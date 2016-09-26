@@ -16,7 +16,7 @@ tests_require = [
 extras_require = {
     'test': tests_require,
     }
-description = "Connexions Database Library"
+description = "Connexions CNXML Library"
 with open('README.rst', 'r') as readme:
     long_description = readme.read()
 
