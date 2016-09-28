@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import subprocess
+from collections import namedtuple
 
 from .util import lookup_resource
 
 __all__ = (
     'jing',
+    'ErrorLine',
 )
 
 
@@ -17,6 +19,9 @@ KNOWN_FATAL_MESSAGES_MAPPING = {
 }
 
 
+ErrorLine = namedtuple('ErrorLine', 'line, column, type, message')
+
+
 def _parse_jing_line(line):
     """Parse a line of jing output to a list of line, column, type
     and message.
@@ -27,7 +32,7 @@ def _parse_jing_line(line):
     if type_ == 'fatal':
         if message in KNOWN_FATAL_MESSAGES_MAPPING:
             message = KNOWN_FATAL_MESSAGES_MAPPING[message]
-    return [line, column, type_, message]
+    return ErrorLine(line, column, type_, message)
 
 
 def _parse_jing_output(output):

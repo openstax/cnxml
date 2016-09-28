@@ -15,4 +15,4 @@ def test_cnxml_validation_messages(datadir):
         ['67', '11', 'error', 'required attributes missing'],
     )
     errors = validate_cnxml(datadir / 'invalid.cnxml')
-    assert errors == expected
+    assert tuple(list(l) for l in errors) == expected
