@@ -39,5 +39,7 @@ setup(
         'cnxml.tests': ['data/**/*.*'],
         },
     entry_points="""\
+    [console_scripts]
+    validate-cnxml = cnxml.cli:main
     """,
     )
