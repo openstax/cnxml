@@ -9,7 +9,7 @@
     <ref name="col-collection"/>
   </start>
 
-  <include href="file:///usr/share/xml/cnxml/schema/rng/0.7/cnxml-abstract-defs.rng">
+  <include href="../../../../cnxml/schema/rng/0.7/cnxml-abstract-defs.rng">
     <define name="cnxml-abstract-common-attributes">
       <ref name="col-common-attributes-noclass"/>
     </define>
@@ -28,7 +28,7 @@
     <ref name="mathml-math"/>
   </define>
 
-  <include href="file:///usr/share/xml/mdml/schema/rng/0.5/mdml-defs.rng">
+  <include href="../../../../mdml/schema/rng/0.5/mdml-defs.rng">
     <define name="mdml-abstract-content">
       <ref name="cnxml-abstract-content"/>
     </define>
@@ -69,10 +69,10 @@
     </interleave>
   </define>
 
-  <include href="file:///usr/share/xml/cnxml/schema/rng/0.7/cnxml-defs.rng"/>
+  <include href="../../../../cnxml/schema/rng/0.7/cnxml-defs.rng"/>
 
   <define name="mathml-math">
-    <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+    <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
   </define>
 
   <include href="collxml-defs.rng"/>

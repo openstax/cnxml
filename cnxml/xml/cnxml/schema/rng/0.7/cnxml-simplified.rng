@@ -40,7 +40,7 @@ Used for human consumption (all nested refs are resolved) -->
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
           <ref name="cnxml-abstract-quote"/>
           <ref name="cnxml-abstract-preformat"/>
@@ -78,7 +78,7 @@ Used for human consumption (all nested refs are resolved) -->
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -113,7 +113,7 @@ Used for human consumption (all nested refs are resolved) -->
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -148,7 +148,7 @@ Used for human consumption (all nested refs are resolved) -->
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -183,7 +183,7 @@ Used for human consumption (all nested refs are resolved) -->
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -218,7 +218,7 @@ Used for human consumption (all nested refs are resolved) -->
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -253,7 +253,7 @@ Used for human consumption (all nested refs are resolved) -->
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -288,7 +288,7 @@ Used for human consumption (all nested refs are resolved) -->
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -342,7 +342,7 @@ Used for human consumption (all nested refs are resolved) -->
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -399,7 +399,7 @@ Used for human consumption (all nested refs are resolved) -->
               <ref name="cnxml-abstract-sub"/>
               <ref name="cnxml-abstract-code"/>
               <notAllowed/>
-              <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+              <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
               <text/>
               <ref name="cnxml-abstract-quote"/>
               <ref name="cnxml-abstract-preformat"/>
@@ -461,7 +461,7 @@ Used for human consumption (all nested refs are resolved) -->
               <ref name="cnxml-abstract-sub"/>
               <ref name="cnxml-abstract-code"/>
               <notAllowed/>
-              <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+              <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
               <text/>
               <ref name="cnxml-abstract-quote"/>
               <ref name="cnxml-abstract-preformat"/>
@@ -553,7 +553,7 @@ Used for human consumption (all nested refs are resolved) -->
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
           <ref name="cnxml-abstract-quote"/>
           <ref name="cnxml-abstract-preformat"/>
@@ -564,7 +564,7 @@ Used for human consumption (all nested refs are resolved) -->
   </define>
   <!--the rest-->
   <!--ending cnxml-abstract-defs.rng-->
-  <!--starting file:///usr/share/xml/mdml/schema/rng/0.5/mdml-defs.rng-->
+  <!--starting ../../../../mdml/schema/rng/0.5/mdml-defs.rng-->
   <!--included elements-->
   <define name="mdml-content-id" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
     <element name="content-id" ns="http://cnx.rice.edu/mdml">
@@ -1671,7 +1671,7 @@ Used for human consumption (all nested refs are resolved) -->
               <ref name="cnxml-abstract-sub"/>
               <ref name="cnxml-abstract-code"/>
               <notAllowed/>
-              <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+              <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
               <text/>
               <ref name="cnxml-abstract-quote"/>
               <ref name="cnxml-abstract-preformat"/>
@@ -1735,8 +1735,8 @@ Used for human consumption (all nested refs are resolved) -->
     </element>
   </define>
   <!--the rest-->
-  <!--ending file:///usr/share/xml/mdml/schema/rng/0.5/mdml-defs.rng-->
-  <!--starting file:///usr/share/xml/qml/schema/rng/1.0/qml-defs.rng-->
+  <!--ending ../../../../mdml/schema/rng/0.5/mdml-defs.rng-->
+  <!--starting ../../../../qml/schema/rng/1.0/qml-defs.rng-->
   <!--included elements-->
   <define name="qml.problemset" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
     <element name="problemset" ns="http://cnx.rice.edu/qml/1.0">
@@ -1883,7 +1883,7 @@ Used for human consumption (all nested refs are resolved) -->
     </element>
   </define>
   <!--the rest-->
-  <!--ending file:///usr/share/xml/qml/schema/rng/1.0/qml-defs.rng-->
+  <!--ending ../../../../qml/schema/rng/1.0/qml-defs.rng-->
   <!--starting cnxml-defs.rng-->
   <!--included elements-->
   <!--
@@ -1965,7 +1965,7 @@ Used for human consumption (all nested refs are resolved) -->
         <ref name="glossary"/>
       </optional>
       <optional>
-        <externalRef href="file:///usr/share/xml/bibtexml/schema/rng/1.0/bibtexml.rng"/>
+        <externalRef href="../../../../bibtexml/schema/rng/1.0/bibtexml.rng"/>
       </optional>
     </element>
   </define>
@@ -2316,7 +2316,7 @@ Used for human consumption (all nested refs are resolved) -->
         <choice>
           <ref name="para"/>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -2398,7 +2398,7 @@ Used for human consumption (all nested refs are resolved) -->
         <choice>
           <ref name="para"/>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -2476,7 +2476,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -2533,7 +2533,7 @@ Used for human consumption (all nested refs are resolved) -->
       <oneOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -2605,7 +2605,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -2692,7 +2692,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -2858,7 +2858,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -2943,7 +2943,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -3019,7 +3019,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -3131,7 +3131,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -3199,7 +3199,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -3284,7 +3284,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -3340,7 +3340,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -3396,7 +3396,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -3497,7 +3497,7 @@ Used for human consumption (all nested refs are resolved) -->
         <choice>
           <ref name="para"/>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -3610,7 +3610,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -3695,7 +3695,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -3753,7 +3753,7 @@ Used for human consumption (all nested refs are resolved) -->
         <choice>
           <ref name="para"/>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -3834,7 +3834,7 @@ Used for human consumption (all nested refs are resolved) -->
         <ref name="block-media"/>
         <ref name="inline-media"/>
         <text/>
-        <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+        <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
       </choice>
     </element>
   </define>
@@ -3900,7 +3900,7 @@ Used for human consumption (all nested refs are resolved) -->
         <choice>
           <ref name="para"/>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -3999,7 +3999,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -4489,7 +4489,7 @@ Used for human consumption (all nested refs are resolved) -->
         <choice>
           <ref name="para"/>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -4564,7 +4564,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -4634,7 +4634,7 @@ Used for human consumption (all nested refs are resolved) -->
       <oneOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -4706,7 +4706,7 @@ Used for human consumption (all nested refs are resolved) -->
       <oneOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -4875,7 +4875,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -5132,7 +5132,7 @@ Used for human consumption (all nested refs are resolved) -->
         <choice>
           <ref name="para"/>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -5262,7 +5262,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -5348,7 +5348,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -5440,7 +5440,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -5563,7 +5563,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -5686,7 +5686,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -5784,7 +5784,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -5923,7 +5923,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -6023,7 +6023,7 @@ Used for human consumption (all nested refs are resolved) -->
         <choice>
           <ref name="para"/>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -6120,7 +6120,7 @@ Used for human consumption (all nested refs are resolved) -->
       <zeroOrMore>
         <choice>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -6431,7 +6431,7 @@ Used for human consumption (all nested refs are resolved) -->
         <choice>
           <ref name="para"/>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -6554,7 +6554,7 @@ Used for human consumption (all nested refs are resolved) -->
         <choice>
           <ref name="para"/>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>
@@ -7510,7 +7510,7 @@ Used for human consumption (all nested refs are resolved) -->
         <choice>
           <ref name="para"/>
           <text/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <ref name="span"/>
           <ref name="term"/>
           <ref name="cite"/>

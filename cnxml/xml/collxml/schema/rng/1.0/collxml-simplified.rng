@@ -3,7 +3,7 @@
   <start>
     <ref name="col-collection"/>
   </start>
-  <!--starting file:///usr/share/xml/cnxml/schema/rng/0.7/cnxml-abstract-defs.rng-->
+  <!--starting ../../../../cnxml/schema/rng/0.7/cnxml-abstract-defs.rng-->
   <!--included elements-->
   <define name="cnxml-abstract-para">
     <element name="para" ns="http://cnx.rice.edu/cnxml">
@@ -43,7 +43,7 @@
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
           <ref name="cnxml-abstract-quote"/>
           <ref name="cnxml-abstract-preformat"/>
@@ -90,7 +90,7 @@
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -134,7 +134,7 @@
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -178,7 +178,7 @@
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -222,7 +222,7 @@
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -266,7 +266,7 @@
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -310,7 +310,7 @@
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -354,7 +354,7 @@
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -417,7 +417,7 @@
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
         </choice>
       </oneOrMore>
@@ -489,7 +489,7 @@
             <ref name="cnxml-abstract-sub"/>
             <ref name="cnxml-abstract-code"/>
             <notAllowed/>
-            <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+            <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
             <text/>
             <ref name="cnxml-abstract-quote"/>
             <ref name="cnxml-abstract-preformat"/>
@@ -565,7 +565,7 @@
             <ref name="cnxml-abstract-sub"/>
             <ref name="cnxml-abstract-code"/>
             <notAllowed/>
-            <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+            <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
             <text/>
             <ref name="cnxml-abstract-quote"/>
             <ref name="cnxml-abstract-preformat"/>
@@ -674,7 +674,7 @@
           <ref name="cnxml-abstract-sub"/>
           <ref name="cnxml-abstract-code"/>
           <notAllowed/>
-          <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+          <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
           <text/>
           <ref name="cnxml-abstract-quote"/>
           <ref name="cnxml-abstract-preformat"/>
@@ -684,8 +684,8 @@
     </element>
   </define>
   <!--the rest-->
-  <!--ending file:///usr/share/xml/cnxml/schema/rng/0.7/cnxml-abstract-defs.rng-->
-  <!--starting file:///usr/share/xml/mdml/schema/rng/0.5/mdml-defs.rng-->
+  <!--ending ../../../../cnxml/schema/rng/0.7/cnxml-abstract-defs.rng-->
+  <!--starting ../../../../mdml/schema/rng/0.5/mdml-defs.rng-->
   <!--included elements-->
   <define name="mdml-metadata" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
     <element name="metadata" ns="http://cnx.rice.edu/mdml">
@@ -2250,7 +2250,7 @@
             <ref name="cnxml-abstract-sub"/>
             <ref name="cnxml-abstract-code"/>
             <notAllowed/>
-            <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+            <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
             <text/>
             <ref name="cnxml-abstract-quote"/>
             <ref name="cnxml-abstract-preformat"/>
@@ -2331,8 +2331,8 @@
     </element>
   </define>
   <!--the rest-->
-  <!--ending file:///usr/share/xml/mdml/schema/rng/0.5/mdml-defs.rng-->
-  <!--starting file:///usr/share/xml/cnxml/schema/rng/0.7/cnxml-defs.rng-->
+  <!--ending ../../../../mdml/schema/rng/0.5/mdml-defs.rng-->
+  <!--starting ../../../../cnxml/schema/rng/0.7/cnxml-defs.rng-->
   <!--included elements-->
   <!--
     Attribute Definitions
@@ -7901,7 +7901,7 @@
     </element>
   </define>
   <!--the rest-->
-  <!--ending file:///usr/share/xml/cnxml/schema/rng/0.7/cnxml-defs.rng-->
+  <!--ending ../../../../cnxml/schema/rng/0.7/cnxml-defs.rng-->
   <!--starting collxml-defs.rng-->
   <!--included elements-->
   <define name="mdml-module-title" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
@@ -8616,7 +8616,7 @@
             <ref name="cnxml-abstract-sub"/>
             <ref name="cnxml-abstract-code"/>
             <notAllowed/>
-            <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+            <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
             <text/>
             <ref name="cnxml-abstract-quote"/>
             <ref name="cnxml-abstract-preformat"/>

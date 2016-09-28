@@ -24,7 +24,7 @@
     <ref name="mathml-math"/>
   </define>
 <!-- Make these relative -->
-  <include href="file:///usr/share/xml/mdml/schema/rng/0.5/mdml-defs.rng">
+  <include href="../../../../mdml/schema/rng/0.5/mdml-defs.rng">
     <define name="mdml-metadata">
       <notAllowed/>
     </define>
@@ -58,10 +58,10 @@
   </include>
 
   <define name="mathml-math">
-    <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+    <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
   </define>
 
-  <include href="file:///usr/share/xml/qml/schema/rng/1.0/qml-defs.rng">
+  <include href="../../../../qml/schema/rng/1.0/qml-defs.rng">
     <define name="qml-text">
       <zeroOrMore>
         <choice>
@@ -92,7 +92,7 @@
       <ref name="mathml-math"/>
     </define>
     <define name="bibliography">
-      <externalRef href="file:///usr/share/xml/bibtexml/schema/rng/1.0/bibtexml.rng"/>
+      <externalRef href="../../../../bibtexml/schema/rng/1.0/bibtexml.rng"/>
     </define>
   </include>
 

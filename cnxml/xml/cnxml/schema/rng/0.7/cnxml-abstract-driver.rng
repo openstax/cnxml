@@ -27,7 +27,7 @@
     <ref name="mathml-math"/>
   </define>
 
-  <include href="file:///usr/share/xml/mdml/schema/rng/0.5/mdml-defs.rng">
+  <include href="../../../../mdml/schema/rng/0.5/mdml-defs.rng">
     <define name="mdml-metadata">
       <notAllowed/>
     </define>
@@ -69,7 +69,7 @@
   <include href="cnxml-defs.rng"/>
 
   <define name="mathml-math">
-    <externalRef href="file:///usr/share/xml/mathml/schema/rng/2.0/mathml2.rng"/>
+    <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
   </define>
 
   <define name="repository-attribute">
