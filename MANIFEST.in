@@ -1,0 +1,3 @@
+include *.rst *.txt *.ini *.yaml
+include cnxml/jing.jar
+recursive-include cnxml/xml *
