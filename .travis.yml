@@ -7,6 +7,8 @@ before_install:
   - pep8 --exclude=tests *.py cnxml
   - pep8 --max-line-length=200 cnxml/tests
 
+  - pip install --upgrade setuptools
+  - pip install --upgrade pip
   # Install the coverage utility and coveralls reporting utility
   - pip install pytest-cov
   - pip install coveralls
