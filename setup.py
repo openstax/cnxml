@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
-import sys
 from setuptools import setup, find_packages
 
-
-IS_PY3 = sys.version_info > (3,)
 
 setup_requires = (
     'pytest-runner',
     )
 install_requires = (
+    'pathlib;python_version<="2.7"',
     )
 tests_require = [
     'pytest',
@@ -20,9 +18,6 @@ description = "Connexions CNXML Library"
 with open('README.rst', 'r') as readme:
     long_description = readme.read()
 
-if not IS_PY3:
-    pass
-    # tests_require.append('mock==1.0.1')
 
 setup(
     name='cnxml',
