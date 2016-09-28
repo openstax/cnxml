@@ -1,0 +1,26 @@
+language: python
+python:
+  - "2.7"
+  - "3.5"
+before_install:
+  - pip install pep8
+  - pep8 --exclude=tests *.py cnxml
+  - pep8 --max-line-length=200 cnxml/tests
+
+  # Install the coverage utility and coveralls reporting utility
+  - pip install pytest-cov
+  - pip install coveralls
+install:
+  # Install test requirements
+  - pip install -e ".[test]"
+  # Now install it as a standalone distribution
+  - pip uninstall -y .
+  - pip install .
+script:
+  - py.test --cov-config .coveragerc --cov=cnxml
+after_success:
+  - coverage report
+  # Report test coverage to coveralls.io
+  - coveralls
+notifications:
+  email: false
