@@ -1,25 +1,17 @@
 # -*- coding: utf-8 -*-
+import subprocess
 from pathlib import Path
 
-import pkg_resources
-
+from .jing import jing
+from .util import lookup_resource
 
 __all__ = (
     'CNXML_JING_RNG',
-    'jing',
     'validate_cnxml',
-    )
+)
 
 
-CNXML_JING_RNG = Path(pkg_resources.resource_filename(
-    'cnxml',
-    'xml/cnxml/schema/rng/0.7/cnxml-jing.rng'))
-
-
-def jing(rng_filepath, xml_filepath):
-    """Run jing.jar using the RNG file against the given XML file."""
-    # TODO Call `java -jar jing.jar $rng $xml`
-    return ()
+CNXML_JING_RNG = lookup_resource('xml/cnxml/schema/rng/0.7/cnxml-jing.rng')
 
 
 def validate_cnxml(content_filepath):
