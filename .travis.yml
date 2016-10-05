@@ -19,7 +19,7 @@ install:
   - pip uninstall -y .
   - pip install .
 script:
-  - py.test --cov-config .coveragerc --cov=cnxml
+  - py.test -v --cov-config .coveragerc --cov=cnxml
 after_success:
   - coverage report
   # Report test coverage to coveralls.io
