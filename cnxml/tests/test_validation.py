@@ -24,9 +24,10 @@ def test_validate_collxml(datadir):
 
 def test_collxml_validation_messages(datadir):
     expected = (
-        ['117', '15', 'error',
+        ['47', '15', 'error',
          'element "para" from namespace '
          '"http://cnx.rice.edu/cnxml" not allowed in this context'],
+        ['139', '18', 'error', 'unfinished element'],
     )
     errors = validate_collxml(datadir / 'invalid_collection.xml')
     assert tuple(list(l) for l in errors) == expected

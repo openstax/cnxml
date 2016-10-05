@@ -15,7 +15,7 @@ __all__ = (
 
 CNXML_JING_RNG = lookup_resource('xml/cnxml/schema/rng/0.7/cnxml-jing.rng')
 COLLXML_JING_RNG = lookup_resource(
-    'xml/collxml/schema/rng/1.0/collxml-jing.rng')
+    'xml/collxml/schema/rng/2.0/collxml-jing.rng')
 
 
 def validate_cnxml(content_filepath):

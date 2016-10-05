@@ -51,9 +51,7 @@
         <ref name="col-collection-type-attribute"/>
       </optional>
       <interleave>
-        <optional>
-          <ref name="col-metadata"/>
-        </optional>
+        <ref name="col-metadata"/>
         <optional>
           <ref name="col-collection-parameters"/>
         </optional>
