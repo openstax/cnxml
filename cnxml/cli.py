@@ -7,7 +7,7 @@ from __future__ import print_function
 import argparse
 from pathlib import Path
 
-from .validation import validate_cnxml
+from .validation import validate_cnxml, validate_collxml
 
 
 def _format_error_line(error):
@@ -34,6 +34,18 @@ def cnxml(argv=None):
     xml = Path(args.xml)
 
     errors = validate_cnxml(xml)
+    print_errors(errors)
+
+    retcode = errors and 1 or 0
+    return retcode
+
+
+def collxml(argv=None):
+    args = _arg_parser().parse_args(argv)
+
+    xml = Path(args.xml)
+
+    errors = validate_collxml(xml)
     print_errors(errors)
 
     retcode = errors and 1 or 0

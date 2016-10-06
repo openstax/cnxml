@@ -41,5 +41,6 @@ setup(
     entry_points="""\
     [console_scripts]
     validate-cnxml = cnxml.cli:cnxml
+    validate-collxml = cnxml.cli:collxml
     """,
     )
