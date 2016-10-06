@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from cnxml.cli import main
+from cnxml.cli import cnxml
 
 
 def test_valid_cnxml(capsys, datadir):
-    retcode = main([str(datadir / 'valid.cnxml')])
+    retcode = cnxml([str(datadir / 'valid.cnxml')])
     out, err = capsys.readouterr()
     assert out == ''
     assert err == ''
@@ -18,7 +18,7 @@ def test_invalid_cnxml(capsys, datadir):
         '',
     ]
 
-    retcode = main([str(datadir / 'invalid.cnxml')])
+    retcode = cnxml([str(datadir / 'invalid.cnxml')])
     out, err = capsys.readouterr()
     assert out.split('\n') == expected_out_lines
     assert err == ''

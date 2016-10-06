@@ -28,7 +28,7 @@ def _arg_parser():
     return parser
 
 
-def main(argv=None):
+def cnxml(argv=None):
     args = _arg_parser().parse_args(argv)
 
     xml = Path(args.xml)
