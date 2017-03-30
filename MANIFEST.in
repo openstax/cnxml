@@ -1,3 +1,5 @@
 include *.rst *.txt *.ini *.yaml
 include cnxml/jing.jar
 recursive-include cnxml/xml *
+include versioneer.py
+include cnxml/_version.py

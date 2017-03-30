@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
+import versioneer
 
 
 setup_requires = (
@@ -21,7 +22,7 @@ with open('README.rst', 'r') as readme:
 
 setup(
     name='cnxml',
-    version='2.0.0',
+    version=versioneer.get_version(),
     author='Connexions team',
     author_email='info@cnx.org',
     url="https://github.com/connexions/cnxml",
@@ -35,6 +36,7 @@ setup(
     test_suite='cnxml.tests',
     packages=find_packages(),
     include_package_data=True,
+    cmdclass=versioneer.get_cmdclass(),
     package_data={
         'cnxml.tests': ['data/**/*.*'],
         },
