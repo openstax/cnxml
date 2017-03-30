@@ -25,7 +25,7 @@ setup(
     author='Connexions team',
     author_email='info@cnx.org',
     url="https://github.com/connexions/cnxml",
-    license='LGPL, See also LICENSE.txt',
+    license='AGPL, See also LICENSE.txt',
     description=description,
     long_description=long_description,
     setup_requires=setup_requires,
