@@ -19,7 +19,7 @@ install:
   - pip uninstall -y .
   - pip install .
 script:
-  - py.test -v --cov-config .coveragerc --cov=cnxml
+  - py.test
 after_success:
   - coverage report
   # Report test coverage to codecov.io

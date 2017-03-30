@@ -1,0 +1,10 @@
+[run]
+omit =
+  cnxml/tests/*
+
+[report]
+omit =
+  cnxml/tests/*
+  cnxml/_version.py
+exclude_lines =
+  pragma: no cover
