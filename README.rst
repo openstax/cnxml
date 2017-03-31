@@ -3,7 +3,26 @@ CNXML Library
 
 This is a python library for working with CNXML content, which includes the CNXML and COLLXML formats.
 
+Install
+-------
 
+This library requires Python >=3.5.
+
+Install using::
+
+   pip install -e "."
+
+Tests
+-----
+
+Use the tox to run the tests::
+  
+  tox
+
+If tox is not installed, run the following::
+
+  pip install tox
+  
 Edit/Validate files using `atom.io <https://atom.io>`_
 ------------------------------------------------------
 
