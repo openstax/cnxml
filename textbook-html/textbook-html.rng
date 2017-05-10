@@ -305,6 +305,7 @@
 <define name="section">
   <element name="section">
     <ref name="section.attlist"/>
+    <ref name="Flow.model"/><!-- TODO: Should this be Block.model? -->
   </element>
 </define>
 
@@ -326,6 +327,7 @@
 <define name="figure">
   <element name="figure">
     <ref name="figure.attlist"/>
+    <ref name="Flow.model"/><!-- TODO: Should this be Block.model? -->
   </element>
 </define>
 
@@ -348,6 +350,7 @@
 <define name="figcaption">
   <element name="figcaption">
     <ref name="figcaption.attlist"/>
+    <ref name="Inline.model"/>
   </element>
 </define>
 
@@ -368,6 +371,7 @@
 <define name="cnx-pi">
   <element name="cnx-pi">
     <ref name="cnx-pi.attlist"/>
+    <ref name="cnx-pi.datatype"/>
   </element>
 </define>
 
@@ -375,6 +379,10 @@
   <attribute name="data-type">
     <value>cnx.eoc</value>
   </attribute>
+</define>
+
+<define name="cnx-pi.datatype">
+  <text/>
 </define>
 
 <!-- TODO: Only allow this element inside a <figure> -->
