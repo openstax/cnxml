@@ -2,7 +2,14 @@
          xmlns="http://relaxng.org/ns/structure/1.0">
 
 <!-- See https://www.w3.org/MarkUp/2010/xhtml-m12n-relaxng-20101216/#sec_3.4.3. -->
-<include href="xhtml/xhtml.rng"/>
+<include href="./xhtml/xhtml.rng"/>
+
+<!-- <include href="../cnxml/xml/mathml/schema/rng/2.0/mathml2.rng"/> -->
+<!-- <include href="http://www.w3.org/Math/RelaxNG/mathml3/mathml3.rng"/> -->
+<include href="./mathml2.rng"/>
+<define name="Inline.class" combine="choice">
+  <ref name="math"/>
+</define>
 
 <!-- Placeholder for enums -->
 <define name="TODO.enum.datatype">
@@ -271,6 +278,29 @@
 
 
 
+
+
+<!-- The <nav> -->
+<define name="nav">
+  <element name="nav">
+    <ref name="nav.attlist"/>
+    <!-- TODO: only allow the restricted-subset <ol>, <li>, and <a> Tree which creates the ToC -->
+    <!-- TODO: only allow it exactly once in the body -->
+  </element>
+</define>
+
+<define name="nav.attlist">
+  <attribute name="id">
+    <value>toc</value>
+  </attribute>
+</define>
+
+<define name="Block.class" combine="choice">
+  <ref name="nav"/>
+</define>
+
+
+
 <!-- The <section> -->
 <define name="section">
   <element name="section">
@@ -312,6 +342,45 @@
   <ref name="figure"/>
 </define>
 
+
+
+<!-- The <figcaption> -->
+<define name="figcaption">
+  <element name="figcaption">
+    <ref name="figcaption.attlist"/>
+  </element>
+</define>
+
+<define name="figcaption.attlist">
+  <!-- <ref name="Common.attrib"/> -->
+  <empty/>
+</define>
+
+<!-- TODO: Only allow this element inside a <figure> -->
+<define name="Block.class" combine="choice">
+  <ref name="figcaption"/>
+</define>
+
+
+
+<!-- <div data-type="page" id="2c962197-8004-45c5-8c65-0eb785cbe09b"> -->
+<!-- <cnx-pi data-type="cnx.eoc">class="self-check-questions" title="Self-Check Questions"</cnx-pi> -->
+<define name="cnx-pi">
+  <element name="cnx-pi">
+    <ref name="cnx-pi.attlist"/>
+  </element>
+</define>
+
+<define name="cnx-pi.attlist">
+  <attribute name="data-type">
+    <value>cnx.eoc</value>
+  </attribute>
+</define>
+
+<!-- TODO: Only allow this element inside a <figure> -->
+<define name="Block.class" combine="choice">
+  <ref name="cnx-pi"/>
+</define>
 
 
 </grammar>
