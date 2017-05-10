@@ -222,9 +222,11 @@
 
 <!-- <div data-type="..." data-list-type="..."> -->
 <define name="div.attlist" combine="interleave">
-  <attribute name="data-type">
-    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
-  </attribute>
+  <optional><!-- TODO: Make this required -->
+    <attribute name="data-type">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
   <optional><!-- TODO: Make this required when data-type="list" -->
     <attribute name="data-list-type">
       <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
