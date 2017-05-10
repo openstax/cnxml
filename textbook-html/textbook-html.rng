@@ -151,9 +151,11 @@
 
 <!-- <strong data-effect="..."> -->
 <define name="strong.attlist" combine="interleave">
-  <attribute name="data-effect">
-    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
-  </attribute>
+  <optional>
+    <attribute name="data-effect">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
 </define>
 
 
@@ -161,18 +163,22 @@
 
 <!-- <em data-effect="..."> -->
 <define name="em.attlist" combine="interleave">
-  <attribute name="data-effect">
-    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
-  </attribute>
+  <optional>
+    <attribute name="data-effect">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
 </define>
 
 
 
 <!-- <span data-type="..." data-alt="..."> -->
 <define name="span.attlist" combine="interleave">
-  <attribute name="data-type">
-    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
-  </attribute>
+  <optional><!-- TODO: make this required again. It is optional because of the ToC -->
+    <attribute name="data-type">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
   <optional>
     <attribute name="data-alt">
       <!-- TODO: Maybe change the CNXML conversion to use an ARIA attribute -->
@@ -253,11 +259,13 @@
   </optional>
   <!-- data-has-label="true" data-label="" -->
   <optional>
-    <attribute name="data-has-label"><!-- TODO: remove from cnxml conversion -->
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
-    </attribute>
     <attribute name="data-label">
       <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-has-label"><!-- TODO: remove from cnxml conversion -->
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
     </attribute>
   </optional>
 
