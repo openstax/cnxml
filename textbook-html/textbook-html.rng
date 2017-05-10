@@ -1,0 +1,21 @@
+<grammar ns="http://www.w3.org/1999/xhtml"
+         xmlns="http://relaxng.org/ns/structure/1.0">
+
+<include href="xhtml/xhtml.rng"/>
+
+<define name="figure">
+  <element name="figure">
+    <ref name="figure.attlist"/>
+  </element>
+</define>
+
+<define name="figure.attlist">
+  <ref name="Common.attrib"/>
+</define>
+
+<define name="Block.class" combine="choice">
+  <ref name="figure"/>
+</define>
+
+
+</grammar>

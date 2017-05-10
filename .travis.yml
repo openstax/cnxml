@@ -20,6 +20,7 @@ install:
   - pip install .
 script:
   - py.test
+  - java -jar ./cnxml/jing.jar ./textbook-html/textbook-html.rng ./textbook-html/test.xhtml
 after_success:
   - coverage report
   # Report test coverage to codecov.io
