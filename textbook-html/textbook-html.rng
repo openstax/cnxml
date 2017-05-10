@@ -21,10 +21,10 @@
 <!-- <head itemscope="itemscope" itemtype="http://schema.org/Book"> -->
 <define name="head.attlist" combine="interleave">
   <attribute name="itemscope">
-    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    <value>itemscope</value>
   </attribute>
   <attribute name="itemtype">
-    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    <value>http://schema.org/Book</value>
   </attribute>
 </define>
 
@@ -46,10 +46,10 @@
 <!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
 <define name="body.attlist" combine="interleave">
   <attribute name="itemscope">
-    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    <value>itemscope</value>
   </attribute>
   <attribute name="itemtype">
-    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    <value>http://schema.org/Book</value>
   </attribute>
 </define>
 
