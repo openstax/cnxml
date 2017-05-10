@@ -1,8 +1,298 @@
 <grammar ns="http://www.w3.org/1999/xhtml"
          xmlns="http://relaxng.org/ns/structure/1.0">
 
+<!-- See https://www.w3.org/MarkUp/2010/xhtml-m12n-relaxng-20101216/#sec_3.4.3. -->
 <include href="xhtml/xhtml.rng"/>
 
+<!-- Placeholder for enums -->
+<define name="TODO.enum.datatype">
+  <text/>
+</define>
+
+
+
+<!-- <head itemscope="itemscope" itemtype="http://schema.org/Book"> -->
+<define name="head.attlist" combine="interleave">
+  <attribute name="itemscope">
+    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+  </attribute>
+  <attribute name="itemtype">
+    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+  </attribute>
+</define>
+
+
+<!-- <meta content="2016-11-04T17:17:06Z" itemprop="dateModified"/> -->
+<define name="meta.attlist" combine="interleave">
+  <attribute name="itemprop">
+    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+  </attribute>
+  <!-- <meta content="en" data-type="language" itemprop="inLanguage"/> -->
+  <optional><!-- TODO: Remove this attribute -->
+    <attribute name="data-type">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+</define>
+
+
+<!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
+<define name="body.attlist" combine="interleave">
+  <attribute name="itemscope">
+    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+  </attribute>
+  <attribute name="itemtype">
+    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+  </attribute>
+</define>
+
+
+<!-- <table data-label=""> -->
+<define name="table.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-label">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+</define>
+
+
+<!-- <td data-valign="top"> -->
+<define name="td.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-valign">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-align">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+</define>
+
+<!-- <th data-align="center"> -->
+<define name="th.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-align">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+</define>
+
+
+
+<!-- <ol data-number-style="lower-alpha"> -->
+<define name="ol.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-number-style">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+</define>
+
+
+<!-- <ul data-bullet-style="bullet"  -->
+<define name="ul.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-bullet-style">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+</define>
+
+<!-- <li cnx-archive-shortid="vPtYALiD@9" cnx-archive-uri="bcfb5800-b883-4a63-8599-e098b407ddfc@9"> (in the ToC) -->
+<define name="li.attlist" combine="interleave">
+  <optional><!-- Make these required when in the ToC -->
+    <attribute name="cnx-archive-shortid"><!-- TODO: Rename this to data-* -->
+      <ref name="Text.datatype"/>
+    </attribute>
+    <attribute name="cnx-archive-uri"><!-- TODO: Rename this to data-* -->
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+</define>
+
+
+
+<!-- <a data-type="license" itemprop="..."> -->
+<define name="a.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-type">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="itemprop">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+</define>
+
+
+<!-- <img data-alt="..." data-media-type="..."> -->
+<define name="img.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-media-type">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+</define>
+
+
+
+
+<!-- <strong data-effect="..."> -->
+<define name="strong.attlist" combine="interleave">
+  <attribute name="data-effect">
+    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+  </attribute>
+</define>
+
+
+
+
+<!-- <em data-effect="..."> -->
+<define name="em.attlist" combine="interleave">
+  <attribute name="data-effect">
+    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+  </attribute>
+</define>
+
+
+
+<!-- <span data-type="..." data-alt="..."> -->
+<define name="span.attlist" combine="interleave">
+  <attribute name="data-type">
+    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+  </attribute>
+  <optional>
+    <attribute name="data-alt">
+      <!-- TODO: Maybe change the CNXML conversion to use an ARIA attribute -->
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+  <optional>
+    <!-- span data-type="copyright-holder" id="copyright-holder-1" itemprop="copyright-holder" itemscope="itemscope" itemtype="http://schema.org/Person"> -->
+    <attribute name="itemprop">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+    <attribute name="itemscope">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+    <attribute name="itemtype">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+
+  <!-- <span data-type="cnx-archive-shortid" data-value="LJYhl4AE@11"/> -->
+  <optional>
+    <attribute name="data-value">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+</define>
+
+
+
+
+<!-- <h1 data-type="..."> -->
+<define name="Heading.attrib" combine="interleave">
+  <attribute name="data-type">
+    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+  </attribute>
+
+  <!-- <h1 data-type="document-title" itemprop="name"> -->
+  <optional>
+    <attribute name="itemprop">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+</define>
+
+
+
+
+<!-- <div data-type="..." data-list-type="..."> -->
+<define name="div.attlist" combine="interleave">
+  <attribute name="data-type">
+    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+  </attribute>
+  <optional><!-- TODO: Make this required when data-type="list" -->
+    <attribute name="data-list-type">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+  <!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
+  <optional><!-- TODO: Make this optional when data-list-type="enumerated" -->
+    <attribute name="data-number-style">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+  <!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
+  <optional><!-- TODO: Make this optional when data-list-type="bulleted" -->
+    <attribute name="data-bullet-style">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+
+
+  <optional><!-- TODO: Make this required when data-type="keyword" -->
+    <attribute name="itemprop">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+  <!-- data-has-label="true" data-label="" -->
+  <optional>
+    <attribute name="data-has-label"><!-- TODO: remove from cnxml conversion -->
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+    <attribute name="data-label">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+
+  <!-- <div data-count="1" data-type="newline"  -->
+  <optional><!-- TODO: Make this required when data-type="newline" -->
+    <attribute name="data-count">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+
+  <!-- <div class="note economics bringhome" data-element-type="note" data-label="note" data-type="note" -->
+  <optional><!-- TODO: Make this optional when data-type="note" -->
+    <attribute name="data-element-type">
+      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    </attribute>
+  </optional>
+
+
+</define>
+
+
+
+<!-- The <section> -->
+<define name="section">
+  <element name="section">
+    <ref name="section.attlist"/>
+  </element>
+</define>
+
+<define name="section.attlist">
+  <ref name="Common.attrib"/>
+  <attribute name="data-depth">
+    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+  </attribute>
+</define>
+
+<define name="Block.class" combine="choice">
+  <ref name="section"/>
+</define>
+
+
+
+
+<!-- The <figure> -->
 <define name="figure">
   <element name="figure">
     <ref name="figure.attlist"/>
@@ -11,11 +301,17 @@
 
 <define name="figure.attlist">
   <ref name="Common.attrib"/>
+  <optional>
+    <attribute name="data-label">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
 </define>
 
 <define name="Block.class" combine="choice">
   <ref name="figure"/>
 </define>
+
 
 
 </grammar>
