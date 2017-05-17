@@ -28,18 +28,56 @@
   </attribute>
 </define>
 
+<!--
+<meta content="en" data-type="language" itemprop="inLanguage"/>
+<meta content="MathML" itemprop="accessibilityFeature"/>
+<meta content="LaTeX" itemprop="accessibilityFeature"/>
+<meta content="alternativeText" itemprop="accessibilityFeature"/>
+<meta content="captions" itemprop="accessibilityFeature"/>
+<meta content="structuredNavigation" itemprop="accessibilityFeature"/>
+<meta content="2014-01-02T22:13:54Z" itemprop="dateCreated"/>
+<meta content="2016-11-04T17:17:06Z" itemprop="dateModified"/>
+-->
+<define name="enum.attr.meta.itemprop">
+  <choice>
+    <value>inLanguage</value>
+    <value>accessibilityFeature</value>
+    <value>dateCreated</value>
+    <value>dateModified</value>
+  </choice>
+</define>
+
+<define name="enum.attr.meta.data-type">
+  <value>language</value>
+</define>
 
 <!-- <meta content="2016-11-04T17:17:06Z" itemprop="dateModified"/> -->
 <define name="meta.attlist" combine="interleave">
-  <attribute name="itemprop">
-    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
-  </attribute>
-  <!-- <meta content="en" data-type="language" itemprop="inLanguage"/> -->
-  <optional><!-- TODO: Remove this attribute -->
-    <attribute name="data-type">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+  <choice>
+    <!-- <meta content="en" data-type="language" itemprop="inLanguage"/> -->
+    <group>
+      <attribute name="itemprop">
+        <value>inLanguage</value>
+      </attribute>
+      <attribute name="data-type"><!-- TODO: Remove this attribute -->
+        <value>language</value>
+      </attribute>
+    </group>
+    <!-- <meta content="MathML" itemprop="accessibilityFeature"/> -->
+    <!-- <meta content="LaTeX" itemprop="accessibilityFeature"/> -->
+    <!-- <meta content="alternativeText" itemprop="accessibilityFeature"/> -->
+    <!-- <meta content="captions" itemprop="accessibilityFeature"/> -->
+    <!-- <meta content="structuredNavigation" itemprop="accessibilityFeature"/> -->
+    <!-- <meta content="2014-01-02T22:13:54Z" itemprop="dateCreated"/> -->
+    <!-- <meta content="2016-11-04T17:17:06Z" itemprop="dateModified"/>  -->
+    <attribute name="itemprop">
+      <choice>
+        <value>accessibilityFeature</value>
+        <value>dateCreated</value>
+        <value>dateModified</value>
+      </choice>
     </attribute>
-  </optional>
+  </choice>
 </define>
 
 
@@ -64,16 +102,29 @@
 </define>
 
 
+
 <!-- <td data-valign="top"> -->
+<define name="enum.attr.td.data-valign">
+  <choice>
+    <value>top</value>
+  </choice>
+</define>
+<define name="enum.attr.td.data-align">
+  <choice>
+    <value>left</value>
+    <value>center</value>
+    <value>right</value>
+  </choice>
+</define>
 <define name="td.attlist" combine="interleave">
   <optional>
     <attribute name="data-valign">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.td.data-valign"/>
     </attribute>
   </optional>
   <optional>
     <attribute name="data-align">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.td.data-align"/>
     </attribute>
   </optional>
 </define>
@@ -82,7 +133,7 @@
 <define name="th.attlist" combine="interleave">
   <optional>
     <attribute name="data-align">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.td.data-align"/>
     </attribute>
   </optional>
 </define>
@@ -90,20 +141,34 @@
 
 
 <!-- <ol data-number-style="lower-alpha"> -->
+<define name="enum.attr.ol.data-number-style">
+  <choice>
+    <value>lower-alpha</value>
+    <value>arabic</value>
+    <!-- TODO: Add more -->
+  </choice>
+</define>
 <define name="ol.attlist" combine="interleave">
   <optional>
     <attribute name="data-number-style">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.ol.data-number-style"/>
     </attribute>
   </optional>
 </define>
 
 
+
 <!-- <ul data-bullet-style="bullet"  -->
+<define name="enum.attr.ul.data-bullet-style">
+  <choice>
+    <value>bullet</value>
+    <!-- TODO: Add more -->
+  </choice>
+</define>
 <define name="ul.attlist" combine="interleave">
   <optional>
     <attribute name="data-bullet-style">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.ul.data-bullet-style"/>
     </attribute>
   </optional>
 </define>
@@ -123,25 +188,45 @@
 
 
 <!-- <a data-type="license" itemprop="..."> -->
+<define name="enum.attr.a.data-type">
+  <choice>
+    <value>license</value>
+    <value>cnx-id</value>
+  </choice>
+</define>
+<define name="enum.attr.a.itemprop">
+  <choice>
+    <value>url</value>
+    <value>dc:license,lrmi:useRightsURL</value>
+  </choice>
+</define>
 <define name="a.attlist" combine="interleave">
   <optional>
     <attribute name="data-type">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.a.data-type"/>
     </attribute>
   </optional>
   <optional>
     <attribute name="itemprop">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.a.itemprop"/>
     </attribute>
   </optional>
 </define>
 
 
 <!-- <img data-alt="..." data-media-type="..."> -->
+<define name="enum.attr.img.data-media-type">
+  <choice>
+    <value>image/png</value>
+    <value>image/jpeg</value>
+    <!-- TODO: automatically convert this to jpeg -->
+    <value>image/jpg</value>
+  </choice>
+</define>
 <define name="img.attlist" combine="interleave">
   <optional>
     <attribute name="data-media-type">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.img.data-media-type"/>
     </attribute>
   </optional>
 </define>
@@ -150,22 +235,29 @@
 
 
 <!-- <strong data-effect="..."> -->
+<define name="enum.attr.strong.data-effect">
+  <!-- TODO: remove the default -->
+  <value>bold</value>
+</define>
 <define name="strong.attlist" combine="interleave">
   <optional>
     <attribute name="data-effect">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.strong.data-effect"/>
     </attribute>
   </optional>
 </define>
 
 
 
-
 <!-- <em data-effect="..."> -->
+<define name="enum.attr.em.data-effect">
+  <!-- TODO: remove the default -->
+  <value>italics</value>
+</define>
 <define name="em.attlist" combine="interleave">
   <optional>
     <attribute name="data-effect">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.em.data-effect"/>
     </attribute>
   </optional>
 </define>
@@ -173,28 +265,53 @@
 
 
 <!-- <span data-type="..." data-alt="..."> -->
+<define name="enum.attr.span.data-type">
+  <choice>
+    <!-- TODO: Make a different validation structure for metadata elements. That way these values are not valid within the content -->
+    <value>cnx-archive-shortid</value>
+    <value>cnx-archive-uri</value>
+    <value>author</value>
+    <value>publisher</value>
+    <value>print-style</value>
+    <value>copyright-holder</value>
+    <value>publisher</value>
+    <value>title</value>
+    <value>binding</value>
+    <!-- These are in content and should remain here -->
+    <value>media</value>
+    <value>term</value>
+  </choice>
+</define>
+<define name="enum.attr.span.itemprop">
+  <!-- TODO: Make a different validation structure for metadata elements. That way these values are not valid within the content -->
+  <choice>
+    <value>author</value>
+    <value>copyright-holder</value>
+    <value>publisher</value>
+  </choice>
+</define>
 <define name="span.attlist" combine="interleave">
   <optional><!-- TODO: make this required again. It is optional because of the ToC -->
     <attribute name="data-type">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.span.data-type"/>
     </attribute>
   </optional>
   <optional>
     <attribute name="data-alt">
       <!-- TODO: Maybe change the CNXML conversion to use an ARIA attribute -->
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="Text.datatype"/>
     </attribute>
   </optional>
   <optional>
     <!-- span data-type="copyright-holder" id="copyright-holder-1" itemprop="copyright-holder" itemscope="itemscope" itemtype="http://schema.org/Person"> -->
     <attribute name="itemprop">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.span.itemprop"/>
     </attribute>
     <attribute name="itemscope">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <value>itemscope</value>
     </attribute>
     <attribute name="itemtype">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <value>http://schema.org/Person</value>
     </attribute>
   </optional>
 
@@ -210,15 +327,27 @@
 
 
 <!-- <h1 data-type="..."> -->
+<define name="enum.attr.Heading.data-type">
+  <choice>
+    <value>document-title</value>
+    <value>title</value>
+
+    <value>glossary-title</value>
+  </choice>
+</define>
+<define name="enum.attr.Heading.itemprop">
+  <value>name</value>
+</define>
 <define name="Heading.attrib" combine="interleave">
+  <!-- TODO: Make a different validation structure for Page elements. That way these values are not valid within the content -->
   <attribute name="data-type">
-    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    <ref name="enum.attr.Heading.data-type"/>
   </attribute>
 
   <!-- <h1 data-type="document-title" itemprop="name"> -->
   <optional>
     <attribute name="itemprop">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.Heading.itemprop"/>
     </attribute>
   </optional>
 </define>
@@ -227,34 +356,98 @@
 
 
 <!-- <div data-type="..." data-list-type="..."> -->
+<define name="enum.attr.div.data-type">
+  <choice>
+    <!-- TODO: Make a different validation structure for Page elements. That way these values are not valid within the content -->
+    <value>metadata</value>
+    <value>description</value>
+    <value>subject</value>
+    <value>page</value>
+    <value>keyword</value>
+    <value>resources</value>
+    <value>document-title</value>
+    <value>abstract</value>
+    <value>chapter</value>
+    <!-- TODO: Make a different validation structure for Structural elements (this is a title for a figure/list/note). That way these values are not valid within the content -->
+    <value>title</value>
+    <value>list</value>
+    <value>item</value>
+
+    <value>newline</value>
+    <value>note</value>
+    <value>exercise</value>
+    <value>problem</value>
+    <value>solution</value>
+    <value>equation</value>
+    <!-- TODO: Don't forget about the child Heading glossary-title -->
+    <value>glossary</value>
+  </choice>
+</define>
+<define name="enum.attr.div.data-list-type">
+  <choice>
+    <value>enumerated</value>
+    <value>bulleted</value>
+  </choice>
+</define>
+<define name="enum.attr.div.data-number-style">
+  <choice>
+    <value>arabic</value>
+    <value>lower-alpha</value>
+    <value>upper-alpha</value>
+    <value>upper-roman</value>
+    <value>lower-roman</value>
+  </choice>
+</define>
+<define name="enum.attr.div.data-bullet-style">
+  <choice>
+    <value>bullet</value>
+    <value>open-circle</value>
+    <value>pilcrow</value>
+    <value>rpilcrow</value>
+    <value>asterisk</value>
+    <value>dash</value>
+    <value>section</value>
+    <value>none</value>
+  </choice>
+</define>
+<define name="enum.attr.div.itemprop">
+  <choice>
+    <!-- TODO: link this with data-type="description" or remove data-type from the HTML -->
+    <value>description</value>
+    <!-- TODO: link this with data-type="subject" or remove data-type from the HTML -->
+    <value>about</value>
+    <value>keywords</value>
+  </choice>
+</define>
+
 <define name="div.attlist" combine="interleave">
   <optional><!-- TODO: Make this required -->
     <attribute name="data-type">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.div.data-type"/>
     </attribute>
   </optional>
   <optional><!-- TODO: Make this required when data-type="list" -->
     <attribute name="data-list-type">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.div.data-list-type"/>
     </attribute>
   </optional>
   <!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
   <optional><!-- TODO: Make this optional when data-list-type="enumerated" -->
     <attribute name="data-number-style">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.div.data-number-style"/>
     </attribute>
   </optional>
   <!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
   <optional><!-- TODO: Make this optional when data-list-type="bulleted" -->
     <attribute name="data-bullet-style">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.div.data-bullet-style"/>
     </attribute>
   </optional>
 
 
   <optional><!-- TODO: Make this required when data-type="keyword" -->
     <attribute name="itemprop">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="enum.attr.div.itemprop"/>
     </attribute>
   </optional>
   <!-- data-has-label="true" data-label="" -->
@@ -265,24 +458,23 @@
   </optional>
   <optional>
     <attribute name="data-has-label"><!-- TODO: remove from cnxml conversion -->
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <value>true</value>
     </attribute>
   </optional>
 
   <!-- <div data-count="1" data-type="newline"  -->
   <optional><!-- TODO: Make this required when data-type="newline" -->
     <attribute name="data-count">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="Number.datatype"/>
     </attribute>
   </optional>
 
   <!-- <div class="note economics bringhome" data-element-type="note" data-label="note" data-type="note" -->
   <optional><!-- TODO: Make this optional when data-type="note" -->
     <attribute name="data-element-type">
-      <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+      <ref name="Text.datatype"/>
     </attribute>
   </optional>
-
 
 </define>
 
@@ -322,7 +514,7 @@
 <define name="section.attlist">
   <ref name="Common.attrib"/>
   <attribute name="data-depth">
-    <ref name="TODO.enum.datatype"/><!-- TODO: enumize -->
+    <ref name="Number.datatype"/>
   </attribute>
 </define>
 
@@ -387,7 +579,10 @@
 
 <define name="cnx-pi.attlist">
   <attribute name="data-type">
-    <value>cnx.eoc</value>
+    <choice>
+      <value>cnx.eoc</value>
+      <ref name="Text.datatype"/>
+    </choice>
   </attribute>
 </define>
 
