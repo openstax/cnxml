@@ -355,51 +355,6 @@
 
 
 
-<!-- <div data-type="..." data-list-type="..."> -->
-<define name="enum.attr.div.data-type">
-  <choice>
-    <!-- TODO: Make a different validation structure for Page elements. That way these values are not valid within the content -->
-    <value>metadata</value>
-    <value>description</value>
-    <value>subject</value>
-    <value>page</value>
-    <value>keyword</value>
-    <value>resources</value>
-    <value>document-title</value>
-    <value>abstract</value>
-    <value>chapter</value>
-    <!-- TODO: Make a different validation structure for Structural elements (this is a title for a figure/list/note). That way these values are not valid within the content -->
-    <value>title</value>
-    <value>item</value>
-
-    <value>exercise</value>
-    <value>problem</value>
-    <value>solution</value>
-    <!-- TODO: Don't forget about the child Heading glossary-title -->
-    <value>glossary</value>
-  </choice>
-</define>
-<define name="enum.attr.div.data-number-style">
-  <choice>
-    <value>arabic</value>
-    <value>lower-alpha</value>
-    <value>upper-alpha</value>
-    <value>upper-roman</value>
-    <value>lower-roman</value>
-  </choice>
-</define>
-<define name="enum.attr.div.data-bullet-style">
-  <choice>
-    <value>bullet</value>
-    <value>open-circle</value>
-    <value>pilcrow</value>
-    <value>rpilcrow</value>
-    <value>asterisk</value>
-    <value>dash</value>
-    <value>section</value>
-    <value>none</value>
-  </choice>
-</define>
 <define name="enum.attr.div.itemprop">
   <choice>
     <!-- TODO: link this with data-type="description" or remove data-type from the HTML -->
@@ -413,47 +368,6 @@
 <define name="div.attlist" combine="interleave">
   <optional>
     <choice>
-      <!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
-      <!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
-      <group>
-        <attribute name="data-type">
-          <value>list</value>
-        </attribute>
-        <choice>
-          <group>
-            <attribute name="data-list-type">
-              <value>bulleted</value>
-            </attribute>
-            <optional>
-              <attribute name="data-bullet-style">
-                <ref name="enum.attr.div.data-bullet-style"/>
-              </attribute>
-            </optional>
-          </group>
-          <group>
-            <attribute name="data-list-type">
-              <value>enumerated</value>
-            </attribute>
-            <optional>
-              <attribute name="data-number-style">
-                <ref name="enum.attr.div.data-number-style"/>
-              </attribute>
-            </optional>
-          </group>
-        </choice>
-      </group>
-      <!-- <div data-count="1" data-type="newline"  -->
-      <group>
-        <attribute name="data-type">
-          <value>newline</value>
-        </attribute>
-        <optional>
-          <attribute name="data-count">
-            <ref name="Number.datatype"/>
-          </attribute>
-        </optional>
-      </group>
-
       <group>
         <!-- catch-all for the other, simpler data-types -->
         <attribute name="data-type">
@@ -492,20 +406,8 @@
 </define>
 
 
-<define name="element.Note.attrs">
-  <ref name="Common.attrib"/>
-  <!-- TODO: Move the following 2 into a common blockish-div-thing -->
-  <optional>
-    <attribute name="data-label">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-element-type">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <!-- Optional note title -->
+<!-- Optional note title -->
+<define name="element.Note.OptionalTitle">
   <optional>
     <element name="div">
       <attribute name="data-type">
@@ -515,6 +417,28 @@
       <ref name="Flow.model"/>
     </element>
   </optional>
+</define>
+
+<define name="element.Note.attrs">
+  <ref name="Common.attrib"/>
+  <!-- TODO: Move the following 2 into a common blockish-div-thing -->
+  <optional>
+    <attribute name="data-label">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <!-- TODO: Remove this attribute in the CNXML->HTML conversion -->
+  <optional>
+    <attribute name="data-has-label">
+      <value>true</value>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-element-type">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <ref name="element.Note.OptionalTitle"/>
 </define>
 
 
@@ -538,11 +462,145 @@
   </element>
 </define>
 
+<!-- TODO: Require id attributes for some elements -->
+<define name="element.Exercise">
+  <element name="div">
+    <attribute name="data-type">
+      <value>exercise</value>
+    </attribute>
+    <ref name="element.Note.attrs"/>
+    <element name="div">
+      <attribute name="data-type">
+        <value>problem</value>
+      </attribute>
+      <ref name="element.Note.attrs"/>
+      <ref name="Flow.model"/>
+    </element>
+    <zeroOrMore>
+      <element name="div">
+        <attribute name="data-type">
+          <value>solution</value>
+        </attribute>
+        <ref name="element.Note.attrs"/>
+        <ref name="Flow.model"/>
+      </element>
+    </zeroOrMore>
+  </element>
+</define>
+
+<!-- <div data-count="1" data-type="newline"  -->
+<define name="element.Newline">
+  <element name="div">
+    <attribute name="data-type">
+      <value>newline</value>
+    </attribute>
+    <ref name="element.Note.attrs"/>
+    <optional>
+      <attribute name="data-count">
+        <ref name="Number.datatype"/>
+      </attribute>
+    </optional>
+  </element>
+</define>
+
+
+
+<!-- <div data-type="..." data-list-type="..."> -->
+<define name="enum.attr.div.data-type">
+  <choice>
+    <!-- TODO: Make a different validation structure for Page elements. That way these values are not valid within the content -->
+    <value>metadata</value>
+    <value>description</value>
+    <value>subject</value>
+    <value>page</value>
+    <value>keyword</value>
+    <value>resources</value>
+    <value>document-title</value>
+    <value>abstract</value>
+    <value>chapter</value>
+
+    <!-- TODO: Don't forget about the child Heading glossary-title -->
+    <value>glossary</value>
+  </choice>
+</define>
+<define name="enum.attr.div.data-number-style">
+  <choice>
+    <value>arabic</value>
+    <value>lower-alpha</value>
+    <value>upper-alpha</value>
+    <value>upper-roman</value>
+    <value>lower-roman</value>
+  </choice>
+</define>
+<define name="enum.attr.div.data-bullet-style">
+  <choice>
+    <value>bullet</value>
+    <value>open-circle</value>
+    <value>pilcrow</value>
+    <value>rpilcrow</value>
+    <value>asterisk</value>
+    <value>dash</value>
+    <value>section</value>
+    <value>none</value>
+  </choice>
+</define>
+<!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
+<!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
+<define name="element.DivList">
+  <element name="div">
+    <attribute name="data-type">
+      <value>list</value>
+    </attribute>
+    <choice>
+      <group>
+        <attribute name="data-list-type">
+          <value>bulleted</value>
+        </attribute>
+        <optional>
+          <attribute name="data-bullet-style">
+            <ref name="enum.attr.div.data-bullet-style"/>
+          </attribute>
+        </optional>
+      </group>
+      <group>
+        <attribute name="data-list-type">
+          <value>enumerated</value>
+        </attribute>
+        <optional>
+          <attribute name="data-number-style">
+            <ref name="enum.attr.div.data-number-style"/>
+          </attribute>
+        </optional>
+      </group>
+    </choice>
+    <ref name="element.Note.attrs"/>
+    <oneOrMore>
+      <ref name="element.DivListItem"/>
+    </oneOrMore>
+  </element>
+</define>
+
+
+<!-- <div data-count="1" data-type="newline"  -->
+<define name="element.DivListItem">
+  <element name="div">
+    <attribute name="data-type">
+      <value>item</value>
+    </attribute>
+    <ref name="element.Note.attrs"/>
+    <ref name="Flow.model"/>
+  </element>
+</define>
+
+
 
 <define name="Block.class" combine="choice">
   <choice>
     <ref name="element.Note"/>
     <ref name="element.Equation"/>
+    <ref name="element.Exercise"/>
+    <ref name="element.Newline"/>
+    <ref name="element.DivList"/>
   </choice>
 </define>
 
@@ -595,6 +653,7 @@
 <define name="figure">
   <element name="figure">
     <ref name="figure.attlist"/>
+    <ref name="element.Note.OptionalTitle"/>
     <ref name="Flow.model"/><!-- TODO: Should this be Block.model? -->
   </element>
 </define>
