@@ -370,23 +370,13 @@
     <value>chapter</value>
     <!-- TODO: Make a different validation structure for Structural elements (this is a title for a figure/list/note). That way these values are not valid within the content -->
     <value>title</value>
-    <value>list</value>
     <value>item</value>
 
-    <value>newline</value>
-    <value>note</value>
     <value>exercise</value>
     <value>problem</value>
     <value>solution</value>
-    <value>equation</value>
     <!-- TODO: Don't forget about the child Heading glossary-title -->
     <value>glossary</value>
-  </choice>
-</define>
-<define name="enum.attr.div.data-list-type">
-  <choice>
-    <value>enumerated</value>
-    <value>bulleted</value>
   </choice>
 </define>
 <define name="enum.attr.div.data-number-style">
@@ -421,27 +411,56 @@
 </define>
 
 <define name="div.attlist" combine="interleave">
-  <optional><!-- TODO: Make this required -->
-    <attribute name="data-type">
-      <ref name="enum.attr.div.data-type"/>
-    </attribute>
-  </optional>
-  <optional><!-- TODO: Make this required when data-type="list" -->
-    <attribute name="data-list-type">
-      <ref name="enum.attr.div.data-list-type"/>
-    </attribute>
-  </optional>
-  <!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
-  <optional><!-- TODO: Make this optional when data-list-type="enumerated" -->
-    <attribute name="data-number-style">
-      <ref name="enum.attr.div.data-number-style"/>
-    </attribute>
-  </optional>
-  <!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
-  <optional><!-- TODO: Make this optional when data-list-type="bulleted" -->
-    <attribute name="data-bullet-style">
-      <ref name="enum.attr.div.data-bullet-style"/>
-    </attribute>
+  <optional>
+    <choice>
+      <!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
+      <!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
+      <group>
+        <attribute name="data-type">
+          <value>list</value>
+        </attribute>
+        <choice>
+          <group>
+            <attribute name="data-list-type">
+              <value>bulleted</value>
+            </attribute>
+            <optional>
+              <attribute name="data-bullet-style">
+                <ref name="enum.attr.div.data-bullet-style"/>
+              </attribute>
+            </optional>
+          </group>
+          <group>
+            <attribute name="data-list-type">
+              <value>enumerated</value>
+            </attribute>
+            <optional>
+              <attribute name="data-number-style">
+                <ref name="enum.attr.div.data-number-style"/>
+              </attribute>
+            </optional>
+          </group>
+        </choice>
+      </group>
+      <!-- <div data-count="1" data-type="newline"  -->
+      <group>
+        <attribute name="data-type">
+          <value>newline</value>
+        </attribute>
+        <optional>
+          <attribute name="data-count">
+            <ref name="Number.datatype"/>
+          </attribute>
+        </optional>
+      </group>
+
+      <group>
+        <!-- catch-all for the other, simpler data-types -->
+        <attribute name="data-type">
+          <ref name="enum.attr.div.data-type"/>
+        </attribute>
+      </group>
+    </choice>
   </optional>
 
 
@@ -462,12 +481,6 @@
     </attribute>
   </optional>
 
-  <!-- <div data-count="1" data-type="newline"  -->
-  <optional><!-- TODO: Make this required when data-type="newline" -->
-    <attribute name="data-count">
-      <ref name="Number.datatype"/>
-    </attribute>
-  </optional>
 
   <!-- <div class="note economics bringhome" data-element-type="note" data-label="note" data-type="note" -->
   <optional><!-- TODO: Make this optional when data-type="note" -->
@@ -479,6 +492,59 @@
 </define>
 
 
+<define name="element.Note.attrs">
+  <ref name="Common.attrib"/>
+  <!-- TODO: Move the following 2 into a common blockish-div-thing -->
+  <optional>
+    <attribute name="data-label">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-element-type">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <!-- Optional note title -->
+  <optional>
+    <element name="div">
+      <attribute name="data-type">
+        <value>title</value>
+      </attribute>
+      <ref name="Common.attrib"/>
+      <ref name="Flow.model"/>
+    </element>
+  </optional>
+</define>
+
+
+<define name="element.Note">
+  <element name="div">
+    <attribute name="data-type">
+      <value>note</value>
+    </attribute>
+    <ref name="element.Note.attrs"/>
+    <ref name="Flow.model"/>
+  </element>
+</define>
+
+<define name="element.Equation">
+  <element name="div">
+    <attribute name="data-type">
+      <value>equation</value>
+    </attribute>
+    <ref name="element.Note.attrs"/>
+    <ref name="Flow.model"/>
+  </element>
+</define>
+
+
+<define name="Block.class" combine="choice">
+  <choice>
+    <ref name="element.Note"/>
+    <ref name="element.Equation"/>
+  </choice>
+</define>
 
 
 
