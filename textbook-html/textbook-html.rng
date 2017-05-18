@@ -443,19 +443,36 @@
 
 
 <define name="element.Note">
+  <attribute name="data-type">
+    <value>note</value>
+  </attribute>
+  <ref name="element.Note.attrs"/>
+  <ref name="Flow.model"/>
+</define>
+
+<define name="element.Equation">
+  <attribute name="data-type">
+    <value>equation</value>
+  </attribute>
+  <ref name="element.Note.attrs"/>
+  <ref name="Flow.model"/>
+</define>
+
+
+<define name="element.Problem">
   <element name="div">
     <attribute name="data-type">
-      <value>note</value>
+      <value>problem</value>
     </attribute>
     <ref name="element.Note.attrs"/>
     <ref name="Flow.model"/>
   </element>
 </define>
 
-<define name="element.Equation">
+<define name="element.Solution">
   <element name="div">
     <attribute name="data-type">
-      <value>equation</value>
+      <value>solution</value>
     </attribute>
     <ref name="element.Note.attrs"/>
     <ref name="Flow.model"/>
@@ -464,43 +481,27 @@
 
 <!-- TODO: Require id attributes for some elements -->
 <define name="element.Exercise">
-  <element name="div">
-    <attribute name="data-type">
-      <value>exercise</value>
-    </attribute>
-    <ref name="element.Note.attrs"/>
-    <element name="div">
-      <attribute name="data-type">
-        <value>problem</value>
-      </attribute>
-      <ref name="element.Note.attrs"/>
-      <ref name="Flow.model"/>
-    </element>
-    <zeroOrMore>
-      <element name="div">
-        <attribute name="data-type">
-          <value>solution</value>
-        </attribute>
-        <ref name="element.Note.attrs"/>
-        <ref name="Flow.model"/>
-      </element>
-    </zeroOrMore>
-  </element>
+  <attribute name="data-type">
+    <value>exercise</value>
+  </attribute>
+  <ref name="element.Note.attrs"/>
+  <ref name="element.Problem"/>
+  <zeroOrMore>
+    <ref name="element.Solution"/>
+  </zeroOrMore>
 </define>
 
 <!-- <div data-count="1" data-type="newline"  -->
 <define name="element.Newline">
-  <element name="div">
-    <attribute name="data-type">
-      <value>newline</value>
+  <attribute name="data-type">
+    <value>newline</value>
+  </attribute>
+  <ref name="element.Note.attrs"/>
+  <optional>
+    <attribute name="data-count">
+      <ref name="Number.datatype"/>
     </attribute>
-    <ref name="element.Note.attrs"/>
-    <optional>
-      <attribute name="data-count">
-        <ref name="Number.datatype"/>
-      </attribute>
-    </optional>
-  </element>
+  </optional>
 </define>
 
 
@@ -547,37 +548,35 @@
 <!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
 <!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
 <define name="element.DivList">
-  <element name="div">
-    <attribute name="data-type">
-      <value>list</value>
-    </attribute>
-    <choice>
-      <group>
-        <attribute name="data-list-type">
-          <value>bulleted</value>
+  <attribute name="data-type">
+    <value>list</value>
+  </attribute>
+  <choice>
+    <group>
+      <attribute name="data-list-type">
+        <value>bulleted</value>
+      </attribute>
+      <optional>
+        <attribute name="data-bullet-style">
+          <ref name="enum.attr.div.data-bullet-style"/>
         </attribute>
-        <optional>
-          <attribute name="data-bullet-style">
-            <ref name="enum.attr.div.data-bullet-style"/>
-          </attribute>
-        </optional>
-      </group>
-      <group>
-        <attribute name="data-list-type">
-          <value>enumerated</value>
+      </optional>
+    </group>
+    <group>
+      <attribute name="data-list-type">
+        <value>enumerated</value>
+      </attribute>
+      <optional>
+        <attribute name="data-number-style">
+          <ref name="enum.attr.div.data-number-style"/>
         </attribute>
-        <optional>
-          <attribute name="data-number-style">
-            <ref name="enum.attr.div.data-number-style"/>
-          </attribute>
-        </optional>
-      </group>
-    </choice>
-    <ref name="element.Note.attrs"/>
-    <oneOrMore>
-      <ref name="element.DivListItem"/>
-    </oneOrMore>
-  </element>
+      </optional>
+    </group>
+  </choice>
+  <ref name="element.Note.attrs"/>
+  <oneOrMore>
+    <ref name="element.DivListItem"/>
+  </oneOrMore>
 </define>
 
 
@@ -595,13 +594,15 @@
 
 
 <define name="Block.class" combine="choice">
-  <choice>
-    <ref name="element.Note"/>
-    <ref name="element.Equation"/>
-    <ref name="element.Exercise"/>
-    <ref name="element.Newline"/>
-    <ref name="element.DivList"/>
-  </choice>
+  <element name="div">
+    <choice>
+      <ref name="element.Note"/>
+      <ref name="element.Equation"/>
+      <ref name="element.Exercise"/>
+      <ref name="element.Newline"/>
+      <ref name="element.DivList"/>
+    </choice>
+  </element>
 </define>
 
 
