@@ -1093,9 +1093,6 @@
 
       </choice>
     </element>
-    <!-- TODO: move these onto the <body> element -->
-    <ref name="element.Chapter"/>
-    <ref name="element.Page"/>
   </choice>
 </define>
 
