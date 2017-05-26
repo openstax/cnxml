@@ -1,0 +1,17 @@
+<grammar ns="http://www.w3.org/1999/xhtml"
+         xmlns="http://relaxng.org/ns/structure/1.0">
+
+<include href="./textbook-html-base.rng"/>
+
+<!-- from xhtml/modules/struct.rng but changed to only include a subset of valid "root" elements -->
+<define name="body">
+
+  <element name="body">
+    <ref name="body.attlist"/>
+    <ref name="Block.model"/>
+  </element>
+
+</define>
+
+
+</grammar>

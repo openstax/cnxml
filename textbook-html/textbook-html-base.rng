@@ -1213,23 +1213,5 @@
 </define>
 
 
-<!-- from xhtml/modules/struct.rng but changed to only include a subset of valid "root" elements -->
-<define name="body">
-  <element name="body">
-    <!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
-    <ref name="body.attlist"/>
-    <!-- Actually, it's BookMetadata -->
-    <ref name="element.BookMetadata"/>
-    <ref name="nav"/><!-- TODO: rename this to element.ToC -->
-    <oneOrMore>
-      <choice>
-        <ref name="element.Chapter"/>
-        <!-- Preface or Appendix -->
-        <ref name="element.Page"/>
-      </choice>
-    </oneOrMore>
-  </element>
-</define>
-
 
 </grammar>
