@@ -17,6 +17,212 @@
 </define>
 
 
+<define name="UUID-and-version.datatype">
+  <text/>
+</define>
+
+
+<define name="element.Page">
+  <element name="div">
+    <attribute name="data-type">
+      <value>page</value>
+    </attribute>
+    <attribute name="id">
+      <ref name="ID.datatype"/>
+    </attribute>
+    <zeroOrMore>
+      <ref name="Flow.model"/>
+    </zeroOrMore>
+    <!-- <ref name="element.PageMetadata"/>
+    <element name="div">
+      <attribute name="data-type">
+        <value>document-title</value>
+      </attribute>
+      <ref name="Inline.model"/>
+    </element>
+    <zeroOrMore>
+      <element name="cnx-pi">
+        <attribute name="data-type">
+          <text/>
+        </attribute>
+        <text/>
+      </element>
+    </zeroOrMore>
+    <oneOrMore>
+      <ref name="Block.model"/>
+    </oneOrMore> -->
+  </element>
+</define>
+
+
+<define name="element.Chapter">
+  <element name="div">
+    <attribute name="data-type">
+      <value>chapter</value>
+    </attribute>
+    <ref name="element.ChapterMetadata"/>
+    <element name="h1">
+      <attribute name="data-type">
+        <value>document-title</value>
+      </attribute>
+      <ref name="Inline.model"/>
+    </element>
+    <oneOrMore>
+      <ref name="element.Page"/>
+    </oneOrMore>
+  </element>
+</define>
+
+
+
+<define name="element.PageMetadata">
+  <element name="div">
+    <attribute name="data-type">
+      <value>metadata</value>
+    </attribute>
+    <element name="h1">
+      <attribute name="data-type">
+        <value>document-title</value>
+      </attribute>
+      <attribute name="itemprop">
+        <value>name</value>
+      </attribute>
+      <ref name="Flow.model"/>
+    </element>
+    <element name="span">
+      <attribute name="data-type">
+        <value>cnx-archive-uri</value>
+      </attribute>
+      <attribute name="data-value">
+        <ref name="UUID-and-version.datatype"/>
+      </attribute>
+    </element>
+    <element name="div">
+      <attribute name="class">
+        <value>authors</value>
+      </attribute>
+      <text/>
+      <oneOrMore>
+        <element name="span">
+          <attribute name="data-type">
+            <value>author</value>
+          </attribute>
+          <attribute name="id">
+            <ref name="ID.datatype"/>
+          </attribute>
+          <attribute name="itemprop">
+            <value>author</value>
+          </attribute>
+          <attribute name="itemscope">
+            <value>itemscope</value>
+          </attribute>
+          <attribute name="itemtype">
+            <value>http://schema.org/Person</value>
+          </attribute>
+          <element name="a">
+            <attribute name="data-type">
+              <value>cnx-id</value>
+            </attribute>
+            <attribute name="href">
+              <ref name="Text.datatype"/>
+            </attribute>
+            <attribute name="itemprop">
+              <value>url</value>
+            </attribute>
+            <ref name="Text.datatype"/>
+          </element>
+        </element>
+      </oneOrMore>
+    </element>
+    <!-- TODO: remove me. why is this here? -->
+    <element name="span">
+      <attribute name="data-type">
+        <value>binding</value>
+      </attribute>
+      <attribute name="data-value">
+        <value>translucent</value>
+      </attribute>
+    </element>
+    <!-- change class="permissions" to some other attribute -->
+    <element name="div">
+      <attribute name="class">
+        <value>permissions</value>
+      </attribute>
+      <element name="p">
+        <attribute name="class">
+          <value>license</value>
+        </attribute>
+        <text/>
+        <element name="a">
+          <attribute name="data-type">
+            <value>license</value>
+          </attribute>
+          <attribute name="href">
+            <ref name="URI.datatype"/>
+          </attribute>
+          <attribute name="itemprop">
+            <value>dc:license,lrmi:useRightsURL</value>
+          </attribute>
+          <text/>
+        </element>
+      </element>
+    </element>
+  </element>
+</define>
+
+
+
+<define name="element.ChapterMetadata">
+  <element name="div">
+    <attribute name="data-type">
+      <value>metadata</value>
+    </attribute>
+    <element name="h1">
+      <attribute name="data-type">
+        <value>document-title</value>
+      </attribute>
+      <attribute name="itemprop">
+        <value>name</value>
+      </attribute>
+      <ref name="Flow.model"/>
+    </element>
+    <!-- TODO: remove me. why is this here? -->
+    <element name="span">
+      <attribute name="data-type">
+        <value>binding</value>
+      </attribute>
+      <attribute name="data-value">
+        <value>translucent</value>
+      </attribute>
+    </element>
+    <!-- change class="permissions" to some other attribute -->
+    <element name="div">
+      <attribute name="class">
+        <value>permissions</value>
+      </attribute>
+      <element name="p">
+        <attribute name="class">
+          <value>license</value>
+        </attribute>
+        <text/>
+        <element name="a">
+          <attribute name="data-type">
+            <value>license</value>
+          </attribute>
+          <attribute name="href">
+            <ref name="URI.datatype"/>
+          </attribute>
+          <attribute name="itemprop">
+            <value>dc:license,lrmi:useRightsURL</value>
+          </attribute>
+          <text/>
+        </element>
+      </element>
+    </element>
+  </element>
+</define>
+
+
 
 <!-- <head itemscope="itemscope" itemtype="http://schema.org/Book"> -->
 <define name="head.attlist" combine="interleave">
@@ -502,6 +708,9 @@
       <ref name="Number.datatype"/>
     </attribute>
   </optional>
+  <zeroOrMore>
+    <ref name="br"/>
+  </zeroOrMore>
 </define>
 
 
@@ -513,12 +722,12 @@
     <value>metadata</value>
     <value>description</value>
     <value>subject</value>
-    <value>page</value>
     <value>keyword</value>
     <value>resources</value>
     <value>document-title</value>
     <value>abstract</value>
-    <value>chapter</value>
+
+    <value>metadata</value>
 
     <!-- TODO: Don't forget about the child Heading glossary-title -->
     <value>glossary</value>
@@ -601,6 +810,10 @@
       <ref name="element.Exercise"/>
       <ref name="element.Newline"/>
       <ref name="element.DivList"/>
+
+      <!-- TODO: move these onto the <body> element -->
+      <ref name="element.Chapter"/>
+      <ref name="element.Page"/>
     </choice>
   </element>
 </define>
