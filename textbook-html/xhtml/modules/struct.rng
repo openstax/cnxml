@@ -37,16 +37,16 @@
   <optional>
     <attribute name="profile">
       <ref name="URI.datatype"/>
-    </attribute>     
+    </attribute>
   </optional>
 </define>
 
-<define name="body">
+<!-- <define name="body">
   <element name="body">
     <ref name="body.attlist"/>
     <ref name="Block.model"/>
   </element>
-</define>
+</define> -->
 
 <define name="body.attlist">
   <ref name="Common.attrib"/>

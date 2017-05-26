@@ -27,6 +27,11 @@
     <attribute name="data-type">
       <value>page</value>
     </attribute>
+    <optional>
+      <attribute name="class">
+        <text/>
+      </attribute>
+    </optional>
     <attribute name="id">
       <ref name="ID.datatype"/>
     </attribute>
@@ -170,6 +175,280 @@
   </element>
 </define>
 
+
+<define name="Metadata.AuthorList">
+  <oneOrMore>
+    <choice>
+      <!-- Allow text like "Edited by:" intermingled in the DOM -->
+      <text/>
+      <element name="span">
+        <attribute name="data-type">
+          <value>author</value>
+        </attribute>
+        <attribute name="id">
+          <ref name="ID.datatype"/>
+        </attribute>
+        <attribute name="itemprop">
+          <value>author</value>
+        </attribute>
+        <attribute name="itemscope">
+          <value>itemscope</value>
+        </attribute>
+        <attribute name="itemtype">
+          <value>http://schema.org/Person</value>
+        </attribute>
+        <element name="a">
+          <attribute name="data-type">
+            <value>cnx-id</value>
+          </attribute>
+          <attribute name="href">
+            <ref name="Text.datatype"/>
+          </attribute>
+          <attribute name="itemprop">
+            <value>url</value>
+          </attribute>
+          <ref name="Text.datatype"/>
+        </element>
+      </element>
+    </choice>
+  </oneOrMore>
+</define>
+
+<!-- Copy/Pasta from Metadata.AuthorList
+  TODO: Combine these somehow.
+-->
+<define name="Metadata.PublisherList">
+  <oneOrMore>
+    <choice>
+      <!-- Allow text like "Edited by:" intermingled in the DOM -->
+      <text/>
+      <element name="span">
+        <attribute name="data-type">
+          <value>publisher</value>
+        </attribute>
+        <attribute name="id">
+          <ref name="ID.datatype"/>
+        </attribute>
+        <attribute name="itemprop">
+          <value>publisher</value>
+        </attribute>
+        <attribute name="itemscope">
+          <value>itemscope</value>
+        </attribute>
+        <attribute name="itemtype">
+          <value>http://schema.org/Person</value>
+        </attribute>
+        <element name="a">
+          <attribute name="data-type">
+            <value>cnx-id</value>
+          </attribute>
+          <attribute name="href">
+            <ref name="Text.datatype"/>
+          </attribute>
+          <attribute name="itemprop">
+            <value>url</value>
+          </attribute>
+          <ref name="Text.datatype"/>
+        </element>
+      </element>
+    </choice>
+  </oneOrMore>
+</define>
+
+
+<!-- <span data-type="cnx-archive-uri" data-value="69619d2b-68f0-44b0-b074-a9b2bf90b2c6@11.332"/>
+<span data-type="cnx-archive-shortid" data-value="aWGdK2jw@11.332"/> -->
+<define name="element.BookMetadata">
+  <element name="div">
+    <attribute name="data-type">
+      <value>metadata</value>
+    </attribute>
+    <element name="h1">
+      <attribute name="data-type">
+        <value>document-title</value>
+      </attribute>
+      <attribute name="itemprop">
+        <value>name</value>
+      </attribute>
+      <ref name="Flow.model"/>
+    </element>
+    <element name="span">
+      <attribute name="data-type">
+        <value>cnx-archive-uri</value>
+      </attribute>
+      <attribute name="data-value">
+        <ref name="UUID-and-version.datatype"/>
+      </attribute>
+    </element>
+    <element name="span">
+      <attribute name="data-type">
+        <value>cnx-archive-shortid</value>
+      </attribute>
+      <attribute name="data-value">
+        <ref name="UUID-and-version.datatype"/>
+      </attribute>
+    </element>
+    <element name="div">
+      <attribute name="class">
+        <value>authors</value>
+      </attribute>
+      <ref name="Metadata.AuthorList"/>
+    </element>
+    <element name="div">
+      <attribute name="class">
+        <value>publishers</value>
+      </attribute>
+      <ref name="Metadata.PublisherList"/>
+    </element>
+
+    <!-- <div class="print-style">
+    Print style:
+    <span data-type="print-style">ccap-economics</span>
+    </div> -->
+    <element name="div">
+      <attribute name="class">
+        <value>print-style</value>
+      </attribute>
+      <text/><!-- "Print style:" -->
+      <element name="span">
+        <attribute name="data-type">
+          <value>print-style</value>
+        </attribute>
+        <ref name="TODO.enum.datatype"/>
+      </element>
+    </element>
+
+    <!-- TODO: remove me. why is this here? It is only in Pages -->
+    <optional>
+      <element name="span">
+        <attribute name="data-type">
+          <value>binding</value>
+        </attribute>
+        <attribute name="data-value">
+          <value>translucent</value>
+        </attribute>
+      </element>
+    </optional>
+
+
+
+    <!-- <p class="copyright">
+  Copyright:
+      <span data-type="copyright-holder" id="copyright-holder-1" itemprop="copyright-holder" itemscope="itemscope" itemtype="http://schema.org/Person">
+        <a data-type="cnx-id" href="cnxecon" itemprop="url">OpenStax Economics</a>
+      </span>        </p>
+<p class="license">
+  Licensed:
+  <a data-type="license" href="http://creativecommons.org/licenses/by/4.0/" itemprop="dc:license,lrmi:useRightsURL">Creative Commons Attribution License</a>
+</p> -->
+    <!-- TODO: change class="permissions" to some other attribute -->
+    <element name="div">
+      <attribute name="class">
+        <value>permissions</value>
+      </attribute>
+      <optional>
+        <element name="p">
+          <attribute name="class">
+            <value>copyright</value>
+          </attribute>
+          <text/><!-- "Copyright:" -->
+          <element name="span">
+            <attribute name="data-type">
+              <value>copyright-holder</value>
+            </attribute>
+            <ref name="id.attrib"/>
+            <attribute name="itemprop">
+              <value>copyright-holder</value>
+            </attribute>
+            <attribute name="itemscope">
+              <value>itemscope</value>
+            </attribute>
+            <attribute name="itemtype">
+              <value>http://schema.org/Person</value>
+            </attribute>
+            <!-- TODO: This link is broken & needs fixing in the code that generates it -->
+            <element name="a">
+              <attribute name="data-type">
+                <value>cnx-id</value>
+              </attribute>
+              <attribute name="href">
+                <ref name="URI.datatype"/>
+              </attribute>
+              <attribute name="itemprop">
+                <value>url</value>
+              </attribute>
+              <text/><!-- Title of the book -->
+            </element>
+          </element>
+        </element>
+      </optional>
+      <element name="p">
+        <attribute name="class">
+          <value>license</value>
+        </attribute>
+        <text/>
+        <element name="a">
+          <attribute name="data-type">
+            <value>license</value>
+          </attribute>
+          <attribute name="href">
+            <ref name="URI.datatype"/>
+          </attribute>
+          <attribute name="itemprop">
+            <value>dc:license,lrmi:useRightsURL</value>
+          </attribute>
+          <text/>
+        </element>
+      </element>
+    </element>
+
+    <!-- <div class="description" data-type="description" itemprop="description">
+      <div><div>
+        <p><em data-effect="italics">Principles of Economics</em> covers the scope and sequence for a two-semester principles of economics course. The text also includes many current examples, including; discussions on the great recession, the controversy among economists over the Affordable Care Act (Obamacare), the recent government shutdown, and the appointment of the United States’ first female Federal Reserve chair, Janet Yellen.</p>
+
+        <p>The pedagogical choices, chapter arrangements, and learning objective fulfillment were developed and vetted with feedback from educators dedicated to the project. The outcome is a balanced approach to micro and macro economics, to both Keynesian and classical views, and to the theory and application of economics concepts. Current events are treated in a politically-balanced way, as well.</p>
+
+        <p><strong>Note:</strong> <em data-effect="italics">Principles of Economics</em> PDF and web view versions have been updated to include current FRED (Federal Reserve Economic) data. </p>
+        </div>
+        </div>
+
+    </div> -->
+    <element name="div">
+      <attribute name="class">
+        <value>description</value>
+      </attribute>
+      <attribute name="data-type">
+        <value>description</value>
+      </attribute>
+      <attribute name="itemprop">
+        <value>description</value>
+      </attribute>
+      <element name="div">
+        <element name="div">
+          <oneOrMore>
+            <element name="p">
+              <ref name="Inline.model"/>
+            </element>
+          </oneOrMore>
+        </element>
+      </element>
+    </element>
+
+    <!-- <div data-type="subject" itemprop="about">Mathematics and Statistics</div><div data-type="subject" itemprop="about">OpenStax Featured</div>    </div> -->
+    <oneOrMore>
+      <element name="div">
+        <attribute name="data-type">
+          <value>subject</value>
+        </attribute>
+        <attribute name="itemprop">
+          <value>about</value>
+        </attribute>
+        <text/>
+      </element>
+    </oneOrMore>
+
+  </element>
+</define>
 
 
 <define name="element.ChapterMetadata">
@@ -803,19 +1082,21 @@
 
 
 <define name="Block.class" combine="choice">
-  <element name="div">
-    <choice>
-      <ref name="element.Note"/>
-      <ref name="element.Equation"/>
-      <ref name="element.Exercise"/>
-      <ref name="element.Newline"/>
-      <ref name="element.DivList"/>
+  <choice>
+    <element name="div">
+      <choice>
+        <ref name="element.Note"/>
+        <ref name="element.Equation"/>
+        <ref name="element.Exercise"/>
+        <ref name="element.Newline"/>
+        <ref name="element.DivList"/>
 
-      <!-- TODO: move these onto the <body> element -->
-      <ref name="element.Chapter"/>
-      <ref name="element.Page"/>
-    </choice>
-  </element>
+      </choice>
+    </element>
+    <!-- TODO: move these onto the <body> element -->
+    <ref name="element.Chapter"/>
+    <ref name="element.Page"/>
+  </choice>
 </define>
 
 
@@ -932,6 +1213,25 @@
 <!-- TODO: Only allow this element inside a <figure> -->
 <define name="Block.class" combine="choice">
   <ref name="cnx-pi"/>
+</define>
+
+
+<!-- from xhtml/modules/struct.rng but changed to only include a subset of valid "root" elements -->
+<define name="body">
+  <element name="body">
+    <!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
+    <ref name="body.attlist"/>
+    <!-- Actually, it's BookMetadata -->
+    <ref name="element.BookMetadata"/>
+    <ref name="nav"/><!-- TODO: rename this to element.ToC -->
+    <oneOrMore>
+      <choice>
+        <ref name="element.Chapter"/>
+        <!-- Preface or Appendix -->
+        <ref name="element.Page"/>
+      </choice>
+    </oneOrMore>
+  </element>
 </define>
 
 
