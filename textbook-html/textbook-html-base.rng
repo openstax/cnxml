@@ -571,6 +571,7 @@
 <define name="enum.attr.td.data-valign">
   <choice>
     <value>top</value>
+    <value>middle</value>
   </choice>
 </define>
 <define name="enum.attr.td.data-align">
@@ -595,6 +596,11 @@
 
 <!-- <th data-align="center"> -->
 <define name="th.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-valign">
+      <ref name="enum.attr.td.data-valign"/>
+    </attribute>
+  </optional>
   <optional>
     <attribute name="data-align">
       <ref name="enum.attr.td.data-align"/>
@@ -955,6 +961,16 @@
   </zeroOrMore>
 </define>
 
+
+<define name="element.Example">
+  <attribute name="data-type">
+    <value>example</value>
+  </attribute>
+  <ref name="element.Note.attrs"/>
+  <ref name="Flow.model"/>
+</define>
+
+
 <!-- <div data-count="1" data-type="newline"  -->
 <define name="element.Newline">
   <attribute name="data-type">
@@ -1067,14 +1083,24 @@
         <ref name="element.Note"/>
         <ref name="element.Equation"/>
         <ref name="element.Exercise"/>
+        <ref name="element.Example"/>
         <ref name="element.Newline"/>
         <ref name="element.DivList"/>
-
       </choice>
     </element>
   </choice>
 </define>
 
+
+<define name="Inline.class" combine="choice">
+  <choice>
+    <element name="span">
+      <choice>
+        <ref name="element.Newline"/>
+      </choice>
+    </element>
+  </choice>
+</define>
 
 
 <!-- The <nav> -->
