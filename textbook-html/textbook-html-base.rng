@@ -572,6 +572,7 @@
   <choice>
     <value>top</value>
     <value>middle</value>
+    <value>bottom</value>
   </choice>
 </define>
 <define name="enum.attr.td.data-align">
@@ -579,6 +580,7 @@
     <value>left</value>
     <value>center</value>
     <value>right</value>
+    <value>justify</value>
   </choice>
 </define>
 <define name="td.attlist" combine="interleave">
@@ -613,9 +615,11 @@
 <!-- <ol data-number-style="lower-alpha"> -->
 <define name="enum.attr.ol.data-number-style">
   <choice>
+    <value>arabic</value><!-- TODO: remove the default -->
     <value>lower-alpha</value>
-    <value>arabic</value>
-    <!-- TODO: Add more -->
+    <value>upper-alpha</value>
+    <value>lower-roman</value>
+    <value>upper-roman</value>
   </choice>
 </define>
 <define name="ol.attlist" combine="interleave">
@@ -631,8 +635,14 @@
 <!-- <ul data-bullet-style="bullet"  -->
 <define name="enum.attr.ul.data-bullet-style">
   <choice>
-    <value>bullet</value>
-    <!-- TODO: Add more -->
+    <value>bullet</value><!-- TODO: remove the default -->
+    <value>open-circle</value>
+    <value>pilcrow</value>
+    <value>rpilcrow</value>
+    <value>asterisk</value>
+    <value>dash</value>
+    <value>section</value>
+    <value>none</value>
   </choice>
 </define>
 <define name="ul.attlist" combine="interleave">
