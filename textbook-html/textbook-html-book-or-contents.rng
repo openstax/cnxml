@@ -3,6 +3,33 @@
 
 <include href="./textbook-html-base.rng"/>
 
+<!-- Make these next 2 optional -->
+
+<!-- <head itemscope="itemscope" itemtype="http://schema.org/Book"> -->
+<define name="head.attlist" combine="interleave">
+  <optional>
+    <attribute name="itemscope">
+      <value>itemscope</value>
+    </attribute>
+    <attribute name="itemtype">
+      <value>http://schema.org/Book</value>
+    </attribute>
+  </optional>
+</define>
+
+<!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
+<define name="body.attlist" combine="interleave">
+  <optional>
+    <attribute name="itemscope">
+      <value>itemscope</value>
+    </attribute>
+    <attribute name="itemtype">
+      <value>http://schema.org/Book</value>
+    </attribute>
+  </optional>
+</define>
+
+
 <!-- from xhtml/modules/struct.rng but changed to only include a subset of valid "root" elements -->
 <define name="body">
   <element name="body">

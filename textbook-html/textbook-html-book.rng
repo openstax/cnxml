@@ -3,6 +3,26 @@
 
 <include href="./textbook-html-base.rng"/>
 
+<!-- <head itemscope="itemscope" itemtype="http://schema.org/Book"> -->
+<define name="head.attlist" combine="interleave">
+  <attribute name="itemscope">
+    <value>itemscope</value>
+  </attribute>
+  <attribute name="itemtype">
+    <value>http://schema.org/Book</value>
+  </attribute>
+</define>
+
+<!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
+<define name="body.attlist" combine="interleave">
+  <attribute name="itemscope">
+    <value>itemscope</value>
+  </attribute>
+  <attribute name="itemtype">
+    <value>http://schema.org/Book</value>
+  </attribute>
+</define>
+
 <!-- from xhtml/modules/struct.rng but changed to only include a subset of valid "root" elements -->
 <define name="body">
   <element name="body">
