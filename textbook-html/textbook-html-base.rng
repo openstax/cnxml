@@ -568,6 +568,11 @@
       <ref name="Text.datatype"/>
     </attribute>
   </optional>
+  <optional>
+    <attribute name="data-frame">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
 </define>
 
 
@@ -628,9 +633,7 @@
   </choice>
 </define>
 <define name="enum.attr.ol.data-mark-suffix">
-  <choice>
-    <text/><!-- TODO: maybe disallow this and just discard it in the CNXML->HTML conversion -->
-  </choice>
+  <text/><!-- TODO: maybe disallow this and just discard it in the CNXML->HTML conversion -->
 </define>
 <define name="ol.attlist" combine="interleave">
   <optional>
@@ -640,6 +643,12 @@
   </optional>
   <optional>
     <attribute name="data-mark-suffix">
+      <ref name="enum.attr.ol.data-mark-suffix"/>
+    </attribute>
+  </optional>
+  <!-- algebra trigonometry uses this once -->
+  <optional>
+    <attribute name="data-mark-prefix">
       <ref name="enum.attr.ol.data-mark-suffix"/>
     </attribute>
   </optional>
@@ -664,6 +673,17 @@
   <optional>
     <attribute name="data-bullet-style">
       <ref name="enum.attr.ul.data-bullet-style"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-mark-suffix">
+      <ref name="enum.attr.ol.data-mark-suffix"/>
+    </attribute>
+  </optional>
+  <!-- lists have data-labeled-item="true" so CSS can set list-style-type: none; -->
+  <optional>
+    <attribute name="data-labeled-item">
+      <value>true</value>
     </attribute>
   </optional>
 </define>
@@ -775,6 +795,7 @@
     <!-- These are in content and should remain here -->
     <value>media</value>
     <value>term</value>
+    <value>foreign</value>
   </choice>
 </define>
 <define name="enum.attr.span.itemprop">
@@ -898,6 +919,17 @@
     </attribute>
   </optional>
 
+</define>
+
+
+<define name="element.Space">
+  <attribute name="data-type">
+    <value>space</value>
+  </attribute>
+  <attribute name="data-count">
+    <ref name="Number.datatype"/>
+  </attribute>
+  <ref name="Text.datatype"/>
 </define>
 
 
@@ -1063,6 +1095,16 @@
   </element>
 </define>
 
+<define name="element.Commentary">
+  <element name="div">
+    <attribute name="data-type">
+      <value>commentary</value>
+    </attribute>
+    <ref name="element.Note.attrs"/>
+    <ref name="Flow.model"/>
+  </element>
+</define>
+
 <!-- TODO: Require id attributes for some elements -->
 <define name="element.Exercise">
   <attribute name="data-type">
@@ -1072,6 +1114,9 @@
   <ref name="element.Problem"/>
   <zeroOrMore>
     <ref name="element.Solution"/>
+  </zeroOrMore>
+  <zeroOrMore>
+    <ref name="element.Commentary"/>
   </zeroOrMore>
 </define>
 
@@ -1144,7 +1189,7 @@
 </define>
 <!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
 <!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
-<define name="element.DivList">
+<define name="div-span-list.attrs">
   <attribute name="data-type">
     <value>list</value>
   </attribute>
@@ -1171,6 +1216,10 @@
     </group>
   </choice>
   <ref name="element.Note.attrs"/>
+</define>
+
+<define name="element.DivList">
+  <ref name="div-span-list.attrs"/>
   <oneOrMore>
     <ref name="element.DivListItem"/>
   </oneOrMore>
@@ -1188,6 +1237,50 @@
   </element>
 </define>
 
+<define name="element.SpanList">
+  <ref name="div-span-list.attrs"/>
+  <oneOrMore>
+    <ref name="element.SpanListItem"/>
+  </oneOrMore>
+</define>
+
+<define name="element.SpanListItem">
+  <element name="span">
+    <attribute name="data-type">
+      <value>item</value>
+    </attribute>
+    <ref name="element.Note.attrs"/>
+    <ref name="Inline.model"/>
+  </element>
+</define>
+
+
+
+
+<define name="element.Media">
+  <attribute name="data-type">
+    <value>media</value>
+  </attribute>
+  <attribute name="id">
+    <ref name="ID.datatype"/>
+  </attribute>
+  <attribute name="data-alt">
+    <ref name="Text.datatype"/>
+  </attribute>
+  <optional>
+    <attribute name="longdesc">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <choice>
+    <ref name="img"/>
+    <!-- <ref name="element.Audio"/>
+    <ref name="element.Video"/>
+    <ref name="element.Labview"/>
+    <ref name="element.Download"/>
+    <ref name="element.Flash"/> -->
+  </choice>
+</define>
 
 
 <define name="Block.class" combine="choice">
@@ -1200,6 +1293,7 @@
         <ref name="element.Example"/>
         <ref name="element.Newline"/>
         <ref name="element.DivList"/>
+        <ref name="element.Media"/>
         <!-- TODO: Move FootnoteRefs to only be valid either in a Page or in <body> -->
         <ref name="element.FootnoteRefs"/>
       </choice>
@@ -1213,6 +1307,8 @@
     <element name="span">
       <choice>
         <ref name="element.Newline"/>
+        <ref name="element.Space"/>
+        <ref name="element.SpanList"/>
       </choice>
     </element>
     <element name="sup">
@@ -1295,7 +1391,8 @@
 <define name="figcaption">
   <element name="figcaption">
     <ref name="figcaption.attlist"/>
-    <ref name="Inline.model"/>
+    <!-- Algebra and trigonometry has newlines in the figcaption for some reason -->
+    <ref name="Flow.model"/>
   </element>
 </define>
 
