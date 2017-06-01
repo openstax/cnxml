@@ -755,6 +755,16 @@
       <ref name="enum.attr.img.data-media-type"/>
     </attribute>
   </optional>
+  <!-- For images with thumbnails m42042 in Physics (col11406) -->
+  <optional>
+    <attribute name="data-print">
+      <!-- TODO: Make this Boolean.datatype -->
+      <choice>
+        <value>true</value>
+        <value>false</value>
+      </choice>
+    </attribute>
+  </optional>
 </define>
 
 
@@ -777,8 +787,11 @@
 
 <!-- <em data-effect="..."> -->
 <define name="enum.attr.em.data-effect">
-  <!-- TODO: remove the default -->
-  <value>italics</value>
+  <choice>
+    <!-- TODO: remove the default -->
+    <value>italics</value>
+    <value>smallcaps</value>
+  </choice>
 </define>
 <define name="em.attlist" combine="interleave">
   <optional>
@@ -962,6 +975,18 @@
   </element>
 </define>
 
+<define name="element.ImageWithThumbnail">
+  <element name="a">
+    <attribute name="data-type">
+      <value>image-with-thumbnail</value>
+    </attribute>
+    <attribute name="href">
+      <ref name="URI.datatype"/>
+    </attribute>
+    <ref name="img"/>
+  </element>
+</define>
+
 <!-- This occurs at the end of a Page
     <div
         data-type="footnote-refs"
@@ -1101,6 +1126,12 @@
     <attribute name="data-type">
       <value>solution</value>
     </attribute>
+    <!-- TODO: This is a deprecated attribute -->
+    <optional>
+      <attribute name="data-print-placement">
+        <value>here</value>
+      </attribute>
+    </optional>
     <ref name="element.Note.attrs"/>
     <ref name="Flow.model"/>
   </element>
@@ -1121,6 +1152,12 @@
   <attribute name="data-type">
     <value>exercise</value>
   </attribute>
+  <!-- TODO: This is a deprecated attribute -->
+  <optional>
+    <attribute name="data-print-placement">
+      <value>here</value>
+    </attribute>
+  </optional>
   <ref name="element.Note.attrs"/>
   <ref name="element.Problem"/>
   <zeroOrMore>
@@ -1290,6 +1327,26 @@
 </define>
 
 
+<define name="element.Alternates">
+  <attribute name="data-type">
+    <value>alternates</value>
+  </attribute>
+  <attribute name="id">
+    <ref name="ID.datatype"/>
+  </attribute>
+  <optional>
+    <attribute name="data-alt">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <oneOrMore>
+    <choice>
+      <ref name="img"/>
+      <ref name="element.ImageWithThumbnail"/>
+    </choice>
+  </oneOrMore>
+</define>
+
 <define name="element.Media">
   <attribute name="data-type">
     <value>media</value>
@@ -1329,6 +1386,7 @@
         <ref name="element.DivList"/>
         <ref name="element.ListWithTitle"/>
         <ref name="element.Media"/>
+        <ref name="element.Alternates"/>
         <!-- TODO: Move FootnoteRefs to only be valid either in a Page or in <body> -->
         <ref name="element.FootnoteRefs"/>
       </choice>
@@ -1339,11 +1397,13 @@
 
 <define name="Inline.class" combine="choice">
   <choice>
+    <!-- TODO: move the element name into the <define> or rename the define to be "element.Foo.class" to show that it defines a class of elements -->
     <element name="span">
       <choice>
         <ref name="element.Newline"/>
         <ref name="element.Space"/>
         <ref name="element.SpanList"/>
+        <ref name="element.Alternates"/>
       </choice>
     </element>
     <element name="sup">
@@ -1452,6 +1512,11 @@
 
 <define name="figcaption.attlist">
   <!-- <ref name="Common.attrib"/> -->
+  <optional>
+    <attribute name="id">
+      <ref name="ID.datatype"/>
+    </attribute>
+  </optional>
   <empty/>
 </define>
 
