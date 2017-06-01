@@ -591,6 +591,7 @@
     <value>center</value>
     <value>right</value>
     <value>justify</value>
+    <value>char</value>
   </choice>
 </define>
 <define name="td.attlist" combine="interleave">
@@ -1255,6 +1256,28 @@
 </define>
 
 
+<define name="element.ListWithTitle">
+  <attribute name="data-type">
+    <value>list-with-title</value>
+  </attribute>
+  <attribute name="id">
+    <ref name="ID.datatype"/>
+  </attribute>
+  <element name="div">
+    <attribute name="data-type">
+      <value>title</value>
+    </attribute>
+    <ref name="Inline.model"/>
+  </element>
+  <choice>
+    <ref name="ul"/>
+    <ref name="ol"/>
+    <!-- TODO: make this just be a ref -->
+    <element name="div">
+      <ref name="element.DivList"/>
+    </element>
+  </choice>
+</define>
 
 
 <define name="element.Media">
@@ -1294,6 +1317,7 @@
         <ref name="element.Example"/>
         <ref name="element.Newline"/>
         <ref name="element.DivList"/>
+        <ref name="element.ListWithTitle"/>
         <ref name="element.Media"/>
         <!-- TODO: Move FootnoteRefs to only be valid either in a Page or in <body> -->
         <ref name="element.FootnoteRefs"/>
