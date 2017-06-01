@@ -1354,6 +1354,11 @@
   <attribute name="data-depth">
     <ref name="Number.datatype"/>
   </attribute>
+  <optional>
+    <attribute name="data-label">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
 </define>
 
 <define name="Block.class" combine="choice">
@@ -1377,6 +1382,14 @@
   <optional>
     <attribute name="data-label">
       <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-orient">
+      <choice>
+        <value>vertical</value>
+        <value>horizontal</value>
+      </choice>
     </attribute>
   </optional>
 </define>
