@@ -573,6 +573,16 @@
       <ref name="Text.datatype"/>
     </attribute>
   </optional>
+  <optional>
+    <attribute name="data-colsep">
+      <ref name="Number.datatype"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-rowsep">
+      <ref name="Number.datatype"/>
+    </attribute>
+  </optional>
 </define>
 
 
