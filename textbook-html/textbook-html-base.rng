@@ -1394,6 +1394,12 @@
       <ref name="Text.datatype"/>
     </attribute>
   </optional>
+  <!-- Found in m51005 (chemistry book col11760)-->
+  <optional>
+    <attribute name="data-element-type">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
 </define>
 
 <define name="Block.class" combine="choice">
