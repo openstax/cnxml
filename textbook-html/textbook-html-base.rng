@@ -1241,10 +1241,25 @@
   <attribute name="data-type">
     <value>list</value>
   </attribute>
+  <!-- TODO: This may only apply to inline lists -->
+  <optional>
+    <attribute name="data-mark-suffix">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <!-- TODO: This may only apply to inline lists -->
+  <optional>
+    <attribute name="data-item-sep">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
   <choice>
     <group>
       <attribute name="data-list-type">
-        <value>bulleted</value>
+        <choice>
+          <value>bulleted</value>
+          <value>labeled-item</value>
+        </choice>
       </attribute>
       <optional>
         <attribute name="data-bullet-style">
