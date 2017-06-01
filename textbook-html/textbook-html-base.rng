@@ -709,6 +709,11 @@
       <ref name="Text.datatype"/>
     </attribute>
   </optional>
+  <optional>
+    <attribute name="data-label">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
 </define>
 
 
@@ -745,6 +750,7 @@
   <choice>
     <value>image/png</value>
     <value>image/jpeg</value>
+    <value>application/postscript</value>
     <!-- TODO: automatically convert this to jpeg -->
     <value>image/jpg</value>
   </choice>
@@ -755,6 +761,17 @@
       <ref name="enum.attr.img.data-media-type"/>
     </attribute>
   </optional>
+  <optional>
+    <attribute name="data-longdesc">
+      <ref name="URI.datatype"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-print-width">
+      <ref name="Length.datatype"/>
+    </attribute>
+  </optional>
+
   <!-- For images with thumbnails m42042 in Physics (col11406) -->
   <optional>
     <attribute name="data-print">
@@ -820,6 +837,8 @@
     <value>media</value>
     <value>term</value>
     <value>foreign</value>
+    <!-- TODO: either remove these or move them in to being optional children of <cite> -->
+    <value>cite-title</value>
   </choice>
 </define>
 <define name="enum.attr.span.itemprop">
@@ -1129,7 +1148,10 @@
     <!-- TODO: This is a deprecated attribute -->
     <optional>
       <attribute name="data-print-placement">
-        <value>here</value>
+        <choice>
+          <value>here</value>
+          <value>end</value>
+        </choice>
       </attribute>
     </optional>
     <ref name="element.Note.attrs"/>
@@ -1155,7 +1177,10 @@
   <!-- TODO: This is a deprecated attribute -->
   <optional>
     <attribute name="data-print-placement">
-      <value>here</value>
+      <choice>
+        <value>here</value>
+        <value>end</value>
+      </choice>
     </attribute>
   </optional>
   <ref name="element.Note.attrs"/>
@@ -1329,6 +1354,11 @@
     <attribute name="data-type">
       <value>title</value>
     </attribute>
+    <optional>
+      <attribute name="id">
+        <ref name="ID.datatype"/>
+      </attribute>
+    </optional>
     <ref name="Inline.model"/>
   </element>
   <choice>
@@ -1373,7 +1403,7 @@
     <ref name="Text.datatype"/>
   </attribute>
   <optional>
-    <attribute name="longdesc">
+    <attribute name="data-longdesc">
       <ref name="Text.datatype"/>
     </attribute>
   </optional>
