@@ -1274,6 +1274,7 @@
   </optional>
   <choice>
     <ref name="img"/>
+    <ref name="iframe"/>
     <!-- <ref name="element.Audio"/>
     <ref name="element.Video"/>
     <ref name="element.Labview"/>
