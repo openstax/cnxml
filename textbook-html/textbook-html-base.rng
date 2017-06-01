@@ -56,6 +56,11 @@
     <oneOrMore>
       <ref name="Block.model"/>
     </oneOrMore> -->
+    <optional>
+      <element name="div">
+        <ref name="element.FootnoteRefs"/>
+      </element>
+    </optional>
   </element>
 </define>
 
@@ -622,10 +627,20 @@
     <value>upper-roman</value>
   </choice>
 </define>
+<define name="enum.attr.ol.data-mark-suffix">
+  <choice>
+    <text/><!-- TODO: maybe disallow this and just discard it in the CNXML->HTML conversion -->
+  </choice>
+</define>
 <define name="ol.attlist" combine="interleave">
   <optional>
     <attribute name="data-number-style">
       <ref name="enum.attr.ol.data-number-style"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-mark-suffix">
+      <ref name="enum.attr.ol.data-mark-suffix"/>
     </attribute>
   </optional>
 </define>
@@ -886,6 +901,95 @@
 </define>
 
 
+<define name="element.FootnoteNumber">
+  <attribute name="data-type">
+    <value>footnote-number</value>
+  </attribute>
+  <attribute name="id">
+    <ref name="ID.datatype"/>
+  </attribute>
+  <element name="a">
+    <attribute name="data-type">
+      <value>footnote-link</value>
+    </attribute>
+    <attribute name="href">
+      <ref name="URI.datatype"/>
+    </attribute>
+    <ref name="Number.datatype"/>
+  </element>
+</define>
+
+<!-- This occurs at the end of a Page
+    <div
+        data-type="footnote-refs"
+      ><h3
+          data-type="footnote-refs-title"
+        >Footnotes</h3
+      ><ul
+          data-list-type="bulleted"
+          data-bullet-style="none"
+        ><li
+            data-type="footnote-ref"
+            id="footnote1"
+          ><a
+              data-type="footnote-ref-link"
+              href="#footnote-ref1"
+            >1</a
+          > <span
+              data-type="footnote-ref-content"
+            >J. Hulcr et al. &#x201C;A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable.&#x201D; <em
+                data-effect="italics"
+              >PLoS ONE</em
+            > 7 no. 11 (2012): e47712. doi:10.1371/journal.pone.0047712.</span
+          ></li
+        ></ul
+      ></div
+    > -->
+<define name="element.FootnoteRefs">
+  <attribute name="data-type">
+    <value>footnote-refs</value>
+  </attribute>
+  <element name="h3">
+    <attribute name="data-type">
+      <value>footnote-refs-title</value>
+    </attribute>
+    <value>Footnotes</value>
+  </element>
+  <element name="ul">
+    <attribute name="data-list-type">
+      <value>bulleted</value>
+    </attribute>
+    <attribute name="data-bullet-style">
+      <value>none</value>
+    </attribute>
+    <oneOrMore>
+      <element name="li">
+        <attribute name="data-type">
+          <value>footnote-ref</value>
+        </attribute>
+        <attribute name="id">
+          <ref name="ID.datatype"/>
+        </attribute>
+        <element name="a">
+          <attribute name="data-type">
+            <value>footnote-ref-link</value>
+          </attribute>
+          <attribute name="href">
+            <ref name="URI.datatype"/>
+          </attribute>
+          <ref name="Number.datatype"/>
+        </element>
+        <element name="span">
+          <attribute name="data-type">
+            <value>footnote-ref-content</value>
+          </attribute>
+          <ref name="Inline.model"/>
+        </element>
+      </element>
+    </oneOrMore>
+  </element>
+</define>
+
 <!-- Optional note title -->
 <define name="element.Note.OptionalTitle">
   <optional>
@@ -1096,6 +1200,8 @@
         <ref name="element.Example"/>
         <ref name="element.Newline"/>
         <ref name="element.DivList"/>
+        <!-- TODO: Move FootnoteRefs to only be valid either in a Page or in <body> -->
+        <ref name="element.FootnoteRefs"/>
       </choice>
     </element>
   </choice>
@@ -1107,6 +1213,11 @@
     <element name="span">
       <choice>
         <ref name="element.Newline"/>
+      </choice>
+    </element>
+    <element name="sup">
+      <choice>
+        <ref name="element.FootnoteNumber"/>
       </choice>
     </element>
   </choice>
