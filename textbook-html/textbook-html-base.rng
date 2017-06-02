@@ -17,7 +17,7 @@
 </define>
 
 
-<define name="UUID-and-version.datatype">
+<define name="uuid-and-version.datatype">
   <text/>
 </define>
 
@@ -36,7 +36,7 @@
 </define>
 
 
-<define name="Book.Page">
+<define name="Structure.Page">
   <element name="div">
     <attribute name="data-type">
       <value>page</value>
@@ -53,12 +53,12 @@
 </define>
 
 
-<define name="Book.Chapter">
+<define name="Structure.Chapter">
   <element name="div">
     <attribute name="data-type">
       <value>chapter</value>
     </attribute>
-    <ref name="Book.ChapterMetadata"/>
+    <ref name="Structure.ChapterMetadata"/>
     <element name="h1">
       <attribute name="data-type">
         <value>document-title</value>
@@ -66,14 +66,14 @@
       <ref name="Inline.model"/>
     </element>
     <oneOrMore>
-      <ref name="Book.Page"/>
+      <ref name="Structure.Page"/>
     </oneOrMore>
   </element>
 </define>
 
 
 
-<define name="Book.PageMetadata">
+<define name="Structure.PageMetadata">
   <element name="div">
     <attribute name="data-type">
       <value>metadata</value>
@@ -92,7 +92,7 @@
         <value>cnx-archive-uri</value>
       </attribute>
       <attribute name="data-value">
-        <ref name="UUID-and-version.datatype"/>
+        <ref name="uuid-and-version.datatype"/>
       </attribute>
     </element>
     <element name="div">
@@ -167,7 +167,7 @@
 </define>
 
 
-<define name="Book.Metadata.AuthorList">
+<define name="Structure.Metadata.AuthorList">
   <oneOrMore>
     <choice>
       <!-- Allow text like "Edited by:" intermingled in the DOM -->
@@ -206,7 +206,7 @@
 <!-- Copy/Pasta from Book.Metadata.AuthorList
   TODO: Combine these somehow.
 -->
-<define name="Metadata.PublisherList">
+<define name="Structure.Metadata.PublisherList">
   <oneOrMore>
     <choice>
       <!-- Allow text like "Edited by:" intermingled in the DOM -->
@@ -245,7 +245,7 @@
 
 <!-- <span data-type="cnx-archive-uri" data-value="69619d2b-68f0-44b0-b074-a9b2bf90b2c6@11.332"/>
 <span data-type="cnx-archive-shortid" data-value="aWGdK2jw@11.332"/> -->
-<define name="Book.Metadata">
+<define name="Structure.Metadata">
   <element name="div">
     <attribute name="data-type">
       <value>metadata</value>
@@ -264,7 +264,7 @@
         <value>cnx-archive-uri</value>
       </attribute>
       <attribute name="data-value">
-        <ref name="UUID-and-version.datatype"/>
+        <ref name="uuid-and-version.datatype"/>
       </attribute>
     </element>
     <element name="span">
@@ -272,20 +272,20 @@
         <value>cnx-archive-shortid</value>
       </attribute>
       <attribute name="data-value">
-        <ref name="UUID-and-version.datatype"/>
+        <ref name="uuid-and-version.datatype"/>
       </attribute>
     </element>
     <element name="div">
       <attribute name="class">
         <value>authors</value>
       </attribute>
-      <ref name="Book.Metadata.AuthorList"/>
+      <ref name="Structure.Metadata.AuthorList"/>
     </element>
     <element name="div">
       <attribute name="class">
         <value>publishers</value>
       </attribute>
-      <ref name="Metadata.PublisherList"/>
+      <ref name="Structure.Metadata.PublisherList"/>
     </element>
 
     <!-- <div class="print-style">
@@ -438,7 +438,7 @@
 </define>
 
 
-<define name="Book.ChapterMetadata">
+<define name="Structure.ChapterMetadata">
   <element name="div">
     <attribute name="data-type">
       <value>metadata</value>
@@ -1053,7 +1053,7 @@
 </define>
 
 <!-- Optional note title -->
-<define name="Content.OptionalTitle">
+<define name="Content.Title.optional">
   <optional>
     <element name="div">
       <attribute name="data-type">
@@ -1084,7 +1084,7 @@
       <ref name="Text.datatype"/>
     </attribute>
   </optional>
-  <ref name="Content.OptionalTitle"/>
+  <ref name="Content.Title.optional"/>
 </define>
 
 
@@ -1492,7 +1492,7 @@
 <define name="figure">
   <element name="figure">
     <ref name="figure.attlist"/>
-    <ref name="Content.OptionalTitle"/>
+    <ref name="Content.Title.optional"/>
     <ref name="Flow.model"/><!-- TODO: Should this be Block.model? -->
   </element>
 </define>
