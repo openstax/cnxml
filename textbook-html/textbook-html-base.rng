@@ -21,56 +21,44 @@
   <text/>
 </define>
 
+<define name="Boolean.datatype">
+  <choice>
+    <value>true</value>
+    <value>false</value>
+  </choice>
+</define>
 
-<define name="element.Page">
+
+<define name="id.attrib.required">
+  <attribute name="id">
+    <ref name="ID.datatype"/>
+  </attribute>
+</define>
+
+
+<define name="Book.Page">
   <element name="div">
     <attribute name="data-type">
       <value>page</value>
     </attribute>
-    <optional>
-      <attribute name="class">
-        <text/>
-      </attribute>
-    </optional>
-    <attribute name="id">
-      <ref name="ID.datatype"/>
-    </attribute>
+    <ref name="class.attrib"/>
+    <ref name="id.attrib.required"/>
     <zeroOrMore>
       <ref name="Flow.model"/>
     </zeroOrMore>
-    <!-- <ref name="element.PageMetadata"/>
-    <element name="div">
-      <attribute name="data-type">
-        <value>document-title</value>
-      </attribute>
-      <ref name="Inline.model"/>
-    </element>
-    <zeroOrMore>
-      <element name="cnx-pi">
-        <attribute name="data-type">
-          <text/>
-        </attribute>
-        <text/>
-      </element>
-    </zeroOrMore>
-    <oneOrMore>
-      <ref name="Block.model"/>
-    </oneOrMore> -->
     <optional>
-      <element name="div">
-        <ref name="element.FootnoteRefs"/>
-      </element>
+      <ref name="Content.FootnoteRefs"/>
     </optional>
   </element>
 </define>
 
 
-<define name="element.Chapter">
+<define name="Book.Chapter">
   <element name="div">
     <attribute name="data-type">
       <value>chapter</value>
     </attribute>
-    <ref name="element.ChapterMetadata"/>
+    <ref name="Book.ChapterMetadata"/>
     <element name="h1">
       <attribute name="data-type">
         <value>document-title</value>
@@ -78,14 +66,14 @@
       <ref name="Inline.model"/>
     </element>
     <oneOrMore>
-      <ref name="element.Page"/>
+      <ref name="Book.Page"/>
     </oneOrMore>
   </element>
 </define>
 
 
 
-<define name="element.PageMetadata">
+<define name="Book.PageMetadata">
   <element name="div">
     <attribute name="data-type">
       <value>metadata</value>
@@ -117,9 +105,7 @@
           <attribute name="data-type">
             <value>author</value>
           </attribute>
-          <attribute name="id">
-            <ref name="ID.datatype"/>
-          </attribute>
+          <ref name="id.attrib.required"/>
           <attribute name="itemprop">
             <value>author</value>
           </attribute>
@@ -181,7 +167,7 @@
 </define>
 
 
-<define name="Metadata.AuthorList">
+<define name="Book.Metadata.AuthorList">
   <oneOrMore>
     <choice>
       <!-- Allow text like "Edited by:" intermingled in the DOM -->
@@ -190,9 +176,7 @@
         <attribute name="data-type">
           <value>author</value>
         </attribute>
-        <attribute name="id">
-          <ref name="ID.datatype"/>
-        </attribute>
+        <ref name="id.attrib.required"/>
         <attribute name="itemprop">
           <value>author</value>
         </attribute>
@@ -219,7 +203,7 @@
   </oneOrMore>
 </define>
 
-<!-- Copy/Pasta from Metadata.AuthorList
+<!-- Copy/Pasta from Book.Metadata.AuthorList
   TODO: Combine these somehow.
 -->
 <define name="Metadata.PublisherList">
@@ -231,9 +215,7 @@
         <attribute name="data-type">
           <value>publisher</value>
         </attribute>
-        <attribute name="id">
-          <ref name="ID.datatype"/>
-        </attribute>
+        <ref name="id.attrib.required"/>
         <attribute name="itemprop">
           <value>publisher</value>
         </attribute>
@@ -263,7 +245,7 @@
 
 <!-- <span data-type="cnx-archive-uri" data-value="69619d2b-68f0-44b0-b074-a9b2bf90b2c6@11.332"/>
 <span data-type="cnx-archive-shortid" data-value="aWGdK2jw@11.332"/> -->
-<define name="element.BookMetadata">
+<define name="Book.Metadata">
   <element name="div">
     <attribute name="data-type">
       <value>metadata</value>
@@ -297,7 +279,7 @@
       <attribute name="class">
         <value>authors</value>
       </attribute>
-      <ref name="Metadata.AuthorList"/>
+      <ref name="Book.Metadata.AuthorList"/>
     </element>
     <element name="div">
       <attribute name="class">
@@ -456,7 +438,7 @@
 </define>
 
 
-<define name="element.ChapterMetadata">
+<define name="Book.ChapterMetadata">
   <element name="div">
     <attribute name="data-type">
       <value>metadata</value>
@@ -775,11 +757,7 @@
   <!-- For images with thumbnails m42042 in Physics (col11406) -->
   <optional>
     <attribute name="data-print">
-      <!-- TODO: Make this Boolean.datatype -->
-      <choice>
-        <value>true</value>
-        <value>false</value>
-      </choice>
+      <ref name="Boolean.datatype"/>
     </attribute>
   </optional>
 </define>
@@ -926,16 +904,11 @@
 
 <define name="div.attlist" combine="interleave">
   <optional>
-    <choice>
-      <group>
-        <!-- catch-all for the other, simpler data-types -->
-        <attribute name="data-type">
-          <ref name="enum.attr.div.data-type"/>
-        </attribute>
-      </group>
-    </choice>
+    <!-- catch-all for the other, simpler data-types -->
+    <attribute name="data-type">
+      <ref name="enum.attr.div.data-type"/>
+    </attribute>
   </optional>
-
 
   <optional><!-- TODO: Make this required when data-type="keyword" -->
     <attribute name="itemprop">
@@ -965,36 +938,38 @@
 </define>
 
 
-<define name="element.Space">
-  <attribute name="data-type">
-    <value>space</value>
-  </attribute>
-  <attribute name="data-count">
-    <ref name="Number.datatype"/>
-  </attribute>
-  <ref name="Text.datatype"/>
-</define>
-
-
-<define name="element.FootnoteNumber">
-  <attribute name="data-type">
-    <value>footnote-number</value>
-  </attribute>
-  <attribute name="id">
-    <ref name="ID.datatype"/>
-  </attribute>
-  <element name="a">
+<define name="Content.Space">
+  <element name="span">
     <attribute name="data-type">
-      <value>footnote-link</value>
+      <value>space</value>
     </attribute>
-    <attribute name="href">
-      <ref name="URI.datatype"/>
+    <attribute name="data-count">
+      <ref name="Number.datatype"/>
     </attribute>
-    <ref name="Number.datatype"/>
+    <ref name="Text.datatype"/>
   </element>
 </define>
 
-<define name="element.ImageWithThumbnail">
+
+<define name="Content.FootnoteNumber">
+  <element name="sup">
+    <attribute name="data-type">
+      <value>footnote-number</value>
+    </attribute>
+    <ref name="id.attrib.required"/>
+    <element name="a">
+      <attribute name="data-type">
+        <value>footnote-link</value>
+      </attribute>
+      <attribute name="href">
+        <ref name="URI.datatype"/>
+      </attribute>
+      <ref name="Number.datatype"/>
+    </element>
+  </element>
+</define>
+
+<define name="Content.ImageWithThumbnail">
   <element name="a">
     <attribute name="data-type">
       <value>image-with-thumbnail</value>
@@ -1032,53 +1007,53 @@
         ></ul
       ></div
     > -->
-<define name="element.FootnoteRefs">
-  <attribute name="data-type">
-    <value>footnote-refs</value>
-  </attribute>
-  <element name="h3">
+<define name="Content.FootnoteRefs">
+  <element name="div">
     <attribute name="data-type">
-      <value>footnote-refs-title</value>
+      <value>footnote-refs</value>
     </attribute>
-    <value>Footnotes</value>
-  </element>
-  <element name="ul">
-    <attribute name="data-list-type">
-      <value>bulleted</value>
-    </attribute>
-    <attribute name="data-bullet-style">
-      <value>none</value>
-    </attribute>
-    <oneOrMore>
-      <element name="li">
-        <attribute name="data-type">
-          <value>footnote-ref</value>
-        </attribute>
-        <attribute name="id">
-          <ref name="ID.datatype"/>
-        </attribute>
-        <element name="a">
+    <element name="h3">
+      <attribute name="data-type">
+        <value>footnote-refs-title</value>
+      </attribute>
+      <value>Footnotes</value>
+    </element>
+    <element name="ul">
+      <attribute name="data-list-type">
+        <value>bulleted</value>
+      </attribute>
+      <attribute name="data-bullet-style">
+        <value>none</value>
+      </attribute>
+      <oneOrMore>
+        <element name="li">
           <attribute name="data-type">
-            <value>footnote-ref-link</value>
+            <value>footnote-ref</value>
           </attribute>
-          <attribute name="href">
-            <ref name="URI.datatype"/>
-          </attribute>
-          <ref name="Number.datatype"/>
+          <ref name="id.attrib.required"/>
+          <element name="a">
+            <attribute name="data-type">
+              <value>footnote-ref-link</value>
+            </attribute>
+            <attribute name="href">
+              <ref name="URI.datatype"/>
+            </attribute>
+            <ref name="Number.datatype"/>
+          </element>
+          <element name="span">
+            <attribute name="data-type">
+              <value>footnote-ref-content</value>
+            </attribute>
+            <ref name="Inline.model"/>
+          </element>
         </element>
-        <element name="span">
-          <attribute name="data-type">
-            <value>footnote-ref-content</value>
-          </attribute>
-          <ref name="Inline.model"/>
-        </element>
-      </element>
-    </oneOrMore>
+      </oneOrMore>
+    </element>
   </element>
 </define>
 
 <!-- Optional note title -->
-<define name="element.Note.OptionalTitle">
+<define name="Content.OptionalTitle">
   <optional>
     <element name="div">
       <attribute name="data-type">
@@ -1090,7 +1065,7 @@
   </optional>
 </define>
 
-<define name="element.Note.attrs">
+<define name="Content.Note.attrs">
   <ref name="Common.attrib"/>
   <!-- TODO: Move the following 2 into a common blockish-div-thing -->
   <optional>
@@ -1109,38 +1084,42 @@
       <ref name="Text.datatype"/>
     </attribute>
   </optional>
-  <ref name="element.Note.OptionalTitle"/>
+  <ref name="Content.OptionalTitle"/>
 </define>
 
 
-<define name="element.Note">
-  <attribute name="data-type">
-    <value>note</value>
-  </attribute>
-  <ref name="element.Note.attrs"/>
-  <ref name="Flow.model"/>
-</define>
-
-<define name="element.Equation">
-  <attribute name="data-type">
-    <value>equation</value>
-  </attribute>
-  <ref name="element.Note.attrs"/>
-  <ref name="Flow.model"/>
-</define>
-
-
-<define name="element.Problem">
+<define name="Content.Note">
   <element name="div">
     <attribute name="data-type">
-      <value>problem</value>
+      <value>note</value>
     </attribute>
-    <ref name="element.Note.attrs"/>
+    <ref name="Content.Note.attrs"/>
     <ref name="Flow.model"/>
   </element>
 </define>
 
-<define name="element.Solution">
+<define name="Content.Equation">
+  <element name="div">
+    <attribute name="data-type">
+      <value>equation</value>
+    </attribute>
+    <ref name="Content.Note.attrs"/>
+    <ref name="Flow.model"/>
+  </element>
+</define>
+
+
+<define name="Content.Problem">
+  <element name="div">
+    <attribute name="data-type">
+      <value>problem</value>
+    </attribute>
+    <ref name="Content.Note.attrs"/>
+    <ref name="Flow.model"/>
+  </element>
+</define>
+
+<define name="Content.Solution">
   <element name="div">
     <attribute name="data-type">
       <value>solution</value>
@@ -1154,61 +1133,65 @@
         </choice>
       </attribute>
     </optional>
-    <ref name="element.Note.attrs"/>
+    <ref name="Content.Note.attrs"/>
     <ref name="Flow.model"/>
   </element>
 </define>
 
-<define name="element.Commentary">
+<define name="Content.Commentary">
   <element name="div">
     <attribute name="data-type">
       <value>commentary</value>
     </attribute>
-    <ref name="element.Note.attrs"/>
+    <ref name="Content.Note.attrs"/>
     <ref name="Flow.model"/>
   </element>
 </define>
 
 <!-- TODO: Require id attributes for some elements -->
-<define name="element.Exercise">
-  <attribute name="data-type">
-    <value>exercise</value>
-  </attribute>
-  <!-- TODO: This is a deprecated attribute -->
-  <optional>
-    <attribute name="data-print-placement">
-      <choice>
-        <value>here</value>
-        <value>end</value>
-      </choice>
+<define name="Content.Exercise">
+  <element name="div">
+    <attribute name="data-type">
+      <value>exercise</value>
     </attribute>
-  </optional>
-  <ref name="element.Note.attrs"/>
-  <ref name="element.Problem"/>
-  <zeroOrMore>
-    <ref name="element.Solution"/>
-  </zeroOrMore>
-  <zeroOrMore>
-    <ref name="element.Commentary"/>
-  </zeroOrMore>
+    <!-- TODO: This is a deprecated attribute -->
+    <optional>
+      <attribute name="data-print-placement">
+        <choice>
+          <value>here</value>
+          <value>end</value>
+        </choice>
+      </attribute>
+    </optional>
+    <ref name="Content.Note.attrs"/>
+    <ref name="Content.Problem"/>
+    <zeroOrMore>
+      <ref name="Content.Solution"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="Content.Commentary"/>
+    </zeroOrMore>
+  </element>
 </define>
 
 
-<define name="element.Example">
-  <attribute name="data-type">
-    <value>example</value>
-  </attribute>
-  <ref name="element.Note.attrs"/>
-  <ref name="Flow.model"/>
+<define name="Content.Example">
+  <element name="div">
+    <attribute name="data-type">
+      <value>example</value>
+    </attribute>
+    <ref name="Content.Note.attrs"/>
+    <ref name="Flow.model"/>
+  </element>
 </define>
 
 
 <!-- <div data-count="1" data-type="newline"  -->
-<define name="element.Newline">
+<define name="Content.Newline.class">
   <attribute name="data-type">
     <value>newline</value>
   </attribute>
-  <ref name="element.Note.attrs"/>
+  <ref name="Content.Note.attrs"/>
   <optional>
     <attribute name="data-count">
       <ref name="Number.datatype"/>
@@ -1303,82 +1286,77 @@
       </optional>
     </group>
   </choice>
-  <ref name="element.Note.attrs"/>
+  <ref name="Content.Note.attrs"/>
 </define>
 
-<define name="element.DivList">
-  <ref name="div-span-list.attrs"/>
-  <oneOrMore>
-    <ref name="element.DivListItem"/>
-  </oneOrMore>
+<define name="Content.DivList">
+  <element name="div">
+    <ref name="div-span-list.attrs"/>
+    <oneOrMore>
+      <ref name="Content.DivListItem"/>
+    </oneOrMore>
+  </element>
 </define>
 
 
 <!-- <div data-count="1" data-type="newline"  -->
-<define name="element.DivListItem">
+<define name="Content.DivListItem">
   <element name="div">
     <attribute name="data-type">
       <value>item</value>
     </attribute>
-    <ref name="element.Note.attrs"/>
+    <ref name="Content.Note.attrs"/>
     <ref name="Flow.model"/>
   </element>
 </define>
 
-<define name="element.SpanList">
-  <ref name="div-span-list.attrs"/>
-  <oneOrMore>
-    <ref name="element.SpanListItem"/>
-  </oneOrMore>
+<define name="Content.SpanList">
+  <element name="span">
+    <ref name="div-span-list.attrs"/>
+    <oneOrMore>
+      <ref name="Content.SpanListItem"/>
+    </oneOrMore>
+  </element>
 </define>
 
-<define name="element.SpanListItem">
+<define name="Content.SpanListItem">
   <element name="span">
     <attribute name="data-type">
       <value>item</value>
     </attribute>
-    <ref name="element.Note.attrs"/>
+    <ref name="Content.Note.attrs"/>
     <ref name="Inline.model"/>
   </element>
 </define>
 
 
-<define name="element.ListWithTitle">
-  <attribute name="data-type">
-    <value>list-with-title</value>
-  </attribute>
-  <attribute name="id">
-    <ref name="ID.datatype"/>
-  </attribute>
+<define name="Content.ListWithTitle">
   <element name="div">
     <attribute name="data-type">
-      <value>title</value>
+      <value>list-with-title</value>
     </attribute>
-    <optional>
-      <attribute name="id">
-        <ref name="ID.datatype"/>
-      </attribute>
-    </optional>
-    <ref name="Inline.model"/>
-  </element>
-  <choice>
-    <ref name="ul"/>
-    <ref name="ol"/>
-    <!-- TODO: make this just be a ref -->
+    <ref name="id.attrib.required"/>
     <element name="div">
-      <ref name="element.DivList"/>
+      <attribute name="data-type">
+        <value>title</value>
+      </attribute>
+      <ref name="id.attrib"/>
+      <ref name="Inline.model"/>
     </element>
-  </choice>
+    <choice>
+      <ref name="ul"/>
+      <ref name="ol"/>
+      <ref name="Content.DivList"/>
+    </choice>
+  </element>
 </define>
 
 
-<define name="element.Alternates">
+<define name="Content.Alternates.class">
   <attribute name="data-type">
     <value>alternates</value>
   </attribute>
-  <attribute name="id">
-    <ref name="ID.datatype"/>
-  </attribute>
+  <ref name="id.attrib.required"/>
   <optional>
     <attribute name="data-alt">
       <ref name="Text.datatype"/>
@@ -1387,74 +1365,69 @@
   <oneOrMore>
     <choice>
       <ref name="img"/>
-      <ref name="element.ImageWithThumbnail"/>
+      <ref name="Content.ImageWithThumbnail"/>
     </choice>
   </oneOrMore>
 </define>
 
-<define name="element.Media">
-  <attribute name="data-type">
-    <value>media</value>
-  </attribute>
-  <attribute name="id">
-    <ref name="ID.datatype"/>
-  </attribute>
-  <attribute name="data-alt">
-    <ref name="Text.datatype"/>
-  </attribute>
-  <optional>
-    <attribute name="data-longdesc">
+<define name="Content.Media">
+  <element name="div">
+    <attribute name="data-type">
+      <value>media</value>
+    </attribute>
+    <ref name="id.attrib.required"/>
+    <attribute name="data-alt">
       <ref name="Text.datatype"/>
     </attribute>
-  </optional>
-  <choice>
-    <ref name="img"/>
-    <ref name="iframe"/>
-    <!-- <ref name="element.Audio"/>
-    <ref name="element.Video"/>
-    <ref name="element.Labview"/>
-    <ref name="element.Download"/>
-    <ref name="element.Flash"/> -->
-  </choice>
+    <optional>
+      <attribute name="data-longdesc">
+        <ref name="Text.datatype"/>
+      </attribute>
+    </optional>
+    <choice>
+      <ref name="img"/>
+      <ref name="iframe"/>
+      <!-- <ref name="Content.Audio"/>
+      <ref name="Content.Video"/>
+      <ref name="Content.Labview"/>
+      <ref name="Content.Download"/>
+      <ref name="Content.Flash"/> -->
+    </choice>
+  </element>
 </define>
 
 
 <define name="Block.class" combine="choice">
   <choice>
+    <ref name="Content.Note"/>
+    <ref name="Content.Equation"/>
+    <ref name="Content.Exercise"/>
+    <ref name="Content.Example"/>
+    <ref name="Content.DivList"/>
+    <ref name="Content.ListWithTitle"/>
+    <ref name="Content.Media"/>
     <element name="div">
-      <choice>
-        <ref name="element.Note"/>
-        <ref name="element.Equation"/>
-        <ref name="element.Exercise"/>
-        <ref name="element.Example"/>
-        <ref name="element.Newline"/>
-        <ref name="element.DivList"/>
-        <ref name="element.ListWithTitle"/>
-        <ref name="element.Media"/>
-        <ref name="element.Alternates"/>
-        <!-- TODO: Move FootnoteRefs to only be valid either in a Page or in <body> -->
-        <ref name="element.FootnoteRefs"/>
-      </choice>
+      <ref name="Content.Alternates.class"/>
     </element>
+    <element name="div">
+      <ref name="Content.Newline.class"/>
+    </element>
+    <!-- TODO: Move FootnoteRefs to only be valid either in a Page or in <body> -->
+    <ref name="Content.FootnoteRefs"/>
   </choice>
 </define>
 
 
 <define name="Inline.class" combine="choice">
   <choice>
-    <!-- TODO: move the element name into the <define> or rename the define to be "element.Foo.class" to show that it defines a class of elements -->
+    <ref name="Content.SpanList"/>
+    <ref name="Content.Space"/>
+    <ref name="Content.FootnoteNumber"/>
     <element name="span">
-      <choice>
-        <ref name="element.Newline"/>
-        <ref name="element.Space"/>
-        <ref name="element.SpanList"/>
-        <ref name="element.Alternates"/>
-      </choice>
+      <ref name="Content.Alternates.class"/>
     </element>
-    <element name="sup">
-      <choice>
-        <ref name="element.FootnoteNumber"/>
-      </choice>
+    <element name="span">
+      <ref name="Content.Newline.class"/>
     </element>
   </choice>
 </define>
@@ -1475,6 +1448,7 @@
   </attribute>
 </define>
 
+<!-- TODO: Move nav definition to specifically be structural, and contain specific validation for the nested lists -->
 <define name="Block.class" combine="choice">
   <ref name="nav"/>
 </define>
@@ -1518,7 +1492,7 @@
 <define name="figure">
   <element name="figure">
     <ref name="figure.attlist"/>
-    <ref name="element.Note.OptionalTitle"/>
+    <ref name="Content.OptionalTitle"/>
     <ref name="Flow.model"/><!-- TODO: Should this be Block.model? -->
   </element>
 </define>
@@ -1557,12 +1531,7 @@
 
 <define name="figcaption.attlist">
   <!-- <ref name="Common.attrib"/> -->
-  <optional>
-    <attribute name="id">
-      <ref name="ID.datatype"/>
-    </attribute>
-  </optional>
-  <empty/>
+  <ref name="id.attrib"/>
 </define>
 
 <!-- TODO: Only allow this element inside a <figure> -->

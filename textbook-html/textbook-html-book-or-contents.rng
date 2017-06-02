@@ -41,13 +41,13 @@
       <choice>
         <!-- Book Structure . TODO: Move this into a ref instead of copy/pasting -->
         <group>
-          <ref name="element.BookMetadata"/>
+          <ref name="Book.Metadata"/>
           <ref name="nav"/><!-- TODO: rename this to element.ToC -->
           <oneOrMore>
             <choice>
-              <ref name="element.Chapter"/>
+              <ref name="Book.Chapter"/>
               <!-- Preface or Appendix -->
-              <ref name="element.Page"/>
+              <ref name="Book.Page"/>
             </choice>
           </oneOrMore>
         </group>

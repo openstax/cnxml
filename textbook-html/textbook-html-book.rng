@@ -29,13 +29,13 @@
     <!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
     <ref name="body.attlist"/>
     <!-- Actually, it's BookMetadata -->
-    <ref name="element.BookMetadata"/>
+    <ref name="Book.Metadata"/>
     <ref name="nav"/><!-- TODO: rename this to element.ToC -->
     <oneOrMore>
       <choice>
-        <ref name="element.Chapter"/>
+        <ref name="Book.Chapter"/>
         <!-- Preface or Appendix -->
-        <ref name="element.Page"/>
+        <ref name="Book.Page"/>
       </choice>
     </oneOrMore>
   </element>
