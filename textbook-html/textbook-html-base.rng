@@ -17,9 +17,22 @@
 </define>
 
 
-<define name="uuid-and-version.datatype">
+<define name="UUID-and-version.datatype">
   <text/>
 </define>
+
+<define name="ShortId.datatype">
+  <text/>
+</define>
+
+<define name="UserLogin.datatype">
+  <text/>
+</define>
+
+<define name="UserName.datatype">
+  <text/>
+</define>
+
 
 <define name="Boolean.datatype">
   <choice>
@@ -43,6 +56,7 @@
     </attribute>
     <ref name="class.attrib"/>
     <ref name="id.attrib.required"/>
+    <ref name="Structure.PageMetadata"/>
     <zeroOrMore>
       <ref name="Flow.model"/>
     </zeroOrMore>
@@ -85,65 +99,89 @@
       <attribute name="itemprop">
         <value>name</value>
       </attribute>
-      <ref name="Flow.model"/>
+      <ref name="Inline.model"/>
     </element>
     <element name="span">
       <attribute name="data-type">
         <value>cnx-archive-uri</value>
       </attribute>
       <attribute name="data-value">
-        <ref name="uuid-and-version.datatype"/>
+        <ref name="UUID-and-version.datatype"/>
+      </attribute>
+    </element>
+    <element name="span">
+      <attribute name="data-type">
+        <value>cnx-archive-shortid</value>
+      </attribute>
+      <attribute name="data-value">
+        <ref name="ShortId.datatype"/>
       </attribute>
     </element>
     <element name="div">
       <attribute name="class">
         <value>authors</value>
       </attribute>
-      <text/>
-      <oneOrMore>
-        <element name="span">
-          <attribute name="data-type">
-            <value>author</value>
-          </attribute>
-          <ref name="id.attrib.required"/>
-          <attribute name="itemprop">
-            <value>author</value>
-          </attribute>
-          <attribute name="itemscope">
-            <value>itemscope</value>
-          </attribute>
-          <attribute name="itemtype">
-            <value>http://schema.org/Person</value>
-          </attribute>
-          <element name="a">
-            <attribute name="data-type">
-              <value>cnx-id</value>
-            </attribute>
-            <attribute name="href">
-              <ref name="Text.datatype"/>
-            </attribute>
-            <attribute name="itemprop">
-              <value>url</value>
-            </attribute>
-            <ref name="Text.datatype"/>
-          </element>
-        </element>
-      </oneOrMore>
+      <ref name="Structure.Metadata.AuthorList"/>
+    </element>
+    <element name="div">
+      <attribute name="class">
+        <value>publishers</value>
+      </attribute>
+      <ref name="Structure.Metadata.PublisherList"/>
     </element>
     <!-- TODO: remove me. why is this here? -->
-    <element name="span">
+    <!-- <element name="span">
       <attribute name="data-type">
         <value>binding</value>
       </attribute>
       <attribute name="data-value">
         <value>translucent</value>
       </attribute>
-    </element>
+    </element> -->
     <!-- change class="permissions" to some other attribute -->
     <element name="div">
       <attribute name="class">
         <value>permissions</value>
       </attribute>
+      <element name="p">
+        <attribute name="class">
+          <value>copyright</value>
+        </attribute>
+        <!-- Copyright: -->
+        <text/>
+        <!--               <span data-type="copyright-holder" id="copyright-holder-1" itemprop="copyright-holder" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a data-type="cnx-id" href="cnxecon" itemprop="url">OpenStax Economics</a>
+              </span> -->
+        <oneOrMore>
+          <element name="span">
+            <attribute name="data-type">
+              <value>copyright-holder</value>
+            </attribute>
+            <attribute name="itemprop">
+              <value>copyright-holder</value>
+            </attribute>
+            <attribute name="itemscope">
+              <value>itemscope</value>
+            </attribute>
+            <attribute name="itemtype">
+              <value>http://schema.org/Person</value>
+            </attribute>
+
+            <element name="a">
+              <attribute name="data-type">
+                <value>cnx-id</value>
+              </attribute>
+              <attribute name="href">
+                <ref name="UserLogin.datatype"/>
+              </attribute>
+              <attribute name="itemprop">
+                <value>url</value>
+              </attribute>
+              <ref name="UserName.datatype"/>
+            </element>
+          </element>
+        </oneOrMore>
+      </element>
       <element name="p">
         <attribute name="class">
           <value>license</value>
@@ -257,14 +295,14 @@
       <attribute name="itemprop">
         <value>name</value>
       </attribute>
-      <ref name="Flow.model"/>
+      <ref name="Inline.model"/>
     </element>
     <element name="span">
       <attribute name="data-type">
         <value>cnx-archive-uri</value>
       </attribute>
       <attribute name="data-value">
-        <ref name="uuid-and-version.datatype"/>
+        <ref name="UUID-and-version.datatype"/>
       </attribute>
     </element>
     <element name="span">
@@ -272,7 +310,7 @@
         <value>cnx-archive-shortid</value>
       </attribute>
       <attribute name="data-value">
-        <ref name="uuid-and-version.datatype"/>
+        <ref name="UUID-and-version.datatype"/>
       </attribute>
     </element>
     <element name="div">
@@ -450,7 +488,7 @@
       <attribute name="itemprop">
         <value>name</value>
       </attribute>
-      <ref name="Flow.model"/>
+      <ref name="Inline.model"/>
     </element>
     <!-- TODO: remove me. why is this here? -->
     <element name="span">
@@ -488,6 +526,59 @@
   </element>
 </define>
 
+
+<!-- The <nav id="toc"> -->
+<define name="Structure.ToC">
+  <element name="nav">
+    <attribute name="id">
+      <value>toc</value>
+    </attribute>
+    <element name="ol">
+      <zeroOrMore>
+        <ref name="Structure.ToC.LeafItem"/>
+      </zeroOrMore>
+      <oneOrMore>
+        <ref name="Structure.ToC.InternalItem"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <ref name="Structure.ToC.LeafItem"/>
+      </zeroOrMore>
+    </element>
+  </element>
+</define>
+
+<define name="Structure.ToC.LeafItem">
+  <element name="li">
+    <attribute name="cnx-archive-shortid">
+      <ref name="ShortId.datatype"/>
+    </attribute>
+    <attribute name="cnx-archive-uri">
+      <ref name="UUID-and-version.datatype"/>
+    </attribute>
+    <element name="a">
+      <attribute name="href">
+        <ref name="URI.datatype"/>
+      </attribute>
+      <text/>
+    </element>
+  </element>
+</define>
+
+<define name="Structure.ToC.InternalItem">
+  <element name="li">
+    <element name="span">
+      <text/>
+    </element>
+    <element name="ol">
+      <oneOrMore>
+        <choice>
+          <ref name="Structure.ToC.InternalItem"/>
+          <ref name="Structure.ToC.LeafItem"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </element>
+</define>
 
 
 <!--
@@ -703,7 +794,7 @@
 <!-- <a data-type="license" itemprop="..."> -->
 <define name="enum.attr.a.data-type">
   <choice>
-    <value>license</value>
+    <!-- <value>license</value> -->
     <value>cnx-id</value>
   </choice>
 </define>
@@ -1430,27 +1521,6 @@
       <ref name="Content.Newline.class"/>
     </element>
   </choice>
-</define>
-
-
-<!-- The <nav> -->
-<define name="nav">
-  <element name="nav">
-    <ref name="nav.attlist"/>
-    <!-- TODO: only allow the restricted-subset <ol>, <li>, and <a> Tree which creates the ToC -->
-    <!-- TODO: only allow it exactly once in the body -->
-  </element>
-</define>
-
-<define name="nav.attlist">
-  <attribute name="id">
-    <value>toc</value>
-  </attribute>
-</define>
-
-<!-- TODO: Move nav definition to specifically be structural, and contain specific validation for the nested lists -->
-<define name="Block.class" combine="choice">
-  <ref name="nav"/>
 </define>
 
 
