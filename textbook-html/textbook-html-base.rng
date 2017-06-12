@@ -21,6 +21,10 @@
   <text/>
 </define>
 
+<define name="Sha.datatype">
+  <text/>
+</define>
+
 <define name="ShortId.datatype">
   <text/>
 </define>
@@ -92,43 +96,11 @@
     <attribute name="data-type">
       <value>metadata</value>
     </attribute>
-    <element name="h1">
-      <attribute name="data-type">
-        <value>document-title</value>
-      </attribute>
-      <attribute name="itemprop">
-        <value>name</value>
-      </attribute>
-      <ref name="Inline.model"/>
-    </element>
-    <element name="span">
-      <attribute name="data-type">
-        <value>cnx-archive-uri</value>
-      </attribute>
-      <attribute name="data-value">
-        <ref name="UUID-and-version.datatype"/>
-      </attribute>
-    </element>
-    <element name="span">
-      <attribute name="data-type">
-        <value>cnx-archive-shortid</value>
-      </attribute>
-      <attribute name="data-value">
-        <ref name="ShortId.datatype"/>
-      </attribute>
-    </element>
-    <element name="div">
-      <attribute name="class">
-        <value>authors</value>
-      </attribute>
-      <ref name="Structure.Metadata.AuthorList"/>
-    </element>
-    <element name="div">
-      <attribute name="class">
-        <value>publishers</value>
-      </attribute>
-      <ref name="Structure.Metadata.PublisherList"/>
-    </element>
+    <ref name="Structure.Metadata.Title"/>
+    <ref name="Structure.Metadata.Uri"/>
+    <ref name="Structure.Metadata.ShortId"/>
+    <ref name="Structure.Metadata.Authors"/>
+    <ref name="Structure.Metadata.Publishers"/>
     <!-- TODO: remove me. why is this here? -->
     <!-- <element name="span">
       <attribute name="data-type">
@@ -138,148 +110,228 @@
         <value>translucent</value>
       </attribute>
     </element> -->
-    <!-- change class="permissions" to some other attribute -->
-    <element name="div">
-      <attribute name="class">
-        <value>permissions</value>
-      </attribute>
-      <element name="p">
-        <attribute name="class">
-          <value>copyright</value>
-        </attribute>
-        <!-- Copyright: -->
-        <text/>
-        <!--               <span data-type="copyright-holder" id="copyright-holder-1" itemprop="copyright-holder" itemscope="itemscope" itemtype="http://schema.org/Person">
-                <a data-type="cnx-id" href="cnxecon" itemprop="url">OpenStax Economics</a>
-              </span> -->
-        <oneOrMore>
-          <element name="span">
-            <attribute name="data-type">
-              <value>copyright-holder</value>
-            </attribute>
-            <attribute name="itemprop">
-              <value>copyright-holder</value>
-            </attribute>
-            <attribute name="itemscope">
-              <value>itemscope</value>
-            </attribute>
-            <attribute name="itemtype">
-              <value>http://schema.org/Person</value>
-            </attribute>
+    <ref name="Structure.Metadata.Permissions"/>
+    <!-- Add description -->
+    <ref name="Structure.Metadata.Description"/>
+    <ref name="Structure.Metadata.Keywords"/>
+    <ref name="Structure.Metadata.Resources"/>
+  </element>
+</define>
 
-            <element name="a">
-              <attribute name="data-type">
-                <value>cnx-id</value>
-              </attribute>
-              <attribute name="href">
-                <ref name="UserLogin.datatype"/>
-              </attribute>
-              <attribute name="itemprop">
-                <value>url</value>
-              </attribute>
-              <ref name="UserName.datatype"/>
-            </element>
-          </element>
-        </oneOrMore>
-      </element>
-      <element name="p">
-        <attribute name="class">
-          <value>license</value>
-        </attribute>
-        <text/>
-        <element name="a">
-          <attribute name="data-type">
-            <value>license</value>
-          </attribute>
-          <attribute name="href">
-            <ref name="URI.datatype"/>
-          </attribute>
-          <attribute name="itemprop">
-            <value>dc:license,lrmi:useRightsURL</value>
-          </attribute>
+<define name="Structure.Metadata.Title">
+  <element name="h1">
+    <attribute name="data-type">
+      <value>document-title</value>
+    </attribute>
+    <attribute name="itemprop">
+      <value>name</value>
+    </attribute>
+    <ref name="Inline.model"/>
+  </element>
+</define>
+
+<define name="Structure.Metadata.Uri">
+  <element name="span">
+    <attribute name="data-type">
+      <value>cnx-archive-uri</value>
+    </attribute>
+    <attribute name="data-value">
+      <ref name="UUID-and-version.datatype"/>
+    </attribute>
+  </element>
+</define>
+
+<define name="Structure.Metadata.ShortId">
+  <element name="span">
+    <attribute name="data-type">
+      <value>cnx-archive-shortid</value>
+    </attribute>
+    <attribute name="data-value">
+      <ref name="ShortId.datatype"/>
+    </attribute>
+  </element>
+</define>
+
+<define name="Structure.Metadata.Authors">
+  <element name="div">
+    <attribute name="class">
+      <value>authors</value>
+    </attribute>
+    <oneOrMore>
+      <group>
+        <!-- Allow text like "Edited by:" intermingled in the DOM -->
+        <optional>
           <text/>
-        </element>
-      </element>
+        </optional>
+        <ref name="Structure.Metadata.Authors.Item"/>
+      </group>
+    </oneOrMore>
+    <!-- Allow text like "Edited by:" intermingled in the DOM -->
+    <optional>
+      <text/>
+    </optional>
+  </element>
+</define>
+
+<define name="Structure.Metadata.Authors.Item">
+  <element name="span">
+    <attribute name="data-type">
+      <value>author</value>
+    </attribute>
+    <ref name="id.attrib.required"/>
+    <attribute name="itemprop">
+      <value>author</value>
+    </attribute>
+    <attribute name="itemscope">
+      <value>itemscope</value>
+    </attribute>
+    <attribute name="itemtype">
+      <value>http://schema.org/Person</value>
+    </attribute>
+    <element name="a">
+      <attribute name="data-type">
+        <value>cnx-id</value>
+      </attribute>
+      <attribute name="href">
+        <ref name="Text.datatype"/>
+      </attribute>
+      <attribute name="itemprop">
+        <value>url</value>
+      </attribute>
+      <ref name="Text.datatype"/>
+    </element>
+  </element>
+</define>
+
+<define name="Structure.Metadata.Publishers">
+  <element name="div">
+    <attribute name="class">
+      <value>publishers</value>
+    </attribute>
+    <oneOrMore>
+      <group>
+        <!-- Allow text like "Edited by:" intermingled in the DOM -->
+        <optional>
+          <text/>
+        </optional>
+        <ref name="Structure.Metadata.Publishers.Item"/>
+      </group>
+    </oneOrMore>
+    <!-- Allow text like "Edited by:" intermingled in the DOM -->
+    <optional>
+      <text/>
+    </optional>
+  </element>
+</define>
+
+<!-- Copy/Pasta from Book.Metadata.Authors.Item
+  TODO: Combine these somehow.
+-->
+<define name="Structure.Metadata.Publishers.Item">
+  <element name="span">
+    <attribute name="data-type">
+      <value>publisher</value>
+    </attribute>
+    <ref name="id.attrib.required"/>
+    <attribute name="itemprop">
+      <value>publisher</value>
+    </attribute>
+    <attribute name="itemscope">
+      <value>itemscope</value>
+    </attribute>
+    <attribute name="itemtype">
+      <value>http://schema.org/Person</value>
+    </attribute>
+    <element name="a">
+      <attribute name="data-type">
+        <value>cnx-id</value>
+      </attribute>
+      <attribute name="href">
+        <ref name="Text.datatype"/>
+      </attribute>
+      <attribute name="itemprop">
+        <value>url</value>
+      </attribute>
+      <ref name="Text.datatype"/>
     </element>
   </element>
 </define>
 
 
-<define name="Structure.Metadata.AuthorList">
-  <oneOrMore>
-    <choice>
-      <!-- Allow text like "Edited by:" intermingled in the DOM -->
+<define name="Structure.Metadata.Permissions">
+  <!-- change class="permissions" to some other attribute -->
+  <element name="div">
+    <attribute name="class">
+      <value>permissions</value>
+    </attribute>
+    <ref name="Structure.Metadata.Copyrights"/>
+    <element name="p">
+      <attribute name="class">
+        <value>license</value>
+      </attribute>
       <text/>
-      <element name="span">
+      <!-- <a data-type="license" itemprop="..."> -->
+      <element name="a">
         <attribute name="data-type">
-          <value>author</value>
+          <value>license</value>
         </attribute>
-        <ref name="id.attrib.required"/>
+        <attribute name="href">
+          <ref name="URI.datatype"/>
+        </attribute>
         <attribute name="itemprop">
-          <value>author</value>
+          <value>dc:license,lrmi:useRightsURL</value>
         </attribute>
-        <attribute name="itemscope">
-          <value>itemscope</value>
-        </attribute>
-        <attribute name="itemtype">
-          <value>http://schema.org/Person</value>
-        </attribute>
-        <element name="a">
-          <attribute name="data-type">
-            <value>cnx-id</value>
-          </attribute>
-          <attribute name="href">
-            <ref name="Text.datatype"/>
-          </attribute>
-          <attribute name="itemprop">
-            <value>url</value>
-          </attribute>
-          <ref name="Text.datatype"/>
-        </element>
+        <text/>
       </element>
-    </choice>
-  </oneOrMore>
+    </element>
+  </element>
 </define>
 
-<!-- Copy/Pasta from Book.Metadata.AuthorList
-  TODO: Combine these somehow.
--->
-<define name="Structure.Metadata.PublisherList">
-  <oneOrMore>
-    <choice>
-      <!-- Allow text like "Edited by:" intermingled in the DOM -->
-      <text/>
-      <element name="span">
-        <attribute name="data-type">
-          <value>publisher</value>
-        </attribute>
-        <ref name="id.attrib.required"/>
-        <attribute name="itemprop">
-          <value>publisher</value>
-        </attribute>
-        <attribute name="itemscope">
-          <value>itemscope</value>
-        </attribute>
-        <attribute name="itemtype">
-          <value>http://schema.org/Person</value>
-        </attribute>
-        <element name="a">
-          <attribute name="data-type">
-            <value>cnx-id</value>
-          </attribute>
-          <attribute name="href">
-            <ref name="Text.datatype"/>
-          </attribute>
-          <attribute name="itemprop">
-            <value>url</value>
-          </attribute>
-          <ref name="Text.datatype"/>
-        </element>
-      </element>
-    </choice>
-  </oneOrMore>
+<define name="Structure.Metadata.Copyrights">
+  <element name="p">
+    <attribute name="class">
+      <value>copyright</value>
+    </attribute>
+    <!-- Copyright: -->
+    <text/>
+    <!--               <span data-type="copyright-holder" id="copyright-holder-1" itemprop="copyright-holder" itemscope="itemscope" itemtype="http://schema.org/Person">
+            <a data-type="cnx-id" href="cnxecon" itemprop="url">OpenStax Economics</a>
+          </span> -->
+    <oneOrMore>
+      <ref name="Structure.Metadata.Copyrights.Item"/>
+    </oneOrMore>
+  </element>
 </define>
 
+<define name="Structure.Metadata.Copyrights.Item">
+  <element name="span">
+    <attribute name="data-type">
+      <value>copyright-holder</value>
+    </attribute>
+    <attribute name="itemprop">
+      <value>copyright-holder</value>
+    </attribute>
+    <attribute name="itemscope">
+      <value>itemscope</value>
+    </attribute>
+    <attribute name="itemtype">
+      <value>http://schema.org/Person</value>
+    </attribute>
+
+    <element name="a">
+      <attribute name="data-type">
+        <value>cnx-id</value>
+      </attribute>
+      <attribute name="href">
+        <ref name="UserLogin.datatype"/>
+      </attribute>
+      <attribute name="itemprop">
+        <value>url</value>
+      </attribute>
+      <ref name="UserName.datatype"/>
+    </element>
+  </element>
+</define>
 
 <!-- <span data-type="cnx-archive-uri" data-value="69619d2b-68f0-44b0-b074-a9b2bf90b2c6@11.332"/>
 <span data-type="cnx-archive-shortid" data-value="aWGdK2jw@11.332"/> -->
@@ -313,18 +365,8 @@
         <ref name="UUID-and-version.datatype"/>
       </attribute>
     </element>
-    <element name="div">
-      <attribute name="class">
-        <value>authors</value>
-      </attribute>
-      <ref name="Structure.Metadata.AuthorList"/>
-    </element>
-    <element name="div">
-      <attribute name="class">
-        <value>publishers</value>
-      </attribute>
-      <ref name="Structure.Metadata.PublisherList"/>
-    </element>
+    <ref name="Structure.Metadata.Authors"/>
+    <ref name="Structure.Metadata.Publishers"/>
 
     <!-- <div class="print-style">
     Print style:
@@ -526,6 +568,67 @@
   </element>
 </define>
 
+
+<define name="Structure.Metadata.Description">
+  <element name="div">
+    <attribute name="class">
+      <value>description</value>
+    </attribute>
+    <attribute name="data-type">
+      <value>description</value>
+    </attribute>
+    <attribute name="itemprop">
+      <value>description</value>
+    </attribute>
+    <oneOrMore>
+      <ref name="Flow.model"/>
+    </oneOrMore>
+  </element>
+</define>
+
+<define name="Structure.Metadata.Keywords">
+  <!-- TODO: This should probably be wrapped in an element -->
+  <zeroOrMore>
+    <element name="div">
+      <attribute name="data-type">
+        <value>keyword</value>
+      </attribute>
+      <attribute name="itemprop">
+        <value>keywords</value>
+      </attribute>
+      <text/>
+    </element>
+  </zeroOrMore>
+</define>
+
+<!-- <div data-type="resources" style="display: none"> <ul>
+<li><a href="971b6320e705d9c81cbad7f4a98148ab91456d3b">971b6320e705d9c81cbad7f4a98148ab91456d3b</a></li>        </ul>
+-->
+<define name="Structure.Metadata.Resources">
+  <element name="div">
+    <attribute name="data-type">
+      <value>resources</value>
+    </attribute>
+    <!-- TODO: remove this attribute, maybe the whole element. What is it used for? -->
+    <attribute name="style">
+      <value>display: none</value>
+    </attribute>
+    <optional>
+      <element name="ul">
+        <oneOrMore>
+          <element name="li">
+            <element name="a">
+              <attribute name="href">
+                <ref name="Sha.datatype"/>
+              </attribute>
+              <ref name="Sha.datatype"/>
+            </element>
+          </element>
+        </oneOrMore>
+      </element>
+    </optional>
+  </element>
+</define>
 
 <!-- The <nav id="toc"> -->
 <define name="Structure.ToC">
@@ -791,33 +894,6 @@
 
 
 
-<!-- <a data-type="license" itemprop="..."> -->
-<define name="enum.attr.a.data-type">
-  <choice>
-    <!-- <value>license</value> -->
-    <value>cnx-id</value>
-  </choice>
-</define>
-<define name="enum.attr.a.itemprop">
-  <choice>
-    <value>url</value>
-    <value>dc:license,lrmi:useRightsURL</value>
-  </choice>
-</define>
-<define name="a.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-type">
-      <ref name="enum.attr.a.data-type"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="itemprop">
-      <ref name="enum.attr.a.itemprop"/>
-    </attribute>
-  </optional>
-</define>
-
-
 <!-- <img data-alt="..." data-media-type="..."> -->
 <define name="enum.attr.img.data-media-type">
   <choice>
@@ -983,16 +1059,6 @@
 
 
 
-<define name="enum.attr.div.itemprop">
-  <choice>
-    <!-- TODO: link this with data-type="description" or remove data-type from the HTML -->
-    <value>description</value>
-    <!-- TODO: link this with data-type="subject" or remove data-type from the HTML -->
-    <value>about</value>
-    <value>keywords</value>
-  </choice>
-</define>
-
 <define name="div.attlist" combine="interleave">
   <optional>
     <!-- catch-all for the other, simpler data-types -->
@@ -1001,11 +1067,6 @@
     </attribute>
   </optional>
 
-  <optional><!-- TODO: Make this required when data-type="keyword" -->
-    <attribute name="itemprop">
-      <ref name="enum.attr.div.itemprop"/>
-    </attribute>
-  </optional>
   <!-- data-has-label="true" data-label="" -->
   <optional>
     <attribute name="data-label">
