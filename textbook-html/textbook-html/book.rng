@@ -1,7 +1,7 @@
 <grammar ns="http://www.w3.org/1999/xhtml"
          xmlns="http://relaxng.org/ns/structure/1.0">
 
-<include href="./textbook-html-book-base.rng"/>
+<include href="./_book-base.rng"/>
 
 <!-- <head itemscope="itemscope" itemtype="http://schema.org/Book"> -->
 <define name="head.attlist" combine="interleave">

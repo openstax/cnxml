@@ -2,6 +2,6 @@
 
 set -e
 
-java -jar ./cnxml/jing.jar ./textbook-html/textbook-html-book.rng ./textbook-html/test/book-minimal.xhtml
-java -jar ./cnxml/jing.jar ./textbook-html/textbook-html-contents.rng ./textbook-html/test/contents-minimal.xhtml
-java -jar ./cnxml/jing.jar ./textbook-html/textbook-html-contents.rng ./textbook-html/test/contents-misc.xhtml
+java -jar ./cnxml/jing.jar ./textbook-html/textbook-html/book.rng ./textbook-html/test/book-minimal.xhtml
+java -jar ./cnxml/jing.jar ./textbook-html/textbook-html/contents.rng ./textbook-html/test/contents-minimal.xhtml
+java -jar ./cnxml/jing.jar ./textbook-html/textbook-html/contents.rng ./textbook-html/test/contents-misc.xhtml
