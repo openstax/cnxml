@@ -55,6 +55,9 @@
       <ref name="Flow.model"/>
     </zeroOrMore>
     <optional>
+      <ref name="Content.Glossary"/>
+    </optional>
+    <optional>
       <ref name="Content.FootnoteRefs"/>
     </optional>
   </element>

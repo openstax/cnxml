@@ -328,41 +328,21 @@
 
 
 
-<!-- <h1 data-type="..."> -->
+<!-- TODO: These are used in <section> elements and should be restricted to that. <h1 data-type="..."> -->
 <define name="enum.attr.Heading.data-type">
-  <choice>
-    <value>title</value>
-
-    <value>glossary-title</value>
-  </choice>
-</define>
-<define name="enum.attr.Heading.itemprop">
-  <value>name</value>
+  <value>title</value>
 </define>
 <define name="Heading.attrib" combine="interleave">
   <!-- TODO: Make a different validation structure for Page elements. That way these values are not valid within the content -->
   <attribute name="data-type">
     <ref name="enum.attr.Heading.data-type"/>
   </attribute>
-
-  <!-- <h1 data-type="document-title" itemprop="name"> -->
-  <optional>
-    <attribute name="itemprop">
-      <ref name="enum.attr.Heading.itemprop"/>
-    </attribute>
-  </optional>
 </define>
 
 
 
 
 <define name="div.attlist" combine="interleave">
-  <optional>
-    <!-- catch-all for the other, simpler data-types -->
-    <attribute name="data-type">
-      <ref name="enum.attr.div.data-type"/>
-    </attribute>
-  </optional>
 
   <!-- data-has-label="true" data-label="" -->
   <optional>
@@ -673,35 +653,6 @@
 
 
 
-<!-- <div data-type="..." data-list-type="..."> -->
-<define name="enum.attr.div.data-type">
-  <choice>
-
-    <!-- TODO: Don't forget about the child Heading glossary-title -->
-    <value>glossary</value>
-  </choice>
-</define>
-<define name="enum.attr.div.data-number-style">
-  <choice>
-    <value>arabic</value>
-    <value>lower-alpha</value>
-    <value>upper-alpha</value>
-    <value>upper-roman</value>
-    <value>lower-roman</value>
-  </choice>
-</define>
-<define name="enum.attr.div.data-bullet-style">
-  <choice>
-    <value>bullet</value>
-    <value>open-circle</value>
-    <value>pilcrow</value>
-    <value>rpilcrow</value>
-    <value>asterisk</value>
-    <value>dash</value>
-    <value>section</value>
-    <value>none</value>
-  </choice>
-</define>
 <!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
 <!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
 <define name="div-span-list.attrs">
@@ -730,7 +681,7 @@
       </attribute>
       <optional>
         <attribute name="data-bullet-style">
-          <ref name="enum.attr.div.data-bullet-style"/>
+          <ref name="enum.attr.ul.data-bullet-style"/>
         </attribute>
       </optional>
     </group>
@@ -740,7 +691,7 @@
       </attribute>
       <optional>
         <attribute name="data-number-style">
-          <ref name="enum.attr.div.data-number-style"/>
+          <ref name="enum.attr.ol.data-number-style"/>
         </attribute>
       </optional>
     </group>
@@ -852,6 +803,31 @@
       <ref name="Content.Download"/>
       <ref name="Content.Flash"/> -->
     </choice>
+  </element>
+</define>
+
+
+<!-- <div data-type="glossary"><h3 data-type="glossary-title">Glossary</h3>
+<dl id="fs-id1167836525060">
+<dt>coefficient</dt>
+<dd id="fs-id1167836525065">The coefficient of a term is the constant that multiplies the variable in a term.</dd>
+</dl>
+</div> -->
+<define name="Content.Glossary">
+  <element name="div">
+    <attribute name="data-type">
+      <value>glossary</value>
+    </attribute>
+    <element name="h3">
+      <attribute name="data-type">
+        <value>glossary-title</value>
+      </attribute>
+      <value>Glossary</value>
+    </element>
+    <!-- TODO: only allow one <dl> per Glossary -->
+    <oneOrMore>
+      <ref name="dl"/>
+    </oneOrMore>
   </element>
 </define>
 

@@ -28,6 +28,10 @@
       <!-- any arbitrary content -->
       <ref name="Block.model"/>
     </choice>
+    <!-- Optionally allow the glossary at the end of the doc -->
+    <optional>
+      <ref name="Content.Glossary"/>
+    </optional>
   </element>
 </define>
 
