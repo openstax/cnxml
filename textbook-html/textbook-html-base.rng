@@ -825,8 +825,6 @@ Print style:
     <value>title</value>
     <!-- These are in content and should remain here -->
     <value>media</value>
-    <value>term</value>
-    <value>foreign</value>
     <!-- TODO: either remove these or move them in to being optional children of <cite> -->
     <value>cite-title</value>
   </choice>
@@ -858,7 +856,6 @@ Print style:
 <!-- <h1 data-type="..."> -->
 <define name="enum.attr.Heading.data-type">
   <choice>
-    <value>document-title</value>
     <value>title</value>
 
     <value>glossary-title</value>
@@ -924,6 +921,26 @@ Print style:
       <ref name="Number.datatype"/>
     </attribute>
     <ref name="Text.datatype"/>
+  </element>
+</define>
+
+
+<define name="Content.Term">
+  <element name="span">
+    <attribute name="data-type">
+      <value>term</value>
+    </attribute>
+    <ref name="class.attrib"/>
+    <ref name="Inline.model"/>
+  </element>
+</define>
+
+<define name="Content.Foreign">
+  <element name="span">
+    <attribute name="data-type">
+      <value>foreign</value>
+    </attribute>
+    <ref name="Inline.model"/>
   </element>
 </define>
 
@@ -1400,6 +1417,8 @@ Print style:
     <ref name="Content.SpanList"/>
     <ref name="Content.Space"/>
     <ref name="Content.FootnoteNumber"/>
+    <ref name="Content.Term"/>
+    <ref name="Content.Foreign"/>
     <element name="span">
       <ref name="Content.Alternates.class"/>
     </element>
