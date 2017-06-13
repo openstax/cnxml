@@ -9,6 +9,12 @@
   <element name="body">
     <ref name="body.attlist"/>
     <ref name="Block.model"/>
+
+    <!-- Optionally allow the glossary at the end of the doc -->
+    <optional>
+      <ref name="Content.Glossary"/>
+    </optional>
+
   </element>
 
 </define>

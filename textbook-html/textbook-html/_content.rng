@@ -834,6 +834,10 @@
 
 <define name="Block.class" combine="choice">
   <choice>
+    <!-- HTML5 elements -->
+    <ref name="section"/>
+    <ref name="figure"/>
+
     <ref name="Content.Note"/>
     <ref name="Content.Equation"/>
     <ref name="Content.Exercise"/>
@@ -897,9 +901,6 @@
   </optional>
 </define>
 
-<define name="Block.class" combine="choice">
-  <ref name="section"/>
-</define>
 
 
 
@@ -909,7 +910,7 @@
   <element name="figure">
     <ref name="figure.attlist"/>
     <ref name="Content.Title.optional"/>
-    <ref name="Flow.model"/><!-- TODO: Should this be Block.model? -->
+    <ref name="Block-with-figcaption.model"/>
   </element>
 </define>
 
@@ -930,9 +931,6 @@
   </optional>
 </define>
 
-<define name="Block.class" combine="choice">
-  <ref name="figure"/>
-</define>
 
 
 
@@ -950,9 +948,14 @@
   <ref name="id.attrib"/>
 </define>
 
-<!-- TODO: Only allow this element inside a <figure> -->
-<define name="Block.class" combine="choice">
-  <ref name="figcaption"/>
+
+<define name="Block-with-figcaption.model">
+  <optional>
+    <ref name="figcaption"/>
+  </optional>
+  <oneOrMore>
+    <ref name="Block.mix"/>
+  </oneOrMore>
 </define>
 
 
