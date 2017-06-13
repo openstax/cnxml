@@ -1,71 +1,29 @@
 <grammar ns="http://www.w3.org/1999/xhtml"
          xmlns="http://relaxng.org/ns/structure/1.0">
 
-<include href="./textbook-html-base.rng"/>
-
-<!-- Make these next 2 optional -->
-
-<!-- <head itemscope="itemscope" itemtype="http://schema.org/Book"> -->
-<define name="head.attlist" combine="interleave">
-  <optional>
-    <attribute name="itemscope">
-      <value>itemscope</value>
-    </attribute>
-    <attribute name="itemtype">
-      <value>http://schema.org/Book</value>
-    </attribute>
-  </optional>
-</define>
-
-<!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
-<define name="body.attlist" combine="interleave">
-  <optional>
-    <attribute name="itemscope">
-      <value>itemscope</value>
-    </attribute>
-    <attribute name="itemtype">
-      <value>http://schema.org/Book</value>
-    </attribute>
-  </optional>
-</define>
+<!-- <include href="./textbook-html-base.rng"/> -->
+<include href="./textbook-html-book.rng"></include>
 
 
 <!-- from xhtml/modules/struct.rng but changed to only include a subset of valid "root" elements -->
-<define name="body">
+<define name="body" combine="interleave">
   <element name="body">
-    <!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
     <ref name="body.attlist"/>
-    <!-- Actually, it's BookMetadata -->
 
-    <oneOrMore>
-      <choice>
-        <!-- Book Structure . TODO: Move this into a ref instead of copy/pasting -->
-        <group>
-          <ref name="Structure.Book.Metadata"/>
-          <ref name="Structure.Book.ToC"/>
-          <oneOrMore>
-            <choice>
-              <ref name="Structure.Chapter"/>
-              <!-- Preface or Appendix -->
-              <ref name="Structure.Page"/>
-            </choice>
-          </oneOrMore>
-        </group>
-
-        <!-- a single CNXML->HTML page that is converted -->
-        <group>
-          <ref name="Structure.Page.Title"/>
-          <optional>
-            <ref name="Structure.Page.Abstract"/>
-          </optional>
-          <ref name="Block.model"/>
-        </group>
-
-        <!-- any arbitrary content -->
+    <!-- An entire book is already defined using <define name="body"> in the imported RNG file -->
+    <choice>
+      <!-- a single CNXML->HTML page that is converted -->
+      <group>
+        <ref name="Structure.Page.Title"/>
+        <optional>
+          <ref name="Structure.Page.Abstract"/>
+        </optional>
         <ref name="Block.model"/>
-      </choice>
+      </group>
 
-    </oneOrMore>
+      <!-- any arbitrary content -->
+      <ref name="Block.model"/>
+    </choice>
   </element>
 </define>
 
