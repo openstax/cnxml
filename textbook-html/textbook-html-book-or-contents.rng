@@ -52,6 +52,16 @@
           </oneOrMore>
         </group>
 
+        <!-- a single CNXML->HTML page that is converted -->
+        <group>
+          <ref name="Structure.Page.Title"/>
+          <optional>
+            <ref name="Structure.Page.Abstract"/>
+          </optional>
+          <ref name="Block.model"/>
+        </group>
+
+        <!-- any arbitrary content -->
         <ref name="Block.model"/>
       </choice>
 

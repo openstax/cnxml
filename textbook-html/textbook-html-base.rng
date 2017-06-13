@@ -67,6 +67,10 @@
     <ref name="class.attrib"/>
     <ref name="id.attrib.required"/>
     <ref name="Structure.PageMetadata"/>
+    <ref name="Structure.Page.Title"/>
+    <optional>
+      <ref name="Structure.Page.Abstract"/>
+    </optional>
     <zeroOrMore>
       <ref name="Flow.model"/>
     </zeroOrMore>
@@ -95,6 +99,30 @@
   </element>
 </define>
 
+
+<!-- <div data-type="document-title" id="auto_7a6f73c5-5378-408b-986f-e54416e12ad0_72544">Preface</div> -->
+<define name="Structure.Page.Title">
+  <element name="div">
+    <attribute name="data-type">
+      <value>document-title</value>
+    </attribute>
+    <!-- id is not required for individual CNXML->HTML pages but *is* required for book conversion -->
+    <ref name="id.attrib"/>
+    <ref name="Inline.model"/>
+  </element>
+</define>
+
+<!-- <div data-type="abstract" id="auto_7a6f73c5-5378-408b-986f-e54416e12ad0_78256"> -->
+<define name="Structure.Page.Abstract">
+  <element name="div">
+    <attribute name="data-type">
+      <value>abstract</value>
+    </attribute>
+    <!-- id is not required for individual CNXML->HTML pages but *is* required for book conversion -->
+    <ref name="id.attrib"/>
+    <ref name="Flow.model"/>
+  </element>
+</define>
 
 
 <define name="Structure.PageMetadata">
@@ -268,24 +296,28 @@
     <optional>
       <ref name="Structure.Metadata.Copyrights"/>
     </optional>
-    <element name="p">
-      <attribute name="class">
+    <ref name="Structure.Metadata.License"/>
+  </element>
+</define>
+
+<define name="Structure.Metadata.License">
+  <element name="p">
+    <attribute name="class">
+      <value>license</value>
+    </attribute>
+    <text/>
+    <!-- <a data-type="license" itemprop="..."> -->
+    <element name="a">
+      <attribute name="data-type">
         <value>license</value>
       </attribute>
+      <attribute name="href">
+        <ref name="URI.datatype"/>
+      </attribute>
+      <attribute name="itemprop">
+        <value>dc:license,lrmi:useRightsURL</value>
+      </attribute>
       <text/>
-      <!-- <a data-type="license" itemprop="..."> -->
-      <element name="a">
-        <attribute name="data-type">
-          <value>license</value>
-        </attribute>
-        <attribute name="href">
-          <ref name="URI.datatype"/>
-        </attribute>
-        <attribute name="itemprop">
-          <value>dc:license,lrmi:useRightsURL</value>
-        </attribute>
-        <text/>
-      </element>
     </element>
   </element>
 </define>
@@ -1201,16 +1233,6 @@ Print style:
 <!-- <div data-type="..." data-list-type="..."> -->
 <define name="enum.attr.div.data-type">
   <choice>
-    <!-- TODO: Make a different validation structure for Page elements. That way these values are not valid within the content -->
-    <value>metadata</value>
-    <value>description</value>
-    <value>subject</value>
-    <value>keyword</value>
-    <value>resources</value>
-    <value>document-title</value>
-    <value>abstract</value>
-
-    <value>metadata</value>
 
     <!-- TODO: Don't forget about the child Heading glossary-title -->
     <value>glossary</value>
