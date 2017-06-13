@@ -111,7 +111,7 @@
     <ref name="Structure.Metadata.Description"/>
     <ref name="Structure.Metadata.Keywords"/>
     <optional>
-      <ref name="Structure.Metadata.Subject"/>
+      <ref name="Structure.Metadata.Subjects"/>
     </optional>
     <optional>
       <ref name="Structure.Metadata.Resources"/>
@@ -325,6 +325,7 @@
       <attribute name="data-type">
         <value>cnx-id</value>
       </attribute>
+      <!-- TODO: This attribute is invalid. the element should not be a link -->
       <attribute name="href">
         <ref name="UserLogin.datatype"/>
       </attribute>
@@ -343,199 +344,47 @@
     <attribute name="data-type">
       <value>metadata</value>
     </attribute>
-    <element name="h1">
-      <attribute name="data-type">
-        <value>document-title</value>
-      </attribute>
-      <attribute name="itemprop">
-        <value>name</value>
-      </attribute>
-      <ref name="Inline.model"/>
-    </element>
-    <element name="span">
-      <attribute name="data-type">
-        <value>cnx-archive-uri</value>
-      </attribute>
-      <attribute name="data-value">
-        <ref name="UUID-and-version.datatype"/>
-      </attribute>
-    </element>
-    <element name="span">
-      <attribute name="data-type">
-        <value>cnx-archive-shortid</value>
-      </attribute>
-      <attribute name="data-value">
-        <ref name="UUID-and-version.datatype"/>
-      </attribute>
-    </element>
+    <ref name="Structure.Metadata.Title"/>
+    <ref name="Structure.Metadata.Uri"/>
+    <ref name="Structure.Metadata.ShortId"/>
     <ref name="Structure.Metadata.Authors"/>
     <ref name="Structure.Metadata.Publishers"/>
-
-    <!-- <div class="print-style">
-    Print style:
-    <span data-type="print-style">ccap-economics</span>
-    </div> -->
-    <element name="div">
-      <attribute name="class">
-        <value>print-style</value>
-      </attribute>
-      <text/><!-- "Print style:" -->
-      <element name="span">
-        <attribute name="data-type">
-          <value>print-style</value>
-        </attribute>
-        <ref name="TODO.enum.datatype"/>
-      </element>
-    </element>
-
-    <!-- TODO: remove me. why is this here? It is only in Pages -->
+    <ref name="Structure.Metadata.PrintStyle"/>
     <optional>
-      <element name="span">
-        <attribute name="data-type">
-          <value>binding</value>
-        </attribute>
-        <attribute name="data-value">
-          <value>translucent</value>
-        </attribute>
-      </element>
+      <ref name="Structure.Metadata.TranslucentBinding"/>
     </optional>
-
-
-
-    <!-- <p class="copyright">
-  Copyright:
-      <span data-type="copyright-holder" id="copyright-holder-1" itemprop="copyright-holder" itemscope="itemscope" itemtype="http://schema.org/Person">
-        <a data-type="cnx-id" href="cnxecon" itemprop="url">OpenStax Economics</a>
-      </span>        </p>
-<p class="license">
-  Licensed:
-  <a data-type="license" href="http://creativecommons.org/licenses/by/4.0/" itemprop="dc:license,lrmi:useRightsURL">Creative Commons Attribution License</a>
-</p> -->
-    <!-- TODO: change class="permissions" to some other attribute -->
-    <element name="div">
-      <attribute name="class">
-        <value>permissions</value>
-      </attribute>
-      <optional>
-        <element name="p">
-          <attribute name="class">
-            <value>copyright</value>
-          </attribute>
-          <text/><!-- "Copyright:" -->
-          <element name="span">
-            <attribute name="data-type">
-              <value>copyright-holder</value>
-            </attribute>
-            <ref name="id.attrib"/>
-            <attribute name="itemprop">
-              <value>copyright-holder</value>
-            </attribute>
-            <attribute name="itemscope">
-              <value>itemscope</value>
-            </attribute>
-            <attribute name="itemtype">
-              <value>http://schema.org/Person</value>
-            </attribute>
-            <!-- TODO: This link is broken & needs fixing in the code that generates it -->
-            <element name="a">
-              <attribute name="data-type">
-                <value>cnx-id</value>
-              </attribute>
-              <attribute name="href">
-                <ref name="URI.datatype"/>
-              </attribute>
-              <attribute name="itemprop">
-                <value>url</value>
-              </attribute>
-              <text/><!-- Title of the book -->
-            </element>
-          </element>
-        </element>
-      </optional>
-      <element name="p">
-        <attribute name="class">
-          <value>license</value>
-        </attribute>
-        <text/>
-        <element name="a">
-          <attribute name="data-type">
-            <value>license</value>
-          </attribute>
-          <attribute name="href">
-            <ref name="URI.datatype"/>
-          </attribute>
-          <attribute name="itemprop">
-            <value>dc:license,lrmi:useRightsURL</value>
-          </attribute>
-          <text/>
-        </element>
-      </element>
-    </element>
-
-    <!-- <div class="description" data-type="description" itemprop="description">
-      <div><div>
-        <p><em data-effect="italics">Principles of Economics</em> covers the scope and sequence for a two-semester principles of economics course. The text also includes many current examples, including; discussions on the great recession, the controversy among economists over the Affordable Care Act (Obamacare), the recent government shutdown, and the appointment of the United States’ first female Federal Reserve chair, Janet Yellen.</p>
-
-        <p>The pedagogical choices, chapter arrangements, and learning objective fulfillment were developed and vetted with feedback from educators dedicated to the project. The outcome is a balanced approach to micro and macro economics, to both Keynesian and classical views, and to the theory and application of economics concepts. Current events are treated in a politically-balanced way, as well.</p>
-
-        <p><strong>Note:</strong> <em data-effect="italics">Principles of Economics</em> PDF and web view versions have been updated to include current FRED (Federal Reserve Economic) data. </p>
-        </div>
-        </div>
-
-    </div> -->
-    <element name="div">
-      <attribute name="class">
-        <value>description</value>
-      </attribute>
-      <attribute name="data-type">
-        <value>description</value>
-      </attribute>
-      <attribute name="itemprop">
-        <value>description</value>
-      </attribute>
-      <element name="div">
-        <element name="div">
-          <oneOrMore>
-            <element name="p">
-              <ref name="Inline.model"/>
-            </element>
-          </oneOrMore>
-        </element>
-      </element>
-    </element>
-
-    <!-- <div data-type="subject" itemprop="about">Mathematics and Statistics</div><div data-type="subject" itemprop="about">OpenStax Featured</div>    </div> -->
-    <oneOrMore>
-      <element name="div">
-        <attribute name="data-type">
-          <value>subject</value>
-        </attribute>
-        <attribute name="itemprop">
-          <value>about</value>
-        </attribute>
-        <text/>
-      </element>
-    </oneOrMore>
-
+    <ref name="Structure.Metadata.Permissions"/>
+    <ref name="Structure.Metadata.Description"/>
+    <ref name="Structure.Metadata.Subjects"/>
   </element>
 </define>
 
+
+<!-- <div class="print-style">
+Print style:
+<span data-type="print-style">ccap-economics</span>
+</div> -->
+<define name="Structure.Metadata.PrintStyle">
+  <element name="div">
+    <attribute name="class">
+      <value>print-style</value>
+    </attribute>
+    <text/><!-- "Print style:" -->
+    <element name="span">
+      <attribute name="data-type">
+        <value>print-style</value>
+      </attribute>
+      <ref name="TODO.enum.datatype"/>
+    </element>
+  </element>
+</define>
 
 <define name="Structure.ChapterMetadata">
   <element name="div">
     <attribute name="data-type">
       <value>metadata</value>
     </attribute>
-    <element name="h1">
-      <attribute name="data-type">
-        <value>document-title</value>
-      </attribute>
-      <attribute name="itemprop">
-        <value>name</value>
-      </attribute>
-      <ref name="Inline.model"/>
-    </element>
-
+    <ref name="Structure.Metadata.Title"/>
     <ref name="Structure.Metadata.TranslucentBinding"/>
     <ref name="Structure.Metadata.Permissions"/>
   </element>
@@ -587,16 +436,18 @@
 </define>
 
 <!-- <div data-type="subject" itemprop="about">Mathematics and Statistics</div> -->
-<define name="Structure.Metadata.Subject">
-  <element name="div">
-    <attribute name="data-type">
-      <value>subject</value>
-    </attribute>
-    <attribute name="itemprop">
-      <value>about</value>
-    </attribute>
-    <ref name="Subject.datatype"/>
-  </element>
+<define name="Structure.Metadata.Subjects">
+  <zeroOrMore>
+    <element name="div">
+      <attribute name="data-type">
+        <value>subject</value>
+      </attribute>
+      <attribute name="itemprop">
+        <value>about</value>
+      </attribute>
+      <ref name="Subject.datatype"/>
+    </element>
+  </zeroOrMore>
 </define>
 
 <!-- <div data-type="resources" style="display: none"> <ul>
@@ -614,17 +465,21 @@
     <optional>
       <element name="ul">
         <oneOrMore>
-          <element name="li">
-            <element name="a">
-              <attribute name="href">
-                <ref name="Sha.datatype"/>
-              </attribute>
-              <ref name="Sha.datatype"/>
-            </element>
-          </element>
+          <ref name="Structure.Metadata.Resources.Item"/>
         </oneOrMore>
       </element>
     </optional>
+  </element>
+</define>
+
+<define name="Structure.Metadata.Resources.Item">
+  <element name="li">
+    <element name="a">
+      <attribute name="href">
+        <ref name="Sha.datatype"/>
+      </attribute>
+      <ref name="Sha.datatype"/>
+    </element>
   </element>
 </define>
 
