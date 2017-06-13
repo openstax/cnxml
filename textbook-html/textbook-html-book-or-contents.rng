@@ -41,7 +41,7 @@
       <choice>
         <!-- Book Structure . TODO: Move this into a ref instead of copy/pasting -->
         <group>
-          <ref name="Structure.Metadata"/>
+          <ref name="Structure.Book.Metadata"/>
           <ref name="Structure.ToC"/>
           <oneOrMore>
             <choice>

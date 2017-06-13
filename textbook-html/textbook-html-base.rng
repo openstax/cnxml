@@ -45,6 +45,12 @@
   </choice>
 </define>
 
+<!-- Mathematics and Statistics -->
+<!-- TODO: enumerate the options -->
+<define name="Subject.datatype">
+  <text/>
+</define>
+
 
 <define name="id.attrib.required">
   <attribute name="id">
@@ -101,20 +107,15 @@
     <ref name="Structure.Metadata.ShortId"/>
     <ref name="Structure.Metadata.Authors"/>
     <ref name="Structure.Metadata.Publishers"/>
-    <!-- TODO: remove me. why is this here? -->
-    <!-- <element name="span">
-      <attribute name="data-type">
-        <value>binding</value>
-      </attribute>
-      <attribute name="data-value">
-        <value>translucent</value>
-      </attribute>
-    </element> -->
     <ref name="Structure.Metadata.Permissions"/>
-    <!-- Add description -->
     <ref name="Structure.Metadata.Description"/>
     <ref name="Structure.Metadata.Keywords"/>
-    <ref name="Structure.Metadata.Resources"/>
+    <optional>
+      <ref name="Structure.Metadata.Subject"/>
+    </optional>
+    <optional>
+      <ref name="Structure.Metadata.Resources"/>
+    </optional>
   </element>
 </define>
 
@@ -264,7 +265,9 @@
     <attribute name="class">
       <value>permissions</value>
     </attribute>
-    <ref name="Structure.Metadata.Copyrights"/>
+    <optional>
+      <ref name="Structure.Metadata.Copyrights"/>
+    </optional>
     <element name="p">
       <attribute name="class">
         <value>license</value>
@@ -335,7 +338,7 @@
 
 <!-- <span data-type="cnx-archive-uri" data-value="69619d2b-68f0-44b0-b074-a9b2bf90b2c6@11.332"/>
 <span data-type="cnx-archive-shortid" data-value="aWGdK2jw@11.332"/> -->
-<define name="Structure.Metadata">
+<define name="Structure.Book.Metadata">
   <element name="div">
     <attribute name="data-type">
       <value>metadata</value>
@@ -532,42 +535,24 @@
       </attribute>
       <ref name="Inline.model"/>
     </element>
-    <!-- TODO: remove me. why is this here? -->
-    <element name="span">
-      <attribute name="data-type">
-        <value>binding</value>
-      </attribute>
-      <attribute name="data-value">
-        <value>translucent</value>
-      </attribute>
-    </element>
-    <!-- change class="permissions" to some other attribute -->
-    <element name="div">
-      <attribute name="class">
-        <value>permissions</value>
-      </attribute>
-      <element name="p">
-        <attribute name="class">
-          <value>license</value>
-        </attribute>
-        <text/>
-        <element name="a">
-          <attribute name="data-type">
-            <value>license</value>
-          </attribute>
-          <attribute name="href">
-            <ref name="URI.datatype"/>
-          </attribute>
-          <attribute name="itemprop">
-            <value>dc:license,lrmi:useRightsURL</value>
-          </attribute>
-          <text/>
-        </element>
-      </element>
-    </element>
+
+    <ref name="Structure.Metadata.TranslucentBinding"/>
+    <ref name="Structure.Metadata.Permissions"/>
   </element>
 </define>
 
+
+<define name="Structure.Metadata.TranslucentBinding">
+  <!-- TODO: remove me. why is this here? -->
+  <element name="span">
+    <attribute name="data-type">
+      <value>binding</value>
+    </attribute>
+    <attribute name="data-value">
+      <value>translucent</value>
+    </attribute>
+  </element>
+</define>
 
 <define name="Structure.Metadata.Description">
   <element name="div">
@@ -599,6 +584,19 @@
       <text/>
     </element>
   </zeroOrMore>
+</define>
+
+<!-- <div data-type="subject" itemprop="about">Mathematics and Statistics</div> -->
+<define name="Structure.Metadata.Subject">
+  <element name="div">
+    <attribute name="data-type">
+      <value>subject</value>
+    </attribute>
+    <attribute name="itemprop">
+      <value>about</value>
+    </attribute>
+    <ref name="Subject.datatype"/>
+  </element>
 </define>
 
 <!-- <div data-type="resources" style="display: none"> <ul>

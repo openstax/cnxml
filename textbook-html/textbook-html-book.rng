@@ -29,7 +29,7 @@
     <!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
     <ref name="body.attlist"/>
     <!-- Actually, it's BookMetadata -->
-    <ref name="Structure.Metadata"/>
+    <ref name="Structure.Book.Metadata"/>
     <ref name="Structure.ToC"/>
     <oneOrMore>
       <choice>
