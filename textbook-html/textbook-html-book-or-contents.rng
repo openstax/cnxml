@@ -42,7 +42,7 @@
         <!-- Book Structure . TODO: Move this into a ref instead of copy/pasting -->
         <group>
           <ref name="Structure.Book.Metadata"/>
-          <ref name="Structure.ToC"/>
+          <ref name="Structure.Book.ToC"/>
           <oneOrMore>
             <choice>
               <ref name="Structure.Chapter"/>

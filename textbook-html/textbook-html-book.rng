@@ -30,7 +30,7 @@
     <ref name="body.attlist"/>
     <!-- Actually, it's BookMetadata -->
     <ref name="Structure.Book.Metadata"/>
-    <ref name="Structure.ToC"/>
+    <ref name="Structure.Book.ToC"/>
     <oneOrMore>
       <choice>
         <ref name="Structure.Chapter"/>

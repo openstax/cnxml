@@ -629,26 +629,26 @@
 </define>
 
 <!-- The <nav id="toc"> -->
-<define name="Structure.ToC">
+<define name="Structure.Book.ToC">
   <element name="nav">
     <attribute name="id">
       <value>toc</value>
     </attribute>
     <element name="ol">
       <zeroOrMore>
-        <ref name="Structure.ToC.LeafItem"/>
+        <ref name="Structure.Book.ToC.LeafItem"/>
       </zeroOrMore>
       <oneOrMore>
-        <ref name="Structure.ToC.InternalItem"/>
+        <ref name="Structure.Book.ToC.InternalItem"/>
       </oneOrMore>
       <zeroOrMore>
-        <ref name="Structure.ToC.LeafItem"/>
+        <ref name="Structure.Book.ToC.LeafItem"/>
       </zeroOrMore>
     </element>
   </element>
 </define>
 
-<define name="Structure.ToC.LeafItem">
+<define name="Structure.Book.ToC.LeafItem">
   <element name="li">
     <attribute name="cnx-archive-shortid">
       <ref name="ShortId.datatype"/>
@@ -665,7 +665,7 @@
   </element>
 </define>
 
-<define name="Structure.ToC.InternalItem">
+<define name="Structure.Book.ToC.InternalItem">
   <element name="li">
     <element name="span">
       <text/>
@@ -673,8 +673,8 @@
     <element name="ol">
       <oneOrMore>
         <choice>
-          <ref name="Structure.ToC.InternalItem"/>
-          <ref name="Structure.ToC.LeafItem"/>
+          <ref name="Structure.Book.ToC.InternalItem"/>
+          <ref name="Structure.Book.ToC.LeafItem"/>
         </choice>
       </oneOrMore>
     </element>
