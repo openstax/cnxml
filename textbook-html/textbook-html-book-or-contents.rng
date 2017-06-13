@@ -2,11 +2,15 @@
          xmlns="http://relaxng.org/ns/structure/1.0">
 
 <!-- <include href="./textbook-html-base.rng"/> -->
-<include href="./textbook-html-book.rng"></include>
+<include href="./textbook-html-book-base.rng"></include>
 
+
+<define name="head.attlist" combine="choice">
+  <ref name="Structure.Book.Head.attlist"/>
+</define>
 
 <!-- from xhtml/modules/struct.rng but changed to only include a subset of valid "root" elements -->
-<define name="body" combine="interleave">
+<define name="body" combine="choice">
   <element name="body">
     <ref name="body.attlist"/>
 

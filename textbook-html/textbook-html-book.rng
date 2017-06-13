@@ -1,42 +1,12 @@
 <grammar ns="http://www.w3.org/1999/xhtml"
          xmlns="http://relaxng.org/ns/structure/1.0">
 
-<include href="./textbook-html-base.rng"/>
+<include href="./textbook-html-book-base.rng"/>
 
 <!-- <head itemscope="itemscope" itemtype="http://schema.org/Book"> -->
 <define name="head.attlist" combine="interleave">
-  <attribute name="itemscope">
-    <value>itemscope</value>
-  </attribute>
-  <attribute name="itemtype">
-    <value>http://schema.org/Book</value>
-  </attribute>
+  <ref name="Structure.Book.Head.attlist"/>
 </define>
-
-<!-- from xhtml/modules/struct.rng but changed to only include a subset of valid "root" elements -->
-<define name="Structure.Book.Body">
-  <element name="body">
-    <!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
-    <attribute name="itemscope">
-      <value>itemscope</value>
-    </attribute>
-    <attribute name="itemtype">
-      <value>http://schema.org/Book</value>
-    </attribute>
-    <ref name="body.attlist"/>
-    <!-- Actually, it's BookMetadata -->
-    <ref name="Structure.Book.Metadata"/>
-    <ref name="Structure.Book.ToC"/>
-    <oneOrMore>
-      <choice>
-        <ref name="Structure.Chapter"/>
-        <!-- Preface or Appendix -->
-        <ref name="Structure.Page"/>
-      </choice>
-    </oneOrMore>
-  </element>
-</define>
-
 
 <define name="body">
   <ref name="Structure.Book.Body"/>
