@@ -821,30 +821,14 @@ Print style:
 <!-- <span data-type="..." data-alt="..."> -->
 <define name="enum.attr.span.data-type">
   <choice>
-    <!-- TODO: Make a different validation structure for metadata elements. That way these values are not valid within the content -->
-    <value>cnx-archive-shortid</value>
-    <value>cnx-archive-uri</value>
-    <value>author</value>
-    <value>publisher</value>
-    <value>print-style</value>
-    <value>copyright-holder</value>
-    <value>publisher</value>
+    <!-- TODO: Make a separate element for a paragraph title -->
     <value>title</value>
-    <value>binding</value>
     <!-- These are in content and should remain here -->
     <value>media</value>
     <value>term</value>
     <value>foreign</value>
     <!-- TODO: either remove these or move them in to being optional children of <cite> -->
     <value>cite-title</value>
-  </choice>
-</define>
-<define name="enum.attr.span.itemprop">
-  <!-- TODO: Make a different validation structure for metadata elements. That way these values are not valid within the content -->
-  <choice>
-    <value>author</value>
-    <value>copyright-holder</value>
-    <value>publisher</value>
   </choice>
 </define>
 <define name="span.attlist" combine="interleave">
@@ -857,18 +841,6 @@ Print style:
     <attribute name="data-alt">
       <!-- TODO: Maybe change the CNXML conversion to use an ARIA attribute -->
       <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <!-- span data-type="copyright-holder" id="copyright-holder-1" itemprop="copyright-holder" itemscope="itemscope" itemtype="http://schema.org/Person"> -->
-    <attribute name="itemprop">
-      <ref name="enum.attr.span.itemprop"/>
-    </attribute>
-    <attribute name="itemscope">
-      <value>itemscope</value>
-    </attribute>
-    <attribute name="itemtype">
-      <value>http://schema.org/Person</value>
     </attribute>
   </optional>
 
