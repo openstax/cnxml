@@ -99,7 +99,7 @@
 
 <define name="kbd.attlist">
   <ref name="Common.attrib"/>
-</define>
+</define> -->
 
 <define name="q">
   <element name="q">
@@ -117,7 +117,7 @@
   </optional>
 </define>
 
-<define name="samp">
+<!-- <define name="samp">
   <element name="samp">
     <ref name="samp.attlist"/>
     <ref name="Inline.model"/>
@@ -297,7 +297,7 @@
     <!-- <ref name="dfn"/> -->
     <ref name="em"/>
     <!-- <ref name="kbd"/> -->
-    <!-- <ref name="q"/> -->
+    <ref name="q"/>
     <!-- <ref name="samp"/> -->
     <ref name="span"/>
     <ref name="strong"/>
