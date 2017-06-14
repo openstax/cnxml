@@ -26,7 +26,15 @@
       </group>
 
       <!-- any arbitrary content -->
-      <ref name="Block.model"/>
+      <group>
+        <zeroOrMore>
+          <ref name="cnx-pi"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="Structure.Page.Abstract"/>
+        </optional>
+        <ref name="Block.model"/>
+      </group>
     </choice>
     <!-- Optionally allow the glossary at the end of the doc -->
     <optional>
