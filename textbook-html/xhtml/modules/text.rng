@@ -24,7 +24,7 @@
   <ref name="Common.attrib"/>
 </define>
 
-<define name="abbr">
+<!-- <define name="abbr">
   <element name="abbr">
     <ref name="abbr.attlist"/>
     <ref name="Inline.model"/>
@@ -44,7 +44,7 @@
 
 <define name="acronym.attlist">
   <ref name="Common.attrib"/>
-</define>
+</define> -->
 
 <define name="cite">
   <element name="cite">
@@ -68,7 +68,7 @@
   <ref name="Common.attrib"/>
 </define>
 
-<define name="dfn">
+<!-- <define name="dfn">
   <element name="dfn">
     <ref name="dfn.attlist"/>
     <ref name="Inline.model"/>
@@ -77,7 +77,7 @@
 
 <define name="dfn.attlist">
   <ref name="Common.attrib"/>
-</define>
+</define> -->
 
 <define name="em">
   <element name="em">
@@ -90,7 +90,7 @@
   <ref name="Common.attrib"/>
 </define>
 
-<define name="kbd">
+<!-- <define name="kbd">
   <element name="kbd">
     <ref name="kbd.attlist"/>
     <ref name="Inline.model"/>
@@ -126,7 +126,7 @@
 
 <define name="samp.attlist">
   <ref name="Common.attrib"/>
-</define>
+</define> -->
 
 <define name="strong">
   <element name="strong">
@@ -139,7 +139,7 @@
   <ref name="Common.attrib"/>
 </define>
 
-<define name="var">
+<!-- <define name="var">
   <element name="var">
     <ref name="var.attlist"/>
     <ref name="Inline.model"/>
@@ -159,7 +159,7 @@
 
 <define name="div.attlist">
   <ref name="Common.attrib"/>
-</define>
+</define> -->
 
 <define name="p">
   <element name="p">
@@ -172,7 +172,7 @@
   <ref name="Common.attrib"/>
 </define>
 
-<define name="address">
+<!-- <define name="address">
   <element name="address">
     <ref name="address.attlist"/>
     <ref name="Inline.model"/>
@@ -181,12 +181,12 @@
 
 <define name="address.attlist">
   <ref name="Common.attrib"/>
-</define>
+</define> -->
 
 <define name="blockquote">
   <element name="blockquote">
     <ref name="blockquote.attlist"/>
-    <ref name="Block.model"/>
+    <ref name="Flow.model"/><!-- BUG: (fixed) This was originally Block.model but it allows text as a child -->
   </element>
 </define>
 
@@ -221,28 +221,28 @@
     <ref name="Heading.content"/>
   </element>
 </define>
- 
+
 <define name="h2">
   <element name="h2">
     <ref name="Heading.attrib"/>
     <ref name="Heading.content"/>
   </element>
 </define>
- 
+
 <define name="h3">
   <element name="h3">
     <ref name="Heading.attrib"/>
     <ref name="Heading.content"/>
   </element>
 </define>
- 
+
 <define name="h4">
   <element name="h4">
     <ref name="Heading.attrib"/>
     <ref name="Heading.content"/>
   </element>
 </define>
- 
+
 <define name="h5">
   <element name="h5">
     <ref name="Heading.attrib"/>
@@ -260,7 +260,7 @@
 <define name="Heading.attrib">
   <ref name="Common.attrib"/>
 </define>
- 
+
 <define name="Heading.content">
   <ref name="Inline.model"/>
 </define>
@@ -278,30 +278,30 @@
 
 <define name="Block.class">
   <choice>
-    <ref name="address"/>
+    <!-- <ref name="address"/> -->
     <ref name="blockquote"/>
-    <ref name="div"/>
+    <!-- <ref name="div"/> -->
     <ref name="p"/>
     <ref name="pre"/>
-    <ref name="Heading.class"/>
+    <!-- <ref name="Heading.class"/> -->
   </choice>
 </define>
 
 <define name="Inline.class">
   <choice>
-    <ref name="abbr"/>
-    <ref name="acronym"/>
+    <!-- <ref name="abbr"/> -->
+    <!-- <ref name="acronym"/> -->
     <ref name="br"/>
     <ref name="cite"/>
     <ref name="code"/>
-    <ref name="dfn"/>
+    <!-- <ref name="dfn"/> -->
     <ref name="em"/>
-    <ref name="kbd"/>
-    <ref name="q"/>
-    <ref name="samp"/>
+    <!-- <ref name="kbd"/> -->
+    <!-- <ref name="q"/> -->
+    <!-- <ref name="samp"/> -->
     <ref name="span"/>
     <ref name="strong"/>
-    <ref name="var"/>
+    <!-- <ref name="var"/> -->
   </choice>
 </define>
 

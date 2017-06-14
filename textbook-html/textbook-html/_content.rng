@@ -2,7 +2,21 @@
          xmlns="http://relaxng.org/ns/structure/1.0">
 
 <!-- See https://www.w3.org/MarkUp/2010/xhtml-m12n-relaxng-20101216/#sec_3.4.3. -->
-<include href="../xhtml/xhtml.rng"/>
+<include href="../xhtml/modules/datatypes.rng"/>
+<include href="../xhtml/modules/attribs.rng"/>
+<include href="../xhtml/modules/struct.rng"/>
+<include href="../xhtml/modules/text.rng"/>
+<include href="../xhtml/modules/hypertext.rng"/>
+<include href="../xhtml/modules/list.rng"/>
+<include href="../xhtml/modules/image.rng"/>
+<include href="../xhtml/modules/param.rng"/>
+<include href="../xhtml/modules/meta.rng"/>
+<include href="../xhtml/modules/link.rng"/>
+<include href="../xhtml/modules/base.rng"/>
+<include href="../xhtml/modules/iframe.rng"/>
+<include href="../xhtml/modules/table.rng"/>
+<include href="../xhtml/modules/pres.rng"/>
+
 
 <!-- <include href="../cnxml/xml/mathml/schema/rng/2.0/mathml2.rng"/> -->
 <!-- <include href="http://www.w3.org/Math/RelaxNG/mathml3/mathml3.rng"/> -->
@@ -89,6 +103,14 @@
   </optional>
 </define>
 
+<!-- allow an optional title for the caption -->
+<define name="caption" combine="choice">
+  <element name="caption">
+    <ref name="caption.attlist"/>
+    <ref name="Content.InlineTitle"/>
+    <ref name="Inline.model"/>
+  </element>
+</define>
 
 
 <!-- <td data-valign="top"> -->
@@ -296,10 +318,6 @@
 <!-- <span data-type="..." data-alt="..."> -->
 <define name="enum.attr.span.data-type">
   <choice>
-    <!-- TODO: Make a separate element for a paragraph title -->
-    <value>title</value>
-    <!-- These are in content and should remain here -->
-    <value>media</value>
     <!-- TODO: either remove these or move them in to being optional children of <cite> -->
     <value>cite-title</value>
   </choice>
@@ -317,18 +335,12 @@
     </attribute>
   </optional>
 
-  <!-- <span data-type="cnx-archive-shortid" data-value="LJYhl4AE@11"/> -->
-  <optional>
-    <attribute name="data-value">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
 </define>
 
 
 
 
-<!-- TODO: These are used in <section> elements and should be restricted to that. <h1 data-type="..."> -->
+<!-- These are used in <section> elements and should be restricted to that. <h1 data-type="..."> -->
 <define name="enum.attr.Heading.data-type">
   <value>title</value>
 </define>
@@ -761,6 +773,14 @@
   </element>
 </define>
 
+<define name="Content.ParaWithTitle">
+  <element name="p">
+    <ref name="p.attlist"/>
+    <ref name="Content.InlineTitle"/>
+    <ref name="Inline.model"/>
+  </element>
+</define>
+
 
 <define name="Content.Alternates.class">
   <attribute name="data-type">
@@ -780,31 +800,58 @@
   </oneOrMore>
 </define>
 
-<define name="Content.Media">
-  <element name="div">
-    <attribute name="data-type">
-      <value>media</value>
-    </attribute>
-    <ref name="id.attrib.required"/>
-    <attribute name="data-alt">
+<define name="Content.Media.class">
+  <attribute name="data-type">
+    <value>media</value>
+  </attribute>
+  <ref name="id.attrib.required"/>
+  <attribute name="data-alt">
+    <ref name="Text.datatype"/>
+  </attribute>
+  <optional>
+    <attribute name="data-longdesc">
       <ref name="Text.datatype"/>
     </attribute>
-    <optional>
-      <attribute name="data-longdesc">
-        <ref name="Text.datatype"/>
-      </attribute>
-    </optional>
-    <choice>
-      <ref name="img"/>
-      <ref name="iframe"/>
-      <!-- <ref name="Content.Audio"/>
-      <ref name="Content.Video"/>
-      <ref name="Content.Labview"/>
-      <ref name="Content.Download"/>
-      <ref name="Content.Flash"/> -->
-    </choice>
+  </optional>
+  <choice>
+    <ref name="img"/>
+    <ref name="iframe"/>
+    <!-- <ref name="Content.Audio"/>
+    <ref name="Content.Video"/>
+    <ref name="Content.Labview"/>
+    <ref name="Content.Download"/>
+    <ref name="Content.Flash"/> -->
+  </choice>
+</define>
+
+
+<!-- For strikethrough. from xhtml/legacy.rng . TODO: Mark this up differently and move this into a separate legacy file -->
+<define name="u">
+  <element name="u">
+    <ref name="u.attlist"/>
+    <ref name="Inline.model"/>
   </element>
 </define>
+
+<define name="u.attlist">
+  <ref name="Common.attrib"/>
+</define>
+
+<!-- From xhtml/legacy.rng TODO: Move this into a separate legacy file -->
+<define name="ol.attlist" combine="interleave">
+  <optional>
+    <attribute name="type"/>
+  </optional>
+  <optional>
+    <attribute name="compact">
+      <value>compact</value>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="start"/>
+  </optional>
+</define>
+
 
 
 <!-- <div data-type="glossary"><h3 data-type="glossary-title">Glossary</h3>
@@ -831,6 +878,14 @@
   </element>
 </define>
 
+<define name="Content.InlineTitle">
+  <element name="span">
+    <attribute name="data-type">
+      <value>title</value>
+    </attribute>
+    <ref name="Inline.model"/>
+  </element>
+</define>
 
 <define name="Block.class" combine="choice">
   <choice>
@@ -844,7 +899,10 @@
     <ref name="Content.Example"/>
     <ref name="Content.DivList"/>
     <ref name="Content.ListWithTitle"/>
-    <ref name="Content.Media"/>
+    <ref name="Content.ParaWithTitle"/>
+    <element name="div">
+      <ref name="Content.Media.class"/>
+    </element>
     <element name="div">
       <ref name="Content.Alternates.class"/>
     </element>
@@ -859,11 +917,15 @@
 
 <define name="Inline.class" combine="choice">
   <choice>
+    <ref name="u"/>
     <ref name="Content.SpanList"/>
     <ref name="Content.Space"/>
     <ref name="Content.FootnoteNumber"/>
     <ref name="Content.Term"/>
     <ref name="Content.Foreign"/>
+    <element name="span">
+      <ref name="Content.Media.class"/>
+    </element>
     <element name="span">
       <ref name="Content.Alternates.class"/>
     </element>
@@ -879,7 +941,12 @@
 <define name="section">
   <element name="section">
     <ref name="section.attlist"/>
-    <ref name="Flow.model"/><!-- TODO: Should this be Block.model? -->
+    <!-- TODO: Ensure that headings all have the data-type="title" attribute or just remove that altogether. Or ensure the correct heading level -->
+    <optional>
+      <ref name="Heading.class"/>
+    </optional>
+    <!-- This is a flow because apparently <span data-type="media"> is allowed -->
+    <ref name="Flow.model"/>
   </element>
 </define>
 
@@ -910,7 +977,10 @@
   <element name="figure">
     <ref name="figure.attlist"/>
     <ref name="Content.Title.optional"/>
-    <ref name="Block-with-figcaption.model"/>
+    <optional>
+      <ref name="figcaption"/>
+    </optional>
+    <ref name="Flow.model"/>
   </element>
 </define>
 
@@ -938,6 +1008,10 @@
 <define name="figcaption">
   <element name="figcaption">
     <ref name="figcaption.attlist"/>
+    <optional>
+      <ref name="Content.InlineTitle"/>
+    </optional>
+
     <!-- Algebra and trigonometry has newlines in the figcaption for some reason -->
     <ref name="Flow.model"/>
   </element>
@@ -946,16 +1020,6 @@
 <define name="figcaption.attlist">
   <!-- <ref name="Common.attrib"/> -->
   <ref name="id.attrib"/>
-</define>
-
-
-<define name="Block-with-figcaption.model">
-  <optional>
-    <ref name="figcaption"/>
-  </optional>
-  <oneOrMore>
-    <ref name="Block.mix"/>
-  </oneOrMore>
 </define>
 
 
@@ -982,7 +1046,7 @@
   <text/>
 </define>
 
-<!-- TODO: Only allow this element inside a <figure> -->
+<!-- TODO: Only allow this element inside a <div data-type="page"> -->
 <define name="Block.class" combine="choice">
   <ref name="cnx-pi"/>
 </define>

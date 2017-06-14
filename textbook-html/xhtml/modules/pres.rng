@@ -11,9 +11,9 @@
   <ref name="Common.attrib"/>
 </define>
 
-<define name="Block.class" combine="choice">
+<!-- <define name="Block.class" combine="choice">
   <ref name="hr"/>
-</define>
+</define> -->
 
 <define name="b">
   <element name="b">
@@ -94,13 +94,13 @@
 
 <define name="Inline.class" combine="choice">
   <choice>
-    <ref name="b"/>
-    <ref name="big"/>
-    <ref name="i"/>
-    <ref name="small"/>
+    <!-- <ref name="b"/> -->
+    <!-- <ref name="big"/> -->
+    <!-- <ref name="i"/> -->
+    <!-- <ref name="small"/> -->
     <ref name="sub"/>
     <ref name="sup"/>
-    <ref name="tt"/>
+    <!-- <ref name="tt"/> -->
   </choice>
 </define>
 
