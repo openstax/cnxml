@@ -19,6 +19,9 @@
       <!-- a single CNXML->HTML page that is converted -->
       <group>
         <ref name="Structure.Page.Title"/>
+        <zeroOrMore>
+          <ref name="cnx-pi"/>
+        </zeroOrMore>
         <optional>
           <ref name="Structure.Page.Abstract"/>
         </optional>
