@@ -16,6 +16,7 @@
 <include href="../xhtml/modules/iframe.rng"/>
 <include href="../xhtml/modules/table.rng"/>
 <include href="../xhtml/modules/pres.rng"/>
+<include href="../xhtml/modules/target.rng"/>
 
 
 <!-- <include href="../cnxml/xml/mathml/schema/rng/2.0/mathml2.rng"/> -->
