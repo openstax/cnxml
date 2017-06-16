@@ -2,6 +2,30 @@
 
 set -e
 
+
+if [[ $(which kramdown) ]]; then
+
+  temp_file1="./textbook-html/docs/temp1.xhtml"
+  temp_file2="./textbook-html/docs/temp2.md"
+
+  for src_rng in $(cd ./textbook-html/textbook-html/ && ls _*.rng); do
+
+    src_file="./textbook-html/textbook-html/${src_rng}"
+    dest_file="./textbook-html/docs/${src_rng}.md"
+    xsltproc ./script/_doc-generation.xsl "${src_file}" | kramdown --input html --output kramdown > "${temp_file1}"
+    cat "${temp_file1}" | tail -n +4 > "${temp_file2}"
+    cat "${temp_file2}" | tail -r | tail -n +3 | tail -r > "${dest_file}"
+
+  done
+
+  rm "${temp_file1}" "${temp_file2}"
+
+else
+  echo "==> Kramdown is not installed. Skipping doc-generation."
+fi
+
+
+
 java -jar ./cnxml/jing.jar ./textbook-html/textbook-html/book.rng ./textbook-html/test/book-minimal.xhtml
 java -jar ./cnxml/jing.jar ./textbook-html/textbook-html/book-or-contents.rng ./textbook-html/test/contents-minimal.xhtml
 java -jar ./cnxml/jing.jar ./textbook-html/textbook-html/contents.rng ./textbook-html/test/contents-misc.xhtml
