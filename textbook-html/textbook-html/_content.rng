@@ -398,6 +398,7 @@
     <attribute name="data-type">
       <value>term</value>
     </attribute>
+    <ref name="id.attrib"/>
     <ref name="class.attrib"/>
     <ref name="Inline.model"/>
   </element>
