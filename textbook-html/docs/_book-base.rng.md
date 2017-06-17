@@ -12,12 +12,13 @@ This defines a set of attributes:
 1.  [body.attlist](#bodyattlist)
 2.  [Structure.Book.Metadata](#structurebookmetadata)
 3.  [Structure.Book.ToC](#structurebooktoc)
-4.  One of the following:
+4.  `(`
+    One of the following:
     
     * [Structure.Chapter](#structurechapter)
     * [Structure.Page](#structurepage)
     
-    `+`
+    `)+`
 
 `</body>`
 
@@ -94,7 +95,17 @@ data-value=UUID-and-version.datatype/>`
 `<span data-type="cnx-archive-shortid" data-value=ShortId.datatype/>`
 # Structure.Metadata.Authors
 
-`<div class="authors"/>`
+`<div class="authors">`
+
+1.  `(`
+    1.  (text...)`?`
+    2.  [Structure.Metadata.Authors.Item](#structuremetadataauthorsitem)
+    
+    `)+`
+2.  (text...)`?`
+
+`</div>`
+
 # Structure.Metadata.Authors.Item
 
 `<span data-type="author" itemprop="author" itemscope="itemscope"
@@ -108,7 +119,17 @@ itemtype="http://schema.org/Person">`
 
 # Structure.Metadata.Publishers
 
-`<div class="publishers"/>`
+`<div class="publishers">`
+
+1.  `(`
+    1.  (text...)`?`
+    2.  [Structure.Metadata.Publishers.Item](#structuremetadatapublishersitem)
+    
+    `)+`
+2.  (text...)`?`
+
+`</div>`
+
 # Structure.Metadata.Publishers.Item
 
 `<span data-type="publisher" itemprop="publisher" itemscope="itemscope"
@@ -122,15 +143,21 @@ itemtype="http://schema.org/Person">`
 
 # Structure.Metadata.Permissions
 
-`<div
-class="permissions">`[Structure.Metadata.Copyrights](#structuremetadatacopyrights)`?`[Structure.Metadata.License](#structuremetadatalicense)`</div>`
+`<div class="permissions">`
+
+1.  [Structure.Metadata.Copyrights](#structuremetadatacopyrights)`?`
+2.  [Structure.Metadata.License](#structuremetadatalicense)
+
+`</div>`
+
 # Structure.Metadata.License
 
-`<p class="license"><a data-type="license" href=URI.datatype
+`<p class="license">`(text...)`<a data-type="license" href=URI.datatype
 itemprop="dc:license,lrmi:useRightsURL"/></p>`
 # Structure.Metadata.Copyrights
 
-`<p class="copyright"/>`
+`<p
+class="copyright">`(text...)[Structure.Metadata.Copyrights.Item](#structuremetadatacopyrightsitem)`+</p>`
 # Structure.Metadata.Copyrights.Item
 
 `<span data-type="copyright-holder" itemprop="copyright-holder"
@@ -156,7 +183,7 @@ itemprop="url">`*UserName.datatype*`</a></span>`
 
 # Structure.Metadata.PrintStyle
 
-`<div class="print-style"><span
+`<div class="print-style">`(text...)`<span
 data-type="print-style">`*TODO.enum.datatype*`</span></div>`
 # Structure.ChapterMetadata
 
@@ -174,22 +201,33 @@ data-type="print-style">`*TODO.enum.datatype*`</span></div>`
 # Structure.Metadata.Description
 
 `<div class="description" data-type="description"
-itemprop="description"/>`
+itemprop="description">`[Flow.model](#flowmodel)`+</div>`
 # Structure.Metadata.Keywords
 
-`<div data-type="keyword" itemprop="keywords"/>*`
+`(<div data-type="keyword" itemprop="keywords"/>)*`
 # Structure.Metadata.Subjects
 
-`<div data-type="subject" itemprop="about">`*Subject.datatype*`</div>*`
+`(<div data-type="subject"
+itemprop="about">`*Subject.datatype*`</div>)*`
 # Structure.Metadata.Resources
 
-`<div data-type="resources" style="display: none"/>`
+`<div data-type="resources" style="display:
+none">(<ul>`[Structure.Metadata.Resources.Item](#structuremetadataresourcesitem)`+</ul>)?</div>`
 # Structure.Metadata.Resources.Item
 
 `<li><a href=`[Sha.datatype](#shadatatype)`>`*Sha.datatype*`</a></li>`
 # Structure.Book.ToC
 
-`<nav id="toc"><ol/></nav>`
+`<nav id="toc">`
+`<ol>`
+
+1.  [Structure.Book.ToC.LeafItem](#structurebooktocleafitem)`*`
+2.  [Structure.Book.ToC.InternalItem](#structurebooktocinternalitem)`+`
+3.  [Structure.Book.ToC.LeafItem](#structurebooktocleafitem)`*`
+
+`</ol>`
+
+`</nav>`
 # Structure.Book.ToC.LeafItem
 
 `<li cnx-archive-shortid=`[ShortId.datatype](#shortiddatatype)`
@@ -200,7 +238,13 @@ href=URI.datatype/></li>`
 `<li>`
 
 1.  `<span/>`
-2.  `<ol/>`
+2.  `<ol>(`
+    One of the following:
+    
+    * [Structure.Book.ToC.InternalItem](#structurebooktocinternalitem)
+    * [Structure.Book.ToC.LeafItem](#structurebooktocleafitem)
+    
+    `)+</ol>`
 
 `</li>`
 

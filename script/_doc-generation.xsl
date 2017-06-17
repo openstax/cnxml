@@ -87,7 +87,7 @@
 
 <xsl:template match="rng:element">
   <xsl:choose>
-    <xsl:when test="count(rng:ref) + count(rng:element) > 1">
+    <xsl:when test="count(rng:ref) + count(rng:element) + count(rng:oneOrMore) + count(rng:zeroOrMore) + count(rng:optional) > 1">
       <p>
         <code>
           <xsl:text>&lt;</xsl:text>
@@ -116,7 +116,7 @@
         </code>
       </p>
     </xsl:when>
-    <xsl:when test="count(rng:ref) + count(rng:element) = 1">
+    <xsl:when test="count(rng:ref) + count(rng:element)  + count(rng:oneOrMore) + count(rng:zeroOrMore) + count(rng:optional) = 1">
       <code>
         <xsl:text>&lt;</xsl:text>
         <xsl:value-of select="@name"/>
@@ -163,6 +163,10 @@
   </code>
 </xsl:template>
 
+<xsl:template match="rng:text">
+  <xsl:text>(text...)</xsl:text>
+</xsl:template>
+
 <xsl:template match="rng:attribute/rng:ref">
   <xsl:variable name="href">
     <xsl:call-template name="string-replace-all">
@@ -192,25 +196,44 @@
   </ol>
 </xsl:template>
 
+<xsl:template name="optional-zeroOrMore-oneOrMore">
+  <xsl:param name="character"/>
+  <xsl:choose>
+    <xsl:when test="*[not(self::rng:attribute)]/*">
+      <code>
+        <xsl:text>(</xsl:text>
+      </code>
+      <xsl:apply-templates select="*"/>
+      <code>
+        <xsl:text>)</xsl:text>
+        <xsl:value-of select="$character"/>
+      </code>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:apply-templates select="*"/>
+      <code>
+        <xsl:value-of select="$character"/>
+      </code>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
 <xsl:template match="rng:optional">
-  <xsl:apply-templates select="*"/>
-  <code>
-    <xsl:text>?</xsl:text>
-  </code>
+  <xsl:call-template name="optional-zeroOrMore-oneOrMore">
+    <xsl:with-param name="character">?</xsl:with-param>
+  </xsl:call-template>
 </xsl:template>
 
 <xsl:template match="rng:zeroOrMore">
-  <xsl:apply-templates select="*"/>
-  <code>
-    <xsl:text>*</xsl:text>
-  </code>
+  <xsl:call-template name="optional-zeroOrMore-oneOrMore">
+    <xsl:with-param name="character">*</xsl:with-param>
+  </xsl:call-template>
 </xsl:template>
 
 <xsl:template match="rng:oneOrMore">
-  <xsl:apply-templates select="*"/>
-  <code>
-    <xsl:text>+</xsl:text>
-  </code>
+  <xsl:call-template name="optional-zeroOrMore-oneOrMore">
+    <xsl:with-param name="character">+</xsl:with-param>
+  </xsl:call-template>
 </xsl:template>
 
 <xsl:template match="rng:choice">

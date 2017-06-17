@@ -80,12 +80,24 @@ href=`[URI.datatype](#uridatatype)`>`[img](#img)`</a>`
 `<div data-type="footnote-refs">`
 
 1.  `<h3 data-type="footnote-refs-title"/>`
-2.  `<ul data-list-type="bulleted" data-bullet-style="none"/>`
+2.  `<ul data-list-type="bulleted" data-bullet-style="none">(`
+    `<li data-type="footnote-ref">`
+    
+    1.  [id.attrib.required](#idattribrequired)
+    2.  `<a data-type="footnote-ref-link"
+        href=`[URI.datatype](#uridatatype)`>`*Number.datatype*`</a>`
+    3.  `<span
+        data-type="footnote-ref-content">`[Inline.model](#inlinemodel)`</span>`
+    
+    `</li>`
+    
+    `)+</ul>`
 
 `</div>`
 
 # Content.Title.optional
 
+`(`
 `<div data-type="title">`
 
 1.  [Common.attrib](#commonattrib)
@@ -93,7 +105,7 @@ href=`[URI.datatype](#uridatatype)`>`[img](#img)`</a>`
 
 `</div>`
 
-`?`
+`)?`
 # Content.Note.attrs
 
 This defines a set of attributes:
@@ -186,7 +198,13 @@ And other things:
 
 # Content.DivList
 
-`<div>`[div-span-list.attrs](#div-span-listattrs)[Content.DivListItem](#contentdivlistitem)`+</div>`
+`<div>`
+
+1.  [div-span-list.attrs](#div-span-listattrs)
+2.  [Content.DivListItem](#contentdivlistitem)`+`
+
+`</div>`
+
 # Content.DivListItem
 
 `<div data-type="item">`
@@ -198,7 +216,13 @@ And other things:
 
 # Content.SpanList
 
-`<span>`[div-span-list.attrs](#div-span-listattrs)[Content.SpanListItem](#contentspanlistitem)`+</span>`
+`<span>`
+
+1.  [div-span-list.attrs](#div-span-listattrs)
+2.  [Content.SpanListItem](#contentspanlistitem)`+`
+
+`</span>`
+
 # Content.SpanListItem
 
 `<span data-type="item">`
@@ -248,12 +272,13 @@ This defines a set of attributes:
 And other things:
 
 1.  [id.attrib.required](#idattribrequired)
-2.  One of the following:
+2.  `(`
+    One of the following:
     
     * [img](#img)
     * [Content.ImageWithThumbnail](#contentimagewiththumbnail)
     
-    `+`
+    `)+`
 
 # Content.Media.class
 
@@ -273,8 +298,13 @@ And other things:
 
 # Content.Glossary
 
-`<div data-type="glossary"><h3
-data-type="glossary-title"/>`[dl](#dl)`+</div>`
+`<div data-type="glossary">`
+
+1.  `<h3 data-type="glossary-title"/>`
+2.  [dl](#dl)`+`
+
+`</div>`
+
 # Content.InlineTitle
 
 `<span data-type="title">`[Inline.model](#inlinemodel)`</span>`
@@ -349,6 +379,7 @@ One of the following:
 
 # enum.attr.ol.data-mark-suffix
 
+(text...)
 # ol.attlist
 
 This defines a set of attributes:
