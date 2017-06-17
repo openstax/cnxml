@@ -13,9 +13,9 @@ One of the following:
 * [Content.DivList](#contentdivlist)
 * [Content.ListWithTitle](#contentlistwithtitle)
 * [Content.ParaWithTitle](#contentparawithtitle)
-* `<div>Content.Media.class</div>`
-* `<div>Content.Alternates.class</div>`
-* `<div>Content.Newline.class</div>`
+* `<div>`[Content.Media.class](#contentmediaclass)`</div>`
+* `<div>`[Content.Alternates.class](#contentalternatesclass)`</div>`
+* `<div>`[Content.Newline.class](#contentnewlineclass)`</div>`
 * [Content.FootnoteRefs](#contentfootnoterefs)
 
 # Block.class
@@ -40,14 +40,14 @@ One of the following:
 * [Content.FootnoteNumber](#contentfootnotenumber)
 * [Content.Term](#contentterm)
 * [Content.Foreign](#contentforeign)
-* `<span>Content.Media.class</span>`
-* `<span>Content.Alternates.class</span>`
-* `<span>Content.Newline.class</span>`
+* `<span>`[Content.Media.class](#contentmediaclass)`</span>`
+* `<span>`[Content.Alternates.class](#contentalternatesclass)`</span>`
+* `<span>`[Content.Newline.class](#contentnewlineclass)`</span>`
 
 # Content.Space
 
 `<span data-type="space"
-data-count=Number.datatype>Text.datatype</span>`
+data-count=`[Number.datatype](#numberdatatype)`>`*Text.datatype*`</span>`
 # Content.Term
 
 `<span data-type="term">`
@@ -60,19 +60,21 @@ data-count=Number.datatype>Text.datatype</span>`
 
 # Content.Foreign
 
-`<span data-type="foreign">Inline.model</span>`
+`<span data-type="foreign">`[Inline.model](#inlinemodel)`</span>`
 # Content.FootnoteNumber
 
 `<sup data-type="footnote-number">`
 
 1.  [id.attrib.required](#idattribrequired)
-2.  `<a data-type="footnote-link" href=URI.datatype>Number.datatype</a>`
+2.  `<a data-type="footnote-link"
+    href=`[URI.datatype](#uridatatype)`>`*Number.datatype*`</a>`
 
 `</sup>`
 
 # Content.ImageWithThumbnail
 
-`<a data-type="image-with-thumbnail" href=URI.datatype>img</a>`
+`<a data-type="image-with-thumbnail"
+href=`[URI.datatype](#uridatatype)`>`[img](#img)`</a>`
 # Content.FootnoteRefs
 
 `<div data-type="footnote-refs">`
@@ -91,12 +93,20 @@ data-count=Number.datatype>Text.datatype</span>`
 
 `</div>`
 
-?
+`?`
 # Content.Note.attrs
 
-[Common.attrib](#commonattrib)
-data-label=[Text.datatype](#textdatatype)? data-has-label="true"?
-data-element-type=[Text.datatype](#textdatatype)?[Content.Title.optional](#contenttitleoptional)
+This defines a set of attributes:
+
+* ` data-label=`[Text.datatype](#textdatatype)`?`
+* ` data-has-label="true"?`
+* ` data-element-type=`[Text.datatype](#textdatatype)`?`
+
+And other things:
+
+1.  [Common.attrib](#commonattrib)
+2.  [Content.Title.optional](#contenttitleoptional)
+
 # Content.Note
 
 `<div data-type="note">`
@@ -126,7 +136,7 @@ data-element-type=[Text.datatype](#textdatatype)?[Content.Title.optional](#conte
 
 # Content.Solution
 
-`<div data-type="solution" data-print-placement=["here" | "end"]>`
+`<div data-type="solution" data-print-placement=`[`"here"` | `"end"`]`>`
 
 1.  [Content.Note.attrs](#contentnoteattrs)
 2.  [Flow.model](#flowmodel)
@@ -144,12 +154,12 @@ data-element-type=[Text.datatype](#textdatatype)?[Content.Title.optional](#conte
 
 # Content.Exercise
 
-`<div data-type="exercise" data-print-placement=["here" | "end"]>`
+`<div data-type="exercise" data-print-placement=`[`"here"` | `"end"`]`>`
 
 1.  [Content.Note.attrs](#contentnoteattrs)
 2.  [Content.Problem](#contentproblem)
-3.  [Content.Solution](#contentsolution)*
-4.  [Content.Commentary](#contentcommentary)*
+3.  [Content.Solution](#contentsolution)`*`
+4.  [Content.Commentary](#contentcommentary)`*`
 
 `</div>`
 
@@ -164,11 +174,19 @@ data-element-type=[Text.datatype](#textdatatype)?[Content.Title.optional](#conte
 
 # Content.Newline.class
 
-data-type="newline"[Content.Note.attrs](#contentnoteattrs)
-data-count=[Number.datatype](#numberdatatype)?[br](#br)*
+This defines a set of attributes:
+
+* ` data-type="newline"`
+* ` data-count=`[Number.datatype](#numberdatatype)`?`
+
+And other things:
+
+1.  [Content.Note.attrs](#contentnoteattrs)
+2.  [br](#br)`*`
+
 # Content.DivList
 
-`<div>div-span-list.attrsContent.DivListItem*</div>`
+`<div>`[div-span-list.attrs](#div-span-listattrs)[Content.DivListItem](#contentdivlistitem)`+</div>`
 # Content.DivListItem
 
 `<div data-type="item">`
@@ -180,7 +198,7 @@ data-count=[Number.datatype](#numberdatatype)?[br](#br)*
 
 # Content.SpanList
 
-`<span>div-span-list.attrsContent.SpanListItem*</span>`
+`<span>`[div-span-list.attrs](#div-span-listattrs)[Content.SpanListItem](#contentspanlistitem)`+</span>`
 # Content.SpanListItem
 
 `<span data-type="item">`
@@ -222,41 +240,59 @@ data-count=[Number.datatype](#numberdatatype)?[br](#br)*
 
 # Content.Alternates.class
 
-data-type="alternates"[id.attrib.required](#idattribrequired)
-data-alt=[Text.datatype](#textdatatype)?
-One of the following:
+This defines a set of attributes:
 
-* [img](#img)
-* [Content.ImageWithThumbnail](#contentimagewiththumbnail)
+* ` data-type="alternates"`
+* ` data-alt=`[Text.datatype](#textdatatype)`?`
 
-*
+And other things:
+
+1.  [id.attrib.required](#idattribrequired)
+2.  One of the following:
+    
+    * [img](#img)
+    * [Content.ImageWithThumbnail](#contentimagewiththumbnail)
+    
+    `+`
+
 # Content.Media.class
 
-data-type="media"[id.attrib.required](#idattribrequired)
-data-alt=[Text.datatype](#textdatatype)
-data-longdesc=[Text.datatype](#textdatatype)?
-One of the following:
+This defines a set of attributes:
 
-* [img](#img)
-* [iframe](#iframe)
+* ` data-type="media"`
+* ` data-alt=`[Text.datatype](#textdatatype)
+* ` data-longdesc=`[Text.datatype](#textdatatype)`?`
+
+And other things:
+
+1.  [id.attrib.required](#idattribrequired)
+2.  One of the following:
+    
+    * [img](#img)
+    * [iframe](#iframe)
 
 # Content.Glossary
 
-`<div data-type="glossary"><h3 data-type="glossary-title"/>dl*</div>`
+`<div data-type="glossary"><h3
+data-type="glossary-title"/>`[dl](#dl)`+</div>`
 # Content.InlineTitle
 
-`<span data-type="title">Inline.model</span>`
+`<span data-type="title">`[Inline.model](#inlinemodel)`</span>`
 # id.attrib.required
 
-id=[ID.datatype](#iddatatype)
+This defines a set of attributes:
+
+* ` id=`[ID.datatype](#iddatatype)
+
 # table.attlist
 
-This element extends an existing defition
+This defines a set of attributes:
 
-data-label=[Text.datatype](#textdatatype)?
-data-frame=[Text.datatype](#textdatatype)?
-data-colsep=[Number.datatype](#numberdatatype)?
-data-rowsep=[Number.datatype](#numberdatatype)?
+* ` data-label=`[Text.datatype](#textdatatype)`?`
+* ` data-frame=`[Text.datatype](#textdatatype)`?`
+* ` data-colsep=`[Number.datatype](#numberdatatype)`?`
+* ` data-rowsep=`[Number.datatype](#numberdatatype)`?`
+
 # caption
 
 This element extends an existing defition
@@ -273,151 +309,182 @@ This element extends an existing defition
 
 One of the following:
 
-* "top"
-* "middle"
-* "bottom"
+* `"top"`
+* `"middle"`
+* `"bottom"`
 
 # enum.attr.td.data-align
 
 One of the following:
 
-* "left"
-* "center"
-* "right"
-* "justify"
-* "char"
+* `"left"`
+* `"center"`
+* `"right"`
+* `"justify"`
+* `"char"`
 
 # td.attlist
 
-This element extends an existing defition
+This defines a set of attributes:
 
-data-valign=[enum.attr.td.data-valign](#enumattrtddata-valign)?
-data-align=[enum.attr.td.data-align](#enumattrtddata-align)?
+* ` data-valign=`[enum.attr.td.data-valign](#enumattrtddata-valign)`?`
+* ` data-align=`[enum.attr.td.data-align](#enumattrtddata-align)`?`
+
 # th.attlist
 
-This element extends an existing defition
+This defines a set of attributes:
 
-data-valign=[enum.attr.td.data-valign](#enumattrtddata-valign)?
-data-align=[enum.attr.td.data-align](#enumattrtddata-align)?
+* ` data-valign=`[enum.attr.td.data-valign](#enumattrtddata-valign)`?`
+* ` data-align=`[enum.attr.td.data-align](#enumattrtddata-align)`?`
+
 # enum.attr.ol.data-number-style
 
 One of the following:
 
-* "arabic"
-* "lower-alpha"
-* "upper-alpha"
-* "lower-roman"
-* "upper-roman"
+* `"arabic"`
+* `"lower-alpha"`
+* `"upper-alpha"`
+* `"lower-roman"`
+* `"upper-roman"`
 
 # enum.attr.ol.data-mark-suffix
 
 # ol.attlist
 
-This element extends an existing defition
+This defines a set of attributes:
 
-data-number-style=[enum.attr.ol.data-number-style](#enumattroldata-number-style)?
-data-mark-suffix=[enum.attr.ol.data-mark-suffix](#enumattroldata-mark-suffix)?
-data-mark-prefix=[enum.attr.ol.data-mark-suffix](#enumattroldata-mark-suffix)?
+* `
+  data-number-style=`[enum.attr.ol.data-number-style](#enumattroldata-number-style)`?`
+* `
+  data-mark-suffix=`[enum.attr.ol.data-mark-suffix](#enumattroldata-mark-suffix)`?`
+* `
+  data-mark-prefix=`[enum.attr.ol.data-mark-suffix](#enumattroldata-mark-suffix)`?`
+
 # enum.attr.ul.data-bullet-style
 
 One of the following:
 
-* "bullet"
-* "open-circle"
-* "pilcrow"
-* "rpilcrow"
-* "asterisk"
-* "dash"
-* "section"
-* "none"
+* `"bullet"`
+* `"open-circle"`
+* `"pilcrow"`
+* `"rpilcrow"`
+* `"asterisk"`
+* `"dash"`
+* `"section"`
+* `"none"`
 
 # ul.attlist
 
-This element extends an existing defition
+This defines a set of attributes:
 
-data-bullet-style=[enum.attr.ul.data-bullet-style](#enumattruldata-bullet-style)?
-data-mark-suffix=[enum.attr.ol.data-mark-suffix](#enumattroldata-mark-suffix)?
-data-labeled-item="true"?
+* `
+  data-bullet-style=`[enum.attr.ul.data-bullet-style](#enumattruldata-bullet-style)`?`
+* `
+  data-mark-suffix=`[enum.attr.ol.data-mark-suffix](#enumattroldata-mark-suffix)`?`
+* ` data-labeled-item="true"?`
+
 # li.attlist
 
-This element extends an existing defition
+This defines a set of attributes:
 
-cnx-archive-shortid=[Text.datatype](#textdatatype)
-cnx-archive-uri=[Text.datatype](#textdatatype)?
-data-label=[Text.datatype](#textdatatype)?
+* ` cnx-archive-shortid=`[Text.datatype](#textdatatype)`
+  cnx-archive-uri=`[Text.datatype](#textdatatype)`?`
+* ` data-label=`[Text.datatype](#textdatatype)`?`
+
 # enum.attr.img.data-media-type
 
 One of the following:
 
-* "image/png"
-* "image/jpeg"
-* "application/postscript"
-* "image/jpg"
+* `"image/png"`
+* `"image/jpeg"`
+* `"application/postscript"`
+* `"image/jpg"`
 
 # img.attlist
 
-This element extends an existing defition
+This defines a set of attributes:
 
-data-media-type=[enum.attr.img.data-media-type](#enumattrimgdata-media-type)?
-data-longdesc=[URI.datatype](#uridatatype)?
-data-print-width=[Length.datatype](#lengthdatatype)?
-data-print=[Boolean.datatype](#booleandatatype)?
+* `
+  data-media-type=`[enum.attr.img.data-media-type](#enumattrimgdata-media-type)`?`
+* ` data-longdesc=`[URI.datatype](#uridatatype)`?`
+* ` data-print-width=`[Length.datatype](#lengthdatatype)`?`
+* ` data-print=`[Boolean.datatype](#booleandatatype)`?`
+
 # enum.attr.strong.data-effect
 
-"bold"
+`"bold"`
 # strong.attlist
 
-This element extends an existing defition
+This defines a set of attributes:
 
-data-effect=[enum.attr.strong.data-effect](#enumattrstrongdata-effect)?
+* `
+  data-effect=`[enum.attr.strong.data-effect](#enumattrstrongdata-effect)`?`
+
 # enum.attr.em.data-effect
 
 One of the following:
 
-* "italics"
-* "smallcaps"
+* `"italics"`
+* `"smallcaps"`
 
 # em.attlist
 
-This element extends an existing defition
+This defines a set of attributes:
 
-data-effect=[enum.attr.em.data-effect](#enumattremdata-effect)?
+* ` data-effect=`[enum.attr.em.data-effect](#enumattremdata-effect)`?`
+
 # enum.attr.span.data-type
 
 One of the following:
 
-* "cite-title"
+* `"cite-title"`
 
 # span.attlist
 
-This element extends an existing defition
+This defines a set of attributes:
 
-data-type=[enum.attr.span.data-type](#enumattrspandata-type)?
-data-alt=[Text.datatype](#textdatatype)?
+* ` data-type=`[enum.attr.span.data-type](#enumattrspandata-type)`?`
+* ` data-alt=`[Text.datatype](#textdatatype)`?`
+
 # enum.attr.Heading.data-type
 
-"title"
+`"title"`
 # Heading.attrib
 
-This element extends an existing defition
+This defines a set of attributes:
 
-data-type=[enum.attr.Heading.data-type](#enumattrheadingdata-type)
+* ` data-type=`[enum.attr.Heading.data-type](#enumattrheadingdata-type)
+
 # div.attlist
 
-This element extends an existing defition
+This defines a set of attributes:
 
-data-label=[Text.datatype](#textdatatype)? data-has-label="true"?
-data-element-type=[Text.datatype](#textdatatype)?
+* ` data-label=`[Text.datatype](#textdatatype)`?`
+* ` data-has-label="true"?`
+* ` data-element-type=`[Text.datatype](#textdatatype)`?`
+
 # div-span-list.attrs
 
-data-type="list" data-mark-suffix=[Text.datatype](#textdatatype)?
-data-item-sep=[Text.datatype](#textdatatype)?
-One of the following:
+This defines a set of attributes:
 
-* 
-* 
+* ` data-type="list"`
+* ` data-mark-suffix=`[Text.datatype](#textdatatype)`?`
+* ` data-item-sep=`[Text.datatype](#textdatatype)`?`
 
-[Content.Note.attrs](#contentnoteattrs)
+And other things:
+
+1.  One of the following:
+    
+    * 1.  ` data-list-type=`[`"bulleted"` | `"labeled-item"`]
+      2.  `
+          data-bullet-style=`[enum.attr.ul.data-bullet-style](#enumattruldata-bullet-style)`?`
+    
+    * 1.  ` data-list-type="enumerated"`
+      2.  `
+          data-number-style=`[enum.attr.ol.data-number-style](#enumattroldata-number-style)`?`
+
+2.  [Content.Note.attrs](#contentnoteattrs)
+
 # u
 
 `<u>`
@@ -432,47 +499,62 @@ One of the following:
 [Common.attrib](#commonattrib)
 # ol.attlist
 
-This element extends an existing defition
+This defines a set of attributes:
 
-type=? compact="compact"? start=?
+* ` type=?`
+* ` compact="compact"?`
+* ` start=?`
+
 # section
 
 `<section>`
 
 1.  [section.attlist](#sectionattlist)
-2.  [Heading.class](#headingclass)?
+2.  [Heading.class](#headingclass)`?`
 3.  [Flow.model](#flowmodel)
 
 `</section>`
 
 # section.attlist
 
-[Common.attrib](#commonattrib)
-data-depth=[Number.datatype](#numberdatatype)
-data-label=[Text.datatype](#textdatatype)?
-data-element-type=[Text.datatype](#textdatatype)?
+This defines a set of attributes:
+
+* ` data-depth=`[Number.datatype](#numberdatatype)
+* ` data-label=`[Text.datatype](#textdatatype)`?`
+* ` data-element-type=`[Text.datatype](#textdatatype)`?`
+
+And other things:
+
+1.  [Common.attrib](#commonattrib)
+
 # figure
 
 `<figure>`
 
 1.  [figure.attlist](#figureattlist)
 2.  [Content.Title.optional](#contenttitleoptional)
-3.  [figcaption](#figcaption)?
+3.  [figcaption](#figcaption)`?`
 4.  [Flow.model](#flowmodel)
 
 `</figure>`
 
 # figure.attlist
 
-[Common.attrib](#commonattrib)
-data-label=[Text.datatype](#textdatatype)? data-orient=["vertical" |
-"horizontal"]?
+This defines a set of attributes:
+
+* ` data-label=`[Text.datatype](#textdatatype)`?`
+* ` data-orient=`[`"vertical"` | `"horizontal"`]`?`
+
+And other things:
+
+1.  [Common.attrib](#commonattrib)
+
 # figcaption
 
 `<figcaption>`
 
 1.  [figcaption.attlist](#figcaptionattlist)
-2.  [Content.InlineTitle](#contentinlinetitle)?
+2.  [Content.InlineTitle](#contentinlinetitle)`?`
 3.  [Flow.model](#flowmodel)
 
 `</figcaption>`
@@ -491,4 +573,7 @@ data-label=[Text.datatype](#textdatatype)? data-orient=["vertical" |
 
 # cnx-pi.attlist
 
-data-type=["cnx.eoc" | *Text.datatype*]
+This defines a set of attributes:
+
+* ` data-type=`[`"cnx.eoc"` | *Text.datatype*]
+

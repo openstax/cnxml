@@ -32,6 +32,33 @@
   <xsl:apply-templates select="*"/>
 </xsl:template>
 
+
+<xsl:template match="rng:define[rng:attribute or rng:optional/rng:attribute]">
+  <h1>
+    <xsl:value-of select="@name"/>
+  </h1>
+  <p>This defines a set of attributes:</p>
+  <ul>
+    <xsl:for-each select="rng:attribute | rng:optional[rng:attribute]">
+      <li>
+        <xsl:apply-templates select="."/>
+      </li>
+    </xsl:for-each>
+  </ul>
+
+  <xsl:if test="*[not(self::rng:attribute or self::rng:optional[rng:attribute])]">
+    <p>And other things:</p>
+    <ol>
+      <xsl:for-each select="*[not(self::rng:attribute or self::rng:optional[rng:attribute])]">
+        <li>
+          <xsl:apply-templates select="."/>
+        </li>
+      </xsl:for-each>
+    </ol>
+  </xsl:if>
+</xsl:template>
+
+
 <xsl:template match="rng:ref[not(contains(@name, '.datatype'))]">
   <xsl:variable name="href">
     <xsl:call-template name="string-replace-all">
@@ -65,8 +92,10 @@
         <code>
           <xsl:text>&lt;</xsl:text>
           <xsl:value-of select="@name"/>
-          <xsl:apply-templates select="rng:attribute"/>
-          <xsl:apply-templates select="rng:optional/rng:attribute"/>
+        </code>
+        <xsl:apply-templates select="rng:attribute"/>
+        <xsl:apply-templates select="rng:optional/rng:attribute"/>
+        <code>
           <xsl:text>&gt;</xsl:text>
         </code>
       </p>
@@ -91,10 +120,14 @@
       <code>
         <xsl:text>&lt;</xsl:text>
         <xsl:value-of select="@name"/>
-        <xsl:apply-templates select="rng:attribute"/>
-        <xsl:apply-templates select="rng:optional/rng:attribute"/>
+      </code>
+      <xsl:apply-templates select="rng:attribute"/>
+      <xsl:apply-templates select="rng:optional/rng:attribute"/>
+      <code>
         <xsl:text>&gt;</xsl:text>
-        <xsl:apply-templates select="rng:*[not(self::rng:attribute)][not(self::rng:optional[rng:attribute])]"/>
+      </code>
+      <xsl:apply-templates select="rng:*[not(self::rng:attribute)][not(self::rng:optional[rng:attribute])]"/>
+      <code>
         <xsl:text>&lt;/</xsl:text>
         <xsl:value-of select="@name"/>
         <xsl:text>&gt;</xsl:text>
@@ -113,17 +146,21 @@
 </xsl:template>
 
 <xsl:template match="rng:attribute">
-  <xsl:text> </xsl:text>
-  <xsl:value-of select="@name"/>
-  <xsl:text>=</xsl:text>
+  <code>
+    <xsl:text> </xsl:text>
+    <xsl:value-of select="@name"/>
+    <xsl:text>=</xsl:text>
+  </code>
   <xsl:apply-templates select="*"/>
 </xsl:template>
 
 
 <xsl:template match="rng:value">
-  <xsl:text>"</xsl:text>
-  <xsl:value-of select="text()"/>
-  <xsl:text>"</xsl:text>
+  <code>
+    <xsl:text>"</xsl:text>
+    <xsl:value-of select="text()"/>
+    <xsl:text>"</xsl:text>
+  </code>
 </xsl:template>
 
 <xsl:template match="rng:attribute/rng:ref">
@@ -145,19 +182,35 @@
 </xsl:template>
 
 
+<xsl:template match="rng:group">
+  <ol>
+    <xsl:for-each select="*">
+      <li>
+        <xsl:apply-templates select="."/>
+      </li>
+    </xsl:for-each>
+  </ol>
+</xsl:template>
+
 <xsl:template match="rng:optional">
   <xsl:apply-templates select="*"/>
-  <xsl:text>?</xsl:text>
+  <code>
+    <xsl:text>?</xsl:text>
+  </code>
 </xsl:template>
 
 <xsl:template match="rng:zeroOrMore">
   <xsl:apply-templates select="*"/>
-  <xsl:text>*</xsl:text>
+  <code>
+    <xsl:text>*</xsl:text>
+  </code>
 </xsl:template>
 
 <xsl:template match="rng:oneOrMore">
   <xsl:apply-templates select="*"/>
-  <xsl:text>*</xsl:text>
+  <code>
+    <xsl:text>+</xsl:text>
+  </code>
 </xsl:template>
 
 <xsl:template match="rng:choice">

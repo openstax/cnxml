@@ -1,6 +1,10 @@
 # Structure.Book.Head.attlist
 
-itemscope="itemscope" itemtype="http://schema.org/Book"
+This defines a set of attributes:
+
+* ` itemscope="itemscope"`
+* ` itemtype="http://schema.org/Book"`
+
 # Structure.Book.Body
 
 `<body itemscope="itemscope" itemtype="http://schema.org/Book">`
@@ -13,7 +17,7 @@ itemscope="itemscope" itemtype="http://schema.org/Book"
     * [Structure.Chapter](#structurechapter)
     * [Structure.Page](#structurepage)
     
-    *
+    `+`
 
 `</body>`
 
@@ -25,10 +29,10 @@ itemscope="itemscope" itemtype="http://schema.org/Book"
 2.  [id.attrib.required](#idattribrequired)
 3.  [Structure.PageMetadata](#structurepagemetadata)
 4.  [Structure.Page.Title](#structurepagetitle)
-5.  [Structure.Page.Abstract](#structurepageabstract)?
-6.  [Flow.model](#flowmodel)*
-7.  [Content.Glossary](#contentglossary)?
-8.  [Content.FootnoteRefs](#contentfootnoterefs)?
+5.  [Structure.Page.Abstract](#structurepageabstract)`?`
+6.  [Flow.model](#flowmodel)`*`
+7.  [Content.Glossary](#contentglossary)`?`
+8.  [Content.FootnoteRefs](#contentfootnoterefs)`?`
 
 `</div>`
 
@@ -37,8 +41,8 @@ itemscope="itemscope" itemtype="http://schema.org/Book"
 `<div data-type="chapter">`
 
 1.  [Structure.ChapterMetadata](#structurechaptermetadata)
-2.  `<h1 data-type="document-title">Inline.model</h1>`
-3.  [Structure.Page](#structurepage)*
+2.  `<h1 data-type="document-title">`[Inline.model](#inlinemodel)`</h1>`
+3.  [Structure.Page](#structurepage)`+`
 
 `</div>`
 
@@ -72,14 +76,15 @@ itemscope="itemscope" itemtype="http://schema.org/Book"
 6.  [Structure.Metadata.Permissions](#structuremetadatapermissions)
 7.  [Structure.Metadata.Description](#structuremetadatadescription)
 8.  [Structure.Metadata.Keywords](#structuremetadatakeywords)
-9.  [Structure.Metadata.Subjects](#structuremetadatasubjects)?
-10. [Structure.Metadata.Resources](#structuremetadataresources)?
+9.  [Structure.Metadata.Subjects](#structuremetadatasubjects)`?`
+10. [Structure.Metadata.Resources](#structuremetadataresources)`?`
 
 `</div>`
 
 # Structure.Metadata.Title
 
-`<h1 data-type="document-title" itemprop="name">Inline.model</h1>`
+`<h1 data-type="document-title"
+itemprop="name">`[Inline.model](#inlinemodel)`</h1>`
 # Structure.Metadata.Uri
 
 `<span data-type="cnx-archive-uri"
@@ -96,8 +101,8 @@ data-value=UUID-and-version.datatype/>`
 itemtype="http://schema.org/Person">`
 
 1.  [id.attrib.required](#idattribrequired)
-2.  `<a data-type="cnx-id" href=Text.datatype
-    itemprop="url">Text.datatype</a>`
+2.  `<a data-type="cnx-id" href=`[Text.datatype](#textdatatype)`
+    itemprop="url">`*Text.datatype*`</a>`
 
 `</span>`
 
@@ -110,15 +115,15 @@ itemtype="http://schema.org/Person">`
 itemtype="http://schema.org/Person">`
 
 1.  [id.attrib.required](#idattribrequired)
-2.  `<a data-type="cnx-id" href=Text.datatype
-    itemprop="url">Text.datatype</a>`
+2.  `<a data-type="cnx-id" href=`[Text.datatype](#textdatatype)`
+    itemprop="url">`*Text.datatype*`</a>`
 
 `</span>`
 
 # Structure.Metadata.Permissions
 
 `<div
-class="permissions">Structure.Metadata.Copyrights?Structure.Metadata.License</div>`
+class="permissions">`[Structure.Metadata.Copyrights](#structuremetadatacopyrights)`?`[Structure.Metadata.License](#structuremetadatalicense)`</div>`
 # Structure.Metadata.License
 
 `<p class="license"><a data-type="license" href=URI.datatype
@@ -130,8 +135,8 @@ itemprop="dc:license,lrmi:useRightsURL"/></p>`
 
 `<span data-type="copyright-holder" itemprop="copyright-holder"
 itemscope="itemscope" itemtype="http://schema.org/Person"><a
-data-type="cnx-id" href=UserLogin.datatype
-itemprop="url">UserName.datatype</a></span>`
+data-type="cnx-id" href=`[UserLogin.datatype](#userlogindatatype)`
+itemprop="url">`*UserName.datatype*`</a></span>`
 # Structure.Book.Metadata
 
 `<div data-type="metadata">`
@@ -142,7 +147,7 @@ itemprop="url">UserName.datatype</a></span>`
 4.  [Structure.Metadata.Authors](#structuremetadataauthors)
 5.  [Structure.Metadata.Publishers](#structuremetadatapublishers)
 6.  [Structure.Metadata.PrintStyle](#structuremetadataprintstyle)
-7.  [Structure.Metadata.TranslucentBinding](#structuremetadatatranslucentbinding)?
+7.  [Structure.Metadata.TranslucentBinding](#structuremetadatatranslucentbinding)`?`
 8.  [Structure.Metadata.Permissions](#structuremetadatapermissions)
 9.  [Structure.Metadata.Description](#structuremetadatadescription)
 10. [Structure.Metadata.Subjects](#structuremetadatasubjects)
@@ -152,7 +157,7 @@ itemprop="url">UserName.datatype</a></span>`
 # Structure.Metadata.PrintStyle
 
 `<div class="print-style"><span
-data-type="print-style">TODO.enum.datatype</span></div>`
+data-type="print-style">`*TODO.enum.datatype*`</span></div>`
 # Structure.ChapterMetadata
 
 `<div data-type="metadata">`
@@ -172,23 +177,24 @@ data-type="print-style">TODO.enum.datatype</span></div>`
 itemprop="description"/>`
 # Structure.Metadata.Keywords
 
-`<div data-type="keyword" itemprop="keywords"/>`*
+`<div data-type="keyword" itemprop="keywords"/>*`
 # Structure.Metadata.Subjects
 
-`<div data-type="subject" itemprop="about">Subject.datatype</div>`*
+`<div data-type="subject" itemprop="about">`*Subject.datatype*`</div>*`
 # Structure.Metadata.Resources
 
 `<div data-type="resources" style="display: none"/>`
 # Structure.Metadata.Resources.Item
 
-`<li><a href=Sha.datatype>Sha.datatype</a></li>`
+`<li><a href=`[Sha.datatype](#shadatatype)`>`*Sha.datatype*`</a></li>`
 # Structure.Book.ToC
 
 `<nav id="toc"><ol/></nav>`
 # Structure.Book.ToC.LeafItem
 
-`<li cnx-archive-shortid=ShortId.datatype
-cnx-archive-uri=UUID-and-version.datatype><a href=URI.datatype/></li>`
+`<li cnx-archive-shortid=`[ShortId.datatype](#shortiddatatype)`
+cnx-archive-uri=`[UUID-and-version.datatype](#uuid-and-versiondatatype)`><a
+href=URI.datatype/></li>`
 # Structure.Book.ToC.InternalItem
 
 `<li>`
@@ -202,20 +208,23 @@ cnx-archive-uri=UUID-and-version.datatype><a href=URI.datatype/></li>`
 
 One of the following:
 
-* "inLanguage"
-* "accessibilityFeature"
-* "dateCreated"
-* "dateModified"
+* `"inLanguage"`
+* `"accessibilityFeature"`
+* `"dateCreated"`
+* `"dateModified"`
 
 # enum.attr.meta.data-type
 
-"language"
+`"language"`
 # meta.attlist
 
 This element extends an existing defition
 
 One of the following:
 
-* 
-* itemprop=["accessibilityFeature" | "dateCreated" | "dateModified"]
+* 1.  ` itemprop="inLanguage"`
+  2.  ` data-type="language"`
+
+* ` itemprop=`[`"accessibilityFeature"` | `"dateCreated"` |
+  `"dateModified"`]
 
