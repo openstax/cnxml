@@ -94,7 +94,7 @@
           <xsl:value-of select="@name"/>
         </code>
         <xsl:apply-templates select="rng:attribute"/>
-        <xsl:apply-templates select="rng:optional/rng:attribute"/>
+        <xsl:apply-templates select="rng:optional[rng:attribute]"/>
         <code>
           <xsl:text>&gt;</xsl:text>
         </code>
@@ -122,7 +122,7 @@
         <xsl:value-of select="@name"/>
       </code>
       <xsl:apply-templates select="rng:attribute"/>
-      <xsl:apply-templates select="rng:optional/rng:attribute"/>
+      <xsl:apply-templates select="rng:optional[rng:attribute]"/>
       <code>
         <xsl:text>&gt;</xsl:text>
       </code>
@@ -138,7 +138,7 @@
         <xsl:text>&lt;</xsl:text>
         <xsl:value-of select="@name"/>
         <xsl:apply-templates select="rng:attribute"/>
-        <xsl:apply-templates select="rng:optional/rng:attribute"/>
+        <xsl:apply-templates select="rng:optional[rng:attribute]"/>
         <xsl:text>/&gt;</xsl:text>
       </code>
     </xsl:otherwise>

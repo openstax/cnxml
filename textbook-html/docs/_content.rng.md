@@ -148,7 +148,8 @@ And other things:
 
 # Content.Solution
 
-`<div data-type="solution" data-print-placement=`[`"here"` | `"end"`]`>`
+`<div data-type="solution" data-print-placement=`[`"here"` |
+`"end"`]`?>`
 
 1.  [Content.Note.attrs](#contentnoteattrs)
 2.  [Flow.model](#flowmodel)
@@ -166,7 +167,8 @@ And other things:
 
 # Content.Exercise
 
-`<div data-type="exercise" data-print-placement=`[`"here"` | `"end"`]`>`
+`<div data-type="exercise" data-print-placement=`[`"here"` |
+`"end"`]`?>`
 
 1.  [Content.Note.attrs](#contentnoteattrs)
 2.  [Content.Problem](#contentproblem)
