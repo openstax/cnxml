@@ -15,6 +15,7 @@
 
 <!-- from xhtml/modules/struct.rng but changed to only include a subset of valid "root" elements -->
 <r:define name="Structure.Book.Body">
+  <p>When an entire book is being validated, the <code>&lt;body&gt;</code> element needs to have additional attributes and has a restricted set of children.</p>
   <r:element name="body">
     <!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
     <r:attribute name="itemscope">
@@ -40,6 +41,7 @@
 
 <!-- <head itemscope="itemscope" itemtype="http://schema.org/Book"> -->
 <r:define name="Structure.Book.Head.attlist">
+  <p>When an entire book is being validated, the <code>&lt;head&gt;</code> element needs to have additional attributes and has a restricted set of children.</p>
   <r:attribute name="itemscope">
     <r:value>itemscope</r:value>
   </r:attribute>

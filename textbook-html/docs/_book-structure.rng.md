@@ -13,6 +13,9 @@ This file is organized into the following sections
 
 ## Structure.Book.Body
 
+When an entire book is being validated, the `<body>` element needs to
+have additional attributes and has a restricted set of children.
+
 `<body itemscope="itemscope" itemtype="http://schema.org/Book">`
 
 1.  [body.attlist](#bodyattlist)
@@ -29,6 +32,13 @@ This defines a set of attributes:
 
 * ` itemscope="itemscope"`
 * ` itemtype="http://schema.org/Book"`
+
+And other things:
+
+1.  When an entire book is being validated, the `<head>` element needs
+    to have additional attributes and has a restricted set of children.
+
+^
 
 ## Structure.Book.Metadata
 
