@@ -1,3 +1,7 @@
+# Included files
+
+* [./_content.rng](../textbook-html/./_content.rng)
+
 # Structure.Book.Head.attlist
 
 This defines a set of attributes:

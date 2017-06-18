@@ -1,11 +1,28 @@
+# Included files
+
+* [../xhtml/modules/datatypes.rng](../textbook-html/../xhtml/modules/datatypes.rng)
+* [../xhtml/modules/attribs.rng](../textbook-html/../xhtml/modules/attribs.rng)
+* [../xhtml/modules/struct.rng](../textbook-html/../xhtml/modules/struct.rng)
+* [../xhtml/modules/text.rng](../textbook-html/../xhtml/modules/text.rng)
+* [../xhtml/modules/hypertext.rng](../textbook-html/../xhtml/modules/hypertext.rng)
+* [../xhtml/modules/list.rng](../textbook-html/../xhtml/modules/list.rng)
+* [../xhtml/modules/image.rng](../textbook-html/../xhtml/modules/image.rng)
+* [../xhtml/modules/param.rng](../textbook-html/../xhtml/modules/param.rng)
+* [../xhtml/modules/meta.rng](../textbook-html/../xhtml/modules/meta.rng)
+* [../xhtml/modules/link.rng](../textbook-html/../xhtml/modules/link.rng)
+* [../xhtml/modules/base.rng](../textbook-html/../xhtml/modules/base.rng)
+* [../xhtml/modules/iframe.rng](../textbook-html/../xhtml/modules/iframe.rng)
+* [../xhtml/modules/table.rng](../textbook-html/../xhtml/modules/table.rng)
+* [../xhtml/modules/pres.rng](../textbook-html/../xhtml/modules/pres.rng)
+* [../xhtml/modules/target.rng](../textbook-html/../xhtml/modules/target.rng)
+* [../mathml2.rng](../textbook-html/../mathml2.rng)
+
 # Block.class
 
 This element extends an existing defition
 
 One of the following:
 
-* [section](#section)
-* [figure](#figure)
 * [Content.Note](#contentnote)
 * [Content.Equation](#contentequation)
 * [Content.Exercise](#contentexercise)
@@ -17,23 +34,17 @@ One of the following:
 * `<div>`[Content.Alternates.class](#contentalternatesclass)`</div>`
 * `<div>`[Content.Newline.class](#contentnewlineclass)`</div>`
 * [Content.FootnoteRefs](#contentfootnoterefs)
+* [section](#section)
+* [figure](#figure)
+* [cnx-pi](#cnx-pi)
 
-# Block.class
-
-This element extends an existing defition
-
-[cnx-pi](#cnx-pi)
-# Inline.class
-
-This element extends an existing defition
-
-[math](#math)
 # Inline.class
 
 This element extends an existing defition
 
 One of the following:
 
+* [math](#math)
 * [u](#u)
 * [Content.SpanList](#contentspanlist)
 * [Content.Space](#contentspace)
@@ -298,6 +309,9 @@ And other things:
     * [img](#img)
     * [iframe](#iframe)
 
+# Content.InlineTitle
+
+`<span data-type="title">`[Inline.model](#inlinemodel)`</span>`
 # Content.Glossary
 
 `<div data-type="glossary">`
@@ -307,9 +321,6 @@ And other things:
 
 `</div>`
 
-# Content.InlineTitle
-
-`<span data-type="title">`[Inline.model](#inlinemodel)`</span>`
 # id.attrib.required
 
 This defines a set of attributes:

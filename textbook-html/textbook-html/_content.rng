@@ -18,369 +18,80 @@
 <include href="../xhtml/modules/pres.rng"/>
 <include href="../xhtml/modules/target.rng"/>
 
-
 <!-- <include href="../cnxml/xml/mathml/schema/rng/2.0/mathml2.rng"/> -->
 <!-- <include href="http://www.w3.org/Math/RelaxNG/mathml3/mathml3.rng"/> -->
 <include href="../mathml2.rng"/>
+
+
+<!-- This file is organized into 4 sections:
+  1. Textbook-specific Blockish pseudo-elements: This contains things like Note, Exercise
+  2. Textbook-specific Inline pseudoelements: things like "term", inline list, media
+  3. Enum attributes: things like `bullet-style` or `lower-roman`
+  4. HTML5 elements: things like `<section>` or `<figure>`
+  5. Additional attributes to existing xhtml elements: things like table valign and `<caption>` element
+  6. Additional datatype values: things like UUID, UUID-and-version
+-->
+
+
+<define name="Block.class" combine="choice">
+  <!-- This extends the set of elements that are allowed in a "Blockish" area -->
+  <choice>
+    <ref name="Content.Note"/>
+    <ref name="Content.Equation"/>
+    <ref name="Content.Exercise"/>
+    <ref name="Content.Example"/>
+    <ref name="Content.DivList"/>
+    <ref name="Content.ListWithTitle"/>
+    <ref name="Content.ParaWithTitle"/>
+    <element name="div">
+      <ref name="Content.Media.class"/>
+    </element>
+    <element name="div">
+      <ref name="Content.Alternates.class"/>
+    </element>
+    <element name="div">
+      <ref name="Content.Newline.class"/>
+    </element>
+    <!-- TODO: Move FootnoteRefs to only be valid either in a Page or in <body> -->
+    <ref name="Content.FootnoteRefs"/>
+
+    <!-- HTML5 elements -->
+    <ref name="section"/>
+    <ref name="figure"/>
+
+    <!-- TODO: Only allow this element inside a <div data-type="page"> -->
+    <ref name="cnx-pi"/>
+  </choice>
+</define>
+
+
 <define name="Inline.class" combine="choice">
-  <ref name="math"/>
-</define>
-
-<!-- Placeholder for enums -->
-<define name="TODO.enum.datatype">
-  <text/>
-</define>
-
-
-<define name="UUID-and-version.datatype">
-  <text/>
-</define>
-
-<define name="Sha.datatype">
-  <text/>
-</define>
-
-<define name="ShortId.datatype">
-  <text/>
-</define>
-
-<define name="UserLogin.datatype">
-  <text/>
-</define>
-
-<define name="UserName.datatype">
-  <text/>
-</define>
-
-
-<define name="Boolean.datatype">
+  <!-- This extends the set of elements that are allowed in an "Inline" area -->
   <choice>
-    <value>true</value>
-    <value>false</value>
+    <ref name="math"/>
+    <ref name="u"/>
+    <ref name="Content.SpanList"/>
+    <ref name="Content.Space"/>
+    <ref name="Content.FootnoteNumber"/>
+    <ref name="Content.Term"/>
+    <ref name="Content.Foreign"/>
+    <element name="span">
+      <ref name="Content.Media.class"/>
+    </element>
+    <element name="span">
+      <ref name="Content.Alternates.class"/>
+    </element>
+    <element name="span">
+      <ref name="Content.Newline.class"/>
+    </element>
   </choice>
 </define>
 
-<!-- Mathematics and Statistics -->
-<!-- TODO: enumerate the options -->
-<define name="Subject.datatype">
-  <text/>
-</define>
 
-
-<define name="id.attrib.required">
-  <attribute name="id">
-    <ref name="ID.datatype"/>
-  </attribute>
-</define>
-
-
-
-
-
-
-
-
-<!-- <table data-label=""> -->
-<define name="table.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-label">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-frame">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-colsep">
-      <ref name="Number.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-rowsep">
-      <ref name="Number.datatype"/>
-    </attribute>
-  </optional>
-</define>
-
-<!-- allow an optional title for the caption -->
-<define name="caption" combine="choice">
-  <element name="caption">
-    <ref name="caption.attlist"/>
-    <ref name="Content.InlineTitle"/>
-    <ref name="Inline.model"/>
-  </element>
-</define>
-
-
-<!-- <td data-valign="top"> -->
-<define name="enum.attr.td.data-valign">
-  <choice>
-    <value>top</value>
-    <value>middle</value>
-    <value>bottom</value>
-  </choice>
-</define>
-<define name="enum.attr.td.data-align">
-  <choice>
-    <value>left</value>
-    <value>center</value>
-    <value>right</value>
-    <value>justify</value>
-    <value>char</value>
-  </choice>
-</define>
-<define name="td.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-valign">
-      <ref name="enum.attr.td.data-valign"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-align">
-      <ref name="enum.attr.td.data-align"/>
-    </attribute>
-  </optional>
-</define>
-
-<!-- <th data-align="center"> -->
-<define name="th.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-valign">
-      <ref name="enum.attr.td.data-valign"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-align">
-      <ref name="enum.attr.td.data-align"/>
-    </attribute>
-  </optional>
-</define>
-
-
-
-<!-- <ol data-number-style="lower-alpha"> -->
-<define name="enum.attr.ol.data-number-style">
-  <choice>
-    <value>arabic</value><!-- TODO: remove the default -->
-    <value>lower-alpha</value>
-    <value>upper-alpha</value>
-    <value>lower-roman</value>
-    <value>upper-roman</value>
-  </choice>
-</define>
-<define name="enum.attr.ol.data-mark-suffix">
-  <text/><!-- TODO: maybe disallow this and just discard it in the CNXML->HTML conversion -->
-</define>
-<define name="ol.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-number-style">
-      <ref name="enum.attr.ol.data-number-style"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-mark-suffix">
-      <ref name="enum.attr.ol.data-mark-suffix"/>
-    </attribute>
-  </optional>
-  <!-- algebra trigonometry uses this once -->
-  <optional>
-    <attribute name="data-mark-prefix">
-      <ref name="enum.attr.ol.data-mark-suffix"/>
-    </attribute>
-  </optional>
-</define>
-
-
-
-<!-- <ul data-bullet-style="bullet"  -->
-<define name="enum.attr.ul.data-bullet-style">
-  <choice>
-    <value>bullet</value><!-- TODO: remove the default -->
-    <value>open-circle</value>
-    <value>pilcrow</value>
-    <value>rpilcrow</value>
-    <value>asterisk</value>
-    <value>dash</value>
-    <value>section</value>
-    <value>none</value>
-  </choice>
-</define>
-<define name="ul.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-bullet-style">
-      <ref name="enum.attr.ul.data-bullet-style"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-mark-suffix">
-      <ref name="enum.attr.ol.data-mark-suffix"/>
-    </attribute>
-  </optional>
-  <!-- lists have data-labeled-item="true" so CSS can set list-style-type: none; -->
-  <optional>
-    <attribute name="data-labeled-item">
-      <value>true</value>
-    </attribute>
-  </optional>
-</define>
-
-<!-- <li cnx-archive-shortid="vPtYALiD@9" cnx-archive-uri="bcfb5800-b883-4a63-8599-e098b407ddfc@9"> (in the ToC) -->
-<define name="li.attlist" combine="interleave">
-  <optional><!-- Make these required when in the ToC -->
-    <attribute name="cnx-archive-shortid"><!-- TODO: Rename this to data-* -->
-      <ref name="Text.datatype"/>
-    </attribute>
-    <attribute name="cnx-archive-uri"><!-- TODO: Rename this to data-* -->
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-label">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-</define>
-
-
-
-<!-- <img data-alt="..." data-media-type="..."> -->
-<define name="enum.attr.img.data-media-type">
-  <choice>
-    <value>image/png</value>
-    <value>image/jpeg</value>
-    <value>application/postscript</value>
-    <!-- TODO: automatically convert this to jpeg -->
-    <value>image/jpg</value>
-  </choice>
-</define>
-<define name="img.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-media-type">
-      <ref name="enum.attr.img.data-media-type"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-longdesc">
-      <ref name="URI.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-print-width">
-      <ref name="Length.datatype"/>
-    </attribute>
-  </optional>
-
-  <!-- For images with thumbnails m42042 in Physics (col11406) -->
-  <optional>
-    <attribute name="data-print">
-      <ref name="Boolean.datatype"/>
-    </attribute>
-  </optional>
-</define>
-
-
-
-
-<!-- <strong data-effect="..."> -->
-<define name="enum.attr.strong.data-effect">
-  <!-- TODO: remove the default -->
-  <value>bold</value>
-</define>
-<define name="strong.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-effect">
-      <ref name="enum.attr.strong.data-effect"/>
-    </attribute>
-  </optional>
-</define>
-
-
-
-<!-- <em data-effect="..."> -->
-<define name="enum.attr.em.data-effect">
-  <choice>
-    <!-- TODO: remove the default -->
-    <value>italics</value>
-    <value>smallcaps</value>
-  </choice>
-</define>
-<define name="em.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-effect">
-      <ref name="enum.attr.em.data-effect"/>
-    </attribute>
-  </optional>
-</define>
-
-
-
-<!-- <span data-type="..." data-alt="..."> -->
-<define name="enum.attr.span.data-type">
-  <choice>
-    <!-- TODO: either remove these or move them in to being optional children of <cite> -->
-    <value>cite-title</value>
-  </choice>
-</define>
-<define name="span.attlist" combine="interleave">
-  <optional><!-- TODO: make this required again. It is optional because of the ToC -->
-    <attribute name="data-type">
-      <ref name="enum.attr.span.data-type"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-alt">
-      <!-- TODO: Maybe change the CNXML conversion to use an ARIA attribute -->
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-
-</define>
-
-
-
-
-<!-- These are used in <section> elements and should be restricted to that. <h1 data-type="..."> -->
-<define name="enum.attr.Heading.data-type">
-  <value>title</value>
-</define>
-<define name="Heading.attrib" combine="interleave">
-  <!-- TODO: Make a different validation structure for Page elements. That way these values are not valid within the content -->
-  <attribute name="data-type">
-    <ref name="enum.attr.Heading.data-type"/>
-  </attribute>
-</define>
-
-
-
-
-<define name="div.attlist" combine="interleave">
-
-  <!-- data-has-label="true" data-label="" -->
-  <optional>
-    <attribute name="data-label">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-has-label"><!-- TODO: remove from cnxml conversion -->
-      <value>true</value>
-    </attribute>
-  </optional>
-
-
-  <!-- <div class="note economics bringhome" data-element-type="note" data-label="note" data-type="note" -->
-  <optional><!-- TODO: Make this optional when data-type="note" -->
-    <attribute name="data-element-type">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-
-</define>
 
 
 <define name="Content.Space">
+  <!-- This provides horizontal space -->
   <element name="span">
     <attribute name="data-type">
       <value>space</value>
@@ -394,6 +105,7 @@
 
 
 <define name="Content.Term">
+  <!-- This defines a Term -->
   <element name="span">
     <attribute name="data-type">
       <value>term</value>
@@ -405,6 +117,7 @@
 </define>
 
 <define name="Content.Foreign">
+  <!-- This defines a piece of Foreign text -->
   <element name="span">
     <attribute name="data-type">
       <value>foreign</value>
@@ -415,6 +128,7 @@
 
 
 <define name="Content.FootnoteNumber">
+  <!-- This defines Footnote number that appears in the content. It is matched with an item in Content.FootnoteRefs -->
   <element name="sup">
     <attribute name="data-type">
       <value>footnote-number</value>
@@ -433,6 +147,7 @@
 </define>
 
 <define name="Content.ImageWithThumbnail">
+  <!-- This is an Image with a clickable thumbnail -->
   <element name="a">
     <attribute name="data-type">
       <value>image-with-thumbnail</value>
@@ -666,53 +381,6 @@
 </define>
 
 
-
-<!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
-<!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
-<define name="div-span-list.attrs">
-  <attribute name="data-type">
-    <value>list</value>
-  </attribute>
-  <!-- TODO: This may only apply to inline lists -->
-  <optional>
-    <attribute name="data-mark-suffix">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <!-- TODO: This may only apply to inline lists -->
-  <optional>
-    <attribute name="data-item-sep">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <choice>
-    <group>
-      <attribute name="data-list-type">
-        <choice>
-          <value>bulleted</value>
-          <value>labeled-item</value>
-        </choice>
-      </attribute>
-      <optional>
-        <attribute name="data-bullet-style">
-          <ref name="enum.attr.ul.data-bullet-style"/>
-        </attribute>
-      </optional>
-    </group>
-    <group>
-      <attribute name="data-list-type">
-        <value>enumerated</value>
-      </attribute>
-      <optional>
-        <attribute name="data-number-style">
-          <ref name="enum.attr.ol.data-number-style"/>
-        </attribute>
-      </optional>
-    </group>
-  </choice>
-  <ref name="Content.Note.attrs"/>
-</define>
-
 <define name="Content.DivList">
   <element name="div">
     <ref name="div-span-list.attrs"/>
@@ -827,6 +495,405 @@
 </define>
 
 
+
+<define name="Content.InlineTitle">
+  <element name="span">
+    <attribute name="data-type">
+      <value>title</value>
+    </attribute>
+    <ref name="Inline.model"/>
+  </element>
+</define>
+
+
+<!-- <div data-type="glossary"><h3 data-type="glossary-title">Glossary</h3>
+<dl id="fs-id1167836525060">
+<dt>coefficient</dt>
+<dd id="fs-id1167836525065">The coefficient of a term is the constant that multiplies the variable in a term.</dd>
+</dl>
+</div> -->
+<define name="Content.Glossary">
+  <element name="div">
+    <attribute name="data-type">
+      <value>glossary</value>
+    </attribute>
+    <element name="h3">
+      <attribute name="data-type">
+        <value>glossary-title</value>
+      </attribute>
+      <value>Glossary</value>
+    </element>
+    <!-- TODO: only allow one <dl> per Glossary -->
+    <oneOrMore>
+      <ref name="dl"/>
+    </oneOrMore>
+  </element>
+</define>
+
+
+
+
+
+<define name="id.attrib.required">
+  <attribute name="id">
+    <ref name="ID.datatype"/>
+  </attribute>
+</define>
+
+
+
+<!-- <table data-label=""> -->
+<define name="table.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-label">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-frame">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-colsep">
+      <ref name="Number.datatype"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-rowsep">
+      <ref name="Number.datatype"/>
+    </attribute>
+  </optional>
+</define>
+
+<!-- allow an optional title for the caption -->
+<define name="caption" combine="choice">
+  <element name="caption">
+    <ref name="caption.attlist"/>
+    <ref name="Content.InlineTitle"/>
+    <ref name="Inline.model"/>
+  </element>
+</define>
+
+
+<!-- <td data-valign="top"> -->
+<define name="enum.attr.td.data-valign">
+  <choice>
+    <value>top</value>
+    <value>middle</value>
+    <value>bottom</value>
+  </choice>
+</define>
+<define name="enum.attr.td.data-align">
+  <choice>
+    <value>left</value>
+    <value>center</value>
+    <value>right</value>
+    <value>justify</value>
+    <value>char</value>
+  </choice>
+</define>
+<define name="td.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-valign">
+      <ref name="enum.attr.td.data-valign"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-align">
+      <ref name="enum.attr.td.data-align"/>
+    </attribute>
+  </optional>
+</define>
+
+<!-- <th data-align="center"> -->
+<define name="th.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-valign">
+      <ref name="enum.attr.td.data-valign"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-align">
+      <ref name="enum.attr.td.data-align"/>
+    </attribute>
+  </optional>
+</define>
+
+
+
+
+<!-- <ol data-number-style="lower-alpha"> -->
+<define name="enum.attr.ol.data-number-style">
+  <choice>
+    <value>arabic</value><!-- TODO: remove the default -->
+    <value>lower-alpha</value>
+    <value>upper-alpha</value>
+    <value>lower-roman</value>
+    <value>upper-roman</value>
+  </choice>
+</define>
+<define name="enum.attr.ol.data-mark-suffix">
+  <text/><!-- TODO: maybe disallow this and just discard it in the CNXML->HTML conversion -->
+</define>
+<define name="ol.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-number-style">
+      <ref name="enum.attr.ol.data-number-style"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-mark-suffix">
+      <ref name="enum.attr.ol.data-mark-suffix"/>
+    </attribute>
+  </optional>
+  <!-- algebra trigonometry uses this once -->
+  <optional>
+    <attribute name="data-mark-prefix">
+      <ref name="enum.attr.ol.data-mark-suffix"/>
+    </attribute>
+  </optional>
+</define>
+
+
+
+<!-- <ul data-bullet-style="bullet"  -->
+<define name="enum.attr.ul.data-bullet-style">
+  <choice>
+    <value>bullet</value><!-- TODO: remove the default -->
+    <value>open-circle</value>
+    <value>pilcrow</value>
+    <value>rpilcrow</value>
+    <value>asterisk</value>
+    <value>dash</value>
+    <value>section</value>
+    <value>none</value>
+  </choice>
+</define>
+<define name="ul.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-bullet-style">
+      <ref name="enum.attr.ul.data-bullet-style"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-mark-suffix">
+      <ref name="enum.attr.ol.data-mark-suffix"/>
+    </attribute>
+  </optional>
+  <!-- lists have data-labeled-item="true" so CSS can set list-style-type: none; -->
+  <optional>
+    <attribute name="data-labeled-item">
+      <value>true</value>
+    </attribute>
+  </optional>
+</define>
+
+<!-- <li cnx-archive-shortid="vPtYALiD@9" cnx-archive-uri="bcfb5800-b883-4a63-8599-e098b407ddfc@9"> (in the ToC) -->
+<define name="li.attlist" combine="interleave">
+  <optional><!-- Make these required when in the ToC -->
+    <attribute name="cnx-archive-shortid"><!-- TODO: Rename this to data-* -->
+      <ref name="Text.datatype"/>
+    </attribute>
+    <attribute name="cnx-archive-uri"><!-- TODO: Rename this to data-* -->
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-label">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+</define>
+
+
+
+<!-- <img data-alt="..." data-media-type="..."> -->
+<define name="enum.attr.img.data-media-type">
+  <choice>
+    <value>image/png</value>
+    <value>image/jpeg</value>
+    <value>application/postscript</value>
+    <!-- TODO: automatically convert this to jpeg -->
+    <value>image/jpg</value>
+  </choice>
+</define>
+<define name="img.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-media-type">
+      <ref name="enum.attr.img.data-media-type"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-longdesc">
+      <ref name="URI.datatype"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-print-width">
+      <ref name="Length.datatype"/>
+    </attribute>
+  </optional>
+
+  <!-- For images with thumbnails m42042 in Physics (col11406) -->
+  <optional>
+    <attribute name="data-print">
+      <ref name="Boolean.datatype"/>
+    </attribute>
+  </optional>
+</define>
+
+
+
+
+<!-- <strong data-effect="..."> -->
+<define name="enum.attr.strong.data-effect">
+  <!-- TODO: remove the default -->
+  <value>bold</value>
+</define>
+<define name="strong.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-effect">
+      <ref name="enum.attr.strong.data-effect"/>
+    </attribute>
+  </optional>
+</define>
+
+
+
+<!-- <em data-effect="..."> -->
+<define name="enum.attr.em.data-effect">
+  <choice>
+    <!-- TODO: remove the default -->
+    <value>italics</value>
+    <value>smallcaps</value>
+  </choice>
+</define>
+<define name="em.attlist" combine="interleave">
+  <optional>
+    <attribute name="data-effect">
+      <ref name="enum.attr.em.data-effect"/>
+    </attribute>
+  </optional>
+</define>
+
+
+
+<!-- <span data-type="..." data-alt="..."> -->
+<define name="enum.attr.span.data-type">
+  <choice>
+    <!-- TODO: either remove these or move them in to being optional children of <cite> -->
+    <value>cite-title</value>
+  </choice>
+</define>
+<define name="span.attlist" combine="interleave">
+  <optional><!-- TODO: make this required again. It is optional because of the ToC -->
+    <attribute name="data-type">
+      <ref name="enum.attr.span.data-type"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-alt">
+      <!-- TODO: Maybe change the CNXML conversion to use an ARIA attribute -->
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+
+</define>
+
+
+
+
+<!-- These are used in <section> elements and should be restricted to that. <h1 data-type="..."> -->
+<define name="enum.attr.Heading.data-type">
+  <value>title</value>
+</define>
+<define name="Heading.attrib" combine="interleave">
+  <!-- TODO: Make a different validation structure for Page elements. That way these values are not valid within the content -->
+  <attribute name="data-type">
+    <ref name="enum.attr.Heading.data-type"/>
+  </attribute>
+</define>
+
+
+
+
+<define name="div.attlist" combine="interleave">
+
+  <!-- data-has-label="true" data-label="" -->
+  <optional>
+    <attribute name="data-label">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <optional>
+    <attribute name="data-has-label"><!-- TODO: remove from cnxml conversion -->
+      <value>true</value>
+    </attribute>
+  </optional>
+
+
+  <!-- <div class="note economics bringhome" data-element-type="note" data-label="note" data-type="note" -->
+  <optional><!-- TODO: Make this optional when data-type="note" -->
+    <attribute name="data-element-type">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+
+</define>
+
+
+
+
+
+<!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
+<!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
+<define name="div-span-list.attrs">
+  <attribute name="data-type">
+    <value>list</value>
+  </attribute>
+  <!-- TODO: This may only apply to inline lists -->
+  <optional>
+    <attribute name="data-mark-suffix">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <!-- TODO: This may only apply to inline lists -->
+  <optional>
+    <attribute name="data-item-sep">
+      <ref name="Text.datatype"/>
+    </attribute>
+  </optional>
+  <choice>
+    <group>
+      <attribute name="data-list-type">
+        <choice>
+          <value>bulleted</value>
+          <value>labeled-item</value>
+        </choice>
+      </attribute>
+      <optional>
+        <attribute name="data-bullet-style">
+          <ref name="enum.attr.ul.data-bullet-style"/>
+        </attribute>
+      </optional>
+    </group>
+    <group>
+      <attribute name="data-list-type">
+        <value>enumerated</value>
+      </attribute>
+      <optional>
+        <attribute name="data-number-style">
+          <ref name="enum.attr.ol.data-number-style"/>
+        </attribute>
+      </optional>
+    </group>
+  </choice>
+  <ref name="Content.Note.attrs"/>
+</define>
+
+
+
 <!-- For strikethrough. from xhtml/legacy.rng . TODO: Mark this up differently and move this into a separate legacy file -->
 <define name="u">
   <element name="u">
@@ -856,86 +923,7 @@
 
 
 
-<!-- <div data-type="glossary"><h3 data-type="glossary-title">Glossary</h3>
-<dl id="fs-id1167836525060">
-<dt>coefficient</dt>
-<dd id="fs-id1167836525065">The coefficient of a term is the constant that multiplies the variable in a term.</dd>
-</dl>
-</div> -->
-<define name="Content.Glossary">
-  <element name="div">
-    <attribute name="data-type">
-      <value>glossary</value>
-    </attribute>
-    <element name="h3">
-      <attribute name="data-type">
-        <value>glossary-title</value>
-      </attribute>
-      <value>Glossary</value>
-    </element>
-    <!-- TODO: only allow one <dl> per Glossary -->
-    <oneOrMore>
-      <ref name="dl"/>
-    </oneOrMore>
-  </element>
-</define>
 
-<define name="Content.InlineTitle">
-  <element name="span">
-    <attribute name="data-type">
-      <value>title</value>
-    </attribute>
-    <ref name="Inline.model"/>
-  </element>
-</define>
-
-<define name="Block.class" combine="choice">
-  <choice>
-    <!-- HTML5 elements -->
-    <ref name="section"/>
-    <ref name="figure"/>
-
-    <ref name="Content.Note"/>
-    <ref name="Content.Equation"/>
-    <ref name="Content.Exercise"/>
-    <ref name="Content.Example"/>
-    <ref name="Content.DivList"/>
-    <ref name="Content.ListWithTitle"/>
-    <ref name="Content.ParaWithTitle"/>
-    <element name="div">
-      <ref name="Content.Media.class"/>
-    </element>
-    <element name="div">
-      <ref name="Content.Alternates.class"/>
-    </element>
-    <element name="div">
-      <ref name="Content.Newline.class"/>
-    </element>
-    <!-- TODO: Move FootnoteRefs to only be valid either in a Page or in <body> -->
-    <ref name="Content.FootnoteRefs"/>
-  </choice>
-</define>
-
-
-<define name="Inline.class" combine="choice">
-  <choice>
-    <ref name="u"/>
-    <ref name="Content.SpanList"/>
-    <ref name="Content.Space"/>
-    <ref name="Content.FootnoteNumber"/>
-    <ref name="Content.Term"/>
-    <ref name="Content.Foreign"/>
-    <element name="span">
-      <ref name="Content.Media.class"/>
-    </element>
-    <element name="span">
-      <ref name="Content.Alternates.class"/>
-    </element>
-    <element name="span">
-      <ref name="Content.Newline.class"/>
-    </element>
-  </choice>
-</define>
 
 
 
@@ -1044,13 +1032,58 @@
   </attribute>
 </define>
 
+
+
+
+
+
+
+
+
+
 <define name="cnx-pi.datatype">
   <text/>
 </define>
 
-<!-- TODO: Only allow this element inside a <div data-type="page"> -->
-<define name="Block.class" combine="choice">
-  <ref name="cnx-pi"/>
+
+<!-- Placeholder for enums -->
+<define name="TODO.enum.datatype">
+  <text/>
+</define>
+
+
+<define name="UUID-and-version.datatype">
+  <text/>
+</define>
+
+<define name="Sha.datatype">
+  <text/>
+</define>
+
+<define name="ShortId.datatype">
+  <text/>
+</define>
+
+<define name="UserLogin.datatype">
+  <text/>
+</define>
+
+<define name="UserName.datatype">
+  <text/>
+</define>
+
+
+<define name="Boolean.datatype">
+  <choice>
+    <value>true</value>
+    <value>false</value>
+  </choice>
+</define>
+
+<!-- Mathematics and Statistics -->
+<!-- TODO: enumerate the options -->
+<define name="Subject.datatype">
+  <text/>
 </define>
 
 

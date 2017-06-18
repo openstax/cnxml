@@ -49,16 +49,27 @@
 <xsl:template match="/rng:grammar">
   <html>
     <body>
-      <xsl:apply-templates select="rng:define[starts-with(@name, 'Block')]"/>
-      <xsl:apply-templates select="rng:define[starts-with(@name, 'Inline')]"/>
-      <xsl:apply-templates select="rng:define[starts-with(@name, 'Content')]"/>
-      <xsl:apply-templates select="rng:define
-        [not(starts-with(@name, 'Block'))]
-        [not(starts-with(@name, 'Inline'))]
-        [not(starts-with(@name, 'Content'))]
-      "/>
+      <xsl:if test="rng:include">
+        <h1>Included files</h1>
+        <ul>
+          <xsl:apply-templates select="rng:include"/>
+        </ul>
+      </xsl:if>
+      <xsl:apply-templates select="*[not(self::rng:include)]"/>
     </body>
   </html>
+</xsl:template>
+
+<xsl:template match="rng:include">
+  <xsl:variable name="href">
+    <xsl:text>../textbook-html/</xsl:text>
+    <xsl:value-of select="@href"/>
+  </xsl:variable>
+  <li>
+    <a href="{$href}">
+      <xsl:value-of select="@href"/>
+    </a>
+  </li>
 </xsl:template>
 
 <xsl:template match="rng:define[not(contains(@name, '.datatype'))]">
