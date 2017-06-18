@@ -2,7 +2,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0">
 
 <!-- <include href="./textbook-html-base.rng"/> -->
-<include href="./_book-base.rng"></include>
+<include href="./_book-structure.rng"></include>
 
 
 <define name="head.attlist" combine="choice">
