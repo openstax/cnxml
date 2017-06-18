@@ -31,7 +31,7 @@ This file is organized into the following sections:
     valign and `<caption>` element
 6.  Additional datatype values: things like UUID, UUID-and-version
 
-# Block.class
+## Block.class
 
 This extends the set of elements that are allowed in a `Block.class`
 
@@ -52,7 +52,7 @@ One of the following:
 * [figure](#figure)
 * [cnx-pi](#cnx-pi)
 
-# Inline.class
+## Inline.class
 
 This extends the set of elements that are allowed in a `Inline.class`
 
@@ -69,13 +69,13 @@ One of the following:
 * `<span>`[Content.Alternates.class](#contentalternatesclass)`</span>`
 * `<span>`[Content.Newline.class](#contentnewlineclass)`</span>`
 
-# Content.Space
+## Content.Space
 
 This provides horizontal space
 
 `<span data-type="space"
 data-count=`[Number.datatype](#numberdatatype)`>`*Text.datatype*`</span>`
-# Content.Term
+## Content.Term
 
 This defines a Term that will be bold and show up in the Book Index
 
@@ -87,12 +87,12 @@ This defines a Term that will be bold and show up in the Book Index
 
 `</span>`
 
-# Content.Foreign
+## Content.Foreign
 
 This defines a piece of Foreign text
 
 `<span data-type="foreign">`[Inline.model](#inlinemodel)`</span>`
-# Content.FootnoteNumber
+## Content.FootnoteNumber
 
 This defines Footnote number that appears in the content. It is matched
 with an item in Content.FootnoteRefs
@@ -105,13 +105,13 @@ with an item in Content.FootnoteRefs
 
 `</sup>`
 
-# Content.ImageWithThumbnail
+## Content.ImageWithThumbnail
 
 This is an Image with a clickable thumbnail
 
 `<a data-type="image-with-thumbnail"
 href=`[URI.datatype](#uridatatype)`>`[img](#img)`</a>`
-# Content.FootnoteRefs
+## Content.FootnoteRefs
 
 `<div data-type="footnote-refs">`
 
@@ -131,7 +131,7 @@ href=`[URI.datatype](#uridatatype)`>`[img](#img)`</a>`
 
 `</div>`
 
-# Content.Title.optional
+## Content.Title.optional
 
 `(`
 `<div data-type="title">`
@@ -142,7 +142,7 @@ href=`[URI.datatype](#uridatatype)`>`[img](#img)`</a>`
 `</div>`
 
 `)?`
-# Content.Note.attrs
+## Content.Note.attrs
 
 This defines a set of attributes:
 
@@ -155,7 +155,7 @@ And other things:
 1.  [Common.attrib](#commonattrib)
 2.  [Content.Title.optional](#contenttitleoptional)
 
-# Content.Note
+## Content.Note
 
 `<div data-type="note">`
 
@@ -164,7 +164,7 @@ And other things:
 
 `</div>`
 
-# Content.Equation
+## Content.Equation
 
 `<div data-type="equation">`
 
@@ -173,7 +173,7 @@ And other things:
 
 `</div>`
 
-# Content.Problem
+## Content.Problem
 
 `<div data-type="problem">`
 
@@ -182,7 +182,7 @@ And other things:
 
 `</div>`
 
-# Content.Solution
+## Content.Solution
 
 `<div data-type="solution" data-print-placement=`[`"here"` |
 `"end"`]`?>`
@@ -192,7 +192,7 @@ And other things:
 
 `</div>`
 
-# Content.Commentary
+## Content.Commentary
 
 `<div data-type="commentary">`
 
@@ -201,7 +201,7 @@ And other things:
 
 `</div>`
 
-# Content.Exercise
+## Content.Exercise
 
 `<div data-type="exercise" data-print-placement=`[`"here"` |
 `"end"`]`?>`
@@ -213,7 +213,7 @@ And other things:
 
 `</div>`
 
-# Content.Example
+## Content.Example
 
 `<div data-type="example">`
 
@@ -222,7 +222,7 @@ And other things:
 
 `</div>`
 
-# Content.Newline.class
+## Content.Newline.class
 
 This defines a set of attributes:
 
@@ -234,7 +234,7 @@ And other things:
 1.  [Content.Note.attrs](#contentnoteattrs)
 2.  [br](#br)`*`
 
-# Content.DivList
+## Content.DivList
 
 `<div>`
 
@@ -243,7 +243,7 @@ And other things:
 
 `</div>`
 
-# Content.DivListItem
+## Content.DivListItem
 
 `<div data-type="item">`
 
@@ -252,7 +252,7 @@ And other things:
 
 `</div>`
 
-# Content.SpanList
+## Content.SpanList
 
 `<span>`
 
@@ -261,7 +261,7 @@ And other things:
 
 `</span>`
 
-# Content.SpanListItem
+## Content.SpanListItem
 
 `<span data-type="item">`
 
@@ -270,7 +270,7 @@ And other things:
 
 `</span>`
 
-# Content.ListWithTitle
+## Content.ListWithTitle
 
 `<div data-type="list-with-title">`
 
@@ -286,7 +286,7 @@ And other things:
 
 `</div>`
 
-# Content.ParaWithTitle
+## Content.ParaWithTitle
 
 `<p>`
 
@@ -296,7 +296,7 @@ And other things:
 
 `</p>`
 
-# Content.Alternates.class
+## Content.Alternates.class
 
 This defines a set of attributes:
 
@@ -309,7 +309,7 @@ And other things:
 2.  `[`[img](#img)` |
     `[Content.ImageWithThumbnail](#contentimagewiththumbnail)`]+`
 
-# Content.Media.class
+## Content.Media.class
 
 This defines a set of attributes:
 
@@ -322,10 +322,10 @@ And other things:
 1.  [id.attrib.required](#idattribrequired)
 2.  `[`[img](#img)` | `[iframe](#iframe)`]`
 
-# Content.InlineTitle
+## Content.InlineTitle
 
 `<span data-type="title">`[Inline.model](#inlinemodel)`</span>`
-# Content.Glossary
+## Content.Glossary
 
 `<div data-type="glossary">`
 
@@ -334,13 +334,13 @@ And other things:
 
 `</div>`
 
-# id.attrib.required
+## id.attrib.required
 
 This defines a set of attributes:
 
 * ` id=`[ID.datatype](#iddatatype)
 
-# table.attlist
+## table.attlist
 
 This defines a set of attributes:
 
@@ -349,7 +349,7 @@ This defines a set of attributes:
 * ` data-colsep=`[Number.datatype](#numberdatatype)`?`
 * ` data-rowsep=`[Number.datatype](#numberdatatype)`?`
 
-# caption
+## caption
 
 This extends the set of elements that are allowed in a `caption`
 
@@ -361,7 +361,7 @@ This extends the set of elements that are allowed in a `caption`
 
 `</caption>`
 
-# enum.attr.td.data-valign
+## enum.attr.td.data-valign
 
 One of the following:
 
@@ -369,7 +369,7 @@ One of the following:
 * `"middle"`
 * `"bottom"`
 
-# enum.attr.td.data-align
+## enum.attr.td.data-align
 
 One of the following:
 
@@ -379,21 +379,21 @@ One of the following:
 * `"justify"`
 * `"char"`
 
-# td.attlist
+## td.attlist
 
 This defines a set of attributes:
 
 * ` data-valign=`[enum.attr.td.data-valign](#enumattrtddata-valign)`?`
 * ` data-align=`[enum.attr.td.data-align](#enumattrtddata-align)`?`
 
-# th.attlist
+## th.attlist
 
 This defines a set of attributes:
 
 * ` data-valign=`[enum.attr.td.data-valign](#enumattrtddata-valign)`?`
 * ` data-align=`[enum.attr.td.data-align](#enumattrtddata-align)`?`
 
-# enum.attr.ol.data-number-style
+## enum.attr.ol.data-number-style
 
 One of the following:
 
@@ -403,10 +403,10 @@ One of the following:
 * `"lower-roman"`
 * `"upper-roman"`
 
-# enum.attr.ol.data-mark-suffix
+## enum.attr.ol.data-mark-suffix
 
 (text...)
-# ol.attlist
+## ol.attlist
 
 This defines a set of attributes:
 
@@ -417,7 +417,7 @@ This defines a set of attributes:
 * `
   data-mark-prefix=`[enum.attr.ol.data-mark-suffix](#enumattroldata-mark-suffix)`?`
 
-# enum.attr.ul.data-bullet-style
+## enum.attr.ul.data-bullet-style
 
 One of the following:
 
@@ -430,7 +430,7 @@ One of the following:
 * `"section"`
 * `"none"`
 
-# ul.attlist
+## ul.attlist
 
 This defines a set of attributes:
 
@@ -440,7 +440,7 @@ This defines a set of attributes:
   data-mark-suffix=`[enum.attr.ol.data-mark-suffix](#enumattroldata-mark-suffix)`?`
 * ` data-labeled-item="true"?`
 
-# li.attlist
+## li.attlist
 
 This defines a set of attributes:
 
@@ -448,7 +448,7 @@ This defines a set of attributes:
 * ` cnx-archive-uri=`[Text.datatype](#textdatatype)`?`
 * ` data-label=`[Text.datatype](#textdatatype)`?`
 
-# enum.attr.img.data-media-type
+## enum.attr.img.data-media-type
 
 One of the following:
 
@@ -457,7 +457,7 @@ One of the following:
 * `"application/postscript"`
 * `"image/jpg"`
 
-# img.attlist
+## img.attlist
 
 This defines a set of attributes:
 
@@ -467,52 +467,52 @@ This defines a set of attributes:
 * ` data-print-width=`[Length.datatype](#lengthdatatype)`?`
 * ` data-print=`[Boolean.datatype](#booleandatatype)`?`
 
-# enum.attr.strong.data-effect
+## enum.attr.strong.data-effect
 
 `"bold"`
-# strong.attlist
+## strong.attlist
 
 This defines a set of attributes:
 
 * `
   data-effect=`[enum.attr.strong.data-effect](#enumattrstrongdata-effect)`?`
 
-# enum.attr.em.data-effect
+## enum.attr.em.data-effect
 
 One of the following:
 
 * `"italics"`
 * `"smallcaps"`
 
-# em.attlist
+## em.attlist
 
 This defines a set of attributes:
 
 * ` data-effect=`[enum.attr.em.data-effect](#enumattremdata-effect)`?`
 
-# enum.attr.span.data-type
+## enum.attr.span.data-type
 
 One of the following:
 
 * `"cite-title"`
 
-# span.attlist
+## span.attlist
 
 This defines a set of attributes:
 
 * ` data-type=`[enum.attr.span.data-type](#enumattrspandata-type)`?`
 * ` data-alt=`[Text.datatype](#textdatatype)`?`
 
-# enum.attr.Heading.data-type
+## enum.attr.Heading.data-type
 
 `"title"`
-# Heading.attrib
+## Heading.attrib
 
 This defines a set of attributes:
 
 * ` data-type=`[enum.attr.Heading.data-type](#enumattrheadingdata-type)
 
-# div.attlist
+## div.attlist
 
 This defines a set of attributes:
 
@@ -520,7 +520,7 @@ This defines a set of attributes:
 * ` data-has-label="true"?`
 * ` data-element-type=`[Text.datatype](#textdatatype)`?`
 
-# div-span-list.attrs
+## div-span-list.attrs
 
 This defines a set of attributes:
 
@@ -542,7 +542,7 @@ And other things:
 
 2.  [Content.Note.attrs](#contentnoteattrs)
 
-# u
+## u
 
 `<u>`
 
@@ -551,10 +551,10 @@ And other things:
 
 `</u>`
 
-# u.attlist
+## u.attlist
 
 [Common.attrib](#commonattrib)
-# ol.attlist
+## ol.attlist
 
 This defines a set of attributes:
 
@@ -562,7 +562,7 @@ This defines a set of attributes:
 * ` compact="compact"?`
 * ` start=?`
 
-# section
+## section
 
 `<section>`
 
@@ -572,7 +572,7 @@ This defines a set of attributes:
 
 `</section>`
 
-# section.attlist
+## section.attlist
 
 This defines a set of attributes:
 
@@ -584,7 +584,7 @@ And other things:
 
 1.  [Common.attrib](#commonattrib)
 
-# figure
+## figure
 
 `<figure>`
 
@@ -595,7 +595,7 @@ And other things:
 
 `</figure>`
 
-# figure.attlist
+## figure.attlist
 
 This defines a set of attributes:
 
@@ -606,7 +606,7 @@ And other things:
 
 1.  [Common.attrib](#commonattrib)
 
-# figcaption
+## figcaption
 
 `<figcaption>`
 
@@ -616,10 +616,10 @@ And other things:
 
 `</figcaption>`
 
-# figcaption.attlist
+## figcaption.attlist
 
 [id.attrib](#idattrib)
-# cnx-pi
+## cnx-pi
 
 `<cnx-pi>`
 
@@ -628,7 +628,7 @@ And other things:
 
 `</cnx-pi>`
 
-# cnx-pi.attlist
+## cnx-pi.attlist
 
 This defines a set of attributes:
 

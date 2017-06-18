@@ -4,15 +4,14 @@
 
 <r:include href="./_content.rng"/>
 
-<!-- <head itemscope="itemscope" itemtype="http://schema.org/Book"> -->
-<r:define name="Structure.Book.Head.attlist">
-  <r:attribute name="itemscope">
-    <r:value>itemscope</r:value>
-  </r:attribute>
-  <r:attribute name="itemtype">
-    <r:value>http://schema.org/Book</r:value>
-  </r:attribute>
-</r:define>
+<h1>File Organization</h1>
+<p>This file is organized into the following sections</p>
+<ol>
+  <li>Book Structure</li>
+  <li>Chapter Structure</li>
+  <li>Page Structure</li>
+  <li>Metadata Structure</li>
+</ol>
 
 <!-- from xhtml/modules/struct.rng but changed to only include a subset of valid "root" elements -->
 <r:define name="Structure.Book.Body">
@@ -39,30 +38,116 @@
 </r:define>
 
 
+<!-- <head itemscope="itemscope" itemtype="http://schema.org/Book"> -->
+<r:define name="Structure.Book.Head.attlist">
+  <r:attribute name="itemscope">
+    <r:value>itemscope</r:value>
+  </r:attribute>
+  <r:attribute name="itemtype">
+    <r:value>http://schema.org/Book</r:value>
+  </r:attribute>
+</r:define>
 
-<r:define name="Structure.Page">
+
+<!-- <span data-type="cnx-archive-uri" data-value="69619d2b-68f0-44b0-b074-a9b2bf90b2c6@11.332"/>
+<span data-type="cnx-archive-shortid" data-value="aWGdK2jw@11.332"/> -->
+<r:define name="Structure.Book.Metadata">
   <r:element name="div">
     <r:attribute name="data-type">
-      <r:value>page</r:value>
+      <r:value>metadata</r:value>
     </r:attribute>
-    <r:ref name="class.attrib"/>
-    <r:ref name="id.attrib.required"/>
-    <r:ref name="Structure.PageMetadata"/>
-    <r:ref name="Structure.Page.Title"/>
+    <r:ref name="Structure.Metadata.Title"/>
+    <r:ref name="Structure.Metadata.Uri"/>
+    <r:ref name="Structure.Metadata.ShortId"/>
+    <r:ref name="Structure.Metadata.Authors"/>
+    <r:ref name="Structure.Metadata.Publishers"/>
+    <r:ref name="Structure.Book.Metadata.PrintStyle"/>
     <r:optional>
-      <r:ref name="Structure.Page.Abstract"/>
+      <r:ref name="Structure.Metadata.TranslucentBinding"/>
     </r:optional>
-    <r:zeroOrMore>
-      <r:ref name="Flow.model"/>
-    </r:zeroOrMore>
-    <r:optional>
-      <r:ref name="Content.Glossary"/>
-    </r:optional>
-    <r:optional>
-      <r:ref name="Content.FootnoteRefs"/>
-    </r:optional>
+    <r:ref name="Structure.Metadata.Permissions"/>
+    <r:ref name="Structure.Metadata.Description"/>
+    <r:ref name="Structure.Metadata.Subjects"/>
   </r:element>
 </r:define>
+
+
+<!-- <div class="print-style">
+Print style:
+<span data-type="print-style">ccap-economics</span>
+</div> -->
+<r:define name="Structure.Book.Metadata.PrintStyle">
+  <r:element name="div">
+    <r:attribute name="class">
+      <r:value>print-style</r:value>
+    </r:attribute>
+    <r:text/><!-- "Print style:" -->
+    <r:element name="span">
+      <r:attribute name="data-type">
+        <r:value>print-style</r:value>
+      </r:attribute>
+      <r:ref name="TODO.enum.datatype"/>
+    </r:element>
+  </r:element>
+</r:define>
+
+
+<!-- The <nav id="toc"> -->
+<r:define name="Structure.Book.ToC">
+  <r:element name="nav">
+    <r:attribute name="id">
+      <r:value>toc</r:value>
+    </r:attribute>
+    <r:element name="ol">
+      <r:zeroOrMore>
+        <r:ref name="Structure.Book.ToC.LeafItem"/>
+      </r:zeroOrMore>
+      <r:oneOrMore>
+        <r:ref name="Structure.Book.ToC.InternalItem"/>
+      </r:oneOrMore>
+      <r:zeroOrMore>
+        <r:ref name="Structure.Book.ToC.LeafItem"/>
+      </r:zeroOrMore>
+    </r:element>
+  </r:element>
+</r:define>
+
+<r:define name="Structure.Book.ToC.LeafItem">
+  <r:element name="li">
+    <r:attribute name="cnx-archive-shortid">
+      <r:ref name="ShortId.datatype"/>
+    </r:attribute>
+    <r:attribute name="cnx-archive-uri">
+      <r:ref name="UUID-and-version.datatype"/>
+    </r:attribute>
+    <r:element name="a">
+      <r:attribute name="href">
+        <r:ref name="URI.datatype"/>
+      </r:attribute>
+      <r:text/>
+    </r:element>
+  </r:element>
+</r:define>
+
+<r:define name="Structure.Book.ToC.InternalItem">
+  <r:element name="li">
+    <r:element name="span">
+      <r:text/>
+    </r:element>
+    <r:element name="ol">
+      <r:oneOrMore>
+        <r:choice>
+          <r:ref name="Structure.Book.ToC.InternalItem"/>
+          <r:ref name="Structure.Book.ToC.LeafItem"/>
+        </r:choice>
+      </r:oneOrMore>
+    </r:element>
+  </r:element>
+</r:define>
+
+
+
+
 
 
 <r:define name="Structure.Chapter">
@@ -80,6 +165,45 @@
     <r:oneOrMore>
       <r:ref name="Structure.Page"/>
     </r:oneOrMore>
+  </r:element>
+</r:define>
+
+
+<r:define name="Structure.ChapterMetadata">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>metadata</r:value>
+    </r:attribute>
+    <r:ref name="Structure.Metadata.Title"/>
+    <r:ref name="Structure.Metadata.TranslucentBinding"/>
+    <r:ref name="Structure.Metadata.Permissions"/>
+  </r:element>
+</r:define>
+
+
+
+
+<r:define name="Structure.Page">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>page</r:value>
+    </r:attribute>
+    <r:ref name="class.attrib"/>
+    <r:ref name="id.attrib.required"/>
+    <r:ref name="Structure.Page.Metadata"/>
+    <r:ref name="Structure.Page.Title"/>
+    <r:optional>
+      <r:ref name="Structure.Page.Abstract"/>
+    </r:optional>
+    <r:zeroOrMore>
+      <r:ref name="Flow.model"/>
+    </r:zeroOrMore>
+    <r:optional>
+      <r:ref name="Content.Glossary"/>
+    </r:optional>
+    <r:optional>
+      <r:ref name="Content.FootnoteRefs"/>
+    </r:optional>
   </r:element>
 </r:define>
 
@@ -109,7 +233,7 @@
 </r:define>
 
 
-<r:define name="Structure.PageMetadata">
+<r:define name="Structure.Page.Metadata">
   <r:element name="div">
     <r:attribute name="data-type">
       <r:value>metadata</r:value>
@@ -130,6 +254,11 @@
     </r:optional>
   </r:element>
 </r:define>
+
+
+
+
+
 
 <r:define name="Structure.Metadata.Title">
   <r:element name="h1">
@@ -353,71 +482,6 @@
   </r:element>
 </r:define>
 
-<!-- <span data-type="cnx-archive-uri" data-value="69619d2b-68f0-44b0-b074-a9b2bf90b2c6@11.332"/>
-<span data-type="cnx-archive-shortid" data-value="aWGdK2jw@11.332"/> -->
-<r:define name="Structure.Book.Metadata">
-  <r:element name="div">
-    <r:attribute name="data-type">
-      <r:value>metadata</r:value>
-    </r:attribute>
-    <r:ref name="Structure.Metadata.Title"/>
-    <r:ref name="Structure.Metadata.Uri"/>
-    <r:ref name="Structure.Metadata.ShortId"/>
-    <r:ref name="Structure.Metadata.Authors"/>
-    <r:ref name="Structure.Metadata.Publishers"/>
-    <r:ref name="Structure.Metadata.PrintStyle"/>
-    <r:optional>
-      <r:ref name="Structure.Metadata.TranslucentBinding"/>
-    </r:optional>
-    <r:ref name="Structure.Metadata.Permissions"/>
-    <r:ref name="Structure.Metadata.Description"/>
-    <r:ref name="Structure.Metadata.Subjects"/>
-  </r:element>
-</r:define>
-
-
-<!-- <div class="print-style">
-Print style:
-<span data-type="print-style">ccap-economics</span>
-</div> -->
-<r:define name="Structure.Metadata.PrintStyle">
-  <r:element name="div">
-    <r:attribute name="class">
-      <r:value>print-style</r:value>
-    </r:attribute>
-    <r:text/><!-- "Print style:" -->
-    <r:element name="span">
-      <r:attribute name="data-type">
-        <r:value>print-style</r:value>
-      </r:attribute>
-      <r:ref name="TODO.enum.datatype"/>
-    </r:element>
-  </r:element>
-</r:define>
-
-<r:define name="Structure.ChapterMetadata">
-  <r:element name="div">
-    <r:attribute name="data-type">
-      <r:value>metadata</r:value>
-    </r:attribute>
-    <r:ref name="Structure.Metadata.Title"/>
-    <r:ref name="Structure.Metadata.TranslucentBinding"/>
-    <r:ref name="Structure.Metadata.Permissions"/>
-  </r:element>
-</r:define>
-
-
-<r:define name="Structure.Metadata.TranslucentBinding">
-  <!-- TODO: remove me. why is this here? -->
-  <r:element name="span">
-    <r:attribute name="data-type">
-      <r:value>binding</r:value>
-    </r:attribute>
-    <r:attribute name="data-value">
-      <r:value>translucent</r:value>
-    </r:attribute>
-  </r:element>
-</r:define>
 
 <r:define name="Structure.Metadata.Description">
   <r:element name="div">
@@ -499,56 +563,16 @@ Print style:
   </r:element>
 </r:define>
 
-<!-- The <nav id="toc"> -->
-<r:define name="Structure.Book.ToC">
-  <r:element name="nav">
-    <r:attribute name="id">
-      <r:value>toc</r:value>
-    </r:attribute>
-    <r:element name="ol">
-      <r:zeroOrMore>
-        <r:ref name="Structure.Book.ToC.LeafItem"/>
-      </r:zeroOrMore>
-      <r:oneOrMore>
-        <r:ref name="Structure.Book.ToC.InternalItem"/>
-      </r:oneOrMore>
-      <r:zeroOrMore>
-        <r:ref name="Structure.Book.ToC.LeafItem"/>
-      </r:zeroOrMore>
-    </r:element>
-  </r:element>
-</r:define>
 
-<r:define name="Structure.Book.ToC.LeafItem">
-  <r:element name="li">
-    <r:attribute name="cnx-archive-shortid">
-      <r:ref name="ShortId.datatype"/>
+<r:define name="Structure.Metadata.TranslucentBinding">
+  <!-- TODO: remove me. why is this here? -->
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>binding</r:value>
     </r:attribute>
-    <r:attribute name="cnx-archive-uri">
-      <r:ref name="UUID-and-version.datatype"/>
+    <r:attribute name="data-value">
+      <r:value>translucent</r:value>
     </r:attribute>
-    <r:element name="a">
-      <r:attribute name="href">
-        <r:ref name="URI.datatype"/>
-      </r:attribute>
-      <r:text/>
-    </r:element>
-  </r:element>
-</r:define>
-
-<r:define name="Structure.Book.ToC.InternalItem">
-  <r:element name="li">
-    <r:element name="span">
-      <r:text/>
-    </r:element>
-    <r:element name="ol">
-      <r:oneOrMore>
-        <r:choice>
-          <r:ref name="Structure.Book.ToC.InternalItem"/>
-          <r:ref name="Structure.Book.ToC.LeafItem"/>
-        </r:choice>
-      </r:oneOrMore>
-    </r:element>
   </r:element>
 </r:define>
 

@@ -88,9 +88,9 @@
 </xsl:template>
 
 <xsl:template match="r:define[not(contains(@name, '.datatype'))]">
-  <h1>
+  <h2>
     <xsl:value-of select="@name"/>
-  </h1>
+  </h2>
   <xsl:choose>
     <xsl:when test="@combine='choice'">
       <p>This extends the set of elements that are allowed in a <code><xsl:value-of select="@name"/></code></p>
@@ -105,9 +105,9 @@
 
 
 <xsl:template match="r:define[r:attribute]">
-  <h1>
+  <h2>
     <xsl:value-of select="@name"/>
-  </h1>
+  </h2>
   <p>This defines a set of attributes:</p>
   <ul>
     <xsl:for-each select="r:attribute">
