@@ -17,9 +17,23 @@
 * [../xhtml/modules/target.rng](../textbook-html/../xhtml/modules/target.rng)
 * [../mathml2.rng](../textbook-html/../mathml2.rng)
 
+# Organization
+
+This file is organized into the following sections:
+
+1.  Textbook-specific Blockish pseudo-elements: This contains things
+    like Note, Exercise
+2.  Textbook-specific Inline pseudoelements: things like "term", inline
+    list, media
+3.  Enum attributes: things like `bullet-style` or `lower-roman`
+4.  HTML5 elements: things like `<section>` or `<figure>`
+5.  Additional attributes to existing xhtml elements: things like table
+    valign and `<caption>` element
+6.  Additional datatype values: things like UUID, UUID-and-version
+
 # Block.class
 
-This element extends an existing defition
+This extends the set of elements that are allowed in a `Block.class`
 
 One of the following:
 
@@ -40,7 +54,7 @@ One of the following:
 
 # Inline.class
 
-This element extends an existing defition
+This extends the set of elements that are allowed in a `Inline.class`
 
 One of the following:
 
@@ -57,9 +71,13 @@ One of the following:
 
 # Content.Space
 
+This provides horizontal space
+
 `<span data-type="space"
 data-count=`[Number.datatype](#numberdatatype)`>`*Text.datatype*`</span>`
 # Content.Term
+
+This defines a Term that will be bold and show up in the Book Index
 
 `<span data-type="term">`
 
@@ -71,8 +89,13 @@ data-count=`[Number.datatype](#numberdatatype)`>`*Text.datatype*`</span>`
 
 # Content.Foreign
 
+This defines a piece of Foreign text
+
 `<span data-type="foreign">`[Inline.model](#inlinemodel)`</span>`
 # Content.FootnoteNumber
+
+This defines Footnote number that appears in the content. It is matched
+with an item in Content.FootnoteRefs
 
 `<sup data-type="footnote-number">`
 
@@ -83,6 +106,8 @@ data-count=`[Number.datatype](#numberdatatype)`>`*Text.datatype*`</span>`
 `</sup>`
 
 # Content.ImageWithThumbnail
+
+This is an Image with a clickable thumbnail
 
 `<a data-type="image-with-thumbnail"
 href=`[URI.datatype](#uridatatype)`>`[img](#img)`</a>`
@@ -326,7 +351,7 @@ This defines a set of attributes:
 
 # caption
 
-This element extends an existing defition
+This extends the set of elements that are allowed in a `caption`
 
 `<caption>`
 

@@ -1,555 +1,556 @@
-<grammar ns="http://www.w3.org/1999/xhtml"
-         xmlns="http://relaxng.org/ns/structure/1.0">
+<r:grammar ns="http://www.w3.org/1999/xhtml"
+         xmlns:r="http://relaxng.org/ns/structure/1.0"
+         xmlns="http://www.w3.org/1999/xhtml">
 
-<include href="./_content.rng"/>
+<r:include href="./_content.rng"/>
 
 <!-- <head itemscope="itemscope" itemtype="http://schema.org/Book"> -->
-<define name="Structure.Book.Head.attlist">
-  <attribute name="itemscope">
-    <value>itemscope</value>
-  </attribute>
-  <attribute name="itemtype">
-    <value>http://schema.org/Book</value>
-  </attribute>
-</define>
+<r:define name="Structure.Book.Head.attlist">
+  <r:attribute name="itemscope">
+    <r:value>itemscope</r:value>
+  </r:attribute>
+  <r:attribute name="itemtype">
+    <r:value>http://schema.org/Book</r:value>
+  </r:attribute>
+</r:define>
 
 <!-- from xhtml/modules/struct.rng but changed to only include a subset of valid "root" elements -->
-<define name="Structure.Book.Body">
-  <element name="body">
+<r:define name="Structure.Book.Body">
+  <r:element name="body">
     <!-- <body itemscope="itemscope" itemtype="http://schema.org/Book"> -->
-    <attribute name="itemscope">
-      <value>itemscope</value>
-    </attribute>
-    <attribute name="itemtype">
-      <value>http://schema.org/Book</value>
-    </attribute>
-    <ref name="body.attlist"/>
+    <r:attribute name="itemscope">
+      <r:value>itemscope</r:value>
+    </r:attribute>
+    <r:attribute name="itemtype">
+      <r:value>http://schema.org/Book</r:value>
+    </r:attribute>
+    <r:ref name="body.attlist"/>
     <!-- Actually, it's BookMetadata -->
-    <ref name="Structure.Book.Metadata"/>
-    <ref name="Structure.Book.ToC"/>
-    <oneOrMore>
-      <choice>
-        <ref name="Structure.Chapter"/>
+    <r:ref name="Structure.Book.Metadata"/>
+    <r:ref name="Structure.Book.ToC"/>
+    <r:oneOrMore>
+      <r:choice>
+        <r:ref name="Structure.Chapter"/>
         <!-- Preface or Appendix -->
-        <ref name="Structure.Page"/>
-      </choice>
-    </oneOrMore>
-  </element>
-</define>
+        <r:ref name="Structure.Page"/>
+      </r:choice>
+    </r:oneOrMore>
+  </r:element>
+</r:define>
 
 
 
-<define name="Structure.Page">
-  <element name="div">
-    <attribute name="data-type">
-      <value>page</value>
-    </attribute>
-    <ref name="class.attrib"/>
-    <ref name="id.attrib.required"/>
-    <ref name="Structure.PageMetadata"/>
-    <ref name="Structure.Page.Title"/>
-    <optional>
-      <ref name="Structure.Page.Abstract"/>
-    </optional>
-    <zeroOrMore>
-      <ref name="Flow.model"/>
-    </zeroOrMore>
-    <optional>
-      <ref name="Content.Glossary"/>
-    </optional>
-    <optional>
-      <ref name="Content.FootnoteRefs"/>
-    </optional>
-  </element>
-</define>
+<r:define name="Structure.Page">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>page</r:value>
+    </r:attribute>
+    <r:ref name="class.attrib"/>
+    <r:ref name="id.attrib.required"/>
+    <r:ref name="Structure.PageMetadata"/>
+    <r:ref name="Structure.Page.Title"/>
+    <r:optional>
+      <r:ref name="Structure.Page.Abstract"/>
+    </r:optional>
+    <r:zeroOrMore>
+      <r:ref name="Flow.model"/>
+    </r:zeroOrMore>
+    <r:optional>
+      <r:ref name="Content.Glossary"/>
+    </r:optional>
+    <r:optional>
+      <r:ref name="Content.FootnoteRefs"/>
+    </r:optional>
+  </r:element>
+</r:define>
 
 
-<define name="Structure.Chapter">
-  <element name="div">
-    <attribute name="data-type">
-      <value>chapter</value>
-    </attribute>
-    <ref name="Structure.ChapterMetadata"/>
-    <element name="h1">
-      <attribute name="data-type">
-        <value>document-title</value>
-      </attribute>
-      <ref name="Inline.model"/>
-    </element>
-    <oneOrMore>
-      <ref name="Structure.Page"/>
-    </oneOrMore>
-  </element>
-</define>
+<r:define name="Structure.Chapter">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>chapter</r:value>
+    </r:attribute>
+    <r:ref name="Structure.ChapterMetadata"/>
+    <r:element name="h1">
+      <r:attribute name="data-type">
+        <r:value>document-title</r:value>
+      </r:attribute>
+      <r:ref name="Inline.model"/>
+    </r:element>
+    <r:oneOrMore>
+      <r:ref name="Structure.Page"/>
+    </r:oneOrMore>
+  </r:element>
+</r:define>
 
 
 <!-- <div data-type="document-title" id="auto_7a6f73c5-5378-408b-986f-e54416e12ad0_72544">Preface</div> -->
-<define name="Structure.Page.Title">
-  <element name="div">
-    <attribute name="data-type">
-      <value>document-title</value>
-    </attribute>
+<r:define name="Structure.Page.Title">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>document-title</r:value>
+    </r:attribute>
     <!-- id is not required for individual CNXML->HTML pages but *is* required for book conversion -->
-    <ref name="id.attrib"/>
-    <ref name="Inline.model"/>
-  </element>
-</define>
+    <r:ref name="id.attrib"/>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
 
 <!-- <div data-type="abstract" id="auto_7a6f73c5-5378-408b-986f-e54416e12ad0_78256"> -->
-<define name="Structure.Page.Abstract">
-  <element name="div">
-    <attribute name="data-type">
-      <value>abstract</value>
-    </attribute>
+<r:define name="Structure.Page.Abstract">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>abstract</r:value>
+    </r:attribute>
     <!-- id is not required for individual CNXML->HTML pages but *is* required for book conversion -->
-    <ref name="id.attrib"/>
-    <ref name="Flow.model"/>
-  </element>
-</define>
+    <r:ref name="id.attrib"/>
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
 
 
-<define name="Structure.PageMetadata">
-  <element name="div">
-    <attribute name="data-type">
-      <value>metadata</value>
-    </attribute>
-    <ref name="Structure.Metadata.Title"/>
-    <ref name="Structure.Metadata.Uri"/>
-    <ref name="Structure.Metadata.ShortId"/>
-    <ref name="Structure.Metadata.Authors"/>
-    <ref name="Structure.Metadata.Publishers"/>
-    <ref name="Structure.Metadata.Permissions"/>
-    <ref name="Structure.Metadata.Description"/>
-    <ref name="Structure.Metadata.Keywords"/>
-    <optional>
-      <ref name="Structure.Metadata.Subjects"/>
-    </optional>
-    <optional>
-      <ref name="Structure.Metadata.Resources"/>
-    </optional>
-  </element>
-</define>
+<r:define name="Structure.PageMetadata">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>metadata</r:value>
+    </r:attribute>
+    <r:ref name="Structure.Metadata.Title"/>
+    <r:ref name="Structure.Metadata.Uri"/>
+    <r:ref name="Structure.Metadata.ShortId"/>
+    <r:ref name="Structure.Metadata.Authors"/>
+    <r:ref name="Structure.Metadata.Publishers"/>
+    <r:ref name="Structure.Metadata.Permissions"/>
+    <r:ref name="Structure.Metadata.Description"/>
+    <r:ref name="Structure.Metadata.Keywords"/>
+    <r:optional>
+      <r:ref name="Structure.Metadata.Subjects"/>
+    </r:optional>
+    <r:optional>
+      <r:ref name="Structure.Metadata.Resources"/>
+    </r:optional>
+  </r:element>
+</r:define>
 
-<define name="Structure.Metadata.Title">
-  <element name="h1">
-    <attribute name="data-type">
-      <value>document-title</value>
-    </attribute>
-    <attribute name="itemprop">
-      <value>name</value>
-    </attribute>
-    <ref name="Inline.model"/>
-  </element>
-</define>
+<r:define name="Structure.Metadata.Title">
+  <r:element name="h1">
+    <r:attribute name="data-type">
+      <r:value>document-title</r:value>
+    </r:attribute>
+    <r:attribute name="itemprop">
+      <r:value>name</r:value>
+    </r:attribute>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
 
-<define name="Structure.Metadata.Uri">
-  <element name="span">
-    <attribute name="data-type">
-      <value>cnx-archive-uri</value>
-    </attribute>
-    <attribute name="data-value">
-      <ref name="UUID-and-version.datatype"/>
-    </attribute>
-  </element>
-</define>
+<r:define name="Structure.Metadata.Uri">
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>cnx-archive-uri</r:value>
+    </r:attribute>
+    <r:attribute name="data-value">
+      <r:ref name="UUID-and-version.datatype"/>
+    </r:attribute>
+  </r:element>
+</r:define>
 
-<define name="Structure.Metadata.ShortId">
-  <element name="span">
-    <attribute name="data-type">
-      <value>cnx-archive-shortid</value>
-    </attribute>
-    <attribute name="data-value">
-      <ref name="ShortId.datatype"/>
-    </attribute>
-  </element>
-</define>
+<r:define name="Structure.Metadata.ShortId">
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>cnx-archive-shortid</r:value>
+    </r:attribute>
+    <r:attribute name="data-value">
+      <r:ref name="ShortId.datatype"/>
+    </r:attribute>
+  </r:element>
+</r:define>
 
-<define name="Structure.Metadata.Authors">
-  <element name="div">
-    <attribute name="class">
-      <value>authors</value>
-    </attribute>
-    <oneOrMore>
-      <group>
+<r:define name="Structure.Metadata.Authors">
+  <r:element name="div">
+    <r:attribute name="class">
+      <r:value>authors</r:value>
+    </r:attribute>
+    <r:oneOrMore>
+      <r:group>
         <!-- Allow text like "Edited by:" intermingled in the DOM -->
-        <optional>
-          <text/>
-        </optional>
-        <ref name="Structure.Metadata.Authors.Item"/>
-      </group>
-    </oneOrMore>
+        <r:optional>
+          <r:text/>
+        </r:optional>
+        <r:ref name="Structure.Metadata.Authors.Item"/>
+      </r:group>
+    </r:oneOrMore>
     <!-- Allow text like "Edited by:" intermingled in the DOM -->
-    <optional>
-      <text/>
-    </optional>
-  </element>
-</define>
+    <r:optional>
+      <r:text/>
+    </r:optional>
+  </r:element>
+</r:define>
 
-<define name="Structure.Metadata.Authors.Item">
-  <element name="span">
-    <attribute name="data-type">
-      <value>author</value>
-    </attribute>
-    <ref name="id.attrib.required"/>
-    <attribute name="itemprop">
-      <value>author</value>
-    </attribute>
-    <attribute name="itemscope">
-      <value>itemscope</value>
-    </attribute>
-    <attribute name="itemtype">
-      <value>http://schema.org/Person</value>
-    </attribute>
-    <element name="a">
-      <attribute name="data-type">
-        <value>cnx-id</value>
-      </attribute>
-      <attribute name="href">
-        <ref name="Text.datatype"/>
-      </attribute>
-      <attribute name="itemprop">
-        <value>url</value>
-      </attribute>
-      <ref name="Text.datatype"/>
-    </element>
-  </element>
-</define>
+<r:define name="Structure.Metadata.Authors.Item">
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>author</r:value>
+    </r:attribute>
+    <r:ref name="id.attrib.required"/>
+    <r:attribute name="itemprop">
+      <r:value>author</r:value>
+    </r:attribute>
+    <r:attribute name="itemscope">
+      <r:value>itemscope</r:value>
+    </r:attribute>
+    <r:attribute name="itemtype">
+      <r:value>http://schema.org/Person</r:value>
+    </r:attribute>
+    <r:element name="a">
+      <r:attribute name="data-type">
+        <r:value>cnx-id</r:value>
+      </r:attribute>
+      <r:attribute name="href">
+        <r:ref name="Text.datatype"/>
+      </r:attribute>
+      <r:attribute name="itemprop">
+        <r:value>url</r:value>
+      </r:attribute>
+      <r:ref name="Text.datatype"/>
+    </r:element>
+  </r:element>
+</r:define>
 
-<define name="Structure.Metadata.Publishers">
-  <element name="div">
-    <attribute name="class">
-      <value>publishers</value>
-    </attribute>
-    <oneOrMore>
-      <group>
+<r:define name="Structure.Metadata.Publishers">
+  <r:element name="div">
+    <r:attribute name="class">
+      <r:value>publishers</r:value>
+    </r:attribute>
+    <r:oneOrMore>
+      <r:group>
         <!-- Allow text like "Edited by:" intermingled in the DOM -->
-        <optional>
-          <text/>
-        </optional>
-        <ref name="Structure.Metadata.Publishers.Item"/>
-      </group>
-    </oneOrMore>
+        <r:optional>
+          <r:text/>
+        </r:optional>
+        <r:ref name="Structure.Metadata.Publishers.Item"/>
+      </r:group>
+    </r:oneOrMore>
     <!-- Allow text like "Edited by:" intermingled in the DOM -->
-    <optional>
-      <text/>
-    </optional>
-  </element>
-</define>
+    <r:optional>
+      <r:text/>
+    </r:optional>
+  </r:element>
+</r:define>
 
 <!-- Copy/Pasta from Book.Metadata.Authors.Item
   TODO: Combine these somehow.
 -->
-<define name="Structure.Metadata.Publishers.Item">
-  <element name="span">
-    <attribute name="data-type">
-      <value>publisher</value>
-    </attribute>
-    <ref name="id.attrib.required"/>
-    <attribute name="itemprop">
-      <value>publisher</value>
-    </attribute>
-    <attribute name="itemscope">
-      <value>itemscope</value>
-    </attribute>
-    <attribute name="itemtype">
-      <value>http://schema.org/Person</value>
-    </attribute>
-    <element name="a">
-      <attribute name="data-type">
-        <value>cnx-id</value>
-      </attribute>
-      <attribute name="href">
-        <ref name="Text.datatype"/>
-      </attribute>
-      <attribute name="itemprop">
-        <value>url</value>
-      </attribute>
-      <ref name="Text.datatype"/>
-    </element>
-  </element>
-</define>
+<r:define name="Structure.Metadata.Publishers.Item">
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>publisher</r:value>
+    </r:attribute>
+    <r:ref name="id.attrib.required"/>
+    <r:attribute name="itemprop">
+      <r:value>publisher</r:value>
+    </r:attribute>
+    <r:attribute name="itemscope">
+      <r:value>itemscope</r:value>
+    </r:attribute>
+    <r:attribute name="itemtype">
+      <r:value>http://schema.org/Person</r:value>
+    </r:attribute>
+    <r:element name="a">
+      <r:attribute name="data-type">
+        <r:value>cnx-id</r:value>
+      </r:attribute>
+      <r:attribute name="href">
+        <r:ref name="Text.datatype"/>
+      </r:attribute>
+      <r:attribute name="itemprop">
+        <r:value>url</r:value>
+      </r:attribute>
+      <r:ref name="Text.datatype"/>
+    </r:element>
+  </r:element>
+</r:define>
 
 
-<define name="Structure.Metadata.Permissions">
+<r:define name="Structure.Metadata.Permissions">
   <!-- change class="permissions" to some other attribute -->
-  <element name="div">
-    <attribute name="class">
-      <value>permissions</value>
-    </attribute>
-    <optional>
-      <ref name="Structure.Metadata.Copyrights"/>
-    </optional>
-    <ref name="Structure.Metadata.License"/>
-  </element>
-</define>
+  <r:element name="div">
+    <r:attribute name="class">
+      <r:value>permissions</r:value>
+    </r:attribute>
+    <r:optional>
+      <r:ref name="Structure.Metadata.Copyrights"/>
+    </r:optional>
+    <r:ref name="Structure.Metadata.License"/>
+  </r:element>
+</r:define>
 
-<define name="Structure.Metadata.License">
-  <element name="p">
-    <attribute name="class">
-      <value>license</value>
-    </attribute>
-    <text/>
+<r:define name="Structure.Metadata.License">
+  <r:element name="p">
+    <r:attribute name="class">
+      <r:value>license</r:value>
+    </r:attribute>
+    <r:text/>
     <!-- <a data-type="license" itemprop="..."> -->
-    <element name="a">
-      <attribute name="data-type">
-        <value>license</value>
-      </attribute>
-      <attribute name="href">
-        <ref name="URI.datatype"/>
-      </attribute>
-      <attribute name="itemprop">
-        <value>dc:license,lrmi:useRightsURL</value>
-      </attribute>
-      <text/>
-    </element>
-  </element>
-</define>
+    <r:element name="a">
+      <r:attribute name="data-type">
+        <r:value>license</r:value>
+      </r:attribute>
+      <r:attribute name="href">
+        <r:ref name="URI.datatype"/>
+      </r:attribute>
+      <r:attribute name="itemprop">
+        <r:value>dc:license,lrmi:useRightsURL</r:value>
+      </r:attribute>
+      <r:text/>
+    </r:element>
+  </r:element>
+</r:define>
 
-<define name="Structure.Metadata.Copyrights">
-  <element name="p">
-    <attribute name="class">
-      <value>copyright</value>
-    </attribute>
+<r:define name="Structure.Metadata.Copyrights">
+  <r:element name="p">
+    <r:attribute name="class">
+      <r:value>copyright</r:value>
+    </r:attribute>
     <!-- Copyright: -->
-    <text/>
+    <r:text/>
     <!--               <span data-type="copyright-holder" id="copyright-holder-1" itemprop="copyright-holder" itemscope="itemscope" itemtype="http://schema.org/Person">
             <a data-type="cnx-id" href="cnxecon" itemprop="url">OpenStax Economics</a>
           </span> -->
-    <oneOrMore>
-      <ref name="Structure.Metadata.Copyrights.Item"/>
-    </oneOrMore>
-  </element>
-</define>
+    <r:oneOrMore>
+      <r:ref name="Structure.Metadata.Copyrights.Item"/>
+    </r:oneOrMore>
+  </r:element>
+</r:define>
 
-<define name="Structure.Metadata.Copyrights.Item">
-  <element name="span">
-    <attribute name="data-type">
-      <value>copyright-holder</value>
-    </attribute>
-    <attribute name="itemprop">
-      <value>copyright-holder</value>
-    </attribute>
-    <attribute name="itemscope">
-      <value>itemscope</value>
-    </attribute>
-    <attribute name="itemtype">
-      <value>http://schema.org/Person</value>
-    </attribute>
+<r:define name="Structure.Metadata.Copyrights.Item">
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>copyright-holder</r:value>
+    </r:attribute>
+    <r:attribute name="itemprop">
+      <r:value>copyright-holder</r:value>
+    </r:attribute>
+    <r:attribute name="itemscope">
+      <r:value>itemscope</r:value>
+    </r:attribute>
+    <r:attribute name="itemtype">
+      <r:value>http://schema.org/Person</r:value>
+    </r:attribute>
 
-    <element name="a">
-      <attribute name="data-type">
-        <value>cnx-id</value>
-      </attribute>
+    <r:element name="a">
+      <r:attribute name="data-type">
+        <r:value>cnx-id</r:value>
+      </r:attribute>
       <!-- TODO: This attribute is invalid. the element should not be a link -->
-      <attribute name="href">
-        <ref name="UserLogin.datatype"/>
-      </attribute>
-      <attribute name="itemprop">
-        <value>url</value>
-      </attribute>
-      <ref name="UserName.datatype"/>
-    </element>
-  </element>
-</define>
+      <r:attribute name="href">
+        <r:ref name="UserLogin.datatype"/>
+      </r:attribute>
+      <r:attribute name="itemprop">
+        <r:value>url</r:value>
+      </r:attribute>
+      <r:ref name="UserName.datatype"/>
+    </r:element>
+  </r:element>
+</r:define>
 
 <!-- <span data-type="cnx-archive-uri" data-value="69619d2b-68f0-44b0-b074-a9b2bf90b2c6@11.332"/>
 <span data-type="cnx-archive-shortid" data-value="aWGdK2jw@11.332"/> -->
-<define name="Structure.Book.Metadata">
-  <element name="div">
-    <attribute name="data-type">
-      <value>metadata</value>
-    </attribute>
-    <ref name="Structure.Metadata.Title"/>
-    <ref name="Structure.Metadata.Uri"/>
-    <ref name="Structure.Metadata.ShortId"/>
-    <ref name="Structure.Metadata.Authors"/>
-    <ref name="Structure.Metadata.Publishers"/>
-    <ref name="Structure.Metadata.PrintStyle"/>
-    <optional>
-      <ref name="Structure.Metadata.TranslucentBinding"/>
-    </optional>
-    <ref name="Structure.Metadata.Permissions"/>
-    <ref name="Structure.Metadata.Description"/>
-    <ref name="Structure.Metadata.Subjects"/>
-  </element>
-</define>
+<r:define name="Structure.Book.Metadata">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>metadata</r:value>
+    </r:attribute>
+    <r:ref name="Structure.Metadata.Title"/>
+    <r:ref name="Structure.Metadata.Uri"/>
+    <r:ref name="Structure.Metadata.ShortId"/>
+    <r:ref name="Structure.Metadata.Authors"/>
+    <r:ref name="Structure.Metadata.Publishers"/>
+    <r:ref name="Structure.Metadata.PrintStyle"/>
+    <r:optional>
+      <r:ref name="Structure.Metadata.TranslucentBinding"/>
+    </r:optional>
+    <r:ref name="Structure.Metadata.Permissions"/>
+    <r:ref name="Structure.Metadata.Description"/>
+    <r:ref name="Structure.Metadata.Subjects"/>
+  </r:element>
+</r:define>
 
 
 <!-- <div class="print-style">
 Print style:
 <span data-type="print-style">ccap-economics</span>
 </div> -->
-<define name="Structure.Metadata.PrintStyle">
-  <element name="div">
-    <attribute name="class">
-      <value>print-style</value>
-    </attribute>
-    <text/><!-- "Print style:" -->
-    <element name="span">
-      <attribute name="data-type">
-        <value>print-style</value>
-      </attribute>
-      <ref name="TODO.enum.datatype"/>
-    </element>
-  </element>
-</define>
+<r:define name="Structure.Metadata.PrintStyle">
+  <r:element name="div">
+    <r:attribute name="class">
+      <r:value>print-style</r:value>
+    </r:attribute>
+    <r:text/><!-- "Print style:" -->
+    <r:element name="span">
+      <r:attribute name="data-type">
+        <r:value>print-style</r:value>
+      </r:attribute>
+      <r:ref name="TODO.enum.datatype"/>
+    </r:element>
+  </r:element>
+</r:define>
 
-<define name="Structure.ChapterMetadata">
-  <element name="div">
-    <attribute name="data-type">
-      <value>metadata</value>
-    </attribute>
-    <ref name="Structure.Metadata.Title"/>
-    <ref name="Structure.Metadata.TranslucentBinding"/>
-    <ref name="Structure.Metadata.Permissions"/>
-  </element>
-</define>
+<r:define name="Structure.ChapterMetadata">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>metadata</r:value>
+    </r:attribute>
+    <r:ref name="Structure.Metadata.Title"/>
+    <r:ref name="Structure.Metadata.TranslucentBinding"/>
+    <r:ref name="Structure.Metadata.Permissions"/>
+  </r:element>
+</r:define>
 
 
-<define name="Structure.Metadata.TranslucentBinding">
+<r:define name="Structure.Metadata.TranslucentBinding">
   <!-- TODO: remove me. why is this here? -->
-  <element name="span">
-    <attribute name="data-type">
-      <value>binding</value>
-    </attribute>
-    <attribute name="data-value">
-      <value>translucent</value>
-    </attribute>
-  </element>
-</define>
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>binding</r:value>
+    </r:attribute>
+    <r:attribute name="data-value">
+      <r:value>translucent</r:value>
+    </r:attribute>
+  </r:element>
+</r:define>
 
-<define name="Structure.Metadata.Description">
-  <element name="div">
-    <attribute name="class">
-      <value>description</value>
-    </attribute>
-    <attribute name="data-type">
-      <value>description</value>
-    </attribute>
-    <attribute name="itemprop">
-      <value>description</value>
-    </attribute>
-    <oneOrMore>
-      <ref name="Flow.model"/>
-    </oneOrMore>
-  </element>
-</define>
+<r:define name="Structure.Metadata.Description">
+  <r:element name="div">
+    <r:attribute name="class">
+      <r:value>description</r:value>
+    </r:attribute>
+    <r:attribute name="data-type">
+      <r:value>description</r:value>
+    </r:attribute>
+    <r:attribute name="itemprop">
+      <r:value>description</r:value>
+    </r:attribute>
+    <r:oneOrMore>
+      <r:ref name="Flow.model"/>
+    </r:oneOrMore>
+  </r:element>
+</r:define>
 
-<define name="Structure.Metadata.Keywords">
+<r:define name="Structure.Metadata.Keywords">
   <!-- TODO: This should probably be wrapped in an element -->
-  <zeroOrMore>
-    <element name="div">
-      <attribute name="data-type">
-        <value>keyword</value>
-      </attribute>
-      <attribute name="itemprop">
-        <value>keywords</value>
-      </attribute>
-      <text/>
-    </element>
-  </zeroOrMore>
-</define>
+  <r:zeroOrMore>
+    <r:element name="div">
+      <r:attribute name="data-type">
+        <r:value>keyword</r:value>
+      </r:attribute>
+      <r:attribute name="itemprop">
+        <r:value>keywords</r:value>
+      </r:attribute>
+      <r:text/>
+    </r:element>
+  </r:zeroOrMore>
+</r:define>
 
 <!-- <div data-type="subject" itemprop="about">Mathematics and Statistics</div> -->
-<define name="Structure.Metadata.Subjects">
-  <zeroOrMore>
-    <element name="div">
-      <attribute name="data-type">
-        <value>subject</value>
-      </attribute>
-      <attribute name="itemprop">
-        <value>about</value>
-      </attribute>
-      <ref name="Subject.datatype"/>
-    </element>
-  </zeroOrMore>
-</define>
+<r:define name="Structure.Metadata.Subjects">
+  <r:zeroOrMore>
+    <r:element name="div">
+      <r:attribute name="data-type">
+        <r:value>subject</r:value>
+      </r:attribute>
+      <r:attribute name="itemprop">
+        <r:value>about</r:value>
+      </r:attribute>
+      <r:ref name="Subject.datatype"/>
+    </r:element>
+  </r:zeroOrMore>
+</r:define>
 
 <!-- <div data-type="resources" style="display: none"> <ul>
 <li><a href="971b6320e705d9c81cbad7f4a98148ab91456d3b">971b6320e705d9c81cbad7f4a98148ab91456d3b</a></li>        </ul>
 -->
-<define name="Structure.Metadata.Resources">
-  <element name="div">
-    <attribute name="data-type">
-      <value>resources</value>
-    </attribute>
+<r:define name="Structure.Metadata.Resources">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>resources</r:value>
+    </r:attribute>
     <!-- TODO: remove this attribute, maybe the whole element. What is it used for? -->
-    <attribute name="style">
-      <value>display: none</value>
-    </attribute>
-    <optional>
-      <element name="ul">
-        <oneOrMore>
-          <ref name="Structure.Metadata.Resources.Item"/>
-        </oneOrMore>
-      </element>
-    </optional>
-  </element>
-</define>
+    <r:attribute name="style">
+      <r:value>display: none</r:value>
+    </r:attribute>
+    <r:optional>
+      <r:element name="ul">
+        <r:oneOrMore>
+          <r:ref name="Structure.Metadata.Resources.Item"/>
+        </r:oneOrMore>
+      </r:element>
+    </r:optional>
+  </r:element>
+</r:define>
 
-<define name="Structure.Metadata.Resources.Item">
-  <element name="li">
-    <element name="a">
-      <attribute name="href">
-        <ref name="Sha.datatype"/>
-      </attribute>
-      <ref name="Sha.datatype"/>
-    </element>
-  </element>
-</define>
+<r:define name="Structure.Metadata.Resources.Item">
+  <r:element name="li">
+    <r:element name="a">
+      <r:attribute name="href">
+        <r:ref name="Sha.datatype"/>
+      </r:attribute>
+      <r:ref name="Sha.datatype"/>
+    </r:element>
+  </r:element>
+</r:define>
 
 <!-- The <nav id="toc"> -->
-<define name="Structure.Book.ToC">
-  <element name="nav">
-    <attribute name="id">
-      <value>toc</value>
-    </attribute>
-    <element name="ol">
-      <zeroOrMore>
-        <ref name="Structure.Book.ToC.LeafItem"/>
-      </zeroOrMore>
-      <oneOrMore>
-        <ref name="Structure.Book.ToC.InternalItem"/>
-      </oneOrMore>
-      <zeroOrMore>
-        <ref name="Structure.Book.ToC.LeafItem"/>
-      </zeroOrMore>
-    </element>
-  </element>
-</define>
+<r:define name="Structure.Book.ToC">
+  <r:element name="nav">
+    <r:attribute name="id">
+      <r:value>toc</r:value>
+    </r:attribute>
+    <r:element name="ol">
+      <r:zeroOrMore>
+        <r:ref name="Structure.Book.ToC.LeafItem"/>
+      </r:zeroOrMore>
+      <r:oneOrMore>
+        <r:ref name="Structure.Book.ToC.InternalItem"/>
+      </r:oneOrMore>
+      <r:zeroOrMore>
+        <r:ref name="Structure.Book.ToC.LeafItem"/>
+      </r:zeroOrMore>
+    </r:element>
+  </r:element>
+</r:define>
 
-<define name="Structure.Book.ToC.LeafItem">
-  <element name="li">
-    <attribute name="cnx-archive-shortid">
-      <ref name="ShortId.datatype"/>
-    </attribute>
-    <attribute name="cnx-archive-uri">
-      <ref name="UUID-and-version.datatype"/>
-    </attribute>
-    <element name="a">
-      <attribute name="href">
-        <ref name="URI.datatype"/>
-      </attribute>
-      <text/>
-    </element>
-  </element>
-</define>
+<r:define name="Structure.Book.ToC.LeafItem">
+  <r:element name="li">
+    <r:attribute name="cnx-archive-shortid">
+      <r:ref name="ShortId.datatype"/>
+    </r:attribute>
+    <r:attribute name="cnx-archive-uri">
+      <r:ref name="UUID-and-version.datatype"/>
+    </r:attribute>
+    <r:element name="a">
+      <r:attribute name="href">
+        <r:ref name="URI.datatype"/>
+      </r:attribute>
+      <r:text/>
+    </r:element>
+  </r:element>
+</r:define>
 
-<define name="Structure.Book.ToC.InternalItem">
-  <element name="li">
-    <element name="span">
-      <text/>
-    </element>
-    <element name="ol">
-      <oneOrMore>
-        <choice>
-          <ref name="Structure.Book.ToC.InternalItem"/>
-          <ref name="Structure.Book.ToC.LeafItem"/>
-        </choice>
-      </oneOrMore>
-    </element>
-  </element>
-</define>
+<r:define name="Structure.Book.ToC.InternalItem">
+  <r:element name="li">
+    <r:element name="span">
+      <r:text/>
+    </r:element>
+    <r:element name="ol">
+      <r:oneOrMore>
+        <r:choice>
+          <r:ref name="Structure.Book.ToC.InternalItem"/>
+          <r:ref name="Structure.Book.ToC.LeafItem"/>
+        </r:choice>
+      </r:oneOrMore>
+    </r:element>
+  </r:element>
+</r:define>
 
 
 <!--
@@ -562,31 +563,31 @@ Print style:
 <meta content="2014-01-02T22:13:54Z" itemprop="dateCreated"/>
 <meta content="2016-11-04T17:17:06Z" itemprop="dateModified"/>
 -->
-<define name="enum.attr.meta.itemprop">
-  <choice>
-    <value>inLanguage</value>
-    <value>accessibilityFeature</value>
-    <value>dateCreated</value>
-    <value>dateModified</value>
-  </choice>
-</define>
+<r:define name="enum.attr.meta.itemprop">
+  <r:choice>
+    <r:value>inLanguage</r:value>
+    <r:value>accessibilityFeature</r:value>
+    <r:value>dateCreated</r:value>
+    <r:value>dateModified</r:value>
+  </r:choice>
+</r:define>
 
-<define name="enum.attr.meta.data-type">
-  <value>language</value>
-</define>
+<r:define name="enum.attr.meta.data-type">
+  <r:value>language</r:value>
+</r:define>
 
 <!-- <meta content="2016-11-04T17:17:06Z" itemprop="dateModified"/> -->
-<define name="meta.attlist" combine="interleave">
-  <choice>
+<r:define name="meta.attlist" combine="interleave">
+  <r:choice>
     <!-- <meta content="en" data-type="language" itemprop="inLanguage"/> -->
-    <group>
-      <attribute name="itemprop">
-        <value>inLanguage</value>
-      </attribute>
-      <attribute name="data-type"><!-- TODO: Remove this attribute -->
-        <value>language</value>
-      </attribute>
-    </group>
+    <r:group>
+      <r:attribute name="itemprop">
+        <r:value>inLanguage</r:value>
+      </r:attribute>
+      <r:attribute name="data-type"><!-- TODO: Remove this attribute -->
+        <r:value>language</r:value>
+      </r:attribute>
+    </r:group>
     <!-- <meta content="MathML" itemprop="accessibilityFeature"/> -->
     <!-- <meta content="LaTeX" itemprop="accessibilityFeature"/> -->
     <!-- <meta content="alternativeText" itemprop="accessibilityFeature"/> -->
@@ -594,17 +595,17 @@ Print style:
     <!-- <meta content="structuredNavigation" itemprop="accessibilityFeature"/> -->
     <!-- <meta content="2014-01-02T22:13:54Z" itemprop="dateCreated"/> -->
     <!-- <meta content="2016-11-04T17:17:06Z" itemprop="dateModified"/>  -->
-    <attribute name="itemprop">
-      <choice>
-        <value>accessibilityFeature</value>
-        <value>dateCreated</value>
-        <value>dateModified</value>
-      </choice>
-    </attribute>
-  </choice>
-</define>
+    <r:attribute name="itemprop">
+      <r:choice>
+        <r:value>accessibilityFeature</r:value>
+        <r:value>dateCreated</r:value>
+        <r:value>dateModified</r:value>
+      </r:choice>
+    </r:attribute>
+  </r:choice>
+</r:define>
 
 
 
 
-</grammar>
+</r:grammar>

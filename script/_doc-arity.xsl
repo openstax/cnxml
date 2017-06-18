@@ -1,8 +1,9 @@
 <xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:h="http://www.w3.org/1999/xhtml"
   xmlns:rng="http://relaxng.org/ns/structure/1.0"
   xmlns:p="http://openstax.org/docs-rng-parity"
-  exclude-result-prefixes="rng"
+  exclude-result-prefixes="rng h"
   version="1.0">
 
 <!-- This converts a .rng file to be a little bit more amenable to documentation-generation.

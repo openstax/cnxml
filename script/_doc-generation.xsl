@@ -1,9 +1,10 @@
 <xsl:stylesheet
   xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://www.w3.org/1999/xhtml"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+  xmlns:r="http://relaxng.org/ns/structure/1.0"
   xmlns:p="http://openstax.org/docs-rng-parity"
-  exclude-result-prefixes="rng"
+  exclude-result-prefixes="r h"
   version="1.0">
 
 <!-- This XSLT file contains 2 modes:
@@ -14,12 +15,12 @@
 -->
 
 <!-- Handle the arity and then render the element -->
-<xsl:template match="*">
+<xsl:template match="r:*">
   <xsl:choose>
     <xsl:when test="@p:arity">
       <xsl:variable name="character" select="@p:arity"/>
       <xsl:choose>
-        <xsl:when test="self::rng:attribute or self::rng:ref or self::rng:choice or self::rng:text">
+        <xsl:when test="self::r:attribute or self::r:ref or self::r:choice or self::r:text">
           <!-- Just add a simple "?" or "*" or "+" at the end of the line -->
           <xsl:apply-templates mode="concrete" select="."/>
           <code>
@@ -45,22 +46,36 @@
   </xsl:choose>
 </xsl:template>
 
+<!-- Copy documentation as-is -->
+<xsl:template match="h:*">
+  <xsl:copy>
+    <xsl:apply-templates select="@*|node()"/>
+  </xsl:copy>
+</xsl:template>
 
-<xsl:template match="/rng:grammar">
+<xsl:template mode="concrete" match="h:*">
+  <xsl:copy>
+    <xsl:apply-templates select="@*|node()"/>
+  </xsl:copy>
+</xsl:template>
+
+
+
+<xsl:template match="/r:grammar">
   <html>
     <body>
-      <xsl:if test="rng:include">
+      <xsl:if test="r:include">
         <h1>Included files</h1>
         <ul>
-          <xsl:apply-templates select="rng:include"/>
+          <xsl:apply-templates select="r:include"/>
         </ul>
       </xsl:if>
-      <xsl:apply-templates select="*[not(self::rng:include)]"/>
+      <xsl:apply-templates select="*[not(self::r:include)]"/>
     </body>
   </html>
 </xsl:template>
 
-<xsl:template match="rng:include">
+<xsl:template match="r:include">
   <xsl:variable name="href">
     <xsl:text>../textbook-html/</xsl:text>
     <xsl:value-of select="@href"/>
@@ -72,35 +87,40 @@
   </li>
 </xsl:template>
 
-<xsl:template match="rng:define[not(contains(@name, '.datatype'))]">
+<xsl:template match="r:define[not(contains(@name, '.datatype'))]">
   <h1>
     <xsl:value-of select="@name"/>
   </h1>
-  <xsl:if test="@combine">
-    <p>This element extends an existing defition</p>
-  </xsl:if>
+  <xsl:choose>
+    <xsl:when test="@combine='choice'">
+      <p>This extends the set of elements that are allowed in a <code><xsl:value-of select="@name"/></code></p>
+    </xsl:when>
+    <xsl:when test="@combine='interleave'">
+      <p>This interleaves additional requirements which restricts the definition of <code><xsl:value-of select="@name"/></code></p>
+    </xsl:when>
+  </xsl:choose>
 
   <xsl:apply-templates select="*"/>
 </xsl:template>
 
 
-<xsl:template match="rng:define[rng:attribute]">
+<xsl:template match="r:define[r:attribute]">
   <h1>
     <xsl:value-of select="@name"/>
   </h1>
   <p>This defines a set of attributes:</p>
   <ul>
-    <xsl:for-each select="rng:attribute">
+    <xsl:for-each select="r:attribute">
       <li>
         <xsl:apply-templates select="."/>
       </li>
     </xsl:for-each>
   </ul>
 
-  <xsl:if test="*[not(self::rng:attribute)]">
+  <xsl:if test="*[not(self::r:attribute)]">
     <p>And other things:</p>
     <ol>
-      <xsl:for-each select="*[not(self::rng:attribute)]">
+      <xsl:for-each select="*[not(self::r:attribute)]">
         <li>
           <xsl:apply-templates select="."/>
         </li>
@@ -110,7 +130,7 @@
 </xsl:template>
 
 
-<xsl:template mode="concrete" match="rng:ref[not(contains(@name, '.datatype'))]">
+<xsl:template mode="concrete" match="r:ref[not(contains(@name, '.datatype'))]">
   <xsl:variable name="href">
     <xsl:call-template name="string-replace-all">
       <xsl:with-param name="text" select="@name" />
@@ -128,7 +148,7 @@
   </a>
 </xsl:template>
 
-<xsl:template mode="concrete" match="rng:ref[contains(@name, '.datatype')]">
+<xsl:template mode="concrete" match="r:ref[contains(@name, '.datatype')]">
   <em>
     <xsl:value-of select="@name"/>
   </em>
@@ -136,22 +156,22 @@
 
 
 
-<xsl:template mode="concrete" match="rng:element">
+<xsl:template mode="concrete" match="r:element">
   <xsl:choose>
-    <xsl:when test="count(rng:*[not(self::rng:attribute)]) > 1">
+    <xsl:when test="count(r:*[not(self::r:attribute)]) > 1">
       <p>
         <code>
           <xsl:text>&lt;</xsl:text>
           <xsl:value-of select="@name"/>
         </code>
-        <xsl:apply-templates select="rng:attribute"/>
+        <xsl:apply-templates select="r:attribute"/>
         <code>
           <xsl:text>&gt;</xsl:text>
         </code>
       </p>
 
       <ol>
-        <xsl:for-each select="rng:*[not(self::rng:attribute)]">
+        <xsl:for-each select="r:*[not(self::r:attribute)]">
           <li>
             <xsl:apply-templates select="."/>
           </li>
@@ -166,16 +186,16 @@
         </code>
       </p>
     </xsl:when>
-    <xsl:when test="count(rng:*[not(self::rng:attribute)]) = 1">
+    <xsl:when test="count(r:*[not(self::r:attribute)]) = 1">
       <code>
         <xsl:text>&lt;</xsl:text>
         <xsl:value-of select="@name"/>
       </code>
-      <xsl:apply-templates select="rng:attribute"/>
+      <xsl:apply-templates select="r:attribute"/>
       <code>
         <xsl:text>&gt;</xsl:text>
       </code>
-      <xsl:apply-templates select="rng:*[not(self::rng:attribute)]"/>
+      <xsl:apply-templates select="r:*[not(self::r:attribute)]"/>
       <code>
         <xsl:text>&lt;/</xsl:text>
         <xsl:value-of select="@name"/>
@@ -186,14 +206,14 @@
       <code>
         <xsl:text>&lt;</xsl:text>
         <xsl:value-of select="@name"/>
-        <xsl:apply-templates select="rng:attribute"/>
+        <xsl:apply-templates select="r:attribute"/>
         <xsl:text>/&gt;</xsl:text>
       </code>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
 
-<xsl:template mode="concrete" match="rng:attribute">
+<xsl:template mode="concrete" match="r:attribute">
   <code>
     <xsl:text> </xsl:text>
     <xsl:value-of select="@name"/>
@@ -203,7 +223,7 @@
 </xsl:template>
 
 
-<xsl:template mode="concrete" match="rng:attribute/rng:value | rng:attribute/rng:choice/rng:value | rng:define/rng:choice/rng:value | rng:define/rng:value">
+<xsl:template mode="concrete" match="r:attribute/r:value | r:attribute/r:choice/r:value | r:define/r:choice/r:value | r:define/r:value">
   <code>
     <xsl:text>"</xsl:text>
     <xsl:value-of select="text()"/>
@@ -211,17 +231,17 @@
   </code>
 </xsl:template>
 
-<xsl:template mode="concrete" match="rng:element/rng:value">
+<xsl:template mode="concrete" match="r:element/r:value">
   <code>
     <xsl:value-of select="text()"/>
   </code>
 </xsl:template>
 
-<xsl:template mode="concrete" match="rng:text">
+<xsl:template mode="concrete" match="r:text">
   <xsl:text>(text...)</xsl:text>
 </xsl:template>
 
-<xsl:template mode="concrete" match="rng:attribute/rng:ref">
+<xsl:template mode="concrete" match="r:attribute/r:ref">
   <xsl:variable name="href">
     <xsl:call-template name="string-replace-all">
       <xsl:with-param name="text" select="@name" />
@@ -240,7 +260,7 @@
 </xsl:template>
 
 
-<xsl:template mode="concrete" match="rng:group">
+<xsl:template mode="concrete" match="r:group">
   <ol>
     <xsl:for-each select="*">
       <li>
@@ -251,7 +271,7 @@
 </xsl:template>
 
 
-<xsl:template mode="concrete" match="rng:choice">
+<xsl:template mode="concrete" match="r:choice">
   <p>One of the following:</p>
   <ul>
     <xsl:for-each select="*">
@@ -262,7 +282,7 @@
   </ul>
 </xsl:template>
 
-<xsl:template mode="concrete" match="rng:choice[count(*) = count(rng:ref)]">
+<xsl:template mode="concrete" match="r:choice[count(*) = count(r:ref)]">
   <code>
     <xsl:text>[</xsl:text>
   </code>
@@ -280,7 +300,7 @@
 </xsl:template>
 
 
-<xsl:template mode="concrete" match="rng:attribute/rng:choice">
+<xsl:template mode="concrete" match="r:attribute/r:choice">
   <xsl:text>[</xsl:text>
   <xsl:for-each select="*">
     <xsl:if test="position() != 1">

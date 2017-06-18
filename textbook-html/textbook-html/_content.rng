@@ -1,163 +1,163 @@
-<grammar ns="http://www.w3.org/1999/xhtml"
-         xmlns="http://relaxng.org/ns/structure/1.0">
+<!-- Note: The default namespace is HTML because it is annoying to strip off the namespace prefix later -->
+<r:grammar ns="http://www.w3.org/1999/xhtml"
+         xmlns="http://www.w3.org/1999/xhtml"
+         xmlns:r="http://relaxng.org/ns/structure/1.0"
+         >
 
 <!-- See https://www.w3.org/MarkUp/2010/xhtml-m12n-relaxng-20101216/#sec_3.4.3. -->
-<include href="../xhtml/modules/datatypes.rng"/>
-<include href="../xhtml/modules/attribs.rng"/>
-<include href="../xhtml/modules/struct.rng"/>
-<include href="../xhtml/modules/text.rng"/>
-<include href="../xhtml/modules/hypertext.rng"/>
-<include href="../xhtml/modules/list.rng"/>
-<include href="../xhtml/modules/image.rng"/>
-<include href="../xhtml/modules/param.rng"/>
-<include href="../xhtml/modules/meta.rng"/>
-<include href="../xhtml/modules/link.rng"/>
-<include href="../xhtml/modules/base.rng"/>
-<include href="../xhtml/modules/iframe.rng"/>
-<include href="../xhtml/modules/table.rng"/>
-<include href="../xhtml/modules/pres.rng"/>
-<include href="../xhtml/modules/target.rng"/>
+<r:include href="../xhtml/modules/datatypes.rng"/>
+<r:include href="../xhtml/modules/attribs.rng"/>
+<r:include href="../xhtml/modules/struct.rng"/>
+<r:include href="../xhtml/modules/text.rng"/>
+<r:include href="../xhtml/modules/hypertext.rng"/>
+<r:include href="../xhtml/modules/list.rng"/>
+<r:include href="../xhtml/modules/image.rng"/>
+<r:include href="../xhtml/modules/param.rng"/>
+<r:include href="../xhtml/modules/meta.rng"/>
+<r:include href="../xhtml/modules/link.rng"/>
+<r:include href="../xhtml/modules/base.rng"/>
+<r:include href="../xhtml/modules/iframe.rng"/>
+<r:include href="../xhtml/modules/table.rng"/>
+<r:include href="../xhtml/modules/pres.rng"/>
+<r:include href="../xhtml/modules/target.rng"/>
 
-<!-- <include href="../cnxml/xml/mathml/schema/rng/2.0/mathml2.rng"/> -->
-<!-- <include href="http://www.w3.org/Math/RelaxNG/mathml3/mathml3.rng"/> -->
-<include href="../mathml2.rng"/>
+<!-- <r:include href="../cnxml/xml/mathml/schema/rng/2.0/mathml2.rng"/> -->
+<!-- <r:include href="http://www.w3.org/Math/RelaxNG/mathml3/mathml3.rng"/> -->
+<r:include href="../mathml2.rng"/>
 
+<h1>Organization</h1>
+<p>This file is organized into the following sections:</p>
+<ol>
+  <li>Textbook-specific Blockish pseudo-elements: This contains things like Note, Exercise</li>
+  <li>Textbook-specific Inline pseudoelements: things like "term", inline list, media</li>
+  <li>Enum attributes: things like `bullet-style` or `lower-roman`</li>
+  <li>HTML5 elements: things like <code>&lt;section&gt;</code> or <code>&lt;figure&gt;</code></li>
+  <li>Additional attributes to existing xhtml elements: things like table valign and <code>&lt;caption&gt;</code> element</li>
+  <li>Additional datatype values: things like UUID, UUID-and-version</li>
+</ol>
 
-<!-- This file is organized into 4 sections:
-  1. Textbook-specific Blockish pseudo-elements: This contains things like Note, Exercise
-  2. Textbook-specific Inline pseudoelements: things like "term", inline list, media
-  3. Enum attributes: things like `bullet-style` or `lower-roman`
-  4. HTML5 elements: things like `<section>` or `<figure>`
-  5. Additional attributes to existing xhtml elements: things like table valign and `<caption>` element
-  6. Additional datatype values: things like UUID, UUID-and-version
--->
-
-
-<define name="Block.class" combine="choice">
-  <!-- This extends the set of elements that are allowed in a "Blockish" area -->
-  <choice>
-    <ref name="Content.Note"/>
-    <ref name="Content.Equation"/>
-    <ref name="Content.Exercise"/>
-    <ref name="Content.Example"/>
-    <ref name="Content.DivList"/>
-    <ref name="Content.ListWithTitle"/>
-    <ref name="Content.ParaWithTitle"/>
-    <element name="div">
-      <ref name="Content.Media.class"/>
-    </element>
-    <element name="div">
-      <ref name="Content.Alternates.class"/>
-    </element>
-    <element name="div">
-      <ref name="Content.Newline.class"/>
-    </element>
+<r:define name="Block.class" combine="choice">
+  <r:choice>
+    <r:ref name="Content.Note"/>
+    <r:ref name="Content.Equation"/>
+    <r:ref name="Content.Exercise"/>
+    <r:ref name="Content.Example"/>
+    <r:ref name="Content.DivList"/>
+    <r:ref name="Content.ListWithTitle"/>
+    <r:ref name="Content.ParaWithTitle"/>
+    <r:element name="div">
+      <r:ref name="Content.Media.class"/>
+    </r:element>
+    <r:element name="div">
+      <r:ref name="Content.Alternates.class"/>
+    </r:element>
+    <r:element name="div">
+      <r:ref name="Content.Newline.class"/>
+    </r:element>
     <!-- TODO: Move FootnoteRefs to only be valid either in a Page or in <body> -->
-    <ref name="Content.FootnoteRefs"/>
+    <r:ref name="Content.FootnoteRefs"/>
 
     <!-- HTML5 elements -->
-    <ref name="section"/>
-    <ref name="figure"/>
+    <r:ref name="section"/>
+    <r:ref name="figure"/>
 
     <!-- TODO: Only allow this element inside a <div data-type="page"> -->
-    <ref name="cnx-pi"/>
-  </choice>
-</define>
+    <r:ref name="cnx-pi"/>
+  </r:choice>
+</r:define>
 
 
-<define name="Inline.class" combine="choice">
-  <!-- This extends the set of elements that are allowed in an "Inline" area -->
-  <choice>
-    <ref name="math"/>
-    <ref name="u"/>
-    <ref name="Content.SpanList"/>
-    <ref name="Content.Space"/>
-    <ref name="Content.FootnoteNumber"/>
-    <ref name="Content.Term"/>
-    <ref name="Content.Foreign"/>
-    <element name="span">
-      <ref name="Content.Media.class"/>
-    </element>
-    <element name="span">
-      <ref name="Content.Alternates.class"/>
-    </element>
-    <element name="span">
-      <ref name="Content.Newline.class"/>
-    </element>
-  </choice>
-</define>
-
+<r:define name="Inline.class" combine="choice">
+  <r:choice>
+    <r:ref name="math"/>
+    <r:ref name="u"/>
+    <r:ref name="Content.SpanList"/>
+    <r:ref name="Content.Space"/>
+    <r:ref name="Content.FootnoteNumber"/>
+    <r:ref name="Content.Term"/>
+    <r:ref name="Content.Foreign"/>
+    <r:element name="span">
+      <r:ref name="Content.Media.class"/>
+    </r:element>
+    <r:element name="span">
+      <r:ref name="Content.Alternates.class"/>
+    </r:element>
+    <r:element name="span">
+      <r:ref name="Content.Newline.class"/>
+    </r:element>
+  </r:choice>
+</r:define>
 
 
 
-<define name="Content.Space">
-  <!-- This provides horizontal space -->
-  <element name="span">
-    <attribute name="data-type">
-      <value>space</value>
-    </attribute>
-    <attribute name="data-count">
-      <ref name="Number.datatype"/>
-    </attribute>
-    <ref name="Text.datatype"/>
-  </element>
-</define>
+<r:define name="Content.Space">
+  <p>This provides horizontal space</p>
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>space</r:value>
+    </r:attribute>
+    <r:attribute name="data-count">
+      <r:ref name="Number.datatype"/>
+    </r:attribute>
+    <r:ref name="Text.datatype"/>
+  </r:element>
+</r:define>
 
 
-<define name="Content.Term">
-  <!-- This defines a Term -->
-  <element name="span">
-    <attribute name="data-type">
-      <value>term</value>
-    </attribute>
-    <ref name="id.attrib"/>
-    <ref name="class.attrib"/>
-    <ref name="Inline.model"/>
-  </element>
-</define>
+<r:define name="Content.Term">
+  <p>This defines a Term that will be bold and show up in the Book Index</p>
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>term</r:value>
+    </r:attribute>
+    <r:ref name="id.attrib"/>
+    <r:ref name="class.attrib"/>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
 
-<define name="Content.Foreign">
-  <!-- This defines a piece of Foreign text -->
-  <element name="span">
-    <attribute name="data-type">
-      <value>foreign</value>
-    </attribute>
-    <ref name="Inline.model"/>
-  </element>
-</define>
+<r:define name="Content.Foreign">
+  <p>This defines a piece of Foreign text</p>
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>foreign</r:value>
+    </r:attribute>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
 
 
-<define name="Content.FootnoteNumber">
-  <!-- This defines Footnote number that appears in the content. It is matched with an item in Content.FootnoteRefs -->
-  <element name="sup">
-    <attribute name="data-type">
-      <value>footnote-number</value>
-    </attribute>
-    <ref name="id.attrib.required"/>
-    <element name="a">
-      <attribute name="data-type">
-        <value>footnote-link</value>
-      </attribute>
-      <attribute name="href">
-        <ref name="URI.datatype"/>
-      </attribute>
-      <ref name="Number.datatype"/>
-    </element>
-  </element>
-</define>
+<r:define name="Content.FootnoteNumber">
+  <p>This defines Footnote number that appears in the content. It is matched with an item in Content.FootnoteRefs</p>
+  <r:element name="sup">
+    <r:attribute name="data-type">
+      <r:value>footnote-number</r:value>
+    </r:attribute>
+    <r:ref name="id.attrib.required"/>
+    <r:element name="a">
+      <r:attribute name="data-type">
+        <r:value>footnote-link</r:value>
+      </r:attribute>
+      <r:attribute name="href">
+        <r:ref name="URI.datatype"/>
+      </r:attribute>
+      <r:ref name="Number.datatype"/>
+    </r:element>
+  </r:element>
+</r:define>
 
-<define name="Content.ImageWithThumbnail">
-  <!-- This is an Image with a clickable thumbnail -->
-  <element name="a">
-    <attribute name="data-type">
-      <value>image-with-thumbnail</value>
-    </attribute>
-    <attribute name="href">
-      <ref name="URI.datatype"/>
-    </attribute>
-    <ref name="img"/>
-  </element>
-</define>
+<r:define name="Content.ImageWithThumbnail">
+  <p>This is an Image with a clickable thumbnail</p>
+  <r:element name="a">
+    <r:attribute name="data-type">
+      <r:value>image-with-thumbnail</r:value>
+    </r:attribute>
+    <r:attribute name="href">
+      <r:ref name="URI.datatype"/>
+    </r:attribute>
+    <r:ref name="img"/>
+  </r:element>
+</r:define>
 
 <!-- This occurs at the end of a Page
     <div
@@ -185,325 +185,325 @@
         ></ul
       ></div
     > -->
-<define name="Content.FootnoteRefs">
-  <element name="div">
-    <attribute name="data-type">
-      <value>footnote-refs</value>
-    </attribute>
-    <element name="h3">
-      <attribute name="data-type">
-        <value>footnote-refs-title</value>
-      </attribute>
-      <value>Footnotes</value>
-    </element>
-    <element name="ul">
-      <attribute name="data-list-type">
-        <value>bulleted</value>
-      </attribute>
-      <attribute name="data-bullet-style">
-        <value>none</value>
-      </attribute>
-      <oneOrMore>
-        <element name="li">
-          <attribute name="data-type">
-            <value>footnote-ref</value>
-          </attribute>
-          <ref name="id.attrib.required"/>
-          <element name="a">
-            <attribute name="data-type">
-              <value>footnote-ref-link</value>
-            </attribute>
-            <attribute name="href">
-              <ref name="URI.datatype"/>
-            </attribute>
-            <ref name="Number.datatype"/>
-          </element>
-          <element name="span">
-            <attribute name="data-type">
-              <value>footnote-ref-content</value>
-            </attribute>
-            <ref name="Inline.model"/>
-          </element>
-        </element>
-      </oneOrMore>
-    </element>
-  </element>
-</define>
+<r:define name="Content.FootnoteRefs">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>footnote-refs</r:value>
+    </r:attribute>
+    <r:element name="h3">
+      <r:attribute name="data-type">
+        <r:value>footnote-refs-title</r:value>
+      </r:attribute>
+      <r:value>Footnotes</r:value>
+    </r:element>
+    <r:element name="ul">
+      <r:attribute name="data-list-type">
+        <r:value>bulleted</r:value>
+      </r:attribute>
+      <r:attribute name="data-bullet-style">
+        <r:value>none</r:value>
+      </r:attribute>
+      <r:oneOrMore>
+        <r:element name="li">
+          <r:attribute name="data-type">
+            <r:value>footnote-ref</r:value>
+          </r:attribute>
+          <r:ref name="id.attrib.required"/>
+          <r:element name="a">
+            <r:attribute name="data-type">
+              <r:value>footnote-ref-link</r:value>
+            </r:attribute>
+            <r:attribute name="href">
+              <r:ref name="URI.datatype"/>
+            </r:attribute>
+            <r:ref name="Number.datatype"/>
+          </r:element>
+          <r:element name="span">
+            <r:attribute name="data-type">
+              <r:value>footnote-ref-content</r:value>
+            </r:attribute>
+            <r:ref name="Inline.model"/>
+          </r:element>
+        </r:element>
+      </r:oneOrMore>
+    </r:element>
+  </r:element>
+</r:define>
 
 <!-- Optional note title -->
-<define name="Content.Title.optional">
-  <optional>
-    <element name="div">
-      <attribute name="data-type">
-        <value>title</value>
-      </attribute>
-      <ref name="Common.attrib"/>
-      <ref name="Flow.model"/>
-    </element>
-  </optional>
-</define>
+<r:define name="Content.Title.optional">
+  <r:optional>
+    <r:element name="div">
+      <r:attribute name="data-type">
+        <r:value>title</r:value>
+      </r:attribute>
+      <r:ref name="Common.attrib"/>
+      <r:ref name="Flow.model"/>
+    </r:element>
+  </r:optional>
+</r:define>
 
-<define name="Content.Note.attrs">
-  <ref name="Common.attrib"/>
+<r:define name="Content.Note.attrs">
+  <r:ref name="Common.attrib"/>
   <!-- TODO: Move the following 2 into a common blockish-div-thing -->
-  <optional>
-    <attribute name="data-label">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
+  <r:optional>
+    <r:attribute name="data-label">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
   <!-- TODO: Remove this attribute in the CNXML->HTML conversion -->
-  <optional>
-    <attribute name="data-has-label">
-      <value>true</value>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-element-type">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <ref name="Content.Title.optional"/>
-</define>
+  <r:optional>
+    <r:attribute name="data-has-label">
+      <r:value>true</r:value>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-element-type">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <r:ref name="Content.Title.optional"/>
+</r:define>
 
 
-<define name="Content.Note">
-  <element name="div">
-    <attribute name="data-type">
-      <value>note</value>
-    </attribute>
-    <ref name="Content.Note.attrs"/>
-    <ref name="Flow.model"/>
-  </element>
-</define>
+<r:define name="Content.Note">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>note</r:value>
+    </r:attribute>
+    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
 
-<define name="Content.Equation">
-  <element name="div">
-    <attribute name="data-type">
-      <value>equation</value>
-    </attribute>
-    <ref name="Content.Note.attrs"/>
-    <ref name="Flow.model"/>
-  </element>
-</define>
+<r:define name="Content.Equation">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>equation</r:value>
+    </r:attribute>
+    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
 
 
-<define name="Content.Problem">
-  <element name="div">
-    <attribute name="data-type">
-      <value>problem</value>
-    </attribute>
-    <ref name="Content.Note.attrs"/>
-    <ref name="Flow.model"/>
-  </element>
-</define>
+<r:define name="Content.Problem">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>problem</r:value>
+    </r:attribute>
+    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
 
-<define name="Content.Solution">
-  <element name="div">
-    <attribute name="data-type">
-      <value>solution</value>
-    </attribute>
+<r:define name="Content.Solution">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>solution</r:value>
+    </r:attribute>
     <!-- TODO: This is a deprecated attribute -->
-    <optional>
-      <attribute name="data-print-placement">
-        <choice>
-          <value>here</value>
-          <value>end</value>
-        </choice>
-      </attribute>
-    </optional>
-    <ref name="Content.Note.attrs"/>
-    <ref name="Flow.model"/>
-  </element>
-</define>
+    <r:optional>
+      <r:attribute name="data-print-placement">
+        <r:choice>
+          <r:value>here</r:value>
+          <r:value>end</r:value>
+        </r:choice>
+      </r:attribute>
+    </r:optional>
+    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
 
-<define name="Content.Commentary">
-  <element name="div">
-    <attribute name="data-type">
-      <value>commentary</value>
-    </attribute>
-    <ref name="Content.Note.attrs"/>
-    <ref name="Flow.model"/>
-  </element>
-</define>
+<r:define name="Content.Commentary">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>commentary</r:value>
+    </r:attribute>
+    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
 
 <!-- TODO: Require id attributes for some elements -->
-<define name="Content.Exercise">
-  <element name="div">
-    <attribute name="data-type">
-      <value>exercise</value>
-    </attribute>
+<r:define name="Content.Exercise">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>exercise</r:value>
+    </r:attribute>
     <!-- TODO: This is a deprecated attribute -->
-    <optional>
-      <attribute name="data-print-placement">
-        <choice>
-          <value>here</value>
-          <value>end</value>
-        </choice>
-      </attribute>
-    </optional>
-    <ref name="Content.Note.attrs"/>
-    <ref name="Content.Problem"/>
-    <zeroOrMore>
-      <ref name="Content.Solution"/>
-    </zeroOrMore>
-    <zeroOrMore>
-      <ref name="Content.Commentary"/>
-    </zeroOrMore>
-  </element>
-</define>
+    <r:optional>
+      <r:attribute name="data-print-placement">
+        <r:choice>
+          <r:value>here</r:value>
+          <r:value>end</r:value>
+        </r:choice>
+      </r:attribute>
+    </r:optional>
+    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Content.Problem"/>
+    <r:zeroOrMore>
+      <r:ref name="Content.Solution"/>
+    </r:zeroOrMore>
+    <r:zeroOrMore>
+      <r:ref name="Content.Commentary"/>
+    </r:zeroOrMore>
+  </r:element>
+</r:define>
 
 
-<define name="Content.Example">
-  <element name="div">
-    <attribute name="data-type">
-      <value>example</value>
-    </attribute>
-    <ref name="Content.Note.attrs"/>
-    <ref name="Flow.model"/>
-  </element>
-</define>
-
-
-<!-- <div data-count="1" data-type="newline"  -->
-<define name="Content.Newline.class">
-  <attribute name="data-type">
-    <value>newline</value>
-  </attribute>
-  <ref name="Content.Note.attrs"/>
-  <optional>
-    <attribute name="data-count">
-      <ref name="Number.datatype"/>
-    </attribute>
-  </optional>
-  <zeroOrMore>
-    <ref name="br"/>
-  </zeroOrMore>
-</define>
-
-
-<define name="Content.DivList">
-  <element name="div">
-    <ref name="div-span-list.attrs"/>
-    <oneOrMore>
-      <ref name="Content.DivListItem"/>
-    </oneOrMore>
-  </element>
-</define>
+<r:define name="Content.Example">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>example</r:value>
+    </r:attribute>
+    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
 
 
 <!-- <div data-count="1" data-type="newline"  -->
-<define name="Content.DivListItem">
-  <element name="div">
-    <attribute name="data-type">
-      <value>item</value>
-    </attribute>
-    <ref name="Content.Note.attrs"/>
-    <ref name="Flow.model"/>
-  </element>
-</define>
-
-<define name="Content.SpanList">
-  <element name="span">
-    <ref name="div-span-list.attrs"/>
-    <oneOrMore>
-      <ref name="Content.SpanListItem"/>
-    </oneOrMore>
-  </element>
-</define>
-
-<define name="Content.SpanListItem">
-  <element name="span">
-    <attribute name="data-type">
-      <value>item</value>
-    </attribute>
-    <ref name="Content.Note.attrs"/>
-    <ref name="Inline.model"/>
-  </element>
-</define>
+<r:define name="Content.Newline.class">
+  <r:attribute name="data-type">
+    <r:value>newline</r:value>
+  </r:attribute>
+  <r:ref name="Content.Note.attrs"/>
+  <r:optional>
+    <r:attribute name="data-count">
+      <r:ref name="Number.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <r:zeroOrMore>
+    <r:ref name="br"/>
+  </r:zeroOrMore>
+</r:define>
 
 
-<define name="Content.ListWithTitle">
-  <element name="div">
-    <attribute name="data-type">
-      <value>list-with-title</value>
-    </attribute>
-    <ref name="id.attrib.required"/>
-    <element name="div">
-      <attribute name="data-type">
-        <value>title</value>
-      </attribute>
-      <ref name="id.attrib"/>
-      <ref name="Inline.model"/>
-    </element>
-    <choice>
-      <ref name="ul"/>
-      <ref name="ol"/>
-      <ref name="Content.DivList"/>
-    </choice>
-  </element>
-</define>
-
-<define name="Content.ParaWithTitle">
-  <element name="p">
-    <ref name="p.attlist"/>
-    <ref name="Content.InlineTitle"/>
-    <ref name="Inline.model"/>
-  </element>
-</define>
+<r:define name="Content.DivList">
+  <r:element name="div">
+    <r:ref name="div-span-list.attrs"/>
+    <r:oneOrMore>
+      <r:ref name="Content.DivListItem"/>
+    </r:oneOrMore>
+  </r:element>
+</r:define>
 
 
-<define name="Content.Alternates.class">
-  <attribute name="data-type">
-    <value>alternates</value>
-  </attribute>
-  <ref name="id.attrib.required"/>
-  <optional>
-    <attribute name="data-alt">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <oneOrMore>
-    <choice>
-      <ref name="img"/>
-      <ref name="Content.ImageWithThumbnail"/>
-    </choice>
-  </oneOrMore>
-</define>
+<!-- <div data-count="1" data-type="newline"  -->
+<r:define name="Content.DivListItem">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>item</r:value>
+    </r:attribute>
+    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
 
-<define name="Content.Media.class">
-  <attribute name="data-type">
-    <value>media</value>
-  </attribute>
-  <ref name="id.attrib.required"/>
-  <attribute name="data-alt">
-    <ref name="Text.datatype"/>
-  </attribute>
-  <optional>
-    <attribute name="data-longdesc">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <choice>
-    <ref name="img"/>
-    <ref name="iframe"/>
-    <!-- <ref name="Content.Audio"/>
-    <ref name="Content.Video"/>
-    <ref name="Content.Labview"/>
-    <ref name="Content.Download"/>
-    <ref name="Content.Flash"/> -->
-  </choice>
-</define>
+<r:define name="Content.SpanList">
+  <r:element name="span">
+    <r:ref name="div-span-list.attrs"/>
+    <r:oneOrMore>
+      <r:ref name="Content.SpanListItem"/>
+    </r:oneOrMore>
+  </r:element>
+</r:define>
+
+<r:define name="Content.SpanListItem">
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>item</r:value>
+    </r:attribute>
+    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
 
 
+<r:define name="Content.ListWithTitle">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>list-with-title</r:value>
+    </r:attribute>
+    <r:ref name="id.attrib.required"/>
+    <r:element name="div">
+      <r:attribute name="data-type">
+        <r:value>title</r:value>
+      </r:attribute>
+      <r:ref name="id.attrib"/>
+      <r:ref name="Inline.model"/>
+    </r:element>
+    <r:choice>
+      <r:ref name="ul"/>
+      <r:ref name="ol"/>
+      <r:ref name="Content.DivList"/>
+    </r:choice>
+  </r:element>
+</r:define>
 
-<define name="Content.InlineTitle">
-  <element name="span">
-    <attribute name="data-type">
-      <value>title</value>
-    </attribute>
-    <ref name="Inline.model"/>
-  </element>
-</define>
+<r:define name="Content.ParaWithTitle">
+  <r:element name="p">
+    <r:ref name="p.attlist"/>
+    <r:ref name="Content.InlineTitle"/>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
+
+
+<r:define name="Content.Alternates.class">
+  <r:attribute name="data-type">
+    <r:value>alternates</r:value>
+  </r:attribute>
+  <r:ref name="id.attrib.required"/>
+  <r:optional>
+    <r:attribute name="data-alt">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <r:oneOrMore>
+    <r:choice>
+      <r:ref name="img"/>
+      <r:ref name="Content.ImageWithThumbnail"/>
+    </r:choice>
+  </r:oneOrMore>
+</r:define>
+
+<r:define name="Content.Media.class">
+  <r:attribute name="data-type">
+    <r:value>media</r:value>
+  </r:attribute>
+  <r:ref name="id.attrib.required"/>
+  <r:attribute name="data-alt">
+    <r:ref name="Text.datatype"/>
+  </r:attribute>
+  <r:optional>
+    <r:attribute name="data-longdesc">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <r:choice>
+    <r:ref name="img"/>
+    <r:ref name="iframe"/>
+    <!-- <r:ref name="Content.Audio"/>
+    <r:ref name="Content.Video"/>
+    <r:ref name="Content.Labview"/>
+    <r:ref name="Content.Download"/>
+    <r:ref name="Content.Flash"/> -->
+  </r:choice>
+</r:define>
+
+
+
+<r:define name="Content.InlineTitle">
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>title</r:value>
+    </r:attribute>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
 
 
 <!-- <div data-type="glossary"><h3 data-type="glossary-title">Glossary</h3>
@@ -512,335 +512,335 @@
 <dd id="fs-id1167836525065">The coefficient of a term is the constant that multiplies the variable in a term.</dd>
 </dl>
 </div> -->
-<define name="Content.Glossary">
-  <element name="div">
-    <attribute name="data-type">
-      <value>glossary</value>
-    </attribute>
-    <element name="h3">
-      <attribute name="data-type">
-        <value>glossary-title</value>
-      </attribute>
-      <value>Glossary</value>
-    </element>
+<r:define name="Content.Glossary">
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>glossary</r:value>
+    </r:attribute>
+    <r:element name="h3">
+      <r:attribute name="data-type">
+        <r:value>glossary-title</r:value>
+      </r:attribute>
+      <r:value>Glossary</r:value>
+    </r:element>
     <!-- TODO: only allow one <dl> per Glossary -->
-    <oneOrMore>
-      <ref name="dl"/>
-    </oneOrMore>
-  </element>
-</define>
+    <r:oneOrMore>
+      <r:ref name="dl"/>
+    </r:oneOrMore>
+  </r:element>
+</r:define>
 
 
 
 
 
-<define name="id.attrib.required">
-  <attribute name="id">
-    <ref name="ID.datatype"/>
-  </attribute>
-</define>
+<r:define name="id.attrib.required">
+  <r:attribute name="id">
+    <r:ref name="ID.datatype"/>
+  </r:attribute>
+</r:define>
 
 
 
 <!-- <table data-label=""> -->
-<define name="table.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-label">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-frame">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-colsep">
-      <ref name="Number.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-rowsep">
-      <ref name="Number.datatype"/>
-    </attribute>
-  </optional>
-</define>
+<r:define name="table.attlist" combine="interleave">
+  <r:optional>
+    <r:attribute name="data-label">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-frame">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-colsep">
+      <r:ref name="Number.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-rowsep">
+      <r:ref name="Number.datatype"/>
+    </r:attribute>
+  </r:optional>
+</r:define>
 
 <!-- allow an optional title for the caption -->
-<define name="caption" combine="choice">
-  <element name="caption">
-    <ref name="caption.attlist"/>
-    <ref name="Content.InlineTitle"/>
-    <ref name="Inline.model"/>
-  </element>
-</define>
+<r:define name="caption" combine="choice">
+  <r:element name="caption">
+    <r:ref name="caption.attlist"/>
+    <r:ref name="Content.InlineTitle"/>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
 
 
 <!-- <td data-valign="top"> -->
-<define name="enum.attr.td.data-valign">
-  <choice>
-    <value>top</value>
-    <value>middle</value>
-    <value>bottom</value>
-  </choice>
-</define>
-<define name="enum.attr.td.data-align">
-  <choice>
-    <value>left</value>
-    <value>center</value>
-    <value>right</value>
-    <value>justify</value>
-    <value>char</value>
-  </choice>
-</define>
-<define name="td.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-valign">
-      <ref name="enum.attr.td.data-valign"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-align">
-      <ref name="enum.attr.td.data-align"/>
-    </attribute>
-  </optional>
-</define>
+<r:define name="enum.attr.td.data-valign">
+  <r:choice>
+    <r:value>top</r:value>
+    <r:value>middle</r:value>
+    <r:value>bottom</r:value>
+  </r:choice>
+</r:define>
+<r:define name="enum.attr.td.data-align">
+  <r:choice>
+    <r:value>left</r:value>
+    <r:value>center</r:value>
+    <r:value>right</r:value>
+    <r:value>justify</r:value>
+    <r:value>char</r:value>
+  </r:choice>
+</r:define>
+<r:define name="td.attlist" combine="interleave">
+  <r:optional>
+    <r:attribute name="data-valign">
+      <r:ref name="enum.attr.td.data-valign"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-align">
+      <r:ref name="enum.attr.td.data-align"/>
+    </r:attribute>
+  </r:optional>
+</r:define>
 
 <!-- <th data-align="center"> -->
-<define name="th.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-valign">
-      <ref name="enum.attr.td.data-valign"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-align">
-      <ref name="enum.attr.td.data-align"/>
-    </attribute>
-  </optional>
-</define>
+<r:define name="th.attlist" combine="interleave">
+  <r:optional>
+    <r:attribute name="data-valign">
+      <r:ref name="enum.attr.td.data-valign"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-align">
+      <r:ref name="enum.attr.td.data-align"/>
+    </r:attribute>
+  </r:optional>
+</r:define>
 
 
 
 
 <!-- <ol data-number-style="lower-alpha"> -->
-<define name="enum.attr.ol.data-number-style">
-  <choice>
-    <value>arabic</value><!-- TODO: remove the default -->
-    <value>lower-alpha</value>
-    <value>upper-alpha</value>
-    <value>lower-roman</value>
-    <value>upper-roman</value>
-  </choice>
-</define>
-<define name="enum.attr.ol.data-mark-suffix">
-  <text/><!-- TODO: maybe disallow this and just discard it in the CNXML->HTML conversion -->
-</define>
-<define name="ol.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-number-style">
-      <ref name="enum.attr.ol.data-number-style"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-mark-suffix">
-      <ref name="enum.attr.ol.data-mark-suffix"/>
-    </attribute>
-  </optional>
+<r:define name="enum.attr.ol.data-number-style">
+  <r:choice>
+    <r:value>arabic</r:value><!-- TODO: remove the default -->
+    <r:value>lower-alpha</r:value>
+    <r:value>upper-alpha</r:value>
+    <r:value>lower-roman</r:value>
+    <r:value>upper-roman</r:value>
+  </r:choice>
+</r:define>
+<r:define name="enum.attr.ol.data-mark-suffix">
+  <r:text/><!-- TODO: maybe disallow this and just discard it in the CNXML->HTML conversion -->
+</r:define>
+<r:define name="ol.attlist" combine="interleave">
+  <r:optional>
+    <r:attribute name="data-number-style">
+      <r:ref name="enum.attr.ol.data-number-style"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-mark-suffix">
+      <r:ref name="enum.attr.ol.data-mark-suffix"/>
+    </r:attribute>
+  </r:optional>
   <!-- algebra trigonometry uses this once -->
-  <optional>
-    <attribute name="data-mark-prefix">
-      <ref name="enum.attr.ol.data-mark-suffix"/>
-    </attribute>
-  </optional>
-</define>
+  <r:optional>
+    <r:attribute name="data-mark-prefix">
+      <r:ref name="enum.attr.ol.data-mark-suffix"/>
+    </r:attribute>
+  </r:optional>
+</r:define>
 
 
 
 <!-- <ul data-bullet-style="bullet"  -->
-<define name="enum.attr.ul.data-bullet-style">
-  <choice>
-    <value>bullet</value><!-- TODO: remove the default -->
-    <value>open-circle</value>
-    <value>pilcrow</value>
-    <value>rpilcrow</value>
-    <value>asterisk</value>
-    <value>dash</value>
-    <value>section</value>
-    <value>none</value>
-  </choice>
-</define>
-<define name="ul.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-bullet-style">
-      <ref name="enum.attr.ul.data-bullet-style"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-mark-suffix">
-      <ref name="enum.attr.ol.data-mark-suffix"/>
-    </attribute>
-  </optional>
+<r:define name="enum.attr.ul.data-bullet-style">
+  <r:choice>
+    <r:value>bullet</r:value><!-- TODO: remove the default -->
+    <r:value>open-circle</r:value>
+    <r:value>pilcrow</r:value>
+    <r:value>rpilcrow</r:value>
+    <r:value>asterisk</r:value>
+    <r:value>dash</r:value>
+    <r:value>section</r:value>
+    <r:value>none</r:value>
+  </r:choice>
+</r:define>
+<r:define name="ul.attlist" combine="interleave">
+  <r:optional>
+    <r:attribute name="data-bullet-style">
+      <r:ref name="enum.attr.ul.data-bullet-style"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-mark-suffix">
+      <r:ref name="enum.attr.ol.data-mark-suffix"/>
+    </r:attribute>
+  </r:optional>
   <!-- lists have data-labeled-item="true" so CSS can set list-style-type: none; -->
-  <optional>
-    <attribute name="data-labeled-item">
-      <value>true</value>
-    </attribute>
-  </optional>
-</define>
+  <r:optional>
+    <r:attribute name="data-labeled-item">
+      <r:value>true</r:value>
+    </r:attribute>
+  </r:optional>
+</r:define>
 
 <!-- <li cnx-archive-shortid="vPtYALiD@9" cnx-archive-uri="bcfb5800-b883-4a63-8599-e098b407ddfc@9"> (in the ToC) -->
-<define name="li.attlist" combine="interleave">
-  <optional><!-- Make these required when in the ToC -->
-    <attribute name="cnx-archive-shortid"><!-- TODO: Rename this to data-* -->
-      <ref name="Text.datatype"/>
-    </attribute>
-    <attribute name="cnx-archive-uri"><!-- TODO: Rename this to data-* -->
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-label">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-</define>
+<r:define name="li.attlist" combine="interleave">
+  <r:optional><!-- Make these required when in the ToC -->
+    <r:attribute name="cnx-archive-shortid"><!-- TODO: Rename this to data-* -->
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+    <r:attribute name="cnx-archive-uri"><!-- TODO: Rename this to data-* -->
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-label">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+</r:define>
 
 
 
 <!-- <img data-alt="..." data-media-type="..."> -->
-<define name="enum.attr.img.data-media-type">
-  <choice>
-    <value>image/png</value>
-    <value>image/jpeg</value>
-    <value>application/postscript</value>
+<r:define name="enum.attr.img.data-media-type">
+  <r:choice>
+    <r:value>image/png</r:value>
+    <r:value>image/jpeg</r:value>
+    <r:value>application/postscript</r:value>
     <!-- TODO: automatically convert this to jpeg -->
-    <value>image/jpg</value>
-  </choice>
-</define>
-<define name="img.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-media-type">
-      <ref name="enum.attr.img.data-media-type"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-longdesc">
-      <ref name="URI.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-print-width">
-      <ref name="Length.datatype"/>
-    </attribute>
-  </optional>
+    <r:value>image/jpg</r:value>
+  </r:choice>
+</r:define>
+<r:define name="img.attlist" combine="interleave">
+  <r:optional>
+    <r:attribute name="data-media-type">
+      <r:ref name="enum.attr.img.data-media-type"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-longdesc">
+      <r:ref name="URI.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-print-width">
+      <r:ref name="Length.datatype"/>
+    </r:attribute>
+  </r:optional>
 
   <!-- For images with thumbnails m42042 in Physics (col11406) -->
-  <optional>
-    <attribute name="data-print">
-      <ref name="Boolean.datatype"/>
-    </attribute>
-  </optional>
-</define>
+  <r:optional>
+    <r:attribute name="data-print">
+      <r:ref name="Boolean.datatype"/>
+    </r:attribute>
+  </r:optional>
+</r:define>
 
 
 
 
 <!-- <strong data-effect="..."> -->
-<define name="enum.attr.strong.data-effect">
+<r:define name="enum.attr.strong.data-effect">
   <!-- TODO: remove the default -->
-  <value>bold</value>
-</define>
-<define name="strong.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-effect">
-      <ref name="enum.attr.strong.data-effect"/>
-    </attribute>
-  </optional>
-</define>
+  <r:value>bold</r:value>
+</r:define>
+<r:define name="strong.attlist" combine="interleave">
+  <r:optional>
+    <r:attribute name="data-effect">
+      <r:ref name="enum.attr.strong.data-effect"/>
+    </r:attribute>
+  </r:optional>
+</r:define>
 
 
 
 <!-- <em data-effect="..."> -->
-<define name="enum.attr.em.data-effect">
-  <choice>
+<r:define name="enum.attr.em.data-effect">
+  <r:choice>
     <!-- TODO: remove the default -->
-    <value>italics</value>
-    <value>smallcaps</value>
-  </choice>
-</define>
-<define name="em.attlist" combine="interleave">
-  <optional>
-    <attribute name="data-effect">
-      <ref name="enum.attr.em.data-effect"/>
-    </attribute>
-  </optional>
-</define>
+    <r:value>italics</r:value>
+    <r:value>smallcaps</r:value>
+  </r:choice>
+</r:define>
+<r:define name="em.attlist" combine="interleave">
+  <r:optional>
+    <r:attribute name="data-effect">
+      <r:ref name="enum.attr.em.data-effect"/>
+    </r:attribute>
+  </r:optional>
+</r:define>
 
 
 
 <!-- <span data-type="..." data-alt="..."> -->
-<define name="enum.attr.span.data-type">
-  <choice>
+<r:define name="enum.attr.span.data-type">
+  <r:choice>
     <!-- TODO: either remove these or move them in to being optional children of <cite> -->
-    <value>cite-title</value>
-  </choice>
-</define>
-<define name="span.attlist" combine="interleave">
-  <optional><!-- TODO: make this required again. It is optional because of the ToC -->
-    <attribute name="data-type">
-      <ref name="enum.attr.span.data-type"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-alt">
+    <r:value>cite-title</r:value>
+  </r:choice>
+</r:define>
+<r:define name="span.attlist" combine="interleave">
+  <r:optional><!-- TODO: make this required again. It is optional because of the ToC -->
+    <r:attribute name="data-type">
+      <r:ref name="enum.attr.span.data-type"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-alt">
       <!-- TODO: Maybe change the CNXML conversion to use an ARIA attribute -->
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
 
-</define>
+</r:define>
 
 
 
 
 <!-- These are used in <section> elements and should be restricted to that. <h1 data-type="..."> -->
-<define name="enum.attr.Heading.data-type">
-  <value>title</value>
-</define>
-<define name="Heading.attrib" combine="interleave">
+<r:define name="enum.attr.Heading.data-type">
+  <r:value>title</r:value>
+</r:define>
+<r:define name="Heading.attrib" combine="interleave">
   <!-- TODO: Make a different validation structure for Page elements. That way these values are not valid within the content -->
-  <attribute name="data-type">
-    <ref name="enum.attr.Heading.data-type"/>
-  </attribute>
-</define>
+  <r:attribute name="data-type">
+    <r:ref name="enum.attr.Heading.data-type"/>
+  </r:attribute>
+</r:define>
 
 
 
 
-<define name="div.attlist" combine="interleave">
+<r:define name="div.attlist" combine="interleave">
 
   <!-- data-has-label="true" data-label="" -->
-  <optional>
-    <attribute name="data-label">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-has-label"><!-- TODO: remove from cnxml conversion -->
-      <value>true</value>
-    </attribute>
-  </optional>
+  <r:optional>
+    <r:attribute name="data-label">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-has-label"><!-- TODO: remove from cnxml conversion -->
+      <r:value>true</r:value>
+    </r:attribute>
+  </r:optional>
 
 
   <!-- <div class="note economics bringhome" data-element-type="note" data-label="note" data-type="note" -->
-  <optional><!-- TODO: Make this optional when data-type="note" -->
-    <attribute name="data-element-type">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
+  <r:optional><!-- TODO: Make this optional when data-type="note" -->
+    <r:attribute name="data-element-type">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
 
-</define>
+</r:define>
 
 
 
@@ -848,78 +848,78 @@
 
 <!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
 <!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
-<define name="div-span-list.attrs">
-  <attribute name="data-type">
-    <value>list</value>
-  </attribute>
+<r:define name="div-span-list.attrs">
+  <r:attribute name="data-type">
+    <r:value>list</r:value>
+  </r:attribute>
   <!-- TODO: This may only apply to inline lists -->
-  <optional>
-    <attribute name="data-mark-suffix">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
+  <r:optional>
+    <r:attribute name="data-mark-suffix">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
   <!-- TODO: This may only apply to inline lists -->
-  <optional>
-    <attribute name="data-item-sep">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <choice>
-    <group>
-      <attribute name="data-list-type">
-        <choice>
-          <value>bulleted</value>
-          <value>labeled-item</value>
-        </choice>
-      </attribute>
-      <optional>
-        <attribute name="data-bullet-style">
-          <ref name="enum.attr.ul.data-bullet-style"/>
-        </attribute>
-      </optional>
-    </group>
-    <group>
-      <attribute name="data-list-type">
-        <value>enumerated</value>
-      </attribute>
-      <optional>
-        <attribute name="data-number-style">
-          <ref name="enum.attr.ol.data-number-style"/>
-        </attribute>
-      </optional>
-    </group>
-  </choice>
-  <ref name="Content.Note.attrs"/>
-</define>
+  <r:optional>
+    <r:attribute name="data-item-sep">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <r:choice>
+    <r:group>
+      <r:attribute name="data-list-type">
+        <r:choice>
+          <r:value>bulleted</r:value>
+          <r:value>labeled-item</r:value>
+        </r:choice>
+      </r:attribute>
+      <r:optional>
+        <r:attribute name="data-bullet-style">
+          <r:ref name="enum.attr.ul.data-bullet-style"/>
+        </r:attribute>
+      </r:optional>
+    </r:group>
+    <r:group>
+      <r:attribute name="data-list-type">
+        <r:value>enumerated</r:value>
+      </r:attribute>
+      <r:optional>
+        <r:attribute name="data-number-style">
+          <r:ref name="enum.attr.ol.data-number-style"/>
+        </r:attribute>
+      </r:optional>
+    </r:group>
+  </r:choice>
+  <r:ref name="Content.Note.attrs"/>
+</r:define>
 
 
 
 <!-- For strikethrough. from xhtml/legacy.rng . TODO: Mark this up differently and move this into a separate legacy file -->
-<define name="u">
-  <element name="u">
-    <ref name="u.attlist"/>
-    <ref name="Inline.model"/>
-  </element>
-</define>
+<r:define name="u">
+  <r:element name="u">
+    <r:ref name="u.attlist"/>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
 
-<define name="u.attlist">
-  <ref name="Common.attrib"/>
-</define>
+<r:define name="u.attlist">
+  <r:ref name="Common.attrib"/>
+</r:define>
 
 <!-- From xhtml/legacy.rng TODO: Move this into a separate legacy file -->
-<define name="ol.attlist" combine="interleave">
-  <optional>
-    <attribute name="type"/>
-  </optional>
-  <optional>
-    <attribute name="compact">
-      <value>compact</value>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="start"/>
-  </optional>
-</define>
+<r:define name="ol.attlist" combine="interleave">
+  <r:optional>
+    <r:attribute name="type"/>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="compact">
+      <r:value>compact</r:value>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="start"/>
+  </r:optional>
+</r:define>
 
 
 
@@ -928,111 +928,109 @@
 
 
 <!-- The <section> -->
-<define name="section">
-  <element name="section">
-    <ref name="section.attlist"/>
+<r:define name="section">
+  <r:element name="section">
+    <r:ref name="section.attlist"/>
     <!-- TODO: Ensure that headings all have the data-type="title" attribute or just remove that altogether. Or ensure the correct heading level -->
-    <optional>
-      <ref name="Heading.class"/>
-    </optional>
+    <r:optional>
+      <r:ref name="Heading.class"/>
+    </r:optional>
     <!-- This is a flow because apparently <span data-type="media"> is allowed -->
-    <ref name="Flow.model"/>
-  </element>
-</define>
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
 
-<define name="section.attlist">
-  <ref name="Common.attrib"/>
-  <attribute name="data-depth">
-    <ref name="Number.datatype"/>
-  </attribute>
-  <optional>
-    <attribute name="data-label">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
+<r:define name="section.attlist">
+  <r:ref name="Common.attrib"/>
+  <r:attribute name="data-depth">
+    <r:ref name="Number.datatype"/>
+  </r:attribute>
+  <r:optional>
+    <r:attribute name="data-label">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
   <!-- Found in m51005 (chemistry book col11760)-->
-  <optional>
-    <attribute name="data-element-type">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-</define>
+  <r:optional>
+    <r:attribute name="data-element-type">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+</r:define>
 
 
 
 
 
 <!-- The <figure> -->
-<define name="figure">
-  <element name="figure">
-    <ref name="figure.attlist"/>
-    <ref name="Content.Title.optional"/>
-    <optional>
-      <ref name="figcaption"/>
-    </optional>
-    <ref name="Flow.model"/>
-  </element>
-</define>
+<r:define name="figure">
+  <r:element name="figure">
+    <r:ref name="figure.attlist"/>
+    <r:ref name="Content.Title.optional"/>
+    <r:optional>
+      <r:ref name="figcaption"/>
+    </r:optional>
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
 
-<define name="figure.attlist">
-  <ref name="Common.attrib"/>
-  <optional>
-    <attribute name="data-label">
-      <ref name="Text.datatype"/>
-    </attribute>
-  </optional>
-  <optional>
-    <attribute name="data-orient">
-      <choice>
-        <value>vertical</value>
-        <value>horizontal</value>
-      </choice>
-    </attribute>
-  </optional>
-</define>
+<r:define name="figure.attlist">
+  <r:ref name="Common.attrib"/>
+  <r:optional>
+    <r:attribute name="data-label">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-orient">
+      <r:choice>
+        <r:value>vertical</r:value>
+        <r:value>horizontal</r:value>
+      </r:choice>
+    </r:attribute>
+  </r:optional>
+</r:define>
 
 
 
 
 <!-- The <figcaption> -->
-<define name="figcaption">
-  <element name="figcaption">
-    <ref name="figcaption.attlist"/>
-    <optional>
-      <ref name="Content.InlineTitle"/>
-    </optional>
+<r:define name="figcaption">
+  <r:element name="figcaption">
+    <r:ref name="figcaption.attlist"/>
+    <r:optional>
+      <r:ref name="Content.InlineTitle"/>
+    </r:optional>
 
     <!-- Algebra and trigonometry has newlines in the figcaption for some reason -->
-    <ref name="Flow.model"/>
-  </element>
-</define>
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
 
-<define name="figcaption.attlist">
-  <!-- <ref name="Common.attrib"/> -->
-  <ref name="id.attrib"/>
-</define>
+<r:define name="figcaption.attlist">
+  <!-- <r:ref name="Common.attrib"/> -->
+  <r:ref name="id.attrib"/>
+</r:define>
 
 
 
 <!-- <div data-type="page" id="2c962197-8004-45c5-8c65-0eb785cbe09b"> -->
 <!-- <cnx-pi data-type="cnx.eoc">class="self-check-questions" title="Self-Check Questions"</cnx-pi> -->
-<define name="cnx-pi">
-  <element name="cnx-pi">
-    <ref name="cnx-pi.attlist"/>
-    <ref name="cnx-pi.datatype"/>
-  </element>
-</define>
+<r:define name="cnx-pi">
+  <r:element name="cnx-pi">
+    <r:ref name="cnx-pi.attlist"/>
+    <r:ref name="cnx-pi.datatype"/>
+  </r:element>
+</r:define>
 
-<define name="cnx-pi.attlist">
-  <attribute name="data-type">
-    <choice>
-      <value>cnx.eoc</value>
-      <ref name="Text.datatype"/>
-    </choice>
-  </attribute>
-</define>
-
-
+<r:define name="cnx-pi.attlist">
+  <r:attribute name="data-type">
+    <r:choice>
+      <r:value>cnx.eoc</r:value>
+      <r:ref name="Text.datatype"/>
+    </r:choice>
+  </r:attribute>
+</r:define>
 
 
 
@@ -1041,51 +1039,53 @@
 
 
 
-<define name="cnx-pi.datatype">
-  <text/>
-</define>
+
+
+<r:define name="cnx-pi.datatype">
+  <r:text/>
+</r:define>
 
 
 <!-- Placeholder for enums -->
-<define name="TODO.enum.datatype">
-  <text/>
-</define>
+<r:define name="TODO.enum.datatype">
+  <r:text/>
+</r:define>
 
 
-<define name="UUID-and-version.datatype">
-  <text/>
-</define>
+<r:define name="UUID-and-version.datatype">
+  <r:text/>
+</r:define>
 
-<define name="Sha.datatype">
-  <text/>
-</define>
+<r:define name="Sha.datatype">
+  <r:text/>
+</r:define>
 
-<define name="ShortId.datatype">
-  <text/>
-</define>
+<r:define name="ShortId.datatype">
+  <r:text/>
+</r:define>
 
-<define name="UserLogin.datatype">
-  <text/>
-</define>
+<r:define name="UserLogin.datatype">
+  <r:text/>
+</r:define>
 
-<define name="UserName.datatype">
-  <text/>
-</define>
+<r:define name="UserName.datatype">
+  <r:text/>
+</r:define>
 
 
-<define name="Boolean.datatype">
-  <choice>
-    <value>true</value>
-    <value>false</value>
-  </choice>
-</define>
+<r:define name="Boolean.datatype">
+  <r:choice>
+    <r:value>true</r:value>
+    <r:value>false</r:value>
+  </r:choice>
+</r:define>
 
 <!-- Mathematics and Statistics -->
 <!-- TODO: enumerate the options -->
-<define name="Subject.datatype">
-  <text/>
-</define>
+<r:define name="Subject.datatype">
+  <r:text/>
+</r:define>
 
 
 
-</grammar>
+</r:grammar>

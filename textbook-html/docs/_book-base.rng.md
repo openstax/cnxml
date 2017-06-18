@@ -272,7 +272,8 @@ One of the following:
 `"language"`
 # meta.attlist
 
-This element extends an existing defition
+This interleaves additional requirements which restricts the definition
+of `meta.attlist`
 
 One of the following:
 
