@@ -2,7 +2,7 @@
 
 * [./_content.rng](../textbook-html/./_content.rng)
 
-# File Organization
+# File Overview
 
 This file is organized into the following sections
 

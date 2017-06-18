@@ -4,7 +4,7 @@
 
 <r:include href="./_content.rng"/>
 
-<h1>File Organization</h1>
+<h1>File Overview</h1>
 <p>This file is organized into the following sections</p>
 <ol>
   <li>Book Structure</li>

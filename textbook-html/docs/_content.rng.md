@@ -17,7 +17,7 @@
 * [../xhtml/modules/target.rng](../textbook-html/../xhtml/modules/target.rng)
 * [../mathml2.rng](../textbook-html/../mathml2.rng)
 
-# Organization
+# File Overview
 
 This file is organized into the following sections:
 
