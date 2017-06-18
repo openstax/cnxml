@@ -12,7 +12,7 @@ if [[ $(which kramdown) ]]; then
 
     src_file="./textbook-html/textbook-html/${src_rng}"
     dest_file="./textbook-html/docs/${src_rng}.md"
-    xsltproc ./script/_doc-generation.xsl "${src_file}" > ${temp_file2}
+    xsltproc ./script/_doc-arity.xsl "${src_file}" | xsltproc ./script/_doc-generation.xsl /dev/stdin > ${temp_file2}
     # Replace </code><code> with nothing so kramdown generates backticks properly
     sed 's/<\/code><code>//g' ${temp_file2} | kramdown --input html --output kramdown > "${temp_file1}"
     cat "${temp_file1}" | tail -n +4 > "${temp_file2}"

@@ -79,7 +79,7 @@ href=`[URI.datatype](#uridatatype)`>`[img](#img)`</a>`
 
 `<div data-type="footnote-refs">`
 
-1.  `<h3 data-type="footnote-refs-title"/>`
+1.  `<h3 data-type="footnote-refs-title">Footnotes</h3>`
 2.  `<ul data-list-type="bulleted" data-bullet-style="none">(`
     `<li data-type="footnote-ref">`
     
@@ -302,7 +302,7 @@ And other things:
 
 `<div data-type="glossary">`
 
-1.  `<h3 data-type="glossary-title"/>`
+1.  `<h3 data-type="glossary-title">Glossary</h3>`
 2.  [dl](#dl)`+`
 
 `</div>`
@@ -420,8 +420,8 @@ This defines a set of attributes:
 
 This defines a set of attributes:
 
-* ` cnx-archive-shortid=`[Text.datatype](#textdatatype)`
-  cnx-archive-uri=`[Text.datatype](#textdatatype)`?`
+* ` cnx-archive-shortid=`[Text.datatype](#textdatatype)`?`
+* ` cnx-archive-uri=`[Text.datatype](#textdatatype)`?`
 * ` data-label=`[Text.datatype](#textdatatype)`?`
 
 # enum.attr.img.data-media-type

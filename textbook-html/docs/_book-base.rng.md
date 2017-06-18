@@ -152,12 +152,23 @@ itemtype="http://schema.org/Person">`
 
 # Structure.Metadata.License
 
-`<p class="license">`(text...)`<a data-type="license" href=URI.datatype
-itemprop="dc:license,lrmi:useRightsURL"/></p>`
+`<p class="license">`
+
+1.  (text...)
+2.  `<a data-type="license" href=`[URI.datatype](#uridatatype)`
+    itemprop="dc:license,lrmi:useRightsURL">`(text...)`</a>`
+
+`</p>`
+
 # Structure.Metadata.Copyrights
 
-`<p
-class="copyright">`(text...)[Structure.Metadata.Copyrights.Item](#structuremetadatacopyrightsitem)`+</p>`
+`<p class="copyright">`
+
+1.  (text...)
+2.  [Structure.Metadata.Copyrights.Item](#structuremetadatacopyrightsitem)`+`
+
+`</p>`
+
 # Structure.Metadata.Copyrights.Item
 
 `<span data-type="copyright-holder" itemprop="copyright-holder"
@@ -183,8 +194,13 @@ itemprop="url">`*UserName.datatype*`</a></span>`
 
 # Structure.Metadata.PrintStyle
 
-`<div class="print-style">`(text...)`<span
-data-type="print-style">`*TODO.enum.datatype*`</span></div>`
+`<div class="print-style">`
+
+1.  (text...)
+2.  `<span data-type="print-style">`*TODO.enum.datatype*`</span>`
+
+`</div>`
+
 # Structure.ChapterMetadata
 
 `<div data-type="metadata">`
@@ -204,7 +220,7 @@ data-type="print-style">`*TODO.enum.datatype*`</span></div>`
 itemprop="description">`[Flow.model](#flowmodel)`+</div>`
 # Structure.Metadata.Keywords
 
-`(<div data-type="keyword" itemprop="keywords"/>)*`
+`(<div data-type="keyword" itemprop="keywords">`(text...)`</div>)*`
 # Structure.Metadata.Subjects
 
 `(<div data-type="subject"
@@ -232,12 +248,12 @@ none">(<ul>`[Structure.Metadata.Resources.Item](#structuremetadataresourcesitem)
 
 `<li cnx-archive-shortid=`[ShortId.datatype](#shortiddatatype)`
 cnx-archive-uri=`[UUID-and-version.datatype](#uuid-and-versiondatatype)`><a
-href=URI.datatype/></li>`
+href=`[URI.datatype](#uridatatype)`>`(text...)`</a></li>`
 # Structure.Book.ToC.InternalItem
 
 `<li>`
 
-1.  `<span/>`
+1.  `<span>`(text...)`</span>`
 2.  `<ol>(`
     One of the following:
     
