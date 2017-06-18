@@ -16,13 +16,8 @@ This defines a set of attributes:
 1.  [body.attlist](#bodyattlist)
 2.  [Structure.Book.Metadata](#structurebookmetadata)
 3.  [Structure.Book.ToC](#structurebooktoc)
-4.  `(`
-    One of the following:
-    
-    * [Structure.Chapter](#structurechapter)
-    * [Structure.Page](#structurepage)
-    
-    `)+`
+4.  `[`[Structure.Chapter](#structurechapter)` |
+    `[Structure.Page](#structurepage)`]+`
 
 `</body>`
 
@@ -258,13 +253,8 @@ href=`[URI.datatype](#uridatatype)`>`(text...)`</a></li>`
 `<li>`
 
 1.  `<span>`(text...)`</span>`
-2.  `<ol>(`
-    One of the following:
-    
-    * [Structure.Book.ToC.InternalItem](#structurebooktocinternalitem)
-    * [Structure.Book.ToC.LeafItem](#structurebooktocleafitem)
-    
-    `)+</ol>`
+2.  `<ol>[`[Structure.Book.ToC.InternalItem](#structurebooktocinternalitem)`
+    | `[Structure.Book.ToC.LeafItem](#structurebooktocleafitem)`]+</ol>`
 
 `</li>`
 

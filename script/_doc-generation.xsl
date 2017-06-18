@@ -19,7 +19,7 @@
     <xsl:when test="@p:arity">
       <xsl:variable name="character" select="@p:arity"/>
       <xsl:choose>
-        <xsl:when test="self::rng:attribute or self::rng:ref or self::rng:text">
+        <xsl:when test="self::rng:attribute or self::rng:ref or self::rng:choice or self::rng:text">
           <!-- Just add a simple "?" or "*" or "+" at the end of the line -->
           <xsl:apply-templates mode="concrete" select="."/>
           <code>
@@ -260,6 +260,23 @@
       </li>
     </xsl:for-each>
   </ul>
+</xsl:template>
+
+<xsl:template mode="concrete" match="rng:choice[count(*) = count(rng:ref)]">
+  <code>
+    <xsl:text>[</xsl:text>
+  </code>
+  <xsl:for-each select="*">
+    <xsl:if test="position() != 1">
+      <code>
+        <xsl:text> | </xsl:text>
+      </code>
+    </xsl:if>
+    <xsl:apply-templates select="."/>
+  </xsl:for-each>
+  <code>
+    <xsl:text>]</xsl:text>
+  </code>
 </xsl:template>
 
 

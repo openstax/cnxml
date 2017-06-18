@@ -257,11 +257,7 @@ And other things:
     
     `</div>`
 
-3.  One of the following:
-    
-    * [ul](#ul)
-    * [ol](#ol)
-    * [Content.DivList](#contentdivlist)
+3.  `[`[ul](#ul)` | `[ol](#ol)` | `[Content.DivList](#contentdivlist)`]`
 
 `</div>`
 
@@ -285,13 +281,8 @@ This defines a set of attributes:
 And other things:
 
 1.  [id.attrib.required](#idattribrequired)
-2.  `(`
-    One of the following:
-    
-    * [img](#img)
-    * [Content.ImageWithThumbnail](#contentimagewiththumbnail)
-    
-    `)+`
+2.  `[`[img](#img)` |
+    `[Content.ImageWithThumbnail](#contentimagewiththumbnail)`]+`
 
 # Content.Media.class
 
@@ -304,10 +295,7 @@ This defines a set of attributes:
 And other things:
 
 1.  [id.attrib.required](#idattribrequired)
-2.  One of the following:
-    
-    * [img](#img)
-    * [iframe](#iframe)
+2.  `[`[img](#img)` | `[iframe](#iframe)`]`
 
 # Content.InlineTitle
 
