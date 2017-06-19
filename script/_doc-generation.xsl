@@ -47,7 +47,7 @@
 </xsl:template>
 
 <!-- Copy documentation as-is -->
-<xsl:template match="h:*">
+<xsl:template match="h:*|h:*/@*">
   <xsl:copy>
     <xsl:apply-templates select="@*|node()"/>
   </xsl:copy>
@@ -87,7 +87,7 @@
   </li>
 </xsl:template>
 
-<xsl:template match="r:define[not(contains(@name, '.datatype'))]">
+<xsl:template match="r:define">
   <h2>
     <xsl:value-of select="@name"/>
   </h2>

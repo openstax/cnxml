@@ -22,15 +22,25 @@
 
 This file is organized into the following sections:
 
-1.  Textbook-specific Blockish pseudo-elements: This contains things
-    like Note, Exercise
-2.  Textbook-specific Inline pseudoelements: things like "term", inline
+1.  Textbook-specific Blockish "elements": This contains things like
+    Note, Exercise
+2.  Textbook-specific Inline "elements": things like "term", inline
     list, media
 3.  Enum attributes: things like `bullet-style` or `lower-roman`
 4.  HTML5 elements: things like `<section>` or `<figure>`
 5.  Additional attributes to existing xhtml elements: things like table
     valign and `<caption>` element
 6.  Additional datatype values: things like UUID, UUID-and-version
+
+A note about `*.model` references. XHTML has 3 types of models,
+`Block.model`, `Inline.model`, and `Flow.model`. Each element may have
+one of these types as children. For example, `<div>` can have other
+Block elements **or** Inline elements as children so it is marked as
+having a `Flow.model`
+
+A note about `*.class` definitions. This definition describes the
+attributes and children *without* describing the element. It is read as
+"the class of things that are an X"
 
 ## Block.class
 
@@ -70,6 +80,8 @@ One of the following:
 * `<span>`[Content.Alternates.class](#contentalternatesclass)`</span>`
 * `<span>`[Content.Newline.class](#contentnewlineclass)`</span>`
 
+# Textbook-specific Blockish "elements"
+
 ## Content.BlockishBase.class
 
 This defines the set of attributes and child elements that are common to
@@ -101,68 +113,6 @@ And other things:
 1.  These are attributes common to many blockish elements
 
 2.  [Common.attrib](#commonattrib)
-
-## Content.Space
-
-This provides horizontal space
-
-`<span data-type="space"
-data-count=`[Number.datatype](#numberdatatype)`>`*Text.datatype*`</span>`
-## Content.Term
-
-This defines a Term that will be bold and show up in the Book Index
-
-`<span data-type="term">`
-
-1.  [id.attrib](#idattrib)
-2.  [class.attrib](#classattrib)
-3.  [Inline.model](#inlinemodel)
-
-`</span>`
-
-## Content.Foreign
-
-This defines a piece of Foreign text
-
-`<span data-type="foreign">`[Inline.model](#inlinemodel)`</span>`
-## Content.FootnoteNumber
-
-This defines Footnote number that appears in the content. It is matched
-with an item in Content.FootnoteRefs
-
-`<sup data-type="footnote-number">`
-
-1.  [id.attrib.required](#idattribrequired)
-2.  `<a data-type="footnote-link"
-    href=`[URI.datatype](#uridatatype)`>`*Number.datatype*`</a>`
-
-`</sup>`
-
-## Content.ImageWithThumbnail
-
-This is an Image with a clickable thumbnail
-
-`<a data-type="image-with-thumbnail"
-href=`[URI.datatype](#uridatatype)`>`[img](#img)`</a>`
-## Content.FootnoteRefs
-
-`<div data-type="footnote-refs">`
-
-1.  `<h3 data-type="footnote-refs-title">Footnotes</h3>`
-2.  `<ul data-list-type="bulleted" data-bullet-style="none">(`
-    `<li data-type="footnote-ref">`
-    
-    1.  [id.attrib.required](#idattribrequired)
-    2.  `<a data-type="footnote-ref-link"
-        href=`[URI.datatype](#uridatatype)`>`*Number.datatype*`</a>`
-    3.  `<span
-        data-type="footnote-ref-content">`[Inline.model](#inlinemodel)`</span>`
-    
-    `</li>`
-    
-    `)+</ul>`
-
-`</div>`
 
 ## Content.Note
 
@@ -333,9 +283,26 @@ And other things:
 1.  [id.attrib.required](#idattribrequired)
 2.  `[`[img](#img)` | `[iframe](#iframe)`]`
 
-## Content.InlineTitle
+## Content.FootnoteRefs
 
-`<span data-type="title">`[Inline.model](#inlinemodel)`</span>`
+`<div data-type="footnote-refs">`
+
+1.  `<h3 data-type="footnote-refs-title">Footnotes</h3>`
+2.  `<ul data-list-type="bulleted" data-bullet-style="none">(`
+    `<li data-type="footnote-ref">`
+    
+    1.  [id.attrib.required](#idattribrequired)
+    2.  `<a data-type="footnote-ref-link"
+        href=`[URI.datatype](#uridatatype)`>`*Number.datatype*`</a>`
+    3.  `<span
+        data-type="footnote-ref-content">`[Inline.model](#inlinemodel)`</span>`
+    
+    `</li>`
+    
+    `)+</ul>`
+
+`</div>`
+
 ## Content.Glossary
 
 `<div data-type="glossary">`
@@ -345,11 +312,66 @@ And other things:
 
 `</div>`
 
+# Textbook-specific Inline "elements"
+
+## Content.Space
+
+This provides horizontal space
+
+`<span data-type="space"
+data-count=`[Number.datatype](#numberdatatype)`>`*Text.datatype*`</span>`
+## Content.Term
+
+This defines a Term that will be bold and show up in the Book Index
+
+`<span data-type="term">`
+
+1.  [id.attrib](#idattrib)
+2.  [class.attrib](#classattrib)
+3.  [Inline.model](#inlinemodel)
+
+`</span>`
+
+## Content.Foreign
+
+This defines a piece of Foreign text
+
+`<span data-type="foreign">`[Inline.model](#inlinemodel)`</span>`
+## Content.FootnoteNumber
+
+This defines Footnote number that appears in the content. It is matched
+with an item in Content.FootnoteRefs
+
+`<sup data-type="footnote-number">`
+
+1.  [id.attrib.required](#idattribrequired)
+2.  `<a data-type="footnote-link"
+    href=`[URI.datatype](#uridatatype)`>`*Number.datatype*`</a>`
+
+`</sup>`
+
+## Content.ImageWithThumbnail
+
+This is an Image with a clickable thumbnail
+
+`<a data-type="image-with-thumbnail"
+href=`[URI.datatype](#uridatatype)`>`[img](#img)`</a>`
+## Content.InlineTitle
+
+`<span data-type="title">`[Inline.model](#inlinemodel)`</span>`
+# Enum attributes (mostly Tables and Lists)
+
 ## id.attrib.required
 
 This defines a set of attributes:
 
 * ` id=`[ID.datatype](#iddatatype)
+
+And other things:
+
+1.  This markes that the `id` attribute on an element is **required**
+
+^
 
 ## table.attlist
 
@@ -551,6 +573,19 @@ And other things:
       2.  `
           data-number-style=`[enum.attr.ol.data-number-style](#enumattroldata-number-style)`?`
 
+## ol.attlist
+
+This defines a set of attributes:
+
+* ` type=?`
+* ` compact="compact"?`
+* ` start=?`
+
+# HTML5 elements
+
+These are elements that were not defined in the original XHTML spec but
+do appear in XHTML5 that openstax uses.
+
 ## u
 
 `<u>`
@@ -563,14 +598,6 @@ And other things:
 ## u.attlist
 
 [Common.attrib](#commonattrib)
-## ol.attlist
-
-This defines a set of attributes:
-
-* ` type=?`
-* ` compact="compact"?`
-* ` start=?`
-
 ## section
 
 `<section>`
@@ -643,3 +670,97 @@ This defines a set of attributes:
 
 * ` data-type=`[`"cnx.eoc"` | *Text.datatype*]
 
+# Datatypes
+
+These are custom text types that can be validated using a Regular
+expression or as part of a data integrity checker with access to the
+database
+
+## cnx-pi.datatype
+
+This is usually found in an Introduction Page and describes how sections
+should collate at the end of a Bhapter/Book. It is being deprecated in
+favor of CSS recipes instead
+
+Example (in CNXML):
+
+    
+    <?chapter-toc label="Learning Objectives"?>
+    <?cnx.eoc class="section-summary" title="Section Summary"?>
+    <?cnx.eoc class="section-quiz" title="Section Quiz"?>
+    <?cnx.eoc class="short-answer" title="Short Answer"?>
+    <?cnx.eoc class="further-research" title="Further Research"?>
+    <?cnx.eoc class="references" title="References"?>
+
+is converted to:
+
+    
+    <cnx-pi data-type="chapter-toc">label="Learning Objectives"?</cnx-pi>
+    <cnx-pi data-type="cnx.eoc">class="section-summary" title="Section Summary"?</cnx-pi>
+    <cnx-pi data-type="cnx.eoc">class="section-quiz" title="Section Quiz"?</cnx-pi>
+    <cnx-pi data-type="cnx.eoc">class="short-answer" title="Short Answer"?</cnx-pi>
+    <cnx-pi data-type="cnx.eoc">class="further-research" title="Further Research"?</cnx-pi>
+    <cnx-pi data-type="cnx.eoc">class="references" title="References"?</cnx-pi>
+
+(text...)
+# Datatypes
+
+These are specific text values that can be validated by regular
+expressions or by looking up in a database
+
+For more details on these formats, see [CNX API Documentation][1]. This
+link may become outdated but is current at the time of writing
+
+## TODO.enum.datatype
+
+(text...)
+## UUID-and-version.datatype
+
+This is an identifier that conforms to the UUIDv4 format specification.
+It is created either by the author or automatically by the archive when
+publishing a new Book or Page.
+
+This contains a UUID and a version. Example:
+`031da8d3-b525-429c-80cf-6c8ed997733a@1.0`
+
+Regular Expression for validation:
+`/[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}@[0-9]+(\.[0-9]+)?/`
+
+(text...)
+## Sha.datatype
+
+These are used for identifying resources (e.g. images) and the value is
+an `sha1` hash, as provided by `sha1sum` of the resource file bits.
+
+(text...)
+## ShortId.datatype
+
+This is a computed string which is based on the first few bits of the
+UUID. These are not guaranteed to be stable over all time, but we will
+strive to extend, rather than replace them.
+
+(text...)
+## UserLogin.datatype
+
+(text...)
+## UserName.datatype
+
+(text...)
+## Boolean.datatype
+
+One of the following:
+
+* `"true"`
+* `"false"`
+
+## Subject.datatype
+
+These values are used to organize content on the [Browse][2] page
+
+(text...)
+
+
+
+
+[1]: https://github.com/openstax/napkin-notes/pull/73
+[2]: https://cnx.org/browse

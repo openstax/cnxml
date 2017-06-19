@@ -28,13 +28,17 @@
 <h1>File Overview</h1>
 <p>This file is organized into the following sections:</p>
 <ol>
-  <li>Textbook-specific Blockish pseudo-elements: This contains things like Note, Exercise</li>
-  <li>Textbook-specific Inline pseudoelements: things like "term", inline list, media</li>
+  <li>Textbook-specific Blockish "elements": This contains things like Note, Exercise</li>
+  <li>Textbook-specific Inline "elements": things like "term", inline list, media</li>
   <li>Enum attributes: things like `bullet-style` or `lower-roman`</li>
   <li>HTML5 elements: things like <code>&lt;section&gt;</code> or <code>&lt;figure&gt;</code></li>
   <li>Additional attributes to existing xhtml elements: things like table valign and <code>&lt;caption&gt;</code> element</li>
   <li>Additional datatype values: things like UUID, UUID-and-version</li>
 </ol>
+
+<p>A note about <code>*.model</code> references. XHTML has 3 types of models, <code>Block.model</code>, <code>Inline.model</code>, and <code>Flow.model</code>. Each element may have one of these types as children. For example, <code>&lt;div&gt;</code> can have other Block elements <strong>or</strong> Inline elements as children so it is marked as having a <code>Flow.model</code></p>
+
+<p>A note about <code>*.class</code> definitions. This definition describes the attributes and children <em>without</em> describing the element. It is read as "the class of things that are an X"</p>
 
 <r:define name="Block.class" combine="choice">
   <r:choice>
@@ -89,6 +93,8 @@
 </r:define>
 
 
+<h1>Textbook-specific Blockish "elements"</h1>
+
 <r:define name="Content.BlockishBase.class">
   <p>This defines the set of attributes and child elements that are common to many Blockish elements</p>
   <r:ref name="Content.BlockishBase.attrs"/>
@@ -128,147 +134,6 @@
       <r:ref name="Text.datatype"/>
     </r:attribute>
   </r:optional>
-</r:define>
-
-
-<r:define name="Content.Space">
-  <p>This provides horizontal space</p>
-  <r:element name="span">
-    <r:attribute name="data-type">
-      <r:value>space</r:value>
-    </r:attribute>
-    <r:attribute name="data-count">
-      <r:ref name="Number.datatype"/>
-    </r:attribute>
-    <r:ref name="Text.datatype"/>
-  </r:element>
-</r:define>
-
-
-<r:define name="Content.Term">
-  <p>This defines a Term that will be bold and show up in the Book Index</p>
-  <r:element name="span">
-    <r:attribute name="data-type">
-      <r:value>term</r:value>
-    </r:attribute>
-    <r:ref name="id.attrib"/>
-    <r:ref name="class.attrib"/>
-    <r:ref name="Inline.model"/>
-  </r:element>
-</r:define>
-
-<r:define name="Content.Foreign">
-  <p>This defines a piece of Foreign text</p>
-  <r:element name="span">
-    <r:attribute name="data-type">
-      <r:value>foreign</r:value>
-    </r:attribute>
-    <r:ref name="Inline.model"/>
-  </r:element>
-</r:define>
-
-
-<r:define name="Content.FootnoteNumber">
-  <p>This defines Footnote number that appears in the content. It is matched with an item in Content.FootnoteRefs</p>
-  <r:element name="sup">
-    <r:attribute name="data-type">
-      <r:value>footnote-number</r:value>
-    </r:attribute>
-    <r:ref name="id.attrib.required"/>
-    <r:element name="a">
-      <r:attribute name="data-type">
-        <r:value>footnote-link</r:value>
-      </r:attribute>
-      <r:attribute name="href">
-        <r:ref name="URI.datatype"/>
-      </r:attribute>
-      <r:ref name="Number.datatype"/>
-    </r:element>
-  </r:element>
-</r:define>
-
-<r:define name="Content.ImageWithThumbnail">
-  <p>This is an Image with a clickable thumbnail</p>
-  <r:element name="a">
-    <r:attribute name="data-type">
-      <r:value>image-with-thumbnail</r:value>
-    </r:attribute>
-    <r:attribute name="href">
-      <r:ref name="URI.datatype"/>
-    </r:attribute>
-    <r:ref name="img"/>
-  </r:element>
-</r:define>
-
-<!-- This occurs at the end of a Page
-    <div
-        data-type="footnote-refs"
-      ><h3
-          data-type="footnote-refs-title"
-        >Footnotes</h3
-      ><ul
-          data-list-type="bulleted"
-          data-bullet-style="none"
-        ><li
-            data-type="footnote-ref"
-            id="footnote1"
-          ><a
-              data-type="footnote-ref-link"
-              href="#footnote-ref1"
-            >1</a
-          > <span
-              data-type="footnote-ref-content"
-            >J. Hulcr et al. &#x201C;A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable.&#x201D; <em
-                data-effect="italics"
-              >PLoS ONE</em
-            > 7 no. 11 (2012): e47712. doi:10.1371/journal.pone.0047712.</span
-          ></li
-        ></ul
-      ></div
-    > -->
-<r:define name="Content.FootnoteRefs">
-  <r:element name="div">
-    <r:attribute name="data-type">
-      <r:value>footnote-refs</r:value>
-    </r:attribute>
-    <r:element name="h3">
-      <r:attribute name="data-type">
-        <r:value>footnote-refs-title</r:value>
-      </r:attribute>
-      <r:value>Footnotes</r:value>
-    </r:element>
-    <r:element name="ul">
-      <r:attribute name="data-list-type">
-        <r:value>bulleted</r:value>
-      </r:attribute>
-      <r:attribute name="data-bullet-style">
-        <r:value>none</r:value>
-      </r:attribute>
-      <r:oneOrMore>
-        <r:element name="li">
-          <r:attribute name="data-type">
-            <r:value>footnote-ref</r:value>
-          </r:attribute>
-          <r:ref name="id.attrib.required"/>
-          <r:element name="a">
-            <r:attribute name="data-type">
-              <r:value>footnote-ref-link</r:value>
-            </r:attribute>
-            <r:attribute name="href">
-              <r:ref name="URI.datatype"/>
-            </r:attribute>
-            <r:ref name="Number.datatype"/>
-          </r:element>
-          <r:element name="span">
-            <r:attribute name="data-type">
-              <r:value>footnote-ref-content</r:value>
-            </r:attribute>
-            <r:ref name="Inline.model"/>
-          </r:element>
-        </r:element>
-      </r:oneOrMore>
-    </r:element>
-  </r:element>
 </r:define>
 
 
@@ -504,12 +369,75 @@
 
 
 
-<r:define name="Content.InlineTitle">
-  <r:element name="span">
+
+<!-- This occurs at the end of a Page
+    <div
+        data-type="footnote-refs"
+      ><h3
+          data-type="footnote-refs-title"
+        >Footnotes</h3
+      ><ul
+          data-list-type="bulleted"
+          data-bullet-style="none"
+        ><li
+            data-type="footnote-ref"
+            id="footnote1"
+          ><a
+              data-type="footnote-ref-link"
+              href="#footnote-ref1"
+            >1</a
+          > <span
+              data-type="footnote-ref-content"
+            >J. Hulcr et al. &#x201C;A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable.&#x201D; <em
+                data-effect="italics"
+              >PLoS ONE</em
+            > 7 no. 11 (2012): e47712. doi:10.1371/journal.pone.0047712.</span
+          ></li
+        ></ul
+      ></div
+    > -->
+<r:define name="Content.FootnoteRefs">
+  <r:element name="div">
     <r:attribute name="data-type">
-      <r:value>title</r:value>
+      <r:value>footnote-refs</r:value>
     </r:attribute>
-    <r:ref name="Inline.model"/>
+    <r:element name="h3">
+      <r:attribute name="data-type">
+        <r:value>footnote-refs-title</r:value>
+      </r:attribute>
+      <r:value>Footnotes</r:value>
+    </r:element>
+    <r:element name="ul">
+      <r:attribute name="data-list-type">
+        <r:value>bulleted</r:value>
+      </r:attribute>
+      <r:attribute name="data-bullet-style">
+        <r:value>none</r:value>
+      </r:attribute>
+      <r:oneOrMore>
+        <r:element name="li">
+          <r:attribute name="data-type">
+            <r:value>footnote-ref</r:value>
+          </r:attribute>
+          <r:ref name="id.attrib.required"/>
+          <r:element name="a">
+            <r:attribute name="data-type">
+              <r:value>footnote-ref-link</r:value>
+            </r:attribute>
+            <r:attribute name="href">
+              <r:ref name="URI.datatype"/>
+            </r:attribute>
+            <r:ref name="Number.datatype"/>
+          </r:element>
+          <r:element name="span">
+            <r:attribute name="data-type">
+              <r:value>footnote-ref-content</r:value>
+            </r:attribute>
+            <r:ref name="Inline.model"/>
+          </r:element>
+        </r:element>
+      </r:oneOrMore>
+    </r:element>
   </r:element>
 </r:define>
 
@@ -540,9 +468,93 @@
 
 
 
+<h1>Textbook-specific Inline "elements"</h1>
 
+
+<r:define name="Content.Space">
+  <p>This provides horizontal space</p>
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>space</r:value>
+    </r:attribute>
+    <r:attribute name="data-count">
+      <r:ref name="Number.datatype"/>
+    </r:attribute>
+    <r:ref name="Text.datatype"/>
+  </r:element>
+</r:define>
+
+
+<r:define name="Content.Term">
+  <p>This defines a Term that will be bold and show up in the Book Index</p>
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>term</r:value>
+    </r:attribute>
+    <r:ref name="id.attrib"/>
+    <r:ref name="class.attrib"/>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
+
+<r:define name="Content.Foreign">
+  <p>This defines a piece of Foreign text</p>
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>foreign</r:value>
+    </r:attribute>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
+
+
+<r:define name="Content.FootnoteNumber">
+  <p>This defines Footnote number that appears in the content. It is matched with an item in Content.FootnoteRefs</p>
+  <r:element name="sup">
+    <r:attribute name="data-type">
+      <r:value>footnote-number</r:value>
+    </r:attribute>
+    <r:ref name="id.attrib.required"/>
+    <r:element name="a">
+      <r:attribute name="data-type">
+        <r:value>footnote-link</r:value>
+      </r:attribute>
+      <r:attribute name="href">
+        <r:ref name="URI.datatype"/>
+      </r:attribute>
+      <r:ref name="Number.datatype"/>
+    </r:element>
+  </r:element>
+</r:define>
+
+<r:define name="Content.ImageWithThumbnail">
+  <p>This is an Image with a clickable thumbnail</p>
+  <r:element name="a">
+    <r:attribute name="data-type">
+      <r:value>image-with-thumbnail</r:value>
+    </r:attribute>
+    <r:attribute name="href">
+      <r:ref name="URI.datatype"/>
+    </r:attribute>
+    <r:ref name="img"/>
+  </r:element>
+</r:define>
+
+
+<r:define name="Content.InlineTitle">
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>title</r:value>
+    </r:attribute>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
+
+
+<h1>Enum attributes (mostly Tables and Lists)</h1>
 
 <r:define name="id.attrib.required">
+  <p>This markes that the <code>id</code> attribute on an element is <strong>required</strong></p>
   <r:attribute name="id">
     <r:ref name="ID.datatype"/>
   </r:attribute>
@@ -901,18 +913,6 @@
 
 
 
-<!-- For strikethrough. from xhtml/legacy.rng . TODO: Mark this up differently and move this into a separate legacy file -->
-<r:define name="u">
-  <r:element name="u">
-    <r:ref name="u.attlist"/>
-    <r:ref name="Inline.model"/>
-  </r:element>
-</r:define>
-
-<r:define name="u.attlist">
-  <r:ref name="Common.attrib"/>
-</r:define>
-
 <!-- From xhtml/legacy.rng TODO: Move this into a separate legacy file -->
 <r:define name="ol.attlist" combine="interleave">
   <r:optional>
@@ -929,8 +929,21 @@
 </r:define>
 
 
+<h1>HTML5 elements</h1>
 
+<p>These are elements that were not defined in the original XHTML spec but do appear in XHTML5 that openstax uses.</p>
 
+<!-- For strikethrough. from xhtml/legacy.rng . TODO: Mark this up differently and move this into a separate legacy file -->
+<r:define name="u">
+  <r:element name="u">
+    <r:ref name="u.attlist"/>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
+
+<r:define name="u.attlist">
+  <r:ref name="Common.attrib"/>
+</r:define>
 
 
 
@@ -1044,16 +1057,47 @@
 
 
 
+<h1>Datatypes</h1>
 
-
+<p>These are custom text types that can be validated using a Regular expression or as part of a data integrity checker with access to the database</p>
 
 
 
 
 <r:define name="cnx-pi.datatype">
+  <p>This is usually found in an Introduction Page and describes how sections should collate at the end of a Bhapter/Book. It is being deprecated in favor of CSS recipes instead</p>
+
+  <p>Example (in CNXML):</p>
+
+  <pre>
+&lt;?chapter-toc label="Learning Objectives"?&gt;
+&lt;?cnx.eoc class="section-summary" title="Section Summary"?&gt;
+&lt;?cnx.eoc class="section-quiz" title="Section Quiz"?&gt;
+&lt;?cnx.eoc class="short-answer" title="Short Answer"?&gt;
+&lt;?cnx.eoc class="further-research" title="Further Research"?&gt;
+&lt;?cnx.eoc class="references" title="References"?&gt;
+</pre>
+
+  <p>is converted to:</p>
+
+<pre>
+&lt;cnx-pi data-type="chapter-toc"&gt;label="Learning Objectives"?&lt;/cnx-pi&gt;
+&lt;cnx-pi data-type="cnx.eoc">class="section-summary" title="Section Summary"?&lt;/cnx-pi&gt;
+&lt;cnx-pi data-type="cnx.eoc">class="section-quiz" title="Section Quiz"?&lt;/cnx-pi&gt;
+&lt;cnx-pi data-type="cnx.eoc">class="short-answer" title="Short Answer"?&lt;/cnx-pi&gt;
+&lt;cnx-pi data-type="cnx.eoc">class="further-research" title="Further Research"?&lt;/cnx-pi&gt;
+&lt;cnx-pi data-type="cnx.eoc">class="references" title="References"?&lt;/cnx-pi&gt;
+</pre>
+
   <r:text/>
 </r:define>
 
+
+
+<h1>Datatypes</h1>
+
+<p>These are specific text values that can be validated by regular expressions or by looking up in a database</p>
+<p>For more details on these formats, see <a href="https://github.com/openstax/napkin-notes/pull/73">CNX API Documentation</a>. This link may become outdated but is current at the time of writing</p>
 
 <!-- Placeholder for enums -->
 <r:define name="TODO.enum.datatype">
@@ -1062,14 +1106,21 @@
 
 
 <r:define name="UUID-and-version.datatype">
+
+  <p>This is an identifier that conforms to the UUIDv4 format specification. It is created either by the author or automatically by the archive when publishing a new Book or Page.</p>
+  <p>This contains a UUID and a version. Example: <code>031da8d3-b525-429c-80cf-6c8ed997733a@1.0</code></p>
+  <p>Regular Expression for validation: <code>/[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}@[0-9]+(\.[0-9]+)?/</code></p>
+
   <r:text/>
 </r:define>
 
 <r:define name="Sha.datatype">
+  <p>These are used for identifying resources (e.g. images) and the value is an <code>sha1</code> hash, as provided by <code>sha1sum</code> of the resource file bits.</p>
   <r:text/>
 </r:define>
 
 <r:define name="ShortId.datatype">
+  <p>This is a computed string which is based on the first few bits of the UUID. These are not guaranteed to be stable over all time, but we will strive to extend, rather than replace them.</p>
   <r:text/>
 </r:define>
 
@@ -1092,6 +1143,7 @@
 <!-- Mathematics and Statistics -->
 <!-- TODO: enumerate the options -->
 <r:define name="Subject.datatype">
+  <p>These values are used to organize content on the <a href="https://cnx.org/browse">Browse</a> page</p>
   <r:text/>
 </r:define>
 
