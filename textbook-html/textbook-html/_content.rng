@@ -89,6 +89,47 @@
 </r:define>
 
 
+<r:define name="Content.BlockishBase.class">
+  <p>This defines the set of attributes and child elements that are common to many Blockish elements</p>
+  <r:ref name="Content.BlockishBase.attrs"/>
+  <r:optional>
+    <r:ref name="Content.BlockishBase.Title"/>
+  </r:optional>
+</r:define>
+
+
+<r:define name="Content.BlockishBase.Title">
+  <p>This is a (usually) optional title for some of the Blockish elements like a Note, Exercise, or Example</p>
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>title</r:value>
+    </r:attribute>
+    <r:ref name="Common.attrib"/>
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
+
+<r:define name="Content.BlockishBase.attrs">
+  <p>These are attributes common to many blockish elements</p>
+  <r:ref name="Common.attrib"/>
+  <r:optional>
+    <r:attribute name="data-label">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+  <!-- TODO: Remove this attribute in the CNXML->HTML conversion -->
+  <r:optional>
+    <r:attribute name="data-has-label">
+      <r:value>true</r:value>
+    </r:attribute>
+  </r:optional>
+  <r:optional>
+    <r:attribute name="data-element-type">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+</r:define>
+
 
 <r:define name="Content.Space">
   <p>This provides horizontal space</p>
@@ -230,48 +271,13 @@
   </r:element>
 </r:define>
 
-<!-- Optional note title -->
-<r:define name="Content.Title.optional">
-  <r:optional>
-    <r:element name="div">
-      <r:attribute name="data-type">
-        <r:value>title</r:value>
-      </r:attribute>
-      <r:ref name="Common.attrib"/>
-      <r:ref name="Flow.model"/>
-    </r:element>
-  </r:optional>
-</r:define>
-
-<r:define name="Content.Note.attrs">
-  <r:ref name="Common.attrib"/>
-  <!-- TODO: Move the following 2 into a common blockish-div-thing -->
-  <r:optional>
-    <r:attribute name="data-label">
-      <r:ref name="Text.datatype"/>
-    </r:attribute>
-  </r:optional>
-  <!-- TODO: Remove this attribute in the CNXML->HTML conversion -->
-  <r:optional>
-    <r:attribute name="data-has-label">
-      <r:value>true</r:value>
-    </r:attribute>
-  </r:optional>
-  <r:optional>
-    <r:attribute name="data-element-type">
-      <r:ref name="Text.datatype"/>
-    </r:attribute>
-  </r:optional>
-  <r:ref name="Content.Title.optional"/>
-</r:define>
-
 
 <r:define name="Content.Note">
   <r:element name="div">
     <r:attribute name="data-type">
       <r:value>note</r:value>
     </r:attribute>
-    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Content.BlockishBase.class"/>
     <r:ref name="Flow.model"/>
   </r:element>
 </r:define>
@@ -281,7 +287,7 @@
     <r:attribute name="data-type">
       <r:value>equation</r:value>
     </r:attribute>
-    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Content.BlockishBase.class"/>
     <r:ref name="Flow.model"/>
   </r:element>
 </r:define>
@@ -292,7 +298,7 @@
     <r:attribute name="data-type">
       <r:value>problem</r:value>
     </r:attribute>
-    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Content.BlockishBase.class"/>
     <r:ref name="Flow.model"/>
   </r:element>
 </r:define>
@@ -311,7 +317,7 @@
         </r:choice>
       </r:attribute>
     </r:optional>
-    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Content.BlockishBase.class"/>
     <r:ref name="Flow.model"/>
   </r:element>
 </r:define>
@@ -321,7 +327,7 @@
     <r:attribute name="data-type">
       <r:value>commentary</r:value>
     </r:attribute>
-    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Content.BlockishBase.class"/>
     <r:ref name="Flow.model"/>
   </r:element>
 </r:define>
@@ -341,7 +347,7 @@
         </r:choice>
       </r:attribute>
     </r:optional>
-    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Content.BlockishBase.class"/>
     <r:ref name="Content.Problem"/>
     <r:zeroOrMore>
       <r:ref name="Content.Solution"/>
@@ -358,7 +364,7 @@
     <r:attribute name="data-type">
       <r:value>example</r:value>
     </r:attribute>
-    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Content.BlockishBase.class"/>
     <r:ref name="Flow.model"/>
   </r:element>
 </r:define>
@@ -369,7 +375,7 @@
   <r:attribute name="data-type">
     <r:value>newline</r:value>
   </r:attribute>
-  <r:ref name="Content.Note.attrs"/>
+  <r:ref name="Content.BlockishBase.attrs"/>
   <r:optional>
     <r:attribute name="data-count">
       <r:ref name="Number.datatype"/>
@@ -384,6 +390,7 @@
 <r:define name="Content.DivList">
   <r:element name="div">
     <r:ref name="div-span-list.attrs"/>
+    <r:ref name="Content.BlockishBase.class"/>
     <r:oneOrMore>
       <r:ref name="Content.DivListItem"/>
     </r:oneOrMore>
@@ -397,7 +404,7 @@
     <r:attribute name="data-type">
       <r:value>item</r:value>
     </r:attribute>
-    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Content.BlockishBase.attrs"/>
     <r:ref name="Flow.model"/>
   </r:element>
 </r:define>
@@ -405,6 +412,7 @@
 <r:define name="Content.SpanList">
   <r:element name="span">
     <r:ref name="div-span-list.attrs"/>
+    <r:ref name="Content.BlockishBase.class"/>
     <r:oneOrMore>
       <r:ref name="Content.SpanListItem"/>
     </r:oneOrMore>
@@ -416,7 +424,7 @@
     <r:attribute name="data-type">
       <r:value>item</r:value>
     </r:attribute>
-    <r:ref name="Content.Note.attrs"/>
+    <r:ref name="Content.BlockishBase.attrs"/>
     <r:ref name="Inline.model"/>
   </r:element>
 </r:define>
@@ -889,7 +897,6 @@
       </r:optional>
     </r:group>
   </r:choice>
-  <r:ref name="Content.Note.attrs"/>
 </r:define>
 
 
@@ -966,7 +973,9 @@
 <r:define name="figure">
   <r:element name="figure">
     <r:ref name="figure.attlist"/>
-    <r:ref name="Content.Title.optional"/>
+    <r:optional>
+      <r:ref name="Content.BlockishBase.Title"/>
+    </r:optional>
     <r:optional>
       <r:ref name="figcaption"/>
     </r:optional>

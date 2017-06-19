@@ -519,6 +519,7 @@ Print style:
 
 <!-- <div data-type="subject" itemprop="about">Mathematics and Statistics</div> -->
 <r:define name="Structure.Metadata.Subjects">
+  <p>Usually books have at most one subject but "Featured Book" is a subject so there may be 2</p>
   <r:zeroOrMore>
     <r:element name="div">
       <r:attribute name="data-type">
@@ -536,11 +537,11 @@ Print style:
 <li><a href="971b6320e705d9c81cbad7f4a98148ab91456d3b">971b6320e705d9c81cbad7f4a98148ab91456d3b</a></li>        </ul>
 -->
 <r:define name="Structure.Metadata.Resources">
+  <p>These are the Image (and other) files related to the Page. <strong>TODO: Are they parsed by anything?</strong></p>
   <r:element name="div">
     <r:attribute name="data-type">
       <r:value>resources</r:value>
     </r:attribute>
-    <!-- TODO: remove this attribute, maybe the whole element. What is it used for? -->
     <r:attribute name="style">
       <r:value>display: none</r:value>
     </r:attribute>
@@ -567,7 +568,7 @@ Print style:
 
 
 <r:define name="Structure.Metadata.TranslucentBinding">
-  <!-- TODO: remove me. why is this here? -->
+  <p><strong>TODO: remove me. why is this here?</strong></p>
   <r:element name="span">
     <r:attribute name="data-type">
       <r:value>binding</r:value>
@@ -590,6 +591,7 @@ Print style:
 <meta content="2016-11-04T17:17:06Z" itemprop="dateModified"/>
 -->
 <r:define name="enum.attr.meta.itemprop">
+  <p>These are the additional <strong>&lt;meta&gt;</strong> elements for a Book. <strong>TODO: Restrict the <code>&lt;head&gt;</code> to these elements</strong></p>
   <r:choice>
     <r:value>inLanguage</r:value>
     <r:value>accessibilityFeature</r:value>
