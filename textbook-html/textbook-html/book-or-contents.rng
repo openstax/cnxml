@@ -1,7 +1,7 @@
 <grammar ns="http://www.w3.org/1999/xhtml"
          xmlns="http://relaxng.org/ns/structure/1.0">
 
-<!-- <include href="./textbook-html-base.rng"/> -->
+<include href="./_content.rng"></include>
 <include href="./_book-structure.rng"></include>
 
 
@@ -39,9 +39,14 @@
         <ref name="Block.model"/>
       </group>
     </choice>
+    <!-- Allow FootnoteRefs to only be valid either in a Page or in <body> -->
+    <optional>
+      <ref name="Structure.Page.FootnoteRefs"/>
+    </optional>
+
     <!-- Optionally allow the glossary at the end of the doc -->
     <optional>
-      <ref name="Content.Glossary"/>
+      <ref name="Structure.Page.Glossary"/>
     </optional>
   </element>
 </define>

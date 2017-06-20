@@ -59,8 +59,6 @@
     <r:element name="div">
       <r:ref name="Content.Newline.class"/>
     </r:element>
-    <!-- TODO: Move FootnoteRefs to only be valid either in a Page or in <body> -->
-    <r:ref name="Content.FootnoteRefs"/>
 
     <!-- HTML5 elements -->
     <r:ref name="figure"/>
@@ -433,73 +431,6 @@
 </r:define>
 
 
-<r:define name="Content.FootnoteRefs">
-  <p>This occurs at the end of a Page (like the Glossary) and contains all the footnote text</p>
-  <r:element name="div">
-    <r:attribute name="data-type">
-      <r:value>footnote-refs</r:value>
-    </r:attribute>
-    <r:element name="h3">
-      <r:attribute name="data-type">
-        <r:value>footnote-refs-title</r:value>
-      </r:attribute>
-      <r:value>Footnotes</r:value>
-    </r:element>
-    <r:element name="ul">
-      <r:attribute name="data-list-type">
-        <r:value>bulleted</r:value>
-      </r:attribute>
-      <r:attribute name="data-bullet-style">
-        <r:value>none</r:value>
-      </r:attribute>
-      <r:oneOrMore>
-        <r:element name="li">
-          <r:attribute name="data-type">
-            <r:value>footnote-ref</r:value>
-          </r:attribute>
-          <r:ref name="id.attrib.required"/>
-          <r:element name="a">
-            <r:attribute name="data-type">
-              <r:value>footnote-ref-link</r:value>
-            </r:attribute>
-            <r:attribute name="href">
-              <r:ref name="URI.datatype"/>
-            </r:attribute>
-            <r:ref name="Number.datatype"/>
-          </r:element>
-          <r:element name="span">
-            <r:attribute name="data-type">
-              <r:value>footnote-ref-content</r:value>
-            </r:attribute>
-            <r:ref name="Inline.model"/>
-          </r:element>
-        </r:element>
-      </r:oneOrMore>
-    </r:element>
-  </r:element>
-</r:define>
-
-
-<r:define name="Content.Glossary">
-  <p>This occurs at the end of a Page and contains all the definitions that will be collated into a Chapter/Book Glossary</p>
-  <r:element name="div">
-    <r:attribute name="data-type">
-      <r:value>glossary</r:value>
-    </r:attribute>
-    <r:element name="h3">
-      <r:attribute name="data-type">
-        <r:value>glossary-title</r:value>
-      </r:attribute>
-      <r:value>Glossary</r:value>
-    </r:element>
-    <!-- TODO: only allow one <dl> per Glossary -->
-    <r:oneOrMore>
-      <r:ref name="dl"/>
-    </r:oneOrMore>
-  </r:element>
-</r:define>
-
-
 
 <h1>Textbook-specific Inline "elements"</h1>
 
@@ -542,7 +473,7 @@
 
 
 <r:define name="Content.FootnoteNumber">
-  <p>This defines Footnote number that appears in the content. It is matched with an item in Content.FootnoteRefs</p>
+  <p>This defines Footnote number that appears in the content. It is matched with an item in Structure.Page.FootnoteRefs</p>
   <r:element name="sup">
     <r:attribute name="data-type">
       <r:value>footnote-number</r:value>

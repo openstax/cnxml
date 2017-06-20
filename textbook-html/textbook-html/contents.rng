@@ -2,6 +2,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0">
 
 <include href="./_content.rng"/>
+<include href="./_book-structure.rng"/>
 
 <!-- from xhtml/modules/struct.rng but changed to only include a subset of valid "root" elements -->
 <define name="body">
@@ -10,9 +11,11 @@
     <ref name="body.attlist"/>
     <ref name="Block.model"/>
 
-    <!-- Optionally allow the glossary at the end of the doc -->
     <optional>
-      <ref name="Content.Glossary"/>
+      <ref name="Structure.Page.FootnoteRefs"/>
+    </optional>
+    <optional>
+      <ref name="Structure.Page.Glossary"/>
     </optional>
 
   </element>

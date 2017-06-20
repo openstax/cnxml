@@ -59,7 +59,6 @@ One of the following:
 * `<div>`[Content.Media.class](#contentmediaclass)`</div>`
 * `<div>`[Content.Alternates.class](#contentalternatesclass)`</div>`
 * `<div>`[Content.Newline.class](#contentnewlineclass)`</div>`
-* [Content.FootnoteRefs](#contentfootnoterefs)
 * [figure](#figure)
 * [cnx-pi](#cnx-pi)
 
@@ -332,41 +331,6 @@ And other things:
 1.  [id.attrib.required](#idattribrequired)
 2.  `[`**img**` | `**iframe**`]`
 
-## Content.FootnoteRefs
-
-This occurs at the end of a Page (like the Glossary) and contains all
-the footnote text
-
-`<div data-type="footnote-refs">`
-
-1.  `<h3 data-type="footnote-refs-title">Footnotes</h3>`
-2.  `<ul data-list-type="bulleted" data-bullet-style="none">(`
-    `<li data-type="footnote-ref">`
-    
-    1.  [id.attrib.required](#idattribrequired)
-    2.  `<a data-type="footnote-ref-link"
-        href=`[URI.datatype](#uridatatype)`>`**Number.datatype**`</a>`
-    3.  `<span
-        data-type="footnote-ref-content">`**Inline.model**`</span>`
-    
-    `</li>`
-    
-    `)+</ul>`
-
-`</div>`
-
-## Content.Glossary
-
-This occurs at the end of a Page and contains all the definitions that
-will be collated into a Chapter/Book Glossary
-
-`<div data-type="glossary">`
-
-1.  `<h3 data-type="glossary-title">Glossary</h3>`
-2.  **dl**`+`
-
-`</div>`
-
 # Textbook-specific Inline "elements"
 
 ## Content.Space
@@ -395,7 +359,7 @@ This defines a piece of Foreign text
 ## Content.FootnoteNumber
 
 This defines Footnote number that appears in the content. It is matched
-with an item in Content.FootnoteRefs
+with an item in Structure.Page.FootnoteRefs
 
 `<sup data-type="footnote-number">`
 

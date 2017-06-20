@@ -2,8 +2,6 @@
          xmlns:r="http://relaxng.org/ns/structure/1.0"
          xmlns="http://www.w3.org/1999/xhtml">
 
-<r:include href="./_content.rng"/>
-
 <h1>File Overview</h1>
 <p>This file is organized into the following sections</p>
 <ol>
@@ -201,10 +199,10 @@ Print style:
       <r:ref name="Flow.model"/>
     </r:zeroOrMore>
     <r:optional>
-      <r:ref name="Content.Glossary"/>
+      <r:ref name="Structure.Page.Glossary"/>
     </r:optional>
     <r:optional>
-      <r:ref name="Content.FootnoteRefs"/>
+      <r:ref name="Structure.Page.FootnoteRefs"/>
     </r:optional>
   </r:element>
 </r:define>
@@ -231,6 +229,72 @@ Print style:
     <!-- id is not required for individual CNXML->HTML pages but *is* required for book conversion -->
     <r:ref name="id.attrib"/>
     <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
+
+
+<r:define name="Structure.Page.Glossary">
+  <p>This occurs at the end of a Page and contains all the definitions that will be collated into a Chapter/Book Glossary</p>
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>glossary</r:value>
+    </r:attribute>
+    <r:element name="h3">
+      <r:attribute name="data-type">
+        <r:value>glossary-title</r:value>
+      </r:attribute>
+      <r:value>Glossary</r:value>
+    </r:element>
+    <!-- TODO: only allow one <dl> per Glossary -->
+    <r:oneOrMore>
+      <r:ref name="dl"/>
+    </r:oneOrMore>
+  </r:element>
+</r:define>
+
+<r:define name="Structure.Page.FootnoteRefs">
+  <p>This occurs at the end of a Page (like the Glossary) and contains all the footnote text</p>
+  <r:element name="div">
+    <r:attribute name="data-type">
+      <r:value>footnote-refs</r:value>
+    </r:attribute>
+    <r:element name="h3">
+      <r:attribute name="data-type">
+        <r:value>footnote-refs-title</r:value>
+      </r:attribute>
+      <r:value>Footnotes</r:value>
+    </r:element>
+    <r:element name="ul">
+      <r:attribute name="data-list-type">
+        <r:value>bulleted</r:value>
+      </r:attribute>
+      <r:attribute name="data-bullet-style">
+        <r:value>none</r:value>
+      </r:attribute>
+      <r:oneOrMore>
+        <r:element name="li">
+          <r:attribute name="data-type">
+            <r:value>footnote-ref</r:value>
+          </r:attribute>
+          <r:ref name="id.attrib.required"/>
+          <r:element name="a">
+            <r:attribute name="data-type">
+              <r:value>footnote-ref-link</r:value>
+            </r:attribute>
+            <r:attribute name="href">
+              <r:ref name="URI.datatype"/>
+            </r:attribute>
+            <r:ref name="Number.datatype"/>
+          </r:element>
+          <r:element name="span">
+            <r:attribute name="data-type">
+              <r:value>footnote-ref-content</r:value>
+            </r:attribute>
+            <r:ref name="Inline.model"/>
+          </r:element>
+        </r:element>
+      </r:oneOrMore>
+    </r:element>
   </r:element>
 </r:define>
 
