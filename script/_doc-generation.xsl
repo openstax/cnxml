@@ -130,29 +130,36 @@
 </xsl:template>
 
 
-<xsl:template mode="concrete" match="r:ref[not(contains(@name, '.datatype'))]">
-  <xsl:variable name="href">
-    <xsl:call-template name="string-replace-all">
-      <xsl:with-param name="text" select="@name" />
-      <xsl:with-param name="replace" select="'.'" />
-      <xsl:with-param name="by" select="''" />
-    </xsl:call-template>
-  </xsl:variable>
-  <xsl:variable name="hrefLowerCase" select="translate($href,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-  <a>
-    <xsl:attribute name="href">
-      <xsl:text>#</xsl:text>
-      <xsl:value-of select="$hrefLowerCase"/>
-    </xsl:attribute>
-    <xsl:value-of select="@name"/>
-  </a>
+<xsl:template mode="concrete" match="r:ref">
+  <xsl:variable name="name" select="@name"/>
+  <xsl:choose>
+    <xsl:when test="//r:define[@name=$name]">
+      <!-- When defined in this doc then make a link to it -->
+      <xsl:variable name="href">
+        <xsl:call-template name="string-replace-all">
+          <xsl:with-param name="text" select="$name" />
+          <xsl:with-param name="replace" select="'.'" />
+          <xsl:with-param name="by" select="''" />
+        </xsl:call-template>
+      </xsl:variable>
+      <xsl:variable name="hrefLowerCase" select="translate($href,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+      <a>
+        <xsl:attribute name="href">
+          <xsl:text>#</xsl:text>
+          <xsl:value-of select="$hrefLowerCase"/>
+        </xsl:attribute>
+        <xsl:value-of select="@name"/>
+      </a>
+    </xsl:when>
+    <xsl:otherwise>
+      <strong>
+        <xsl:value-of select="$name"/>
+      </strong>
+    </xsl:otherwise>
+  </xsl:choose>
+
 </xsl:template>
 
-<xsl:template mode="concrete" match="r:ref[contains(@name, '.datatype')]">
-  <em>
-    <xsl:value-of select="@name"/>
-  </em>
-</xsl:template>
 
 
 

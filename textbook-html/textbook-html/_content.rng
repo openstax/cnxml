@@ -42,6 +42,7 @@
 
 <r:define name="Block.class" combine="choice">
   <r:choice>
+    <r:ref name="Content.Section"/>
     <r:ref name="Content.Note"/>
     <r:ref name="Content.Equation"/>
     <r:ref name="Content.Exercise"/>
@@ -62,7 +63,6 @@
     <r:ref name="Content.FootnoteRefs"/>
 
     <!-- HTML5 elements -->
-    <r:ref name="section"/>
     <r:ref name="figure"/>
 
     <!-- TODO: Only allow this element inside a <div data-type="page"> -->
@@ -134,6 +134,60 @@
       <r:ref name="Text.datatype"/>
     </r:attribute>
   </r:optional>
+</r:define>
+
+
+<r:define name="Content.Section">
+  <p>This describes a section with an optional title</p>
+  <r:element name="section">
+    <r:ref name="Common.attrib"/>
+    <r:attribute name="data-depth">
+      <r:ref name="Number.datatype"/>
+    </r:attribute>
+    <r:optional>
+      <r:attribute name="data-label">
+        <r:ref name="Text.datatype"/>
+      </r:attribute>
+    </r:optional>
+    <!-- Found in m51005 (chemistry book col11760)-->
+    <r:optional>
+      <r:attribute name="data-element-type">
+        <r:ref name="Text.datatype"/>
+      </r:attribute>
+    </r:optional>
+
+    <r:optional>
+      <r:ref name="Content.Section.Title"/>
+    </r:optional>
+    <!-- This is a flow because apparently <span data-type="media"> is allowed -->
+    <r:ref name="Flow.model"/>
+  </r:element>
+</r:define>
+
+
+<r:define name="Content.Section.Title">
+  <!-- TODO: Ensure that headings all have the data-type="title" attribute or just remove that altogether. Or ensure the correct heading level -->
+  <r:choice>
+    <r:element name="h3">
+      <r:ref name="Content.Section.Title.class"/>
+    </r:element>
+    <r:element name="h4">
+      <r:ref name="Content.Section.Title.class"/>
+    </r:element>
+    <r:element name="h5">
+      <r:ref name="Content.Section.Title.class"/>
+    </r:element>
+    <r:element name="h6">
+      <r:ref name="Content.Section.Title.class"/>
+    </r:element>
+  </r:choice>
+</r:define>
+
+<r:define name="Content.Section.Title.class">
+  <r:attribute name="data-type">
+    <r:value>title</r:value>
+  </r:attribute>
+  <r:ref name="Inline.model"/>
 </r:define>
 
 
@@ -376,8 +430,6 @@
     <r:ref name="Content.Flash"/> -->
   </r:choice>
 </r:define>
-
-
 
 
 <r:define name="Content.FootnoteRefs">
@@ -778,43 +830,6 @@
 
 
 
-<!-- These are used in <section> elements and should be restricted to that. <h1 data-type="..."> -->
-<r:define name="enum.attr.Heading.data-type">
-  <r:value>title</r:value>
-</r:define>
-<r:define name="Heading.attrib" combine="interleave">
-  <!-- TODO: Make a different validation structure for Page elements. That way these values are not valid within the content -->
-  <r:attribute name="data-type">
-    <r:ref name="enum.attr.Heading.data-type"/>
-  </r:attribute>
-</r:define>
-
-
-
-
-<r:define name="div.attlist" combine="interleave">
-
-  <!-- data-has-label="true" data-label="" -->
-  <r:optional>
-    <r:attribute name="data-label">
-      <r:ref name="Text.datatype"/>
-    </r:attribute>
-  </r:optional>
-  <r:optional>
-    <r:attribute name="data-has-label"><!-- TODO: remove from cnxml conversion -->
-      <r:value>true</r:value>
-    </r:attribute>
-  </r:optional>
-
-
-  <!-- <div class="note economics bringhome" data-element-type="note" data-label="note" data-type="note" -->
-  <r:optional><!-- TODO: Make this optional when data-type="note" -->
-    <r:attribute name="data-element-type">
-      <r:ref name="Text.datatype"/>
-    </r:attribute>
-  </r:optional>
-
-</r:define>
 
 
 
@@ -901,36 +916,6 @@
 
 
 
-<!-- The <section> -->
-<r:define name="section">
-  <r:element name="section">
-    <r:ref name="section.attlist"/>
-    <!-- TODO: Ensure that headings all have the data-type="title" attribute or just remove that altogether. Or ensure the correct heading level -->
-    <r:optional>
-      <r:ref name="Heading.class"/>
-    </r:optional>
-    <!-- This is a flow because apparently <span data-type="media"> is allowed -->
-    <r:ref name="Flow.model"/>
-  </r:element>
-</r:define>
-
-<r:define name="section.attlist">
-  <r:ref name="Common.attrib"/>
-  <r:attribute name="data-depth">
-    <r:ref name="Number.datatype"/>
-  </r:attribute>
-  <r:optional>
-    <r:attribute name="data-label">
-      <r:ref name="Text.datatype"/>
-    </r:attribute>
-  </r:optional>
-  <!-- Found in m51005 (chemistry book col11760)-->
-  <r:optional>
-    <r:attribute name="data-element-type">
-      <r:ref name="Text.datatype"/>
-    </r:attribute>
-  </r:optional>
-</r:define>
 
 
 

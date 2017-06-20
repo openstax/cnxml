@@ -48,6 +48,7 @@ This extends the set of elements that are allowed in a `Block.class`
 
 One of the following:
 
+* [Content.Section](#contentsection)
 * [Content.Note](#contentnote)
 * [Content.Equation](#contentequation)
 * [Content.Exercise](#contentexercise)
@@ -59,7 +60,6 @@ One of the following:
 * `<div>`[Content.Alternates.class](#contentalternatesclass)`</div>`
 * `<div>`[Content.Newline.class](#contentnewlineclass)`</div>`
 * [Content.FootnoteRefs](#contentfootnoterefs)
-* [section](#section)
 * [figure](#figure)
 * [cnx-pi](#cnx-pi)
 
@@ -69,7 +69,7 @@ This extends the set of elements that are allowed in a `Inline.class`
 
 One of the following:
 
-* [math](#math)
+* **math**
 * [u](#u)
 * [Content.SpanList](#contentspanlist)
 * [Content.Space](#contentspace)
@@ -95,8 +95,8 @@ like a Note, Exercise, or Example
 
 `<div data-type="title">`
 
-1.  [Common.attrib](#commonattrib)
-2.  [Flow.model](#flowmodel)
+1.  **Common.attrib**
+2.  **Flow.model**
 
 `</div>`
 
@@ -112,14 +112,47 @@ And other things:
 
 1.  These are attributes common to many blockish elements
 
-2.  [Common.attrib](#commonattrib)
+2.  **Common.attrib**
+
+## Content.Section
+
+This describes a section with an optional title
+
+`<section data-depth=`[Number.datatype](#numberdatatype)`
+data-label=`[Text.datatype](#textdatatype)`?
+data-element-type=`[Text.datatype](#textdatatype)`?>`
+
+1.  **Common.attrib**
+2.  [Content.Section.Title](#contentsectiontitle)`?`
+3.  **Flow.model**
+
+`</section>`
+
+## Content.Section.Title
+
+One of the following:
+
+* `<h3>`[Content.Section.Title.class](#contentsectiontitleclass)`</h3>`
+* `<h4>`[Content.Section.Title.class](#contentsectiontitleclass)`</h4>`
+* `<h5>`[Content.Section.Title.class](#contentsectiontitleclass)`</h5>`
+* `<h6>`[Content.Section.Title.class](#contentsectiontitleclass)`</h6>`
+
+## Content.Section.Title.class
+
+This defines a set of attributes:
+
+* ` data-type="title"`
+
+And other things:
+
+1.  **Inline.model**
 
 ## Content.Note
 
 `<div data-type="note">`
 
 1.  [Content.BlockishBase.class](#contentblockishbaseclass)
-2.  [Flow.model](#flowmodel)
+2.  **Flow.model**
 
 `</div>`
 
@@ -128,7 +161,7 @@ And other things:
 `<div data-type="equation">`
 
 1.  [Content.BlockishBase.class](#contentblockishbaseclass)
-2.  [Flow.model](#flowmodel)
+2.  **Flow.model**
 
 `</div>`
 
@@ -137,7 +170,7 @@ And other things:
 `<div data-type="problem">`
 
 1.  [Content.BlockishBase.class](#contentblockishbaseclass)
-2.  [Flow.model](#flowmodel)
+2.  **Flow.model**
 
 `</div>`
 
@@ -147,7 +180,7 @@ And other things:
 `"end"`]`?>`
 
 1.  [Content.BlockishBase.class](#contentblockishbaseclass)
-2.  [Flow.model](#flowmodel)
+2.  **Flow.model**
 
 `</div>`
 
@@ -156,7 +189,7 @@ And other things:
 `<div data-type="commentary">`
 
 1.  [Content.BlockishBase.class](#contentblockishbaseclass)
-2.  [Flow.model](#flowmodel)
+2.  **Flow.model**
 
 `</div>`
 
@@ -177,7 +210,7 @@ And other things:
 `<div data-type="example">`
 
 1.  [Content.BlockishBase.class](#contentblockishbaseclass)
-2.  [Flow.model](#flowmodel)
+2.  **Flow.model**
 
 `</div>`
 
@@ -191,7 +224,7 @@ This defines a set of attributes:
 And other things:
 
 1.  [Content.BlockishBase.attrs](#contentblockishbaseattrs)
-2.  [br](#br)`*`
+2.  **br**`*`
 
 # Lists
 
@@ -223,7 +256,7 @@ accessibility**
 `<div data-type="item">`
 
 1.  [Content.BlockishBase.attrs](#contentblockishbaseattrs)
-2.  [Flow.model](#flowmodel)
+2.  **Flow.model**
 
 `</div>`
 
@@ -242,7 +275,7 @@ accessibility**
 `<span data-type="item">`
 
 1.  [Content.BlockishBase.attrs](#contentblockishbaseattrs)
-2.  [Inline.model](#inlinemodel)
+2.  **Inline.model**
 
 `</span>`
 
@@ -253,12 +286,12 @@ accessibility**
 1.  [id.attrib.required](#idattribrequired)
 2.  `<div data-type="title">`
     
-    1.  [id.attrib](#idattrib)
-    2.  [Inline.model](#inlinemodel)
+    1.  **id.attrib**
+    2.  **Inline.model**
     
     `</div>`
 
-3.  `[`[ul](#ul)` | `[ol](#ol)` | `[Content.DivList](#contentdivlist)`]`
+3.  `[`**ul**` | `**ol**` | `[Content.DivList](#contentdivlist)`]`
 
 `</div>`
 
@@ -266,9 +299,9 @@ accessibility**
 
 `<p>`
 
-1.  [p.attlist](#pattlist)
+1.  **p.attlist**
 2.  [Content.InlineTitle](#contentinlinetitle)
-3.  [Inline.model](#inlinemodel)
+3.  **Inline.model**
 
 `</p>`
 
@@ -282,7 +315,7 @@ This defines a set of attributes:
 And other things:
 
 1.  [id.attrib.required](#idattribrequired)
-2.  `[`[img](#img)` |
+2.  `[`**img**` |
     `[Content.ImageWithThumbnail](#contentimagewiththumbnail)`]+`
 
 ## Content.Media.class
@@ -296,7 +329,7 @@ This defines a set of attributes:
 And other things:
 
 1.  [id.attrib.required](#idattribrequired)
-2.  `[`[img](#img)` | `[iframe](#iframe)`]`
+2.  `[`**img**` | `**iframe**`]`
 
 ## Content.FootnoteRefs
 
@@ -311,9 +344,9 @@ the footnote text
     
     1.  [id.attrib.required](#idattribrequired)
     2.  `<a data-type="footnote-ref-link"
-        href=`[URI.datatype](#uridatatype)`>`*Number.datatype*`</a>`
+        href=`[URI.datatype](#uridatatype)`>`**Number.datatype**`</a>`
     3.  `<span
-        data-type="footnote-ref-content">`[Inline.model](#inlinemodel)`</span>`
+        data-type="footnote-ref-content">`**Inline.model**`</span>`
     
     `</li>`
     
@@ -329,7 +362,7 @@ will be collated into a Chapter/Book Glossary
 `<div data-type="glossary">`
 
 1.  `<h3 data-type="glossary-title">Glossary</h3>`
-2.  [dl](#dl)`+`
+2.  **dl**`+`
 
 `</div>`
 
@@ -340,16 +373,16 @@ will be collated into a Chapter/Book Glossary
 This provides horizontal space
 
 `<span data-type="space"
-data-count=`[Number.datatype](#numberdatatype)`>`*Text.datatype*`</span>`
+data-count=`[Number.datatype](#numberdatatype)`>`**Text.datatype**`</span>`
 ## Content.Term
 
 This defines a Term that will be bold and show up in the Book Index
 
 `<span data-type="term">`
 
-1.  [id.attrib](#idattrib)
-2.  [class.attrib](#classattrib)
-3.  [Inline.model](#inlinemodel)
+1.  **id.attrib**
+2.  **class.attrib**
+3.  **Inline.model**
 
 `</span>`
 
@@ -357,7 +390,7 @@ This defines a Term that will be bold and show up in the Book Index
 
 This defines a piece of Foreign text
 
-`<span data-type="foreign">`[Inline.model](#inlinemodel)`</span>`
+`<span data-type="foreign">`**Inline.model**`</span>`
 ## Content.FootnoteNumber
 
 This defines Footnote number that appears in the content. It is matched
@@ -367,7 +400,7 @@ with an item in Content.FootnoteRefs
 
 1.  [id.attrib.required](#idattribrequired)
 2.  `<a data-type="footnote-link"
-    href=`[URI.datatype](#uridatatype)`>`*Number.datatype*`</a>`
+    href=`[URI.datatype](#uridatatype)`>`**Number.datatype**`</a>`
 
 `</sup>`
 
@@ -376,10 +409,10 @@ with an item in Content.FootnoteRefs
 This is an Image with a clickable thumbnail
 
 `<a data-type="image-with-thumbnail"
-href=`[URI.datatype](#uridatatype)`>`[img](#img)`</a>`
+href=`[URI.datatype](#uridatatype)`>`**img**`</a>`
 ## Content.InlineTitle
 
-`<span data-type="title">`[Inline.model](#inlinemodel)`</span>`
+`<span data-type="title">`**Inline.model**`</span>`
 # Enum attributes (mostly Tables and Lists)
 
 ## id.attrib.required
@@ -417,9 +450,9 @@ allow an optional title for the caption
 
 `<caption>`
 
-1.  [caption.attlist](#captionattlist)
+1.  **caption.attlist**
 2.  [Content.InlineTitle](#contentinlinetitle)
-3.  [Inline.model](#inlinemodel)
+3.  **Inline.model**
 
 `</caption>`
 
@@ -558,23 +591,6 @@ This defines a set of attributes:
 * ` data-type=`[enum.attr.span.data-type](#enumattrspandata-type)`?`
 * ` data-alt=`[Text.datatype](#textdatatype)`?`
 
-## enum.attr.Heading.data-type
-
-`"title"`
-## Heading.attrib
-
-This defines a set of attributes:
-
-* ` data-type=`[enum.attr.Heading.data-type](#enumattrheadingdata-type)
-
-## div.attlist
-
-This defines a set of attributes:
-
-* ` data-label=`[Text.datatype](#textdatatype)`?`
-* ` data-has-label="true"?`
-* ` data-element-type=`[Text.datatype](#textdatatype)`?`
-
 ## div-span-list.attrs
 
 This defines a set of attributes:
@@ -613,35 +629,13 @@ do appear in XHTML5 that openstax uses.
 `<u>`
 
 1.  [u.attlist](#uattlist)
-2.  [Inline.model](#inlinemodel)
+2.  **Inline.model**
 
 `</u>`
 
 ## u.attlist
 
-[Common.attrib](#commonattrib)
-## section
-
-`<section>`
-
-1.  [section.attlist](#sectionattlist)
-2.  [Heading.class](#headingclass)`?`
-3.  [Flow.model](#flowmodel)
-
-`</section>`
-
-## section.attlist
-
-This defines a set of attributes:
-
-* ` data-depth=`[Number.datatype](#numberdatatype)
-* ` data-label=`[Text.datatype](#textdatatype)`?`
-* ` data-element-type=`[Text.datatype](#textdatatype)`?`
-
-And other things:
-
-1.  [Common.attrib](#commonattrib)
-
+**Common.attrib**
 ## figure
 
 `<figure>`
@@ -649,7 +643,7 @@ And other things:
 1.  [figure.attlist](#figureattlist)
 2.  [Content.BlockishBase.Title](#contentblockishbasetitle)`?`
 3.  [figcaption](#figcaption)`?`
-4.  [Flow.model](#flowmodel)
+4.  **Flow.model**
 
 `</figure>`
 
@@ -662,7 +656,7 @@ This defines a set of attributes:
 
 And other things:
 
-1.  [Common.attrib](#commonattrib)
+1.  **Common.attrib**
 
 ## figcaption
 
@@ -670,19 +664,19 @@ And other things:
 
 1.  [figcaption.attlist](#figcaptionattlist)
 2.  [Content.InlineTitle](#contentinlinetitle)`?`
-3.  [Flow.model](#flowmodel)
+3.  **Flow.model**
 
 `</figcaption>`
 
 ## figcaption.attlist
 
-[id.attrib](#idattrib)
+**id.attrib**
 ## cnx-pi
 
 `<cnx-pi>`
 
 1.  [cnx-pi.attlist](#cnx-piattlist)
-2.  *cnx-pi.datatype*
+2.  [cnx-pi.datatype](#cnx-pidatatype)
 
 `</cnx-pi>`
 
@@ -690,7 +684,7 @@ And other things:
 
 This defines a set of attributes:
 
-* ` data-type=`[`"cnx.eoc"` | *Text.datatype*]
+* ` data-type=`[`"cnx.eoc"` | **Text.datatype**]
 
 # Datatypes
 

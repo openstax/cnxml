@@ -19,7 +19,7 @@ have additional attributes and has a restricted set of children.
 
 `<body itemscope="itemscope" itemtype="http://schema.org/Book">`
 
-1.  [body.attlist](#bodyattlist)
+1.  **body.attlist**
 2.  [Structure.Book.Metadata](#structurebookmetadata)
 3.  [Structure.Book.ToC](#structurebooktoc)
 4.  `[`[Structure.Chapter](#structurechapter)` |
@@ -63,7 +63,7 @@ And other things:
 `<div class="print-style">`
 
 1.  (text...)
-2.  `<span data-type="print-style">`*TODO.enum.datatype*`</span>`
+2.  `<span data-type="print-style">`**TODO.enum.datatype**`</span>`
 
 `</div>`
 
@@ -99,7 +99,7 @@ href=`[URI.datatype](#uridatatype)`>`(text...)`</a></li>`
 `<div data-type="chapter">`
 
 1.  [Structure.ChapterMetadata](#structurechaptermetadata)
-2.  `<h1 data-type="document-title">`[Inline.model](#inlinemodel)`</h1>`
+2.  `<h1 data-type="document-title">`**Inline.model**`</h1>`
 3.  [Structure.Page](#structurepage)`+`
 
 `</div>`
@@ -118,14 +118,14 @@ href=`[URI.datatype](#uridatatype)`>`(text...)`</a></li>`
 
 `<div data-type="page">`
 
-1.  [class.attrib](#classattrib)
-2.  [id.attrib.required](#idattribrequired)
+1.  **class.attrib**
+2.  **id.attrib.required**
 3.  [Structure.Page.Metadata](#structurepagemetadata)
 4.  [Structure.Page.Title](#structurepagetitle)
 5.  [Structure.Page.Abstract](#structurepageabstract)`?`
-6.  [Flow.model](#flowmodel)`*`
-7.  [Content.Glossary](#contentglossary)`?`
-8.  [Content.FootnoteRefs](#contentfootnoterefs)`?`
+6.  **Flow.model**`*`
+7.  **Content.Glossary**`?`
+8.  **Content.FootnoteRefs**`?`
 
 `</div>`
 
@@ -133,8 +133,8 @@ href=`[URI.datatype](#uridatatype)`>`(text...)`</a></li>`
 
 `<div data-type="document-title">`
 
-1.  [id.attrib](#idattrib)
-2.  [Inline.model](#inlinemodel)
+1.  **id.attrib**
+2.  **Inline.model**
 
 `</div>`
 
@@ -142,8 +142,8 @@ href=`[URI.datatype](#uridatatype)`>`(text...)`</a></li>`
 
 `<div data-type="abstract">`
 
-1.  [id.attrib](#idattrib)
-2.  [Flow.model](#flowmodel)
+1.  **id.attrib**
+2.  **Flow.model**
 
 `</div>`
 
@@ -166,8 +166,7 @@ href=`[URI.datatype](#uridatatype)`>`(text...)`</a></li>`
 
 ## Structure.Metadata.Title
 
-`<h1 data-type="document-title"
-itemprop="name">`[Inline.model](#inlinemodel)`</h1>`
+`<h1 data-type="document-title" itemprop="name">`**Inline.model**`</h1>`
 ## Structure.Metadata.Uri
 
 `<span data-type="cnx-archive-uri"
@@ -193,9 +192,9 @@ data-value=UUID-and-version.datatype/>`
 `<span data-type="author" itemprop="author" itemscope="itemscope"
 itemtype="http://schema.org/Person">`
 
-1.  [id.attrib.required](#idattribrequired)
+1.  **id.attrib.required**
 2.  `<a data-type="cnx-id" href=`[Text.datatype](#textdatatype)`
-    itemprop="url">`*Text.datatype*`</a>`
+    itemprop="url">`**Text.datatype**`</a>`
 
 `</span>`
 
@@ -217,9 +216,9 @@ itemtype="http://schema.org/Person">`
 `<span data-type="publisher" itemprop="publisher" itemscope="itemscope"
 itemtype="http://schema.org/Person">`
 
-1.  [id.attrib.required](#idattribrequired)
+1.  **id.attrib.required**
 2.  `<a data-type="cnx-id" href=`[Text.datatype](#textdatatype)`
-    itemprop="url">`*Text.datatype*`</a>`
+    itemprop="url">`**Text.datatype**`</a>`
 
 `</span>`
 
@@ -256,11 +255,11 @@ itemtype="http://schema.org/Person">`
 `<span data-type="copyright-holder" itemprop="copyright-holder"
 itemscope="itemscope" itemtype="http://schema.org/Person"><a
 data-type="cnx-id" href=`[UserLogin.datatype](#userlogindatatype)`
-itemprop="url">`*UserName.datatype*`</a></span>`
+itemprop="url">`**UserName.datatype**`</a></span>`
 ## Structure.Metadata.Description
 
 `<div class="description" data-type="description"
-itemprop="description">`[Flow.model](#flowmodel)`+</div>`
+itemprop="description">`**Flow.model**`+</div>`
 ## Structure.Metadata.Keywords
 
 `(<div data-type="keyword" itemprop="keywords">`(text...)`</div>)*`
@@ -270,7 +269,7 @@ Usually books have at most one subject but "Featured Book" is a subject
 so there may be 2
 
 `(<div data-type="subject"
-itemprop="about">`*Subject.datatype*`</div>)*`
+itemprop="about">`**Subject.datatype**`</div>)*`
 ## Structure.Metadata.Resources
 
 These are the Image (and other) files related to the Page. **TODO: Are
@@ -280,7 +279,7 @@ they parsed by anything?**
 none">(<ul>`[Structure.Metadata.Resources.Item](#structuremetadataresourcesitem)`+</ul>)?</div>`
 ## Structure.Metadata.Resources.Item
 
-`<li><a href=`[Sha.datatype](#shadatatype)`>`*Sha.datatype*`</a></li>`
+`<li><a href=`[Sha.datatype](#shadatatype)`>`**Sha.datatype**`</a></li>`
 ## Structure.Metadata.TranslucentBinding
 
 **TODO: remove me. why is this here?**
