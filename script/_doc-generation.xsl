@@ -133,7 +133,7 @@
 <xsl:template mode="concrete" match="r:ref">
   <xsl:variable name="name" select="@name"/>
   <xsl:choose>
-    <xsl:when test="//r:define[@name=$name]">
+    <xsl:when test="/r:grammar/r:define[@name=$name]">
       <!-- When defined in this doc then make a link to it -->
       <xsl:variable name="href">
         <xsl:call-template name="string-replace-all">

@@ -145,7 +145,8 @@ This defines a set of attributes:
 
 And other things:
 
-1.  **Inline.model**
+1.  **id.attrib**
+2.  **Inline.model**
 
 ## Content.Note
 
@@ -688,9 +689,11 @@ This defines a set of attributes:
 
 # Datatypes
 
-These are custom text types that can be validated using a Regular
-expression or as part of a data integrity checker with access to the
-database
+These are specific text values that can be validated by regular
+expressions or by looking up in a database
+
+For more details on these formats, see [CNX API Documentation][1]. This
+link may become outdated but is current at the time of writing
 
 ## cnx-pi.datatype
 
@@ -719,15 +722,10 @@ is converted to:
     <cnx-pi data-type="cnx.eoc">class="references" title="References"?</cnx-pi>
 
 (text...)
-# Datatypes
-
-These are specific text values that can be validated by regular
-expressions or by looking up in a database
-
-For more details on these formats, see [CNX API Documentation][1]. This
-link may become outdated but is current at the time of writing
-
 ## TODO.enum.datatype
+
+This is a placeholder for enumerated strings that have not been defined
+in this grammar yet
 
 (text...)
 ## UUID-and-version.datatype
@@ -775,7 +773,11 @@ One of the following:
 
 These values are used to organize content on the [Browse][2] page
 
-(text...)
+One of the following:
+
+* `"Mathematics and Statistics"`
+* (text...)
+
 
 
 

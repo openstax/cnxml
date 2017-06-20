@@ -184,6 +184,7 @@
 </r:define>
 
 <r:define name="Content.Section.Title.class">
+  <r:ref name="id.attrib"/>
   <r:attribute name="data-type">
     <r:value>title</r:value>
   </r:attribute>
@@ -998,8 +999,8 @@
 
 <h1>Datatypes</h1>
 
-<p>These are custom text types that can be validated using a Regular expression or as part of a data integrity checker with access to the database</p>
-
+<p>These are specific text values that can be validated by regular expressions or by looking up in a database</p>
+<p>For more details on these formats, see <a href="https://github.com/openstax/napkin-notes/pull/73">CNX API Documentation</a>. This link may become outdated but is current at the time of writing</p>
 
 
 
@@ -1033,23 +1034,16 @@
 
 
 
-<h1>Datatypes</h1>
-
-<p>These are specific text values that can be validated by regular expressions or by looking up in a database</p>
-<p>For more details on these formats, see <a href="https://github.com/openstax/napkin-notes/pull/73">CNX API Documentation</a>. This link may become outdated but is current at the time of writing</p>
-
-<!-- Placeholder for enums -->
 <r:define name="TODO.enum.datatype">
+  <p>This is a placeholder for enumerated strings that have not been defined in this grammar yet</p>
   <r:text/>
 </r:define>
 
 
 <r:define name="UUID-and-version.datatype">
-
   <p>This is an identifier that conforms to the UUIDv4 format specification. It is created either by the author or automatically by the archive when publishing a new Book or Page.</p>
   <p>This contains a UUID and a version. Example: <code>bcfb5800-b883-4a63-8599-e098b407ddfc@9.1</code></p>
   <p>Regular Expression for validation: <code>/[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}@[0-9]+(\.[0-9]+)?/</code></p>
-
   <r:text/>
 </r:define>
 
@@ -1080,13 +1074,14 @@
   </r:choice>
 </r:define>
 
-<!-- Mathematics and Statistics -->
 <!-- TODO: enumerate the options -->
 <r:define name="Subject.datatype">
   <p>These values are used to organize content on the <a href="https://cnx.org/browse">Browse</a> page</p>
-  <r:text/>
+  <r:choice>
+    <r:value>Mathematics and Statistics</r:value>
+    <r:text/>
+  </r:choice>
 </r:define>
-
 
 
 </r:grammar>
