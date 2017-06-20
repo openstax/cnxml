@@ -75,6 +75,7 @@ One of the following:
 * [Content.FootnoteNumber](#contentfootnotenumber)
 * [Content.Term](#contentterm)
 * [Content.Foreign](#contentforeign)
+* [Content.CiteTitle](#contentcitetitle)
 * `<span>`[Content.Media.class](#contentmediaclass)`</span>`
 * `<span>`[Content.Alternates.class](#contentalternatesclass)`</span>`
 * `<span>`[Content.Newline.class](#contentnewlineclass)`</span>`
@@ -375,6 +376,9 @@ This is an Image with a clickable thumbnail
 
 `<a data-type="image-with-thumbnail"
 href=`[URI.datatype](#uridatatype)`>`**img**`</a>`
+## Content.CiteTitle
+
+`<span data-type="cite-title">`**Inline.model**`</span>`
 ## Content.InlineTitle
 
 `<span data-type="title">`**Inline.model**`</span>`
@@ -518,43 +522,11 @@ This defines a set of attributes:
 * ` data-print-width=`[Length.datatype](#lengthdatatype)`?`
 * ` data-print=`[Boolean.datatype](#booleandatatype)`?`
 
-## enum.attr.strong.data-effect
-
-`"bold"`
-## strong.attlist
-
-This defines a set of attributes:
-
-* `
-  data-effect=`[enum.attr.strong.data-effect](#enumattrstrongdata-effect)`?`
-
-## enum.attr.em.data-effect
-
-One of the following:
-
-* `"italics"`
-* `"smallcaps"`
-
 ## em.attlist
 
 This defines a set of attributes:
 
-* ` data-effect=`[enum.attr.em.data-effect](#enumattremdata-effect)`?`
-
-## enum.attr.span.data-type
-
-**TODO:** Move this to only be a child of `<cite>`
-
-One of the following:
-
-* `"cite-title"`
-
-## span.attlist
-
-This defines a set of attributes:
-
-* ` data-type=`[enum.attr.span.data-type](#enumattrspandata-type)`?`
-* ` data-alt=`[Text.datatype](#textdatatype)`?`
+* ` data-effect="smallcaps"?`
 
 ## div-span-list.attrs
 
@@ -576,6 +548,11 @@ And other things:
       2.  `
           data-number-style=`[enum.attr.ol.data-number-style](#enumattroldata-number-style)`?`
 
+# HTML5 elements
+
+These are elements that were not defined in the original XHTML spec but
+do appear in XHTML5 that openstax uses.
+
 ## ol.attlist
 
 This defines a set of attributes:
@@ -584,12 +561,23 @@ This defines a set of attributes:
 * ` compact="compact"?`
 * ` start=?`
 
-# HTML5 elements
+And other things:
 
-These are elements that were not defined in the original XHTML spec but
-do appear in XHTML5 that openstax uses.
+1.  From `xhtml/legacy.rng` **TODO:** Move this into a separate legacy
+    file
+
+^
+
+## li.attlist
+
+This defines a set of attributes:
+
+* ` data-label=`[Text.datatype](#textdatatype)`?`
 
 ## u
+
+For strikethrough. from `xhtml/legacy.rng` . **TODO:** Mark this up
+differently and move this into a separate legacy file
 
 `<u>`
 

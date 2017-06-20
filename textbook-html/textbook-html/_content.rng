@@ -78,6 +78,7 @@
     <r:ref name="Content.FootnoteNumber"/>
     <r:ref name="Content.Term"/>
     <r:ref name="Content.Foreign"/>
+    <r:ref name="Content.CiteTitle"/>
     <r:element name="span">
       <r:ref name="Content.Media.class"/>
     </r:element>
@@ -504,6 +505,15 @@
   </r:element>
 </r:define>
 
+<r:define name="Content.CiteTitle">
+  <r:element name="span">
+    <r:attribute name="data-type">
+      <r:value>cite-title</r:value>
+    </r:attribute>
+    <r:ref name="Inline.model"/>
+  </r:element>
+</r:define>
+
 
 <r:define name="Content.InlineTitle">
   <r:element name="span">
@@ -607,7 +617,7 @@
 
 <r:define name="enum.attr.ol.data-number-style">
   <r:choice>
-    <r:value>arabic</r:value><!-- TODO: remove the default -->
+    <r:value>arabic</r:value><!-- default -->
     <r:value>lower-alpha</r:value>
     <r:value>upper-alpha</r:value>
     <r:value>lower-roman</r:value>
@@ -640,7 +650,7 @@
 
 <r:define name="enum.attr.ul.data-bullet-style">
   <r:choice>
-    <r:value>bullet</r:value><!-- TODO: remove the default -->
+    <r:value>bullet</r:value><!-- default -->
     <r:value>open-circle</r:value>
     <r:value>pilcrow</r:value>
     <r:value>rpilcrow</r:value>
@@ -706,69 +716,27 @@
 
 
 
-<r:define name="enum.attr.strong.data-effect">
-  <!-- TODO: remove the default -->
-  <r:value>bold</r:value>
-</r:define>
-<r:define name="strong.attlist" combine="interleave">
-  <r:optional>
-    <r:attribute name="data-effect">
-      <r:ref name="enum.attr.strong.data-effect"/>
-    </r:attribute>
-  </r:optional>
-</r:define>
-
-
-
-<r:define name="enum.attr.em.data-effect">
-  <r:choice>
-    <!-- TODO: remove the default -->
-    <r:value>italics</r:value>
-    <r:value>smallcaps</r:value>
-  </r:choice>
-</r:define>
 <r:define name="em.attlist" combine="interleave">
   <r:optional>
     <r:attribute name="data-effect">
-      <r:ref name="enum.attr.em.data-effect"/>
+      <r:value>smallcaps</r:value>
     </r:attribute>
   </r:optional>
 </r:define>
 
 
 
-<r:define name="enum.attr.span.data-type">
-  <p><strong>TODO:</strong> Move this to only be a child of <code>&lt;cite&gt;</code></p>
-  <r:choice>
-    <!-- TODO: either remove these or move them in to being optional children of <cite> -->
-    <r:value>cite-title</r:value>
-  </r:choice>
-</r:define>
-<r:define name="span.attlist" combine="interleave">
-  <r:optional><!-- TODO: make this required again. It is optional because of the ToC -->
-    <r:attribute name="data-type">
-      <r:ref name="enum.attr.span.data-type"/>
-    </r:attribute>
-  </r:optional>
+<!-- <r:define name="span.attlist" combine="interleave">
   <r:optional>
     <r:attribute name="data-alt">
-      <!-- TODO: Maybe change the CNXML conversion to use an ARIA attribute -->
       <r:ref name="Text.datatype"/>
     </r:attribute>
   </r:optional>
-
-</r:define>
-
+</r:define> -->
 
 
 
 
-
-
-
-
-<!-- <div data-list-type="enumerated" data-number-style="lower-alpha" data-type="list" -->
-<!-- <div data-bullet-style="bullet" data-list-type="bulleted" data-type="list"  -->
 <r:define name="div-span-list.attrs">
   <r:attribute name="data-type">
     <r:value>list</r:value>
@@ -814,8 +782,12 @@
 
 
 
-<!-- From xhtml/legacy.rng TODO: Move this into a separate legacy file -->
+<h1>HTML5 elements</h1>
+
+<p>These are elements that were not defined in the original XHTML spec but do appear in XHTML5 that openstax uses.</p>
+
 <r:define name="ol.attlist" combine="interleave">
+  <p>From <code>xhtml/legacy.rng</code> <strong>TODO:</strong> Move this into a separate legacy file</p>
   <r:optional>
     <r:attribute name="type"/>
   </r:optional>
@@ -829,13 +801,16 @@
   </r:optional>
 </r:define>
 
+<r:define name="li.attlist" combine="interleave">
+  <r:optional>
+    <r:attribute name="data-label">
+      <r:ref name="Text.datatype"/>
+    </r:attribute>
+  </r:optional>
+</r:define>
 
-<h1>HTML5 elements</h1>
-
-<p>These are elements that were not defined in the original XHTML spec but do appear in XHTML5 that openstax uses.</p>
-
-<!-- For strikethrough. from xhtml/legacy.rng . TODO: Mark this up differently and move this into a separate legacy file -->
 <r:define name="u">
+  <p>For strikethrough. from <code>xhtml/legacy.rng</code> . <strong>TODO:</strong> Mark this up differently and move this into a separate legacy file</p>
   <r:element name="u">
     <r:ref name="u.attlist"/>
     <r:ref name="Inline.model"/>
@@ -907,8 +882,6 @@
 
 
 
-<!-- <div data-type="page" id="2c962197-8004-45c5-8c65-0eb785cbe09b"> -->
-<!-- <cnx-pi data-type="cnx.eoc">class="self-check-questions" title="Self-Check Questions"</cnx-pi> -->
 <r:define name="cnx-pi">
   <r:element name="cnx-pi">
     <r:ref name="cnx-pi.attlist"/>
