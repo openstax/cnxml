@@ -193,6 +193,21 @@ And other things:
 1.  [Content.BlockishBase.attrs](#contentblockishbaseattrs)
 2.  [br](#br)`*`
 
+# Lists
+
+Lists can come in many forms. Simple lists use the existing `<ol>` and
+`<ul>` elements but there are cases when this is not enough:
+
+* Lists with a title
+* Lists with a mark-prefix for each item
+* Inline lists
+
+In these cases the list is marked up with a `<div data-type="list">` or
+`<span data-type="list">`
+
+**TODO: Use `role="list"` instead of `data-type="list"` for free
+accessibility**
+
 ## Content.DivList
 
 `<div>`
@@ -285,6 +300,9 @@ And other things:
 
 ## Content.FootnoteRefs
 
+This occurs at the end of a Page (like the Glossary) and contains all
+the footnote text
+
 `<div data-type="footnote-refs">`
 
 1.  `<h3 data-type="footnote-refs-title">Footnotes</h3>`
@@ -304,6 +322,9 @@ And other things:
 `</div>`
 
 ## Content.Glossary
+
+This occurs at the end of a Page and contains all the definitions that
+will be collated into a Chapter/Book Glossary
 
 `<div data-type="glossary">`
 
@@ -382,9 +403,17 @@ This defines a set of attributes:
 * ` data-colsep=`[Number.datatype](#numberdatatype)`?`
 * ` data-rowsep=`[Number.datatype](#numberdatatype)`?`
 
+And other things:
+
+1.  These are additional attributes that are defined in CALS tables
+
+^
+
 ## caption
 
 This extends the set of elements that are allowed in a `caption`
+
+allow an optional title for the caption
 
 `<caption>`
 
@@ -473,14 +502,6 @@ This defines a set of attributes:
   data-mark-suffix=`[enum.attr.ol.data-mark-suffix](#enumattroldata-mark-suffix)`?`
 * ` data-labeled-item="true"?`
 
-## li.attlist
-
-This defines a set of attributes:
-
-* ` cnx-archive-shortid=`[Text.datatype](#textdatatype)`?`
-* ` cnx-archive-uri=`[Text.datatype](#textdatatype)`?`
-* ` data-label=`[Text.datatype](#textdatatype)`?`
-
 ## enum.attr.img.data-media-type
 
 One of the following:
@@ -488,7 +509,6 @@ One of the following:
 * `"image/png"`
 * `"image/jpeg"`
 * `"application/postscript"`
-* `"image/jpg"`
 
 ## img.attlist
 
@@ -524,6 +544,8 @@ This defines a set of attributes:
 * ` data-effect=`[enum.attr.em.data-effect](#enumattremdata-effect)`?`
 
 ## enum.attr.span.data-type
+
+**TODO:** Move this to only be a child of `<cite>`
 
 One of the following:
 
@@ -721,7 +743,7 @@ It is created either by the author or automatically by the archive when
 publishing a new Book or Page.
 
 This contains a UUID and a version. Example:
-`031da8d3-b525-429c-80cf-6c8ed997733a@1.0`
+`bcfb5800-b883-4a63-8599-e098b407ddfc@9.1`
 
 Regular Expression for validation:
 `/[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}@[0-9]+(\.[0-9]+)?/`
@@ -738,6 +760,8 @@ an `sha1` hash, as provided by `sha1sum` of the resource file bits.
 This is a computed string which is based on the first few bits of the
 UUID. These are not guaranteed to be stable over all time, but we will
 strive to extend, rather than replace them.
+
+Example: `vPtYALiD@9`
 
 (text...)
 ## UserLogin.datatype

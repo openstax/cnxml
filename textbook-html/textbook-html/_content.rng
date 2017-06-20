@@ -1,4 +1,4 @@
-<!-- Note: The default namespace is HTML because it is annoying to strip off the namespace prefix later -->
+<!-- Note: The default namespace is HTML because it is annoying to strip off the namespace prefix later when generating documentation -->
 <r:grammar ns="http://www.w3.org/1999/xhtml"
          xmlns="http://www.w3.org/1999/xhtml"
          xmlns:r="http://relaxng.org/ns/structure/1.0"
@@ -197,7 +197,6 @@
   </r:element>
 </r:define>
 
-<!-- TODO: Require id attributes for some elements -->
 <r:define name="Content.Exercise">
   <r:element name="div">
     <r:attribute name="data-type">
@@ -235,7 +234,6 @@
 </r:define>
 
 
-<!-- <div data-count="1" data-type="newline"  -->
 <r:define name="Content.Newline.class">
   <r:attribute name="data-type">
     <r:value>newline</r:value>
@@ -251,6 +249,19 @@
   </r:zeroOrMore>
 </r:define>
 
+<h1>Lists</h1>
+
+<p>Lists can come in many forms. Simple lists use the existing <code>&lt;ol&gt;</code> and <code>&lt;ul&gt;</code> elements but there are cases when this is not enough:</p>
+
+<ul>
+  <li>Lists with a title</li>
+  <li>Lists with a mark-prefix for each item</li>
+  <li>Inline lists</li>
+</ul>
+
+<p>In these cases the list is marked up with a <code>&lt;div data-type="list"&gt;</code> or <code>&lt;span data-type="list"&gt;</code></p>
+
+<p><strong>TODO: Use <code>role="list"</code> instead of <code>data-type="list"</code> for free accessibility</strong></p>
 
 <r:define name="Content.DivList">
   <r:element name="div">
@@ -263,7 +274,6 @@
 </r:define>
 
 
-<!-- <div data-count="1" data-type="newline"  -->
 <r:define name="Content.DivListItem">
   <r:element name="div">
     <r:attribute name="data-type">
@@ -370,33 +380,8 @@
 
 
 
-<!-- This occurs at the end of a Page
-    <div
-        data-type="footnote-refs"
-      ><h3
-          data-type="footnote-refs-title"
-        >Footnotes</h3
-      ><ul
-          data-list-type="bulleted"
-          data-bullet-style="none"
-        ><li
-            data-type="footnote-ref"
-            id="footnote1"
-          ><a
-              data-type="footnote-ref-link"
-              href="#footnote-ref1"
-            >1</a
-          > <span
-              data-type="footnote-ref-content"
-            >J. Hulcr et al. &#x201C;A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable.&#x201D; <em
-                data-effect="italics"
-              >PLoS ONE</em
-            > 7 no. 11 (2012): e47712. doi:10.1371/journal.pone.0047712.</span
-          ></li
-        ></ul
-      ></div
-    > -->
 <r:define name="Content.FootnoteRefs">
+  <p>This occurs at the end of a Page (like the Glossary) and contains all the footnote text</p>
   <r:element name="div">
     <r:attribute name="data-type">
       <r:value>footnote-refs</r:value>
@@ -442,13 +427,8 @@
 </r:define>
 
 
-<!-- <div data-type="glossary"><h3 data-type="glossary-title">Glossary</h3>
-<dl id="fs-id1167836525060">
-<dt>coefficient</dt>
-<dd id="fs-id1167836525065">The coefficient of a term is the constant that multiplies the variable in a term.</dd>
-</dl>
-</div> -->
 <r:define name="Content.Glossary">
+  <p>This occurs at the end of a Page and contains all the definitions that will be collated into a Chapter/Book Glossary</p>
   <r:element name="div">
     <r:attribute name="data-type">
       <r:value>glossary</r:value>
@@ -562,8 +542,8 @@
 
 
 
-<!-- <table data-label=""> -->
 <r:define name="table.attlist" combine="interleave">
+  <p>These are additional attributes that are defined in CALS tables</p>
   <r:optional>
     <r:attribute name="data-label">
       <r:ref name="Text.datatype"/>
@@ -586,8 +566,8 @@
   </r:optional>
 </r:define>
 
-<!-- allow an optional title for the caption -->
 <r:define name="caption" combine="choice">
+  <p>allow an optional title for the caption</p>
   <r:element name="caption">
     <r:ref name="caption.attlist"/>
     <r:ref name="Content.InlineTitle"/>
@@ -596,7 +576,6 @@
 </r:define>
 
 
-<!-- <td data-valign="top"> -->
 <r:define name="enum.attr.td.data-valign">
   <r:choice>
     <r:value>top</r:value>
@@ -626,7 +605,6 @@
   </r:optional>
 </r:define>
 
-<!-- <th data-align="center"> -->
 <r:define name="th.attlist" combine="interleave">
   <r:optional>
     <r:attribute name="data-valign">
@@ -643,7 +621,6 @@
 
 
 
-<!-- <ol data-number-style="lower-alpha"> -->
 <r:define name="enum.attr.ol.data-number-style">
   <r:choice>
     <r:value>arabic</r:value><!-- TODO: remove the default -->
@@ -677,7 +654,6 @@
 
 
 
-<!-- <ul data-bullet-style="bullet"  -->
 <r:define name="enum.attr.ul.data-bullet-style">
   <r:choice>
     <r:value>bullet</r:value><!-- TODO: remove the default -->
@@ -709,24 +685,6 @@
   </r:optional>
 </r:define>
 
-<!-- <li cnx-archive-shortid="vPtYALiD@9" cnx-archive-uri="bcfb5800-b883-4a63-8599-e098b407ddfc@9"> (in the ToC) -->
-<r:define name="li.attlist" combine="interleave">
-  <r:optional><!-- Make these required when in the ToC -->
-    <r:attribute name="cnx-archive-shortid"><!-- TODO: Rename this to data-* -->
-      <r:ref name="Text.datatype"/>
-    </r:attribute>
-    <r:attribute name="cnx-archive-uri"><!-- TODO: Rename this to data-* -->
-      <r:ref name="Text.datatype"/>
-    </r:attribute>
-  </r:optional>
-  <r:optional>
-    <r:attribute name="data-label">
-      <r:ref name="Text.datatype"/>
-    </r:attribute>
-  </r:optional>
-</r:define>
-
-
 
 <!-- <img data-alt="..." data-media-type="..."> -->
 <r:define name="enum.attr.img.data-media-type">
@@ -734,8 +692,6 @@
     <r:value>image/png</r:value>
     <r:value>image/jpeg</r:value>
     <r:value>application/postscript</r:value>
-    <!-- TODO: automatically convert this to jpeg -->
-    <r:value>image/jpg</r:value>
   </r:choice>
 </r:define>
 <r:define name="img.attlist" combine="interleave">
@@ -766,7 +722,6 @@
 
 
 
-<!-- <strong data-effect="..."> -->
 <r:define name="enum.attr.strong.data-effect">
   <!-- TODO: remove the default -->
   <r:value>bold</r:value>
@@ -781,7 +736,6 @@
 
 
 
-<!-- <em data-effect="..."> -->
 <r:define name="enum.attr.em.data-effect">
   <r:choice>
     <!-- TODO: remove the default -->
@@ -799,8 +753,8 @@
 
 
 
-<!-- <span data-type="..." data-alt="..."> -->
 <r:define name="enum.attr.span.data-type">
+  <p><strong>TODO:</strong> Move this to only be a child of <code>&lt;cite&gt;</code></p>
   <r:choice>
     <!-- TODO: either remove these or move them in to being optional children of <cite> -->
     <r:value>cite-title</r:value>
@@ -1108,7 +1062,7 @@
 <r:define name="UUID-and-version.datatype">
 
   <p>This is an identifier that conforms to the UUIDv4 format specification. It is created either by the author or automatically by the archive when publishing a new Book or Page.</p>
-  <p>This contains a UUID and a version. Example: <code>031da8d3-b525-429c-80cf-6c8ed997733a@1.0</code></p>
+  <p>This contains a UUID and a version. Example: <code>bcfb5800-b883-4a63-8599-e098b407ddfc@9.1</code></p>
   <p>Regular Expression for validation: <code>/[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}@[0-9]+(\.[0-9]+)?/</code></p>
 
   <r:text/>
@@ -1121,6 +1075,7 @@
 
 <r:define name="ShortId.datatype">
   <p>This is a computed string which is based on the first few bits of the UUID. These are not guaranteed to be stable over all time, but we will strive to extend, rather than replace them.</p>
+  <p>Example: <code>vPtYALiD@9</code></p>
   <r:text/>
 </r:define>
 
