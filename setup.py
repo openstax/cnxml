@@ -7,7 +7,6 @@ setup_requires = (
     'pytest-runner',
     )
 install_requires = (
-    'pathlib;python_version<="2.7"',
     )
 tests_require = [
     'pytest',
