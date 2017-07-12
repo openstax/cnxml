@@ -15,8 +15,12 @@ extras_require = {
     'test': tests_require,
     }
 description = "Connexions CNXML Library"
-with open('README.rst', 'r') as readme:
-    long_description = readme.read()
+with open('README.rst', 'r') as readme, open('CHANGES.rst', 'r') as changes:
+    readme_info = readme.read()
+    changelog = changes.read()
+    long_description = '\n\n'.join([readme_info,
+                                    "Change Log\n==========",
+                                    changelog])
 
 
 setup(
