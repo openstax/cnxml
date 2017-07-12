@@ -5,6 +5,15 @@
 
    - feature message
 
+2.1.0
+-----
+
+- Remove external pathlib dependency
+- Drop support for Python <= 2.7
+- Use versioneer for project versioning
+- Correct license in setup.py
+- Add instructions to validate with the atom.io editor
+
 2.0.0
 -----
 
