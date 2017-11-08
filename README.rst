@@ -3,6 +3,8 @@ CNXML Library
 
 This is a python library for working with CNXML content, which includes the CNXML and COLLXML formats.
 
+It also contains validation and documentation for the HTML formats in the `./textbook-html/`
+
 Install
 -------
 
@@ -16,13 +18,13 @@ Tests
 -----
 
 Use the tox to run the tests::
-  
+
   tox
 
 If tox is not installed, run the following::
 
   pip install tox
-  
+
 Edit/Validate files using `atom.io <https://atom.io>`_
 ------------------------------------------------------
 
@@ -65,18 +67,18 @@ Changes to `~/.atom/config.cson`::
     "*":
       core:
         customFileTypes:
-    
+
           # Add this to the bottom of the customFileTypes area.
           # Note: Indentation is important!
           "text.xml": [
             "index.cnxml"
           ]
-    
-    
+
+
       # And then this to the bottom of the file
       # 1. Make sure "linter-autocomplete-jing" only occurs once in this file!
       # 1. make sure it is indented by 2 spaces just like it is in this example.
-    
+
       "linter-autocomplete-jing":
         displaySchemaWarnings: true
         rules: [

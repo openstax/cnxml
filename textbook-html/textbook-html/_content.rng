@@ -904,7 +904,7 @@
 <h1>Datatypes</h1>
 
 <p>These are specific text values that can be validated by regular expressions or by looking up in a database</p>
-<p>For more details on these formats, see <a href="https://github.com/openstax/napkin-notes/pull/73">CNX API Documentation</a>. This link may become outdated but is current at the time of writing</p>
+<p>For more details on these formats, see <a href="https://github.com/openstax/book-tools/blob/master/terms.md">CNX Terms</a>. This link may become outdated but is current at the time of writing</p>
 
 
 
