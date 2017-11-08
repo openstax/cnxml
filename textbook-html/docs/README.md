@@ -3,8 +3,8 @@ This is documentation that describes the Textbook HTML format. It is autogenerat
 
 # Organization
 
-- [book structure](./_book-structure.md) : Things like chapters, Pages, metadata
-- [page content](./_content.md) : Things like sections, exercises, notes, examples, links
+- [book structure](./_book-structure.rng.md) : Things like chapters, Pages, metadata
+- [page content](./_content.rng.md) : Things like sections, exercises, notes, examples, links
 
 # Source
 
