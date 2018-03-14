@@ -47,7 +47,7 @@ def _parse_jing_output(output):
 def jing(rng_filepath, xml_filepath):
     """Run jing.jar using the RNG file against the given XML file."""
     cmd = ['java', '-jar']
-    cmd.extend([str(JING_JAR), str(rng_filepath), str(xml_filepath)])
+    cmd.extend([str(JING_JAR), '-i', str(rng_filepath), str(xml_filepath)])
     proc = subprocess.Popen(cmd,
                             stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE,
