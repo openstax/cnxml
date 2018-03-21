@@ -82,7 +82,7 @@ Changes to `~/.atom/config.cson`::
         displaySchemaWarnings: true
         rules: [
           {
-            priority: 1
+            priority: 1 
             test:
               pathRegex: ".cnxml$"
             outcome:
