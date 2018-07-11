@@ -5,6 +5,11 @@
 
    - feature message
 
+2.1.1
+-----
+
+- Tweak mdml schema to properly allow any metadata element under derived-from
+
 2.1.0
 -----
 
