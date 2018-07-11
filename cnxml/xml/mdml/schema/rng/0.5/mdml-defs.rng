@@ -418,7 +418,7 @@
       <cnxml:para>Child 'derived-from' elements denote more remote ancestors of the document.</cnxml:para>
       <ref name="mdml-derived-from-attributes"/>
       <zeroOrMore>
-        <ref name="mdml-derived-from"/>
+        <ref name="mdml-metadata-content"/>
       </zeroOrMore>
     </element>
   </define>
