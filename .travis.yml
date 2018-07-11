@@ -16,7 +16,6 @@ install:
   # Install test requirements
   - pip install -e ".[test]"
   # Now install it as a standalone distribution
-  - pip uninstall -y .
   - pip install .
 script:
   - py.test
