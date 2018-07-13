@@ -43,5 +43,5 @@ def test_jing_call_valid_xml():
 def test_jing_call_invalid_xml():
     rng = JING_TEST_DIR / 'test.rng'
     xml = JING_TEST_DIR / 'invalid.xml'
-    expected = (ErrorLine('1', '7', 'error', 'unknown element "c"'),)
+    expected = (ErrorLine('1', '7', 'error', 'element "c" not allowed anywhere; expected the element end-tag or element "b"'),)
     assert jing(rng, xml) == expected
