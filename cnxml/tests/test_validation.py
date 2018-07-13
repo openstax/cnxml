@@ -9,9 +9,9 @@ def test_validate_cnxml(datadir):
 
 def test_cnxml_validation_messages(datadir):
     expected = (
-        ['30', '17', 'error', 'unfinished element'],
-        ['55', '20', 'error', 'unfinished element'],
-        ['67', '11', 'error', 'required attributes missing'],
+        ['30', '17', 'error', 'element "md:person" incomplete; missing required element "md:firstname"'],
+        ['55', '20', 'error', 'element "md:subjectlist" incomplete; missing required element "md:subject"'],
+        ['67', '11', 'error', 'element "para" missing required attribute "id"']
     )
     errors = validate_cnxml(datadir / 'invalid.cnxml')
     assert tuple(list(l) for l in errors) == expected
@@ -25,9 +25,11 @@ def test_validate_collxml(datadir):
 def test_collxml_validation_messages(datadir):
     expected = (
         ['47', '15', 'error',
-         'element "para" from namespace '
-         '"http://cnx.rice.edu/cnxml" not allowed in this context'],
-        ['139', '18', 'error', 'unfinished element'],
+            'element "cnx:para" not allowed here;'
+            ' expected the element end-tag or element "module", "segue" or "subcollection"'],
+        ['139', '18', 'error', 'element "col:collection" incomplete;'
+            ' missing required element "metadata"']
     )
+
     errors = validate_collxml(datadir / 'invalid_collection.xml')
     assert tuple(list(l) for l in errors) == expected
