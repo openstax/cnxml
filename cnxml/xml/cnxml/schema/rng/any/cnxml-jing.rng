@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         ns="http://cnx.rice.edu/cnxml">
+
+  <start>
+    <choice>
+      <ref name="document-0.7"/>
+      <ref name="document-0.8"/>
+    </choice>
+  </start>
+
+  <define name="document-0.7">
+    <externalRef href="../0.7/cnxml-jing.rng"/>
+  </define>
+
+  <define name="document-0.8">
+    <externalRef href="../0.8/cnxml-jing.rng"/>
+  </define>
+
+</grammar>

@@ -13,7 +13,7 @@ __all__ = (
 )
 
 
-CNXML_JING_RNG = lookup_resource('xml/cnxml/schema/rng/0.7/cnxml-jing.rng')
+CNXML_JING_RNG = lookup_resource('xml/cnxml/schema/rng/any/cnxml-jing.rng')
 COLLXML_JING_RNG = lookup_resource(
     'xml/collxml/schema/rng/2.0/collxml-jing.rng')
 

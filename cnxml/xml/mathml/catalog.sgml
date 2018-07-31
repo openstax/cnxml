@@ -10,3 +10,5 @@ OVERRIDE YES
 -- MathML --
 PUBLIC "-//W3C//DTD MathML 2.0//EN"                                             /usr/share/xml/mathml/schema/dtd/2.0/mathml2.dtd
 PUBLIC "-//W3C//ENTITIES MathML 2.0 Qualified Names 1.0//EN"                    /usr/share/xml/mathml/schema/dtd/2.0/mathml2-qname-1.mod
+PUBLIC "-//W3C//DTD MathML 3.0//EN"                                             /usr/share/xml/mathml/schema/dtd/3.0/mathml3.dtd
+PUBLIC "-//W3C//ENTITIES MathML 3.0 Qualified Names 1.0//EN"                    /usr/share/xml/mathml/schema/dtd/3.0/mathml3-qname.mod
