@@ -53,3 +53,30 @@ def test_collxml_validation_messages(datadir):
 
     errors = validate_collxml(datafile)
     assert tuple(list(l) for l in errors) == expected
+
+
+def test_valid_derived_from_cnxml(datadir):
+    # This contains the full metadata for the derived-from.
+    errors = validate_cnxml(datadir / 'valid-derived-from.cnxml')
+    assert errors == tuple()
+
+
+def test_valid_derived_from_cnxml_with_no_children(datadir):
+    # This contains only a md:derived-from tag with the url attribute.
+    # The tag contains no children tags.
+    errors = validate_cnxml(datadir / 'valid-derived-from-2.cnxml')
+    assert errors == tuple()
+
+
+def test_invalid_derived_from_cnxml(datadir):
+    filepath = datadir / 'invalid-derived-from.cnxml'
+    # In this case the document is missing one md:derived-from
+    # required child tag.
+    expected = (
+        [str(filepath), '83', '21', 'error',
+         ('element "md:derived-from" incomplete; '
+          'missing required element "md:language"')],
+    )
+
+    errors = validate_cnxml()
+    assert tuple(list(l) for l in errors) == expected
