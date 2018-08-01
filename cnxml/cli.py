@@ -12,7 +12,7 @@ from .validation import validate_cnxml, validate_collxml
 
 def _format_error_line(error):
     """Formats the error line for human consumption"""
-    return "{}:{} -- {}: {}".format(*error)
+    return "{}:{}:{} -- {}: {}".format(*error)
 
 
 def print_errors(errors):
@@ -24,16 +24,16 @@ def print_errors(errors):
 def _arg_parser():
     """Factory for creating the argument parser"""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('xml')
+    parser.add_argument('xml', nargs='*')
     return parser
 
 
 def cnxml(argv=None):
     args = _arg_parser().parse_args(argv)
 
-    xml = Path(args.xml)
+    xml = [Path(x) for x in args.xml]
 
-    errors = validate_cnxml(xml)
+    errors = validate_cnxml(*xml)
     print_errors(errors)
 
     retcode = errors and 1 or 0
@@ -43,9 +43,9 @@ def cnxml(argv=None):
 def collxml(argv=None):
     args = _arg_parser().parse_args(argv)
 
-    xml = Path(args.xml)
+    xml = [Path(x) for x in args.xml]
 
-    errors = validate_collxml(xml)
+    errors = validate_collxml(*xml)
     print_errors(errors)
 
     retcode = errors and 1 or 0
