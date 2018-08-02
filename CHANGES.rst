@@ -5,6 +5,12 @@
 
    - feature message
 
+
+2.2.0
+-----
+
+- Extend validation API to accept multiple documents to validate
+
 2.1.1
 -----
 
