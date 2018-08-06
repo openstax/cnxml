@@ -41,8 +41,7 @@
          CONTENT_URL/content_info#cnx_cite_header
        where CONTENT_URL is the value provided above in the <md:content-url> element.
   -->
-  <md:derived-from url="http://legacy-staging.cnx.org/content/m48590/1.11">
-  </md:derived-from>
+  <md:derived-from url="http://legacy-staging.cnx.org/content/m48590/1.11"/>
   <md:keywordlist>
     <md:keyword>Air resistance</md:keyword>
     <md:keyword>Kinematics</md:keyword>
