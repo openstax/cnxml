@@ -78,5 +78,5 @@ def test_invalid_derived_from_cnxml(datadir):
           'missing required element "md:language"')],
     )
 
-    errors = validate_cnxml()
+    errors = validate_cnxml(filepath)
     assert tuple(list(l) for l in errors) == expected
