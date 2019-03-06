@@ -19,7 +19,7 @@ def test_invalid_cnxml(capsys, datadir):
         ' missing required element "md:subject"'.format(datafile),
         '{}:67:11 -- error: element "para"'
         ' missing required attribute "id"'.format(datafile)
-        ]
+    ]
 
     retcode = cnxml([datafile])
     out, err = capsys.readouterr()
@@ -44,7 +44,7 @@ def test_invalid_collxml(capsys, datadir):
         ' "module", "segue" or "subcollection"'.format(datafile),
         '{}:139:18 -- error: element "col:collection" incomplete;'
         ' missing required element "metadata"'.format(datafile)
-        ]
+    ]
 
     retcode = collxml([datafile])
     out, err = capsys.readouterr()

@@ -10,7 +10,7 @@ JING_TEST_DIR = here / 'data' / 'jing'
 
 def test_line_parsing():
     line = '/home/fred/broken.cnxml:30:17: error: unfinished element'
-    expected = ErrorLine('/home/fred/broken.cnxml', '30',  '17', 'error', 'unfinished element')
+    expected = ErrorLine('/home/fred/broken.cnxml', '30', '17', 'error', 'unfinished element')
     assert _parse_jing_line(line) == expected
 
 

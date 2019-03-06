@@ -3,9 +3,9 @@ python:
   - "3.5"
   - "3.6"
 before_install:
-  - pip install pep8
-  - pep8 --exclude=tests *.py cnxml
-  - pep8 --max-line-length=200 cnxml/tests
+  - pip install flake8
+  - flake8 --exclude=tests cnxml
+  - flake8 --max-line-length=200 cnxml/tests
 
   - pip install --upgrade setuptools
   - pip install --upgrade pip

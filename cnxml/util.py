@@ -6,7 +6,7 @@ import pkg_resources
 
 __all__ = (
     'lookup_resource',
-    )
+)
 
 
 def lookup_resource(resource_path):
