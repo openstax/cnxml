@@ -7,6 +7,7 @@ setup_requires = (
     'pytest-runner',
     )
 install_requires = (
+    'lxml',
     )
 tests_require = [
     'pytest',
