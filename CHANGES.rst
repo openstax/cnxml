@@ -5,6 +5,11 @@
 
    - feature message
 
+3.0.1
+-----
+
+- Re-release of 3.0.0
+
 3.0.0
 -----
 
