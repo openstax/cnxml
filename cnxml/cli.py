@@ -5,9 +5,12 @@ Validates CNXML and COLLXML
 """
 from __future__ import print_function
 import argparse
+import json
+from lxml import etree
 from pathlib import Path
 
 from .validation import validate_cnxml, validate_collxml
+from .parse import parse_metadata
 
 
 def _format_error_line(error):
@@ -50,3 +53,18 @@ def collxml(argv=None):
 
     retcode = errors and 1 or 0
     return retcode
+
+
+def extract_metadata(argv=None):
+    args = _arg_parser().parse_args(argv)
+
+    files = [Path(x) for x in args.xml]
+
+    data = []
+    for file in files:
+        with file.open('rb') as fb:
+            xml = etree.parse(fb)
+        metadata = parse_metadata(xml)
+        data.append(metadata)
+    print(json.dumps(data, sort_keys=True, indent=2))
+    return 0

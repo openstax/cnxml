@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from cnxml.cli import cnxml, collxml
+from cnxml.cli import cnxml, collxml, extract_metadata
 
 
 def test_valid_cnxml(capsys, datadir):
@@ -51,3 +51,18 @@ def test_invalid_collxml(capsys, datadir):
     assert out.splitlines() == expected_out_lines
     assert err == ''
     assert retcode == 1
+
+
+def test_extract_metadata(capsys, datadir):
+    file_one = str(datadir / 'valid_collection.xml')
+    file_two = str(datadir / 'valid.cnxml')
+
+    retcode = extract_metadata([file_one, file_two])
+    assert retcode == 0
+
+    # Check for json output
+    out, err = capsys.readouterr()
+    assert out.startswith('[\n  {\n    "abstract": "This introductory, algebra-based,')
+    # Check for the dashes that separate the individual files output
+    assert '    "version": "1.9"\n  },\n' in out
+    assert out.endswith('    "version": "1.12"\n  }\n]\n')
