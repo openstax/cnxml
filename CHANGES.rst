@@ -5,6 +5,15 @@
 
    - feature message
 
+3.0.0
+-----
+
+- Add tests for cnxml <md:derived-from ...> validation
+- Fix failing derived-from cnxml validation tests
+- Use a self-closing md:derived-from as the valid repr
+- Move the metadata parsing from
+  `Press <https://github.com/openstax/cnx-press>`_ to cnxml (#20)
+- Add a CLI utility for extracting cnxml metadata to json (#22)
 
 2.2.0
 -----
