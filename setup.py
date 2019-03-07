@@ -48,5 +48,6 @@ setup(
     [console_scripts]
     validate-cnxml = cnxml.cli:cnxml
     validate-collxml = cnxml.cli:collxml
+    extract-cnxml-metadata = cnxml.cli:extract_metadata
     """,
     )
