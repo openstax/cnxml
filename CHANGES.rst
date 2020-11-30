@@ -5,6 +5,12 @@
 
    - feature message
 
+3.1.0
+-----
+
+- Relax required information when parsing metadata (#25)
+
+
 3.0.1
 -----
 
