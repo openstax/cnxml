@@ -21,7 +21,7 @@ def test_cnxml_validation_messages(datadir):
         [str(datafile), '67', '11', 'error', 'element "para" missing required attribute "id"']
     )
     errors = validate_cnxml(datafile)
-    assert tuple(list(l) for l in errors) == expected
+    assert tuple(list(error) for error in errors) == expected
 
 
 def test_cnxml_multiple_validation_messages(datadir):
@@ -33,7 +33,7 @@ def test_cnxml_multiple_validation_messages(datadir):
         [str(bad_datafile), '67', '11', 'error', 'element "para" missing required attribute "id"']
     )
     errors = validate_cnxml(good_datafile, bad_datafile)
-    assert tuple(list(l) for l in errors) == expected
+    assert tuple(list(error) for error in errors) == expected
 
 
 def test_validate_collxml(datadir):
@@ -52,7 +52,7 @@ def test_collxml_validation_messages(datadir):
     )
 
     errors = validate_collxml(datafile)
-    assert tuple(list(l) for l in errors) == expected
+    assert tuple(list(error) for error in errors) == expected
 
 
 def test_valid_derived_from_cnxml(datadir):
@@ -79,4 +79,4 @@ def test_invalid_derived_from_cnxml(datadir):
     )
 
     errors = validate_cnxml(filepath)
-    assert tuple(list(l) for l in errors) == expected
+    assert tuple(list(error) for error in errors) == expected
