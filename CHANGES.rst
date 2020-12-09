@@ -5,6 +5,12 @@
 
    - feature message
 
+3.1.1
+-----
+
+- Add support for new optional metadata (#28)
+
+
 3.1.0
 -----
 
