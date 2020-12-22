@@ -82,6 +82,12 @@
       <optional>
         <ref name="mdml-instructor"/>
       </optional>
+      <optional>
+        <ref name="mdml-uuid"/>
+      </optional>
+      <optional>
+        <ref name="mdml-canonical-book-uuid"/>
+      </optional>
     </interleave>
   </define>
 
@@ -486,6 +492,20 @@
 
   <define name="mdml-objectives">
     <element name="objectives">
+      <ref name="mdml-common-attributes"/>
+      <text/>
+    </element>
+  </define>
+
+  <define name="mdml-uuid">
+    <element name="uuid">
+      <ref name="mdml-common-attributes"/>
+      <text/>
+    </element>
+  </define>
+
+  <define name="mdml-canonical-book-uuid">
+    <element name="canonical-book-uuid">
       <ref name="mdml-common-attributes"/>
       <text/>
     </element>
