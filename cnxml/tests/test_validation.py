@@ -68,15 +68,11 @@ def test_valid_derived_from_cnxml_with_no_children(datadir):
     assert errors == tuple()
 
 
-def test_invalid_derived_from_cnxml(datadir):
-    filepath = datadir / 'invalid-derived-from.cnxml'
-    # In this case the document is missing one md:derived-from
-    # required child tag.
-    expected = (
-        [str(filepath), '83', '21', 'error',
-         ('element "md:derived-from" incomplete; '
-          'missing required element "md:language"')],
-    )
+def test_validate_git_cnxml(datadir):
+    errors = validate_cnxml(datadir / 'valid-git.cnxml')
+    assert errors == tuple()
 
-    errors = validate_cnxml(filepath)
-    assert tuple(list(error) for error in errors) == expected
+
+def test_validate_git_collxml(datadir):
+    errors = validate_collxml(datadir / 'valid_git_collection.xml')
+    assert errors == tuple()
