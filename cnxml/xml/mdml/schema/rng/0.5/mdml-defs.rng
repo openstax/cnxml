@@ -88,6 +88,9 @@
       <optional>
         <ref name="mdml-canonical-book-uuid"/>
       </optional>
+      <optional>
+        <ref name="mdml-slug"/>
+      </optional>
     </interleave>
   </define>
 
@@ -506,6 +509,13 @@
 
   <define name="mdml-canonical-book-uuid">
     <element name="canonical-book-uuid">
+      <ref name="mdml-common-attributes"/>
+      <text/>
+    </element>
+  </define>
+
+  <define name="mdml-slug">
+    <element name="slug">
       <ref name="mdml-common-attributes"/>
       <text/>
     </element>
