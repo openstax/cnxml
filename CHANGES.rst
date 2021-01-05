@@ -5,17 +5,20 @@
 
    - feature message
 
+3.1.2
+-----
+
+- Update schema and add support for slug in metadata (#30)
+
 3.1.1
 -----
 
 - Add support for new optional metadata (#28)
 
-
 3.1.0
 -----
 
 - Relax required information when parsing metadata (#25)
-
 
 3.0.1
 -----
