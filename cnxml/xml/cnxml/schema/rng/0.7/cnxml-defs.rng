@@ -761,7 +761,7 @@
       <ref name="inline-quote"/>
       <ref name="inline-note"/>
       <ref name="list"/>
-      <ref name="inline-media"/>
+      <ref name="media"/>
       <ref name="footnote"/>
       <ref name="link"/>
       <ref name="newline"/>
@@ -779,7 +779,7 @@
       <ref name='block-preformat'/>
       <ref name='block-quote'/>
       <ref name='block-note'/>
-      <ref name='block-media'/>
+      <ref name='media'/>
       <ref name='list'/>
       <ref name='table'/>
       <ref name='rule'/>
@@ -1487,22 +1487,6 @@
     </zeroOrMore>
   </define>
 
-  <define name="inline-media">
-    <element name="media">
-      <optional>
-        <ref name="display-inline-attribute"/>
-      </optional>
-      <ref name="media-common-content"/>
-    </element>
-  </define>
-
-  <define name="block-media">
-    <element name="media">
-      <ref name="display-any-attribute"/>
-      <ref name="media-common-content"/>
-    </element>
-  </define>
-
   <define name="nodisplay-media">
     <element name="media">
       <ref name="display-none-attribute"/>
@@ -1528,10 +1512,17 @@
   </define>
 
   <define name="media">
-    <choice>
-      <ref name="block-media"/>
-      <ref name="inline-media"/>
-    </choice>
+    <element name="media">
+      <choice>
+        <group>
+          <optional>
+            <ref name="display-inline-attribute"/>
+          </optional>
+        </group>
+        <ref name="display-any-attribute"/>
+      </choice>
+      <ref name="media-common-content"/>
+    </element>
   </define>
 
   <define name="param">
