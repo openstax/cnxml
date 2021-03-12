@@ -760,7 +760,7 @@
       <ref name="inline-preformat"/>
       <ref name="inline-quote"/>
       <ref name="inline-note"/>
-      <ref name="inline-list"/>
+      <ref name="list"/>
       <ref name="inline-media"/>
       <ref name="footnote"/>
       <ref name="link"/>
@@ -780,7 +780,7 @@
       <ref name='block-quote'/>
       <ref name='block-note'/>
       <ref name='block-media'/>
-      <ref name='block-list'/>
+      <ref name='list'/>
       <ref name='table'/>
       <ref name='rule'/>
       <ref name='equation'/>
@@ -840,7 +840,7 @@
       <ref name="inline-preformat"/>
       <ref name="inline-quote"/>
       <ref name="inline-note"/>
-      <ref name="inline-list"/>
+      <ref name="list"/>
       <ref name="media-object-class"/>
     </choice>
   </define>
@@ -1264,122 +1264,70 @@
     <ref name="type-attribute"/>
   </define>
 
-  <define name="block-list-common-content">
-    <ref name="display-block-default-attribute"/>
-    <ref name="id-attribute"/>
-    <ref name="block-item-sep-attribute"/>
-    <optional>
-      <ref name="label"/>
-    </optional>
-    <optional>
-      <ref name="title"/>
-    </optional>
-    <oneOrMore>
-      <ref name="block-list-item"/>
-    </oneOrMore>
-  </define>
-
-  <define name="inline-list-common-content">
-    <ref name="display-inline-attribute"/>
-    <optional>
-      <ref name="id-attribute"/>
-    </optional>
-    <ref name="inline-item-sep-attribute"/>
-    <optional>
-      <ref name="label"/>
-    </optional>
-    <optional>
-      <ref name="title"/>
-    </optional>
-    <oneOrMore>
-      <ref name="inline-list-item"/>
-    </oneOrMore>
-  </define>
-
-  <define name="bulleted-list-common-content">
-    <ref name="bulleted-list-type-attribute"/>
-    <ref name="bulleted-mark-suffix-attribute"/>
-    <ref name="bullet-style-attribute"/>
-    <ref name="list-common-content"/>
-  </define>
-
-  <define name="bulleted-block-list">
-    <element name="list">
-      <ref name="bulleted-list-common-content"/>
-      <ref name="block-list-common-content"/>
-    </element>
-  </define>
-
-  <define name="bulleted-inline-list">
-    <element name="list">
-      <ref name="bulleted-list-common-content"/>
-      <ref name="inline-list-common-content"/>
-    </element>
-  </define>
-
-  <define name="enumerated-list-common-content">
-    <ref name="mark-suffix-attribute"/>
-    <ref name="enumerated-list-type-attribute"/>
-    <ref name="number-style-attribute"/>
-    <ref name="start-value-attribute"/>
-    <ref name="list-common-content"/>
-  </define>
-
-  <define name="enumerated-block-list">
-    <element name="list">
-      <ref name="enumerated-list-common-content"/>
-      <ref name="block-list-common-content"/>
-    </element>
-  </define>
-
-  <define name="enumerated-inline-list">
-    <element name="list">
-      <ref name="enumerated-list-common-content"/>
-      <ref name="inline-list-common-content"/>
-    </element>
-  </define>
-
-  <define name="labeled-item-list-common-content">
-    <ref name="labeled-item-mark-suffix-attribute"/>
-    <ref name="labeled-item-list-type-attribute"/>
-    <ref name="list-common-content"/>
-  </define>
-
-  <define name="labeled-item-block-list">
-    <element name="list">
-      <ref name="labeled-item-list-common-content"/>
-      <ref name="block-list-common-content"/>
-    </element>
-  </define>
-
-  <define name="labeled-item-inline-list">
-    <element name="list">
-      <ref name="labeled-item-list-common-content"/>
-      <ref name="inline-list-common-content"/>
-    </element>
-  </define>
-
-  <define name="block-list">
-    <choice>
-      <ref name="bulleted-block-list"/>
-      <ref name="enumerated-block-list"/>
-      <ref name="labeled-item-block-list"/>
-    </choice>
-  </define>
-
-  <define name="inline-list">
-    <choice>
-      <ref name="bulleted-inline-list"/>
-      <ref name="enumerated-inline-list"/>
-      <ref name="labeled-item-inline-list"/>
-    </choice>
-  </define>
-
   <define name="list">
-    <choice>
-      <ref name="block-list"/>
-      <ref name="inline-list"/>
-    </choice>
+    <element name="list">
+      <choice>
+        <group>
+          <ref name="bulleted-list-type-attribute"/>
+          <ref name="bulleted-mark-suffix-attribute"/>
+          <ref name="bullet-style-attribute"/>
+        </group>
+        <group>
+          <ref name="mark-suffix-attribute"/>
+          <ref name="enumerated-list-type-attribute"/>
+          <ref name="number-style-attribute"/>
+          <ref name="start-value-attribute"/>
+        </group>
+        <group>
+          <ref name="labeled-item-mark-suffix-attribute"/>
+          <ref name="labeled-item-list-type-attribute"/>
+        </group>
+      </choice>
+      <ref name="list-common-content"/>
+      <choice>
+        <group>
+          <ref name="display-block-default-attribute"/>
+          <ref name="id-attribute"/>
+          <ref name="block-item-sep-attribute"/>
+        </group>
+        <group>
+          <ref name="display-inline-attribute"/>
+          <optional>
+            <ref name="id-attribute"/>
+          </optional>
+          <ref name="inline-item-sep-attribute"/>
+        </group>
+      </choice>
+      <optional>
+        <ref name="label"/>
+      </optional>
+      <optional>
+        <ref name="title"/>
+      </optional>
+      <oneOrMore>
+        <element name="item">
+          <ref name="common-attributes"/>
+          <optional>
+            <ref name="id-attribute"/>
+          </optional>
+          <optional>
+            <ref name="label"/>
+          </optional>
+          <choice>
+            <group>
+              <zeroOrMore>
+                <ref name="div-content-class"/>
+              </zeroOrMore>
+            </group>
+            <group>
+              <zeroOrMore>
+                <ref name="inline-class"/>
+              </zeroOrMore>
+            </group>
+          </choice>
+        </element>
+      </oneOrMore>
+    </element>
   </define>
 
   <define name="block-list-item">
