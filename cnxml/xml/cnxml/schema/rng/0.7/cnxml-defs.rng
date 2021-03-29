@@ -757,7 +757,7 @@
       <ref name="sub"/>
       <ref name="sup"/>
       <ref name="code"/>
-      <ref name="inline-preformat"/>
+      <ref name="preformat"/>
       <ref name="quote"/>
       <ref name="note"/>
       <ref name="list"/>
@@ -776,7 +776,7 @@
       <ref name='example'/>
       <ref name='figure'/>
       <ref name='code'/>
-      <ref name='block-preformat'/>
+      <ref name='preformat'/>
       <ref name='quote'/>
       <ref name='note'/>
       <ref name='media'/>
@@ -837,7 +837,7 @@
       <ref name="sub"/>
       <ref name="sup"/>
       <ref name="code"/>
-      <ref name="inline-preformat"/>
+      <ref name="preformat"/>
       <ref name="quote"/>
       <ref name="note"/>
       <ref name="list"/>
@@ -1025,19 +1025,20 @@
     </element>
   </define>
 
-  <define name="block-preformat">
+  <define name="preformat">
     <element name="preformat">
-      <ref name="common-attributes"/>
-      <ref name="id-attribute"/>
-      <ref name="display-block-default-attribute"/>
-      <ref name="div-content"/>
-    </element>
-  </define>
-
-  <define name="inline-preformat">
-    <element name="preformat">
-      <ref name="display-inline-attribute"/>
-      <ref name="inline-content"/>
+      <choice>
+        <group>
+          <ref name="common-attributes"/>
+          <ref name="id-attribute"/>
+          <ref name="display-block-default-attribute"/>
+          <ref name="div-content"/>
+        </group>
+        <group>
+          <ref name="display-inline-attribute"/>
+          <ref name="inline-content"/>    
+        </group>
+      </choice>
     </element>
   </define>
 
