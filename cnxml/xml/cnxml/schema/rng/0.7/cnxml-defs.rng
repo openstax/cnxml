@@ -758,7 +758,7 @@
       <ref name="sup"/>
       <ref name="code"/>
       <ref name="inline-preformat"/>
-      <ref name="inline-quote"/>
+      <ref name="quote"/>
       <ref name="note"/>
       <ref name="list"/>
       <ref name="media"/>
@@ -777,7 +777,7 @@
       <ref name='figure'/>
       <ref name='code'/>
       <ref name='block-preformat'/>
-      <ref name='block-quote'/>
+      <ref name='quote'/>
       <ref name='note'/>
       <ref name='media'/>
       <ref name='list'/>
@@ -838,7 +838,7 @@
       <ref name="sup"/>
       <ref name="code"/>
       <ref name="inline-preformat"/>
-      <ref name="inline-quote"/>
+      <ref name="quote"/>
       <ref name="note"/>
       <ref name="list"/>
       <ref name="media-object-class"/>
@@ -1162,29 +1162,30 @@
     </element>
   </define>
 
-  <define name="block-quote">
+  <define name="quote">
     <element name="quote">
-      <ref name="display-block-default-attribute"/>
-      <ref name="common-attributes"/>
-      <ref name="id-attribute"/>
-      <ref name="type-attribute"/>
-      <ref name="linking-attributes"/>
-      <optional>
-        <ref name="label"/>
-      </optional>
-      <ref name="div-content"/>
-    </element>
-  </define>
-
-  <define name="inline-quote">
-    <element name="quote">
-      <ref name="display-inline-attribute"/>
-      <ref name="linking-attributes"/>
-      <ref name="type-attribute"/>
-      <optional>
-        <ref name="label"/>
-      </optional>
-      <ref name="inline-content"/>
+      <choice>
+        <group>
+          <ref name="display-block-default-attribute"/>
+          <ref name="common-attributes"/>
+          <ref name="id-attribute"/>
+          <ref name="type-attribute"/>
+          <ref name="linking-attributes"/>
+          <optional>
+            <ref name="label"/>
+          </optional>
+          <ref name="div-content"/>
+        </group>
+        <group>
+          <ref name="display-inline-attribute"/>
+          <ref name="linking-attributes"/>
+          <ref name="type-attribute"/>
+          <optional>
+            <ref name="label"/>
+          </optional>
+          <ref name="inline-content"/>
+        </group>
+      </choice>
     </element>
   </define>
 
