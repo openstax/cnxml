@@ -756,7 +756,7 @@
       <ref name="emphasis"/>
       <ref name="sub"/>
       <ref name="sup"/>
-      <ref name="inline-code"/>
+      <ref name="code"/>
       <ref name="inline-preformat"/>
       <ref name="inline-quote"/>
       <ref name="inline-note"/>
@@ -775,7 +775,7 @@
       <ref name='definition'/>
       <ref name='example'/>
       <ref name='figure'/>
-      <ref name='block-code'/>
+      <ref name='code'/>
       <ref name='block-preformat'/>
       <ref name='block-quote'/>
       <ref name='block-note'/>
@@ -836,7 +836,7 @@
       <ref name="emphasis"/>
       <ref name="sub"/>
       <ref name="sup"/>
-      <ref name="inline-code"/>
+      <ref name="code"/>
       <ref name="inline-preformat"/>
       <ref name="inline-quote"/>
       <ref name="inline-note"/>
@@ -1360,52 +1360,46 @@
     </element>
   </define>
 
-  <define name="inline-code">
-    <element name="code">
-      <ref name="display-inline-default-attribute"/>
-      <optional>
-        <ref name="code-lang-attribute"/>
-      </optional>
-      <ref name="type-attribute"/>
-      <optional>
-        <ref name="id-attribute"/>
-      </optional>
-      <ref name="common-attributes"/>
-      <oneOrMore>
-        <ref name="inline-class"/>
-      </oneOrMore>
-    </element>
-  </define>
-
-  <define name="block-code">
-    <element name="code">
-      <ref name="display-block-attribute"/>
-      <ref name="common-attributes"/>
-      <ref name="id-attribute"/>
-      <optional>
-        <ref name="code-lang-attribute"/>
-      </optional>
-      <ref name="type-attribute"/>
-      <optional>
-        <ref name="label"/>
-      </optional>
-      <optional>
-          <ref name="title"/>
-      </optional>
-      <oneOrMore>
-        <ref name="inline-class"/>
-      </oneOrMore>
-      <optional>
-          <ref name="caption"/>
-      </optional>
-    </element>
-  </define>
-
   <define name="code">
-    <choice>
-      <ref name="inline-code"/>
-      <ref name="block-code"/>
-    </choice>
+    <element name="code">
+      <choice>
+        <group>
+          <ref name="display-inline-default-attribute"/>
+          <optional>
+            <ref name="code-lang-attribute"/>
+          </optional>
+          <ref name="type-attribute"/>
+          <optional>
+            <ref name="id-attribute"/>
+          </optional>
+          <ref name="common-attributes"/>
+          <oneOrMore>
+            <ref name="inline-class"/>
+          </oneOrMore>
+        </group>
+        <group>
+          <ref name="display-block-attribute"/>
+          <ref name="common-attributes"/>
+          <ref name="id-attribute"/>
+          <optional>
+            <ref name="code-lang-attribute"/>
+          </optional>
+          <ref name="type-attribute"/>
+          <optional>
+            <ref name="label"/>
+          </optional>
+          <optional>
+              <ref name="title"/>
+          </optional>
+          <oneOrMore>
+            <ref name="inline-class"/>
+          </oneOrMore>
+          <optional>
+              <ref name="caption"/>
+          </optional>
+        </group>
+      </choice>
+    </element>
   </define>
 
 <!-- NOTE: I have removed 'table' and 'code' as possible content for
