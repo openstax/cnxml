@@ -759,7 +759,7 @@
       <ref name="code"/>
       <ref name="inline-preformat"/>
       <ref name="inline-quote"/>
-      <ref name="inline-note"/>
+      <ref name="note"/>
       <ref name="list"/>
       <ref name="media"/>
       <ref name="footnote"/>
@@ -778,7 +778,7 @@
       <ref name='code'/>
       <ref name='block-preformat'/>
       <ref name='block-quote'/>
-      <ref name='block-note'/>
+      <ref name='note'/>
       <ref name='media'/>
       <ref name='list'/>
       <ref name='table'/>
@@ -839,7 +839,7 @@
       <ref name="code"/>
       <ref name="inline-preformat"/>
       <ref name="inline-quote"/>
-      <ref name="inline-note"/>
+      <ref name="note"/>
       <ref name="list"/>
       <ref name="media-object-class"/>
     </choice>
@@ -1227,35 +1227,29 @@
     <empty/>
   </define>
 
-  <define name="block-note">
-    <element name="note">
-      <ref name="display-block-default-attribute"/>
-      <ref name="common-attributes"/>
-      <ref name="id-attribute"/>
-      <ref name="note-type-attribute"/>
-      <optional>
-        <ref name="label"/>
-      </optional>
-      <ref name="div-content"/>
-    </element>
-  </define>
-
-  <define name="inline-note">
-    <element name="note">
-      <ref name="display-inline-attribute"/>
-      <ref name="note-type-attribute"/>
-      <optional>
-        <ref name="label"/>
-      </optional>
-      <ref name="inline-content"/>
-    </element>
-  </define>
-
   <define name="note">
-    <choice>
-      <ref name="block-note"/>
-      <ref name="inline-note"/>
-    </choice>
+    <element name="note">
+      <choice>
+        <group>
+          <ref name="display-block-default-attribute"/>
+          <ref name="common-attributes"/>
+          <ref name="id-attribute"/>
+          <ref name="note-type-attribute"/>
+          <optional>
+            <ref name="label"/>
+          </optional>
+          <ref name="div-content"/>
+        </group>
+        <group>
+          <ref name="display-inline-attribute"/>
+          <ref name="note-type-attribute"/>
+          <optional>
+            <ref name="label"/>
+          </optional>
+          <ref name="inline-content"/>
+        </group>
+      </choice>
+    </element>
   </define>
 
   <define name="list-common-content">
