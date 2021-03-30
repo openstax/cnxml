@@ -26,19 +26,18 @@
   </define>
 
   <define name="foreign-namespaced-attribute">
-    <cnxml:para class="description">Any attribute except (1) one not in a namespace; (2) one in the CNXML, CollXML, or Connexions system-info namespaces; and (3) @xml:lang.</cnxml:para>
     <zeroOrMore>
-      <attribute>
-        <anyName>
-          <except>
-            <nsName ns=""/>
-            <nsName ns="http://cnx.rice.edu/cnxml"/>
-            <nsName ns="http://cnx.rice.edu/collxml"/>
-            <nsName ns="http://cnx.rice.edu/system-info"/>
-            <name>xml:lang</name>
-          </except>
-        </anyName>
-      </attribute>
+      <choice>
+        <attribute name="case" ns="http://katalysteducation.org/cmlnle/1.0" />
+        <attribute name="reference" ns="http://katalysteducation.org/cmlnle/1.0" />
+        <attribute name="born" ns="http://katalysteducation.org/cxlxt/1.0" />
+        <attribute name="died" ns="http://katalysteducation.org/cxlxt/1.0" />
+        <attribute name="index" ns="http://katalysteducation.org/cxlxt/1.0" />
+        <attribute name="name" ns="http://katalysteducation.org/cxlxt/1.0" />
+        <attribute name="color" ns="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+        <attribute name="font-style" ns="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+        <attribute name="font-weight" ns="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" />
+      </choice>
     </zeroOrMore>
   </define>
 
