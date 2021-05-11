@@ -5,6 +5,12 @@
 
    - feature message
 
+3.1.3
+-----
+
+- Support using document title once it is removed from metadata (#33)
+- Remove some metadata unused by git storage (#32)
+
 3.1.2
 -----
 
