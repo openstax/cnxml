@@ -355,7 +355,9 @@
         <ref name="sys-version-at-this-collection-version-attribute"/>
       </optional>
       <interleave>
-        <ref name="mdml-module-title"/>
+        <optional>
+          <ref name="mdml-module-title"/>
+        </optional>
         <optional>
           <ref name="mdml-short-title"/>
         </optional>
