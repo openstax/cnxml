@@ -5,6 +5,11 @@
 
    - feature message
 
+3.1.4
+-----
+
+- Make module titles in collection optional (#35)
+
 3.1.3
 -----
 
