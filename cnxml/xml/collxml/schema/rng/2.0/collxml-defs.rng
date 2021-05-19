@@ -170,7 +170,10 @@
       <optional>
         <ref name="mdml-mdml-version-attribute"/>
       </optional>
-      <ref name="mdml-metadata-content"/>
+      <interleave>
+        <ref name="mdml-metadata-content"/>
+        <ref name="mdml-language"/>
+      </interleave>
     </element>
   </define>
 
