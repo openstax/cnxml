@@ -10,38 +10,18 @@
     <element name="title" ns="http://cnx.rice.edu/mdml">
       <ref name="col-core-common-attributes"/>
       <cnxml:para class="description">If the read-only attribute from Connexions's system-info namespace is present with the value 'original-module-title', then the contents of this element are the original module title.  Otherwise, they are the title of the module as overridden in this collection context.</cnxml:para>
-      <ref name="sys-read-only-original-module-title-attribute"/>
+      <ref name="sys-read-only-attribute"/>
       <text/>
     </element>
   </define>
 
-  <div>
-    <cnxml:para class="description">An attribute in the Connexions system-info namespace whose value indicates why changes to the element to which it is attached will not be heeded by the Connexions repository.</cnxml:para>
-    <define name="sys-read-only-original-module-title-attribute">
-      <cnxml:list class="possible-values">
-        <cnxml:title>Possible values:</cnxml:title>
-        <cnxml:item>original-module-title</cnxml:item>
-      </cnxml:list>
-      <optional>
-        <attribute name="read-only" ns="http://cnx.rice.edu/system-info">
-          <value>original-module-title</value>
-        </attribute>
-      </optional>
-    </define>
-
-    <define name="sys-read-only-attribute">
-      <optional>
-        <attribute name="read-only" ns="http://cnx.rice.edu/system-info">
-          <cnxml:para class="content">Content: text (Relax NG)</cnxml:para>
-          <data type="string">
-            <except>
-              <value type="string">original-module-title</value>
-            </except>
-          </data>
-        </attribute>
-      </optional>
-    </define>
-  </div>
+  <define name="sys-read-only-attribute">
+    <optional>
+      <attribute name="read-only" ns="http://cnx.rice.edu/system-info">
+        <data type="string" />
+      </attribute>
+    </optional>
+  </define>
 
   <define name="col-collection">
     <cnxml:para class="description">Document element of a CollXML document; it and its contents describe a collection of modules at a particular version.</cnxml:para>
