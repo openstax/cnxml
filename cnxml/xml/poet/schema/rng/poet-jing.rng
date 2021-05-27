@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+  <define name="collxml">
+    <externalRef href="../../../collxml/schema/rng/2.0/collxml-jing.rng"/>
+  </define>
+  <define name="cnxml">
+    <externalRef href="../../../cnxml/schema/rng/0.7/cnxml-jing.rng"/>
+  </define>
+  <start>
+    <choice>
+      <ref name="collxml"/>
+      <ref name="cnxml"/>
+    </choice>
+  </start>
+</grammar>
