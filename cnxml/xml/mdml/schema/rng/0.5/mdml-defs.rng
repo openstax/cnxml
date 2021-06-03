@@ -67,9 +67,6 @@
         <ref name="mdml-abstract"/>
       </optional>
       <optional>
-        <ref name="mdml-language"/>
-      </optional>
-      <optional>
         <ref name="mdml-objectives"/>
       </optional>
       <optional>
@@ -101,6 +98,9 @@
       <ref name="mdml-mdml-version-attribute"/>
       <ref name="mdml-common-attributes"/>
       <ref name="mdml-metadata-content"/>
+      <optional>
+        <ref name="mdml-language"/>
+      </optional>
     </element>
   </define>
 
@@ -446,6 +446,9 @@
       <ref name="mdml-derived-from-attributes"/>
       <zeroOrMore>
         <ref name="mdml-metadata-content"/>
+        <optional>
+          <ref name="mdml-language"/>
+        </optional>
       </zeroOrMore>
     </element>
   </define>
