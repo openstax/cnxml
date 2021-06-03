@@ -5,6 +5,11 @@
 
    - feature message
 
+3.1.5
+-----
+
+- Add a POET-specific RNG file for XSD generation (#41)
+
 3.1.4
 -----
 
