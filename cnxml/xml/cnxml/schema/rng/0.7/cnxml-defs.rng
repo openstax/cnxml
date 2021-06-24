@@ -12,9 +12,11 @@
 
   <define name="id-attribute">
     <cnxml:para class="description">An attribute of the ID type, whose value must be unique within the module document.</cnxml:para>
-    <attribute name="id">
-      <data type="ID"/>
-    </attribute>
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
   </define>
 
   <define name="class-attribute">

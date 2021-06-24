@@ -17,8 +17,7 @@ def test_cnxml_validation_messages(datadir):
     datafile = datadir / 'invalid.cnxml'
     expected = (
         [str(datafile), '30', '17', 'error', 'element "md:person" incomplete; missing required element "md:firstname"'],
-        [str(datafile), '55', '20', 'error', 'element "md:subjectlist" incomplete; missing required element "md:subject"'],
-        [str(datafile), '67', '11', 'error', 'element "para" missing required attribute "id"']
+        [str(datafile), '55', '20', 'error', 'element "md:subjectlist" incomplete; missing required element "md:subject"']
     )
     errors = validate_cnxml(datafile)
     assert tuple(list(error) for error in errors) == expected
@@ -29,8 +28,7 @@ def test_cnxml_multiple_validation_messages(datadir):
     good_datafile = datadir / 'valid.cnxml'
     expected = (
         [str(bad_datafile), '30', '17', 'error', 'element "md:person" incomplete; missing required element "md:firstname"'],
-        [str(bad_datafile), '55', '20', 'error', 'element "md:subjectlist" incomplete; missing required element "md:subject"'],
-        [str(bad_datafile), '67', '11', 'error', 'element "para" missing required attribute "id"']
+        [str(bad_datafile), '55', '20', 'error', 'element "md:subjectlist" incomplete; missing required element "md:subject"']
     )
     errors = validate_cnxml(good_datafile, bad_datafile)
     assert tuple(list(error) for error in errors) == expected

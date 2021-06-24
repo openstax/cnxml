@@ -16,9 +16,7 @@ def test_invalid_cnxml(capsys, datadir):
         '{}:30:17 -- error: element "md:person" incomplete;'
         ' missing required element "md:firstname"'.format(datafile),
         '{}:55:20 -- error: element "md:subjectlist" incomplete;'
-        ' missing required element "md:subject"'.format(datafile),
-        '{}:67:11 -- error: element "para"'
-        ' missing required attribute "id"'.format(datafile)
+        ' missing required element "md:subject"'.format(datafile)
     ]
 
     retcode = cnxml([datafile])
