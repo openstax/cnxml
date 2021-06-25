@@ -916,9 +916,7 @@
       <optional>
         <attribute name="module-id"/>
       </optional>
-      <optional>
         <ref name="metadata"/>
-      </optional>
       <optional>
         <ref name="featured-links"/>
       </optional>
