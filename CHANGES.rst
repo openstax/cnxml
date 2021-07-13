@@ -5,10 +5,15 @@
 
    - feature message
 
+3.1.6
+-----
+
+- Fix derived metadata validation error (#49)
+
 3.1.5
 -----
 
-- Add a POET-specific RNG file for XSD generation (#41)
+- Require md:language for collxml but not cnxml (#39)
 
 3.1.4
 -----

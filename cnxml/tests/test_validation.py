@@ -74,3 +74,8 @@ def test_validate_git_cnxml(datadir):
 def test_validate_git_collxml(datadir):
     errors = validate_collxml(datadir / 'valid_git_collection.xml')
     assert errors == tuple()
+
+
+def test_validate_derived_collxml(datadir):
+    errors = validate_collxml(datadir / 'valid_derived_collection.xml')
+    assert errors == tuple()
