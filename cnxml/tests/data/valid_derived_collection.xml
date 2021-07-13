@@ -1,0 +1,195 @@
+<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:cnx="http://cnx.rice.edu/cnxml" xmlns:cnxorg="http://cnx.rice.edu/system-info" xmlns:md="http://cnx.rice.edu/mdml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en">
+    <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+        <!-- WARNING! The 'metadata' section is read only. Do not edit below. Changes to the metadata section in the source will not be saved. -->
+        <md:repository>https://legacy.cnx.org/content</md:repository>
+        <md:content-url>https://legacy.cnx.org/content/col11627/1.13</md:content-url>
+        <md:content-id>col11627</md:content-id>
+        <md:title>Principles of Microeconomics</md:title>
+        <md:version>1.13</md:version>
+        <md:created>2014-01-02T16:13:54-06:00</md:created>
+        <md:revised>2020-10-23T11:02:15.005633-05:00</md:revised>
+        <md:language>en</md:language>
+        <md:license url="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution License</md:license>
+        <!-- For information on license requirements for use or modification, see license url in the above <md:license> element.
+           For information on formatting required attribution, see the URL:
+             CONTENT_URL/content_info#cnx_cite_header
+           where CONTENT_URL is the value provided above in the <md:content-url> element.
+      -->
+        <md:actors>
+            <md:person userid="OpenStaxCollege">
+                <md:firstname />
+                <md:surname>OpenStax College</md:surname>
+                <md:fullname>OpenStax</md:fullname>
+                <md:email>info@openstaxcollege.org</md:email>
+            </md:person>
+            <md:person userid="OSCRiceUniversity">
+                <md:firstname>Rice</md:firstname>
+                <md:surname>University</md:surname>
+                <md:fullname>Rice University</md:fullname>
+                <md:email>info@openstax.org</md:email>
+            </md:person>
+            <md:person userid="cnxecon">
+                <md:firstname>OpenStax</md:firstname>
+                <md:surname>Economics</md:surname>
+                <md:fullname>OpenStax College</md:fullname>
+                <md:email>info@openstaxcollege.org</md:email>
+            </md:person>
+        </md:actors>
+        <md:roles>
+            <md:role type="author">OpenStaxCollege</md:role>
+            <md:role type="maintainer">OpenStaxCollege cnxecon</md:role>
+            <md:role type="licensor">OSCRiceUniversity</md:role>
+        </md:roles>
+        <md:abstract>Principles of Microeconomics covers the scope and sequence for a one-semester economics course. The text also includes many current examples, including; the Keystone Pipeline, Occupy Wall Street, and debates over the minimum wage.&#13;
+&#13;
+The pedagogical choices, chapter arrangements, and learning objective fulfillment were developed and vetted with feedback from educators dedicated to the project. The outcome is a balanced approach to economics and to the theory and application of economics concepts. Current events are treated in a politically-balanced way, as well. </md:abstract>
+        <md:subjectlist>
+            <md:subject>Science and Technology</md:subject>
+        </md:subjectlist>
+        <md:keywordlist>
+            <md:keyword>unions</md:keyword>
+            <md:keyword>trade</md:keyword>
+            <md:keyword>total utility</md:keyword>
+            <md:keyword>supply</md:keyword>
+            <md:keyword>stocks</md:keyword>
+            <md:keyword>special-interest politics</md:keyword>
+            <md:keyword>scarcity</md:keyword>
+            <md:keyword>risk</md:keyword>
+            <md:keyword>regulation</md:keyword>
+            <md:keyword>public policy</md:keyword>
+            <md:keyword>public goods</md:keyword>
+            <md:keyword>public good</md:keyword>
+            <md:keyword>public firm</md:keyword>
+            <md:keyword>public economy</md:keyword>
+            <md:keyword>price floor</md:keyword>
+            <md:keyword>price ceiling</md:keyword>
+            <md:keyword>poverty</md:keyword>
+            <md:keyword>positive externalities</md:keyword>
+            <md:keyword>perfect competition</md:keyword>
+            <md:keyword>opportunity cost</md:keyword>
+            <md:keyword>oligopoly</md:keyword>
+            <md:keyword>negative externalities</md:keyword>
+            <md:keyword>natural monopoly</md:keyword>
+            <md:keyword>monopoly</md:keyword>
+            <md:keyword>monopolistic competition</md:keyword>
+            <md:keyword>minimum wage</md:keyword>
+            <md:keyword>microeconomics</md:keyword>
+            <md:keyword>market system</md:keyword>
+            <md:keyword>marginal revenue</md:keyword>
+            <md:keyword>macroeconomics</md:keyword>
+            <md:keyword>legal monopoly</md:keyword>
+            <md:keyword>labor market</md:keyword>
+            <md:keyword>labor</md:keyword>
+            <md:keyword>insurance</md:keyword>
+            <md:keyword>information</md:keyword>
+            <md:keyword>industry</md:keyword>
+            <md:keyword>implicit costs</md:keyword>
+            <md:keyword>immigration</md:keyword>
+            <md:keyword>goods and services</md:keyword>
+            <md:keyword>financial market</md:keyword>
+            <md:keyword>financial</md:keyword>
+            <md:keyword>explicit costs</md:keyword>
+            <md:keyword>equilibrium</md:keyword>
+            <md:keyword>environmental protection</md:keyword>
+            <md:keyword>elasticity</md:keyword>
+            <md:keyword>economies of scale</md:keyword>
+            <md:keyword>economics</md:keyword>
+            <md:keyword>economic systems</md:keyword>
+            <md:keyword>economic inequality</md:keyword>
+            <md:keyword>division of labor</md:keyword>
+            <md:keyword>discrimination</md:keyword>
+            <md:keyword>diminishing marginal utility</md:keyword>
+            <md:keyword>demand curve</md:keyword>
+            <md:keyword>demand</md:keyword>
+            <md:keyword>cost</md:keyword>
+            <md:keyword>corporate stock</md:keyword>
+            <md:keyword>corporate mergers</md:keyword>
+            <md:keyword>consumer choice</md:keyword>
+            <md:keyword>consumer</md:keyword>
+            <md:keyword>competition</md:keyword>
+            <md:keyword>college economics</md:keyword>
+            <md:keyword>budget</md:keyword>
+            <md:keyword>borrowing</md:keyword>
+            <md:keyword>bonds</md:keyword>
+            <md:keyword>bank accounts</md:keyword>
+        </md:keywordlist>
+        <md:derived-from url="https://legacy.cnx.org/content/col11613/1.2">
+            <!-- WARNING! The 'metadata' section is read only. Do not edit below. Changes to the metadata section in the source will not be saved. -->
+            <md:repository>https://legacy.cnx.org/content</md:repository>
+            <md:content-url>https://legacy.cnx.org/content/col11613/1.2</md:content-url>
+            <md:content-id>col11613</md:content-id>
+            <md:title>Principles of Economics</md:title>
+            <md:version>1.2</md:version>
+            <md:created>2014-01-02T16:13:54-06:00</md:created>
+            <md:revised>2014-02-12T15:06:58.908179-06:00</md:revised>
+            <md:language>en</md:language>
+            <md:license url="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution License</md:license>
+            <!-- For information on license requirements for use or modification, see license url in the above <md:license> element.
+           For information on formatting required attribution, see the URL:
+             CONTENT_URL/content_info#cnx_cite_header
+           where CONTENT_URL is the value provided above in the <md:content-url> element.
+      -->
+            <md:actors>
+                <md:person userid="cnxecon">
+                    <md:firstname>OpenStax</md:firstname>
+                    <md:surname>Economics</md:surname>
+                    <md:fullname>OpenStax College</md:fullname>
+                    <md:email>info@openstaxcollege.org</md:email>
+                </md:person>
+            </md:actors>
+            <md:roles>
+                <md:role type="author">cnxecon</md:role>
+                <md:role type="maintainer">cnxecon</md:role>
+                <md:role type="licensor">cnxecon</md:role>
+            </md:roles>
+            <md:abstract>&lt;div&gt;
+&lt;para&gt;&lt;emphasis effect="italics"&gt;Principles of Economics&lt;/emphasis&gt; covers the scope and sequence for a two-semester principles of economics course. The text also includes many current examples, including; discussions on the great recession, the controversy among economists over the Affordable Care Act (Obamacare), the recent government shutdown, and the appointment of the United States’ first female Federal Reserve chair, Janet Yellen.&lt;/para&gt;
+
+&lt;para&gt;The pedagogical choices, chapter arrangements, and learning objective fulfillment were developed and vetted with feedback from educators dedicated to the project. The outcome is a balanced approach to micro and macro economics, to both Keynesian and classical views, and to the theory and application of economics concepts. Current events are treated in a politically-balanced way, as well.&lt;/para&gt;
+
+&lt;para&gt;&lt;emphasis&gt;Note:&lt;/emphasis&gt; &lt;emphasis effect="italics"&gt;Principles of Economics&lt;/emphasis&gt; PDF and web view versions have been updated to include current FRED (Federal Reserve Economic) data. &lt;/para&gt;
+&lt;/div&gt;
+</md:abstract>
+            <md:subjectlist>
+                <md:subject>Mathematics and Statistics</md:subject>
+            </md:subjectlist>
+        </md:derived-from>
+    </metadata>
+    <col:parameters>
+        <col:param name="print-style" value="economics-prod" />
+    </col:parameters>
+    <col:content>
+        <col:module document="m49463" version="latest" repository="https://legacy.cnx.org/content" cnxorg:version-at-this-collection-version="1.8">
+            <md:title>Preface</md:title>
+        </col:module>
+        <col:subcollection>
+            <md:title>Welcome to Economics!</md:title>
+            <col:content>
+                <col:module document="m48590" version="latest" repository="https://legacy.cnx.org/content" cnxorg:version-at-this-collection-version="1.11">
+                    <md:title>Introduction</md:title>
+                </col:module>
+                <col:module document="m48591" version="latest" repository="https://legacy.cnx.org/content" cnxorg:version-at-this-collection-version="1.8">
+                    <md:title>What Economics Is and Why It's Important</md:title>
+                </col:module>
+                <col:module document="m48592" version="latest" repository="https://legacy.cnx.org/content" cnxorg:version-at-this-collection-version="1.5">
+                    <md:title>Microeconomics and Macroeconomics</md:title>
+                </col:module>
+                <col:module document="m48593" version="latest" repository="https://legacy.cnx.org/content" cnxorg:version-at-this-collection-version="1.5">
+                    <md:title>How Economists Use Theories and Models to Understand Economic Issues</md:title>
+                </col:module>
+                <col:module document="m48594" version="latest" repository="https://legacy.cnx.org/content" cnxorg:version-at-this-collection-version="1.12">
+                    <md:title>How Economies Can Be Organized: An Overview of Economic Systems</md:title>
+                </col:module>
+            </col:content>
+        </col:subcollection>
+        <col:module document="m48831" version="latest" repository="https://legacy.cnx.org/content" cnxorg:version-at-this-collection-version="1.12">
+            <md:title>The Use of Mathematics in Principles of Economics</md:title>
+        </col:module>
+        <col:module document="m48833" version="latest" repository="https://legacy.cnx.org/content" cnxorg:version-at-this-collection-version="1.10">
+            <md:title>Indifference Curves</md:title>
+        </col:module>
+        <col:module document="m48834" version="latest" repository="https://legacy.cnx.org/content" cnxorg:version-at-this-collection-version="1.7">
+            <md:title>Present Discounted Value</md:title>
+        </col:module>
+    </col:content>
+</col:collection>
