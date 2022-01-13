@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:cnxml="http://cnx.rice.edu/cnxml"
+         xmlns:bibtex="http://bibtexml.sf.net/"
+         >
+  <include href="../../../../mathml/schema/rng/3.0/mathml3.rng">
+  </include>
+</grammar>
