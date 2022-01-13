@@ -73,7 +73,12 @@
 
   <include href="cnxml-defs.rng">
     <define name="metadata-content">
-      <ref name="mdml-metadata-content"/>
+      <interleave>
+        <ref name="mdml-metadata-content"/>
+        <optional>
+          <ref name="mdml-language"/>
+        </optional>
+      </interleave>
     </define>
     <define name="content-content">
       <choice>

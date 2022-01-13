@@ -75,7 +75,12 @@
 
   <include href="cnxml-defs.rng">
     <define name="metadata-content">
-      <ref name="mdml-metadata-content"/>
+      <interleave>
+        <ref name="mdml-metadata-content"/>
+        <optional>
+          <ref name="mdml-language"/>
+        </optional>
+      </interleave>
     </define>
     <define name="content-content">
       <choice>
@@ -101,9 +106,11 @@
   </define>
 
   <define name="metadata-extra-attributes" combine="interleave">
-    <attribute name="mdml-version">
-      <value>0.5</value>
-    </attribute>
+    <optional>
+      <attribute name="mdml-version">
+        <value>0.5</value>
+      </attribute>
+    </optional>
   </define>
 
 </grammar>

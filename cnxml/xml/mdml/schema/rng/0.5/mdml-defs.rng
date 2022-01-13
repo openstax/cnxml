@@ -15,23 +15,39 @@
   <define name="mdml-metadata-content">
     <interleave>
       <ref name="mdml-content-id"/>
-      <ref name="mdml-repository"/>
+      <optional>
+        <ref name="mdml-repository"/>
+      </optional>
       <optional>
         <ref name="mdml-content-url"/>
       </optional>
-      <ref name="mdml-title"/>
+      <optional>
+        <ref name="mdml-title"/>
+      </optional>
       <optional>
         <ref name="mdml-short-title"/>
       </optional>
       <optional>
         <ref name="mdml-subtitle"/>
       </optional>
-      <ref name="mdml-version"/>
-      <ref name="mdml-created"/>
-      <ref name="mdml-revised"/>
-      <ref name="mdml-actors"/>
-      <ref name="mdml-roles"/>
-      <ref name="mdml-license"/>
+      <optional>
+        <ref name="mdml-version"/>
+      </optional>
+      <optional>
+        <ref name="mdml-created"/>
+      </optional>
+      <optional>
+        <ref name="mdml-revised"/>
+      </optional>
+      <optional>
+        <ref name="mdml-actors"/>
+      </optional>
+      <optional>
+        <ref name="mdml-roles"/>
+      </optional>
+      <optional>
+        <ref name="mdml-license"/>
+      </optional>
       <optional>
         <ref name="mdml-extended-attribution"/>
       </optional>
@@ -50,7 +66,6 @@
       <optional>
         <ref name="mdml-abstract"/>
       </optional>
-      <ref name="mdml-language"/>
       <optional>
         <ref name="mdml-objectives"/>
       </optional>
@@ -66,6 +81,15 @@
       <optional>
         <ref name="mdml-instructor"/>
       </optional>
+      <optional>
+        <ref name="mdml-uuid"/>
+      </optional>
+      <optional>
+        <ref name="mdml-canonical-book-uuid"/>
+      </optional>
+      <optional>
+        <ref name="mdml-slug"/>
+      </optional>
     </interleave>
   </define>
 
@@ -73,7 +97,12 @@
     <element name="metadata">
       <ref name="mdml-mdml-version-attribute"/>
       <ref name="mdml-common-attributes"/>
-      <ref name="mdml-metadata-content"/>
+      <interleave>
+        <ref name="mdml-metadata-content"/>
+        <optional>
+          <ref name="mdml-language"/>
+        </optional>
+      </interleave>
     </element>
   </define>
 
@@ -418,7 +447,12 @@
       <cnxml:para>Child 'derived-from' elements denote more remote ancestors of the document.</cnxml:para>
       <ref name="mdml-derived-from-attributes"/>
       <zeroOrMore>
-        <ref name="mdml-derived-from"/>
+        <interleave>
+          <ref name="mdml-metadata-content"/>
+          <optional>
+            <ref name="mdml-language"/>
+          </optional>
+        </interleave>
       </zeroOrMore>
     </element>
   </define>
@@ -460,7 +494,7 @@
   <define name="mdml-abstract-content">
     <text/>
   </define>
-  
+
   <define name="mdml-language">
     <element name="language">
       <ref name="mdml-common-attributes"/>
@@ -470,6 +504,27 @@
 
   <define name="mdml-objectives">
     <element name="objectives">
+      <ref name="mdml-common-attributes"/>
+      <text/>
+    </element>
+  </define>
+
+  <define name="mdml-uuid">
+    <element name="uuid">
+      <ref name="mdml-common-attributes"/>
+      <text/>
+    </element>
+  </define>
+
+  <define name="mdml-canonical-book-uuid">
+    <element name="canonical-book-uuid">
+      <ref name="mdml-common-attributes"/>
+      <text/>
+    </element>
+  </define>
+
+  <define name="mdml-slug">
+    <element name="slug">
       <ref name="mdml-common-attributes"/>
       <text/>
     </element>

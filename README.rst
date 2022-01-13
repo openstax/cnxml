@@ -3,7 +3,26 @@ CNXML Library
 
 This is a python library for working with CNXML content, which includes the CNXML and COLLXML formats.
 
+Install
+-------
 
+This library requires Python >=3.5.
+
+Install using::
+
+   pip install -e "."
+
+Tests
+-----
+
+Use the tox to run the tests::
+  
+  tox
+
+If tox is not installed, run the following::
+
+  pip install tox
+  
 Edit/Validate files using `atom.io <https://atom.io>`_
 ------------------------------------------------------
 
@@ -15,7 +34,8 @@ Preparation
 
    #. Download the most recent version from https://github.com/Connexions/cnxml/releases (click the "zip" link)
 
-      - It should be in your Download folder
+      - It should be in your Download foler
+      - Move it to ~/.neb/
 
    #. Unzip the file
    #. It should have created a folder named something like `cnxml-2.0.0` (with `/cnxml/xml/cnxml/schema/rng/0.7/cnxml-jing.rng` in it)
@@ -69,7 +89,7 @@ Changes to `~/.atom/config.cson`::
               schemaProps: [
                 {
                   lang: "rng"
-                  path: "~/Downloads/cnxml-validation/cnxml/xml/cnxml/schema/rng/0.7/cnxml-jing.rng"
+                  path: "~/.neb/cnxml-validation/cnxml/xml/cnxml/schema/rng/0.7/cnxml-jing.rng"
                 }
               ]
           }

@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
+import versioneer
 
 
 setup_requires = (
     'pytest-runner',
     )
 install_requires = (
-    'pathlib;python_version<="2.7"',
+    'lxml',
     )
 tests_require = [
     'pytest',
@@ -15,17 +16,21 @@ extras_require = {
     'test': tests_require,
     }
 description = "Connexions CNXML Library"
-with open('README.rst', 'r') as readme:
-    long_description = readme.read()
+with open('README.rst', 'r') as readme, open('CHANGES.rst', 'r') as changes:
+    readme_info = readme.read()
+    changelog = changes.read()
+    long_description = '\n\n'.join([readme_info,
+                                    "Change Log\n==========",
+                                    changelog])
 
 
 setup(
     name='cnxml',
-    version='2.0.0',
+    version=versioneer.get_version(),
     author='Connexions team',
     author_email='info@cnx.org',
     url="https://github.com/connexions/cnxml",
-    license='LGPL, See also LICENSE.txt',
+    license='AGPL, See also LICENSE.txt',
     description=description,
     long_description=long_description,
     setup_requires=setup_requires,
@@ -35,6 +40,7 @@ setup(
     test_suite='cnxml.tests',
     packages=find_packages(),
     include_package_data=True,
+    cmdclass=versioneer.get_cmdclass(),
     package_data={
         'cnxml.tests': ['data/**/*.*'],
         },
@@ -42,5 +48,6 @@ setup(
     [console_scripts]
     validate-cnxml = cnxml.cli:cnxml
     validate-collxml = cnxml.cli:collxml
+    extract-cnxml-metadata = cnxml.cli:extract_metadata
     """,
     )

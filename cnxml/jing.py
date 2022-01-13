@@ -19,7 +19,7 @@ KNOWN_FATAL_MESSAGES_MAPPING = {
 }
 
 
-ErrorLine = namedtuple('ErrorLine', 'line, column, type, message')
+ErrorLine = namedtuple('ErrorLine', 'filename, line, column, type, message')
 
 
 def _parse_jing_line(line):
@@ -28,11 +28,11 @@ def _parse_jing_line(line):
 
     """
     parts = line.split(':', 4)
-    line, column, type_, message = [x.strip() for x in parts[1:]]
+    filename, line, column, type_, message = [x.strip() for x in parts]
     if type_ == 'fatal':
         if message in KNOWN_FATAL_MESSAGES_MAPPING:
             message = KNOWN_FATAL_MESSAGES_MAPPING[message]
-    return ErrorLine(line, column, type_, message)
+    return ErrorLine(filename, line, column, type_, message)
 
 
 def _parse_jing_output(output):
@@ -40,14 +40,16 @@ def _parse_jing_output(output):
 
     """
     output = output.strip()
-    values = [_parse_jing_line(l) for l in output.split('\n') if l]
+    values = [_parse_jing_line(line) for line in output.split('\n') if line]
     return tuple(values)
 
 
-def jing(rng_filepath, xml_filepath):
+def jing(rng_filepath, *xml_filepaths):
     """Run jing.jar using the RNG file against the given XML file."""
     cmd = ['java', '-jar']
-    cmd.extend([str(JING_JAR), '-i', str(rng_filepath), str(xml_filepath)])
+    cmd.extend([str(JING_JAR), '-i', str(rng_filepath)])
+    for xml_filepath in xml_filepaths:
+        cmd.append(str(xml_filepath))
     proc = subprocess.Popen(cmd,
                             stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE,
