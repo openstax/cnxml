@@ -59,6 +59,11 @@ def _squash_to_text(elm, remove_namespaces=False):
     value = ''.join(value)
     return value
 
+def lookup_license_text(license_url):
+    for license_type in ('by-nc-sa', 'by-nd-nc', 'by-nd','by-nc', 'by-sa'):
+        if license_type in license_url:
+            return f'CC {license_type.upper()}'
+    raise Exception('unkonwn license')
 
 def parse_metadata(elm_tree):
     """Given an element-like object (:mod:`lxml.etree`)
@@ -75,6 +80,7 @@ def parse_metadata(elm_tree):
         (_maybe(xpath(xp)) or "").split()
     )
 
+    license_url = _maybe(xpath('//md:license/@url'))
     props = {
         'id': _maybe(xpath('//md:content-id/text()')),
         'uuid': _maybe(xpath('//md:uuid/text()')),
@@ -87,7 +93,8 @@ def parse_metadata(elm_tree):
         'title':
             _maybe(xpath('//md:title/text()')) or xpath('//c:title/text()')[0],
         'slug': _maybe(xpath('//md:slug/text()')),
-        'license_url': _maybe(xpath('//md:license/@url')),
+        'license_url': license_url,
+        'license_text': lookup_license_text(license_url),
         'language': _maybe(xpath('//md:language/text()')),
         'authors': role_xpath('//md:role[@type="author"]/text()'),
         'maintainers': role_xpath('//md:role[@type="maintainer"]/text()'),
