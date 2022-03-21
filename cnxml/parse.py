@@ -89,13 +89,13 @@ def lookup_license_text(license_url):
         'http://creativecommons.org/licenses/by-nc-sa/4.0':
             'Creative Commons Attribution-NonCommercial-ShareAlike License',
     }
-    # If license_url is None, appropriately return None
-    if license_url is None:
+    # If license_url is None or empty, appropriately return None
+    if license_url is None or license_url.strip() == '':
         return None
-    # If license_url is not None, we expect to return a value
     license_text = switcher.get(license_url.rstrip('/'), None)
+    # At this point, we expect to return a value
     if license_text is None:
-        raise Exception(f'Invalid license url {license_url}')
+        raise Exception(f'Invalid license url: "{license_url}"')
     return license_text
 
 
