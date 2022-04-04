@@ -58,7 +58,7 @@
   </include>
 
   <define name="mathml-math">
-    <externalRef href="../../../../mathml/schema/rng/2.0/mathml2.rng"/>
+    <externalRef href="../../../../mathml/schema/rng/3.0/mathml3.rng"/>
   </define>
 
   <include href="../../../../qml/schema/rng/1.0/qml-defs.rng">
