@@ -88,6 +88,8 @@ def lookup_license_text(license_url):
             'Creative Commons Attribution License',
         'http://creativecommons.org/licenses/by-nc-sa/4.0':
             'Creative Commons Attribution-NonCommercial-ShareAlike License',
+        'https://creativecommons.org/licenses/by/4.0/deed.pl':
+            'Uznanie autorstwa (CC BY)'
     }
     # If license_url is None or empty, appropriately return None
     if license_url is None or license_url.strip() == '':
