@@ -174,13 +174,10 @@
     <zeroOrMore>
       <choice>
         <ref name="MathExpression"/>
-        <!-- HACK
         <ref name="anyElement"/>
-        -->
       </choice>
     </zeroOrMore>
   </define>
-  <!-- HACK
   <define name="anyElement">
     <element>
       <anyName>
@@ -199,7 +196,6 @@
       </zeroOrMore>
     </element>
   </define>
-  -->
   <define name="annotation-xml">
     <element name="annotation-xml">
       <ref name="annotation.attributes"/>
