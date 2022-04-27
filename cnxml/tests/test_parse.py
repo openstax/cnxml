@@ -236,10 +236,10 @@ def test_parse_with_optional_metadata():
 @pytest.mark.parametrize(
     'license_el',
     [
-        ('<md:license url=""/>',),
-        ('<md:license url="  "/>',),
-        ('<md:license/>',),
-        ('',),
+        '<md:license url=""/>',
+        '<md:license url="  "/>',
+        '<md:license/>',
+        ''
     ]
 )
 def test_parse_no_license_url_returns_default(license_el):
@@ -267,6 +267,68 @@ def test_parse_no_license_url_returns_default(license_el):
         'language': None,
         'license_url': DEFAULT_LICENSE_URL,
         'license_text': DEFAULT_LICENSE_TEXT,
+        'licensors': (),
+        'maintainers': (),
+        'print_style': None,
+        'revised': None,
+        'subjects': (),
+        'title': 'College Physics',
+        'version': None,
+        'uuid': None,
+        'canonical_book_uuid': None,
+        'slug': None,
+    }
+    # Verify the metadata
+    assert props == expected_props
+
+
+@pytest.mark.parametrize(
+    'license_url,license_text',
+    [
+        (
+            'http://creativecommons.org/licenses/by/4.0/',
+            'Creative Commons Attribution License'
+        ),
+        (
+            'http://creativecommons.org/licenses/by/2.0/',
+            'Creative Commons Attribution License'
+        ),
+        (
+            'http://creativecommons.org/licenses/by-nd/2.0/',
+            'Creative Commons Attribution-NoDerivs License'
+        ),
+        (
+            # Spaces should be ignored
+            ' http://creativecommons.org/licenses/by-nc-sa/4.0/ ',
+            'Creative Commons Attribution-NonCommercial-ShareAlike License'
+        )
+    ]
+)
+def test_parse_license_url_returns_expected_value(license_url, license_text):
+    cnxml = f"""
+        <document xmlns="http://cnx.rice.edu/cnxml">
+            <title>College Physics</title>
+            <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+                <md:content-id>col11406</md:content-id>
+                <md:abstract/>
+                <md:license url="{license_url}"/>
+            </metadata>
+        </document>
+    """
+
+    xml = etree.fromstring(cnxml)
+    props = parse_metadata(xml)
+
+    expected_props = {
+        'abstract': '',
+        'authors': (),
+        'created': None,
+        'derived_from': {'title': None, 'uri': None},
+        'id': 'col11406',
+        'keywords': (),
+        'language': None,
+        'license_url': license_url.strip(),
+        'license_text': license_text,
         'licensors': (),
         'maintainers': (),
         'print_style': None,
@@ -342,8 +404,8 @@ def test_parse_localized_license_url_returns_element_text(license_url, license_t
 @pytest.mark.parametrize(
     'license_el',
     [
-        ('<md:license url="creativecommons.org/licenses/by/4.0/deed.xx">   </md:license>',),
-        ('<md:license url="creativecommons.org/licenses/by/4.0/deed.xx"/>',)
+        '<md:license url="creativecommons.org/licenses/by/4.0/deed.xx">   </md:license>',
+        '<md:license url="creativecommons.org/licenses/by/4.0/deed.xx"/>'
     ]
 )
 def test_parse_localized_license_with_no_license_text_should_error(license_el):
@@ -369,13 +431,11 @@ def test_parse_localized_license_with_no_license_text_should_error(license_el):
     'license_url',
     [
         # Bad type
-        ('https://creativecommons.org/licenses/by-sad/4.0/deed.xx',),
+        'https://creativecommons.org/licenses/by-sad/4.0/deed.xx',
         # Bad type
-        ('https://creativecommons.org/licenses/by-something-else/4.0/',),
+        'https://creativecommons.org/licenses/by-something-else/4.0/',
         # Bad version
-        ('https://creativecommons.org/licenses/by/999.0/',),
-        # Bad
-        ('a/b/c/d/e/f/g',)
+        'https://creativecommons.org/licenses/by/999.0/'
     ]
 )
 def test_parse_license_url_with_typo_should_error(license_url):
@@ -400,9 +460,13 @@ def test_parse_license_url_with_typo_should_error(license_url):
 @pytest.mark.parametrize(
     'license_url',
     [
-        ('this-is-a-bad-url',),
-        ('/deed.xx',),
-        ('deed.xx',),
+        'this-is-a-bad-url',
+        '/deed.xx',
+        'deed.xx',
+        # Valid, but not a license url
+        'http://www.example.com/by/4.0/',
+        # Bad
+        'a/b/c/d/e/f/g'
     ]
 )
 def test_parse_license_with_bad_url_should_error(license_url):

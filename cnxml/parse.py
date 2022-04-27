@@ -87,6 +87,8 @@ def _parse_license(license_el):
         'by-nd-nc': {
             'text': 'Creative Commons Attribution-NoDerivs-NonCommercial' +
                     ' License',
+            # TODO: by-nd-nc version 1.0 does not exist, remove when we
+            #       know it is safe
             'versions': ['1.0', '2.0']
         },
         'by-sa': {
@@ -113,7 +115,7 @@ def _parse_license(license_el):
         if is_localized else
         url.rstrip('/')  # ignore trailing '/'
     ).split('/')[-2:]
-    if len(type_and_version) != 2:
+    if len(type_and_version) != 2 or 'creativecommons.org' not in url:
         raise Exception(f'Invalid license url: "{url}"')
     typ, ver = type_and_version
     # Even if the license is localized, it should have a valid type and
