@@ -1,7 +1,7 @@
 import pytest
 from lxml import etree
 
-from cnxml.parse import NSMAP, parse_metadata, lookup_license_text
+from cnxml.parse import NSMAP, parse_metadata, DEFAULT_LICENSE_TEXT, DEFAULT_LICENSE_URL
 
 
 @pytest.fixture
@@ -175,8 +175,8 @@ def test_parse_with_minimal_metadata():
         'id': 'col11406',
         'keywords': (),
         'language': None,
-        'license_url': None,
-        'license_text': None,
+        'license_url': DEFAULT_LICENSE_URL,
+        'license_text': DEFAULT_LICENSE_TEXT,
         'licensors': (),
         'maintainers': (),
         'print_style': None,
@@ -216,8 +216,8 @@ def test_parse_with_optional_metadata():
         'id': 'col11406',
         'keywords': (),
         'language': None,
-        'license_url': None,
-        'license_text': None,
+        'license_url': DEFAULT_LICENSE_URL,
+        'license_text': DEFAULT_LICENSE_TEXT,
         'licensors': (),
         'maintainers': (),
         'print_style': None,
@@ -233,7 +233,192 @@ def test_parse_with_optional_metadata():
     assert props == expected_props
 
 
-def test_invalid_license_url():
+@pytest.mark.parametrize(
+    'license_el',
+    [
+        ('<md:license url=""/>',),
+        ('<md:license url="  "/>',),
+        ('<md:license/>',),
+        ('',),
+    ]
+)
+def test_parse_no_license_url_returns_default(license_el):
+    cnxml = f"""
+        <document xmlns="http://cnx.rice.edu/cnxml">
+            <title>College Physics</title>
+            <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+                <md:content-id>col11406</md:content-id>
+                <md:abstract/>
+                {license_el}
+            </metadata>
+        </document>
+    """
+
+    xml = etree.fromstring(cnxml)
+    props = parse_metadata(xml)
+
+    expected_props = {
+        'abstract': '',
+        'authors': (),
+        'created': None,
+        'derived_from': {'title': None, 'uri': None},
+        'id': 'col11406',
+        'keywords': (),
+        'language': None,
+        'license_url': DEFAULT_LICENSE_URL,
+        'license_text': DEFAULT_LICENSE_TEXT,
+        'licensors': (),
+        'maintainers': (),
+        'print_style': None,
+        'revised': None,
+        'subjects': (),
+        'title': 'College Physics',
+        'version': None,
+        'uuid': None,
+        'canonical_book_uuid': None,
+        'slug': None,
+    }
+    # Verify the metadata
+    assert props == expected_props
+
+
+@pytest.mark.parametrize(
+    'license_url,license_text',
+    [
+        (
+            'https://creativecommons.org/licenses/by/4.0/deed.lol_could_be_anything',
+            'The part after \'/deed.\' in the url is not consistent'
+        ),
+        (
+            'https://creativecommons.org/licenses/by/4.0/deed.pl',
+            'Uznanie autorstwa (CC BY)'
+        ),
+        (
+            ' https://creativecommons.org/licenses/by/4.0/deed.xx ',
+            ' Spaces in url and text should be removed '
+        )
+    ]
+)
+def test_parse_localized_license_url_returns_element_text(license_url, license_text):
+    cnxml = f"""
+        <document xmlns="http://cnx.rice.edu/cnxml">
+            <title>College Physics</title>
+            <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+                <md:content-id>col11406</md:content-id>
+                <md:abstract/>
+                <md:license url="{license_url}"> {license_text} </md:license>
+            </metadata>
+        </document>
+    """
+
+    xml = etree.fromstring(cnxml)
+    props = parse_metadata(xml)
+
+    expected_props = {
+        'abstract': '',
+        'authors': (),
+        'created': None,
+        'derived_from': {'title': None, 'uri': None},
+        'id': 'col11406',
+        'keywords': (),
+        'language': None,
+        'license_url': license_url.strip(),
+        'license_text': license_text.strip(),
+        'licensors': (),
+        'maintainers': (),
+        'print_style': None,
+        'revised': None,
+        'subjects': (),
+        'title': 'College Physics',
+        'version': None,
+        'uuid': None,
+        'canonical_book_uuid': None,
+        'slug': None,
+    }
+    # Verify the metadata
+    assert props == expected_props
+
+
+@pytest.mark.parametrize(
+    'license_el',
+    [
+        ('<md:license url="creativecommons.org/licenses/by/4.0/deed.xx">   </md:license>',),
+        ('<md:license url="creativecommons.org/licenses/by/4.0/deed.xx"/>',)
+    ]
+)
+def test_parse_localized_license_with_no_license_text_should_error(license_el):
+    cnxml = f"""
+        <document xmlns="http://cnx.rice.edu/cnxml">
+            <title>College Physics</title>
+            <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+                <md:content-id>col11406</md:content-id>
+                <md:abstract/>
+                {license_el}
+            </metadata>
+        </document>
+    """
+
+    xml = etree.fromstring(cnxml)
+
     with pytest.raises(Exception) as e:
-        lookup_license_text('http://www.example.com/')
+        _ = parse_metadata(xml)
+    assert 'Expected license text for' in str(e)
+
+
+@pytest.mark.parametrize(
+    'license_url',
+    [
+        # Bad type
+        ('https://creativecommons.org/licenses/by-sad/4.0/deed.xx',),
+        # Bad type
+        ('https://creativecommons.org/licenses/by-something-else/4.0/',),
+        # Bad version
+        ('https://creativecommons.org/licenses/by/999.0/',),
+        # Bad
+        ('a/b/c/d/e/f/g',)
+    ]
+)
+def test_parse_license_url_with_typo_should_error(license_url):
+    cnxml = f"""
+        <document xmlns="http://cnx.rice.edu/cnxml">
+            <title>College Physics</title>
+            <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+                <md:content-id>col11406</md:content-id>
+                <md:abstract/>
+                <md:license url="{license_url}"/>
+            </metadata>
+        </document>
+    """
+
+    xml = etree.fromstring(cnxml)
+
+    with pytest.raises(Exception) as e:
+        _ = parse_metadata(xml)
+    assert 'Unknown license type or version' in str(e)
+
+
+@pytest.mark.parametrize(
+    'license_url',
+    [
+        ('this-is-a-bad-url',),
+        ('/deed.xx',),
+        ('deed.xx',),
+    ]
+)
+def test_parse_license_with_bad_url_should_error(license_url):
+    cnxml = f"""
+        <document xmlns="http://cnx.rice.edu/cnxml">
+            <title>College Physics</title>
+            <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+                <md:content-id>col11406</md:content-id>
+                <md:abstract/>
+                <md:license url="{license_url}"/>
+            </metadata>
+        </document>
+    """
+
+    xml = etree.fromstring(cnxml)
+
+    with pytest.raises(Exception) as e:
+        _ = parse_metadata(xml)
     assert 'Invalid license url' in str(e)

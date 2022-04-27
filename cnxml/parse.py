@@ -30,6 +30,10 @@ NSMAP = {
 }
 
 
+DEFAULT_LICENSE_TEXT = 'Creative Commons Attribution License (ASSUMED)'
+DEFAULT_LICENSE_URL = 'http://creativecommons.org/licenses/by/4.0/'
+
+
 def _maybe(vals):
     """Grab the first value if it exists."""
     try:
@@ -60,45 +64,77 @@ def _squash_to_text(elm, remove_namespaces=False):
     return value
 
 
-def lookup_license_text(license_url):
-    switcher = {
-        'http://creativecommons.org/licenses/by/1.0':
-            'Creative Commons Attribution License',
-        'http://creativecommons.org/licenses/by-nd/1.0':
-            'Creative Commons Attribution-NoDerivs License',
-        'http://creativecommons.org/licenses/by-nd-nc/1.0':
-            'Creative Commons Attribution-NoDerivs-NonCommercial License',
-        'http://creativecommons.org/licenses/by-nc/1.0':
-            'Creative Commons Attribution-NonCommercial License',
-        'http://creativecommons.org/licenses/by-sa/1.0':
-            'Creative Commons Attribution-ShareAlike License',
-        'http://creativecommons.org/licenses/by/2.0':
-            'Creative Commons Attribution License',
-        'http://creativecommons.org/licenses/by-nd/2.0':
-            'Creative Commons Attribution-NoDerivs License',
-        'http://creativecommons.org/licenses/by-nd-nc/2.0':
-            'Creative Commons Attribution-NoDerivs-NonCommercial License',
-        'http://creativecommons.org/licenses/by-nc/2.0':
-            'Creative Commons Attribution-NonCommercial License',
-        'http://creativecommons.org/licenses/by-sa/2.0':
-            'Creative Commons Attribution-ShareAlike License',
-        'http://creativecommons.org/licenses/by/3.0':
-            'Creative Commons Attribution License',
-        'http://creativecommons.org/licenses/by/4.0':
-            'Creative Commons Attribution License',
-        'http://creativecommons.org/licenses/by-nc-sa/4.0':
-            'Creative Commons Attribution-NonCommercial-ShareAlike License',
-        'https://creativecommons.org/licenses/by/4.0/deed.pl':
-            'Uznanie autorstwa (CC BY)'
+def _parse_license(license_el):
+    default_license = (DEFAULT_LICENSE_TEXT, DEFAULT_LICENSE_URL)
+    if license_el is None:
+        return default_license
+    url = license_el.attrib.get('url', None)
+    if url is None:
+        return default_license
+    url = url.strip()
+    if len(url) == 0:
+        return default_license
+
+    license_info_map = {
+        'by': {
+            'text': 'Creative Commons Attribution License',
+            'versions': ['1.0', '2.0', '3.0', '4.0']
+        },
+        'by-nd': {
+            'text': 'Creative Commons Attribution-NoDerivs License',
+            'versions': ['1.0', '2.0']
+        },
+        'by-nd-nc': {
+            'text': 'Creative Commons Attribution-NoDerivs-NonCommercial' +
+                    ' License',
+            'versions': ['1.0', '2.0']
+        },
+        'by-sa': {
+            'text': 'Creative Commons Attribution-ShareAlike License',
+            'versions': ['1.0', '2.0']
+        },
+        'by-nc': {
+            'text': 'Creative Commons Attribution-NonCommercial License',
+            'versions': ['1.0', '2.0']
+        },
+        'by-nc-sa': {
+            'text': 'Creative Commons Attribution-NonCommercial-ShareAlike' +
+                    ' License',
+            'versions': ['4.0']
+        }
+
     }
-    # If license_url is None or empty, appropriately return None
-    if license_url is None or license_url.strip() == '':
-        return None
-    license_text = switcher.get(license_url.rstrip('/'), None)
-    # At this point, we expect to return a value
-    if license_text is None:
-        raise Exception(f'Invalid license url: "{license_url}"')
-    return license_text
+    # Example urls:
+    # (no locale) http://creativecommons.org/licenses/by/4.0/
+    # (w/ locale) http://creativecommons.org/licenses/by/4.0/deed.(...)
+    is_localized = '/deed.' in url
+    type_and_version = (
+        url[:url.rindex('/deed.')]  # ignore /deed.(...)
+        if is_localized else
+        url.rstrip('/')  # ignore trailing '/'
+    ).split('/')[-2:]
+    if len(type_and_version) != 2:
+        raise Exception(f'Invalid license url: "{url}"')
+    typ, ver = type_and_version
+    # Even if the license is localized, it should have a valid type and
+    # version in the url
+    if(typ not in license_info_map or
+            ver not in license_info_map[typ]['versions']):
+        raise Exception('Unknown license type or version: ' +
+                        f'{{ type: "{typ}", version: "{ver}" }}')
+    if is_localized:
+        # In this instance, use the text in the element. Hopefully this text
+        # has been translated. We could store translated versions of license
+        # text here; however, that could quickly become burdensome.
+        text = license_el.text
+        if text is None:
+            raise Exception(f'Expected license text for "{url}"')
+        text = text.strip()
+        if len(text) == 0:
+            raise Exception(f'Expected license text for "{url}"')
+    else:
+        text = license_info_map[typ]['text']
+    return (text, url)
 
 
 def parse_metadata(elm_tree):
@@ -116,7 +152,7 @@ def parse_metadata(elm_tree):
         (_maybe(xpath(xp)) or "").split()
     )
 
-    license_url = _maybe(xpath('//md:license/@url'))
+    license_text, license_url = _parse_license(_maybe(xpath('//md:license')))
     props = {
         'id': _maybe(xpath('//md:content-id/text()')),
         'uuid': _maybe(xpath('//md:uuid/text()')),
@@ -130,7 +166,7 @@ def parse_metadata(elm_tree):
             _maybe(xpath('//md:title/text()')) or xpath('//c:title/text()')[0],
         'slug': _maybe(xpath('//md:slug/text()')),
         'license_url': license_url,
-        'license_text': lookup_license_text(license_url),
+        'license_text': license_text,
         'language': _maybe(xpath('//md:language/text()')),
         'authors': role_xpath('//md:role[@type="author"]/text()'),
         'maintainers': role_xpath('//md:role[@type="maintainer"]/text()'),
