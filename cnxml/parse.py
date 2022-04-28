@@ -123,7 +123,7 @@ def _parse_license(license_el):
     if(typ not in license_info_map or
             ver not in license_info_map[typ]['versions']):
         raise Exception('Unknown license type or version: ' +
-                        f'{{ type: "{typ}", version: "{ver}" }}')
+                        f'{{ url: "{url}", type: "{typ}", version: "{ver}" }}')
     if is_localized:
         # In this instance, use the text in the element. Hopefully this text
         # has been translated. We could store translated versions of license
