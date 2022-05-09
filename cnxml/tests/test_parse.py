@@ -282,35 +282,41 @@ def test_parse_no_license_url_returns_default(license_el):
     assert props == expected_props
 
 
+# Currently, the en license is used in many instances where md:language is not en
 @pytest.mark.parametrize(
-    'license_url,license_text',
+    'license_url,license_text,md_lang',
     [
         (
-            'http://creativecommons.org/licenses/by/4.0/',
-            'Creative Commons Attribution License'
+            'http://creativecommons.org/licenses/by/4.0/deed.en',
+            'Creative Commons Attribution License',
+            'en'
         ),
         (
             'http://creativecommons.org/licenses/by/2.0/',
-            'Creative Commons Attribution License'
+            'Creative Commons Attribution License',
+            'pl'
         ),
         (
             'http://creativecommons.org/licenses/by-nd/2.0/',
-            'Creative Commons Attribution-NoDerivs License'
+            'Creative Commons Attribution-NoDerivs License',
+            'es'
         ),
         (
             # Spaces should be ignored
             ' http://creativecommons.org/licenses/by-nc-sa/4.0/ ',
-            'Creative Commons Attribution-NonCommercial-ShareAlike License'
+            'Creative Commons Attribution-NonCommercial-ShareAlike License',
+            'en'
         )
     ]
 )
-def test_parse_license_url_returns_expected_value(license_url, license_text):
+def test_parse_license_url_returns_expected_value(license_url, license_text, md_lang):
     cnxml = f"""
         <document xmlns="http://cnx.rice.edu/cnxml">
             <title>College Physics</title>
             <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
                 <md:content-id>col11406</md:content-id>
                 <md:abstract/>
+                <md:language>{md_lang}</md:language>
                 <md:license url="{license_url}"/>
             </metadata>
         </document>
@@ -326,7 +332,7 @@ def test_parse_license_url_returns_expected_value(license_url, license_text):
         'derived_from': {'title': None, 'uri': None},
         'id': 'col11406',
         'keywords': (),
-        'language': None,
+        'language': md_lang,
         'license_url': license_url.strip(),
         'license_text': license_text,
         'licensors': (),
@@ -344,30 +350,62 @@ def test_parse_license_url_returns_expected_value(license_url, license_text):
     assert props == expected_props
 
 
+# For now, only check localized license match their language
 @pytest.mark.parametrize(
-    'license_url,license_text',
+    'license_el,md_lang',
+    [
+        ('<md:license url="creativecommons.org/licenses/by/4.0/deed.pl">   </md:license>', 'xx'),
+        ('<md:license url="creativecommons.org/licenses/by/4.0/deed.pl"/>', 'xx')
+    ]
+)
+def test_parse_license_with_localized_url_and_lang_mismatch_should_error(license_el, md_lang):
+    cnxml = f"""
+        <document xmlns="http://cnx.rice.edu/cnxml">
+            <title>College Physics</title>
+            <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+                <md:content-id>col11406</md:content-id>
+                <md:language>{md_lang}</md:language>
+                <md:abstract/>
+                {license_el}
+            </metadata>
+        </document>
+    """
+
+    xml = etree.fromstring(cnxml)
+
+    with pytest.raises(Exception) as e:
+        _ = parse_metadata(xml)
+    assert 'Language mismatch' in str(e)
+
+
+@pytest.mark.parametrize(
+    'license_url,license_text,md_lang',
     [
         (
-            'https://creativecommons.org/licenses/by/4.0/deed.lol_could_be_anything',
-            'The part after \'/deed.\' in the url is not consistent'
+            'https://creativecommons.org/licenses/by/4.0/deed.could_be_anything',
+            'The part after \'/deed.\' in the url is not consistent',
+            'could_be_anything'
         ),
         (
             'https://creativecommons.org/licenses/by/4.0/deed.pl',
-            'Uznanie autorstwa (CC BY)'
+            'Uznanie autorstwa (CC BY)',
+            'pl'
         ),
         (
             ' https://creativecommons.org/licenses/by/4.0/deed.xx ',
-            ' Spaces in url and text should be removed '
+            ' Spaces in url and text should be removed ',
+            'xx'
         )
     ]
 )
-def test_parse_localized_license_url_returns_element_text(license_url, license_text):
+def test_parse_localized_license_url_returns_element_text(license_url, license_text, md_lang):
     cnxml = f"""
         <document xmlns="http://cnx.rice.edu/cnxml">
             <title>College Physics</title>
             <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
                 <md:content-id>col11406</md:content-id>
                 <md:abstract/>
+                <md:language>{md_lang}</md:language>
                 <md:license url="{license_url}"> {license_text} </md:license>
             </metadata>
         </document>
@@ -383,7 +421,7 @@ def test_parse_localized_license_url_returns_element_text(license_url, license_t
         'derived_from': {'title': None, 'uri': None},
         'id': 'col11406',
         'keywords': (),
-        'language': None,
+        'language': md_lang,
         'license_url': license_url.strip(),
         'license_text': license_text.strip(),
         'licensors': (),
@@ -414,6 +452,7 @@ def test_parse_localized_license_with_no_license_text_should_error(license_el):
             <title>College Physics</title>
             <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
                 <md:content-id>col11406</md:content-id>
+                <md:language>xx</md:language>
                 <md:abstract/>
                 {license_el}
             </metadata>
