@@ -292,6 +292,17 @@ def test_parse_no_license_url_returns_default(license_el):
             'en'
         ),
         (
+            # https should work too
+            'https://creativecommons.org/licenses/by/4.0/deed.en',
+            'Creative Commons Attribution License',
+            'en'
+        ),
+        (
+            'https://creativecommons.org/licenses/by/4.0',
+            'Creative Commons Attribution License',
+            'en'
+        ),
+        (
             'http://creativecommons.org/licenses/by/2.0/',
             'Creative Commons Attribution License',
             'pl'
