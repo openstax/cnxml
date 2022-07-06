@@ -5,6 +5,12 @@
 
    - feature message
 
+3.1.9
+-----
+
+- Add structured parsing of licenses (#56)
+- Ensure that https is acceptable in license urls (#57)
+
 3.1.6
 -----
 
