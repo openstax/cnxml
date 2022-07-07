@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="../0.7/cnxml-jing.rng">
+    <define name="cnxml-version">
+      <attribute name="cnxml-version">
+        <value>0.8</value>
+      </attribute>
+    </define>
+
+    <define name="mathml-math">
+      <externalRef href="cnxml-math.rng"/>
+    </define>
+  </include>
+</grammar>
