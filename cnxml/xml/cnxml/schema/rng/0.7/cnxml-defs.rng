@@ -1066,13 +1066,33 @@
     </element>
   </define>
 
+  <define name="document-title-content">
+    <oneOrMore>
+      <choice>
+        <element name="emphasis">
+          <optional>
+            <ref name="effect-attribute"/>
+          </optional>
+          <ref name="document-title-content"/>
+        </element>
+        <element name="sub">
+          <ref name="document-title-content"/>
+        </element>
+        <element name="sup">
+          <ref name="document-title-content"/>
+        </element>
+        <text/>
+      </choice>
+    </oneOrMore>
+  </define>
+
   <define name="document-title">
     <element name="title">
       <ref name="common-attributes"/>
       <optional>
         <ref name="id-attribute"/>
       </optional>
-      <text/>
+      <ref name="document-title-content"/>
     </element>
   </define>
 
