@@ -2102,7 +2102,7 @@
         <attribute name="summary"/>
       </optional>
       <optional>
-        <attribute name="screenreader-table-description"/>
+        <attribute name="aria-label"/>
       </optional>
       <ref name="colsep-attribute"/>
       <ref name="rowsep-attribute"/>
