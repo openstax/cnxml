@@ -14,7 +14,9 @@
 
   <define name="mdml-metadata-content">
     <interleave>
-      <ref name="mdml-content-id"/>
+      <optional>
+        <ref name="mdml-content-id"/>
+      </optional>
       <optional>
         <ref name="mdml-repository"/>
       </optional>
