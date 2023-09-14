@@ -6,6 +6,22 @@
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://cnx.rice.edu/cnxml">
 
+  <!-- https://qwerty.dev/whitespace/ -->
+  <define name="not-invisible-text-in-attribute">
+    <data type="token">
+      <except>
+        <data type="token">
+          <param name="pattern">.*[&#x200a;&#x200b;&#x2006;&#x2009;&#x2008;&#x2005;&#x2004;&#x2007;&#x2002;&#x2003;&#x2800;].*</param>
+        </data>
+      </except>
+    </data>
+  </define>
+
+    <!-- Cannot restrict text in an element: https://stackoverflow.com/a/5047555 -->
+    <define name="text-in-an-element">
+      <text/>
+    </define>
+  
 <!--
     Attribute Definitions
 -->
@@ -172,31 +188,31 @@
   <define name="url-attribute">
     <cnxml:para class="description">An attribute containing the URL of the resource the parent link points to.</cnxml:para>
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
-    <attribute name="url"/>
+    <attribute name="url"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="document-attribute">
     <cnxml:para class="description">An attribute containing the module or collection ID of the learning object the parent link points to.</cnxml:para>
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
-    <attribute name="document"/>
+    <attribute name="document"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="version-attribute">
     <cnxml:para class="description">An attribute containing the version number of the learning object the parent link points to.</cnxml:para>
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
-    <attribute name="version"/>
+    <attribute name="version"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="targetid-attribute">
     <cnxml:para class="description">An attribute containing the XML element ID of the element the parent link points to.</cnxml:para>
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
-    <attribute name="target-id"/>
+    <attribute name="target-id"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="resource-attribute">
     <cnxml:para class="description">An attribute containing the XML element ID of the element the parent link points to.</cnxml:para>
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
-    <attribute name="resource"/>
+    <attribute name="resource"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <!-- Attributes pattern for 'link' element.  Require at least one
@@ -355,7 +371,7 @@
           <value>dash</value>
           <value>section</value>
           <value>none</value>
-          <text/>
+          <ref name="not-invisible-text-in-attribute"/>
         </choice>
       </attribute>
     </optional>
@@ -381,7 +397,7 @@
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
     <cnxml:para class="default-value">Default is the empty string.</cnxml:para>
     <optional>
-      <attribute name="mark-prefix"/>
+      <attribute name="mark-prefix"><ref name="not-invisible-text-in-attribute"/></attribute>
     </optional>
   </define>
 
@@ -390,7 +406,7 @@
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
     <cnxml:para class="default-value">Default is the period '.'.</cnxml:para>
     <optional>
-      <attribute name="mark-suffix" a:defaultValue="."/>
+      <attribute name="mark-suffix" a:defaultValue="."><ref name="not-invisible-text-in-attribute"/></attribute>
     </optional>
   </define>
 
@@ -399,7 +415,7 @@
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
     <cnxml:para class="default-value">Default is the empty string.</cnxml:para>
     <optional>
-      <attribute name="mark-suffix" a:defaultValue=""/>
+      <attribute name="mark-suffix" a:defaultValue=""><ref name="not-invisible-text-in-attribute"/></attribute>
     </optional>
   </define>
 
@@ -408,7 +424,7 @@
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
     <cnxml:para class="default-value">Default is the colon ':'.</cnxml:para>
     <optional>
-      <attribute name="mark-suffix" a:defaultValue=":"/>
+      <attribute name="mark-suffix" a:defaultValue=":"><ref name="not-invisible-text-in-attribute"/></attribute>
     </optional>
   </define>
 
@@ -417,7 +433,7 @@
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
     <cnxml:para class="default-value">Default is the empty string.</cnxml:para>
     <optional>
-      <attribute name="item-sep"/>
+      <attribute name="item-sep"><ref name="not-invisible-text-in-attribute"/></attribute>
     </optional>
   </define>
 
@@ -426,7 +442,7 @@
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
     <cnxml:para class="default-value">Default is the semicolon ';'.</cnxml:para>
     <optional>
-      <attribute name="item-sep" a:defaultValue=";"/>
+      <attribute name="item-sep" a:defaultValue=";"><ref name="not-invisible-text-in-attribute"/></attribute>
     </optional>
   </define>
 
@@ -446,45 +462,45 @@
   <define name="code-lang-attribute">
     <cnxml:para class="description">An attribute whose value denotes the computer language of the code in the parent code element.</cnxml:para>
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
-    <attribute name="lang"/>
+    <attribute name="lang"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="alt-attribute">
     <cnxml:para class="description">An attribute whose value specifies alternate text for user agents that cannot display images and other audiovisual media.</cnxml:para>
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
-    <attribute name="alt"/>
+    <attribute name="alt"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="longdesc-attribute">
     <cnxml:para class="description">An attribute whose value specifies a longer description of the parent media object as a supplement to the alternate text in the 'alt' attribute.</cnxml:para>
     <cnxml:para class="content">Content is text (Relax NG).</cnxml:para>
-    <attribute name="longdesc"/>
+    <attribute name="longdesc"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="height-attribute">
-    <attribute name="height"/>
+    <attribute name="height"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="width-attribute">
-    <attribute name="width"/>
+    <attribute name="width"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="print-width-attribute">
     <cnxml:para class="description">An attribute whose value specifies an absolute or proportional width for the parent media object when it is rendered in print.</cnxml:para>
     <cnxml:para class="content">Content is text (Relax NG). Authors should supply a number followed by a two-letter abbreviation for units of length as used in LaTeX (e.g. <cnxml:list display="inline" item-sep=", " bullet-style="none"><cnxml:item>'cm'</cnxml:item><cnxml:item>'mm'</cnxml:item><cnxml:item>'in'</cnxml:item><cnxml:item>'pt'</cnxml:item><cnxml:item>'em'</cnxml:item><cnxml:item>'pc'</cnxml:item></cnxml:list>), or by a percent sign '%' for proportional scaling.</cnxml:para>
-    <attribute name="print-width"/>
+    <attribute name="print-width"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="src-attribute">
     <cnxml:para class="description">An attribute whose value specifies a URL or filesystem path to the media object represented by the parent media object element.</cnxml:para>
     <cnxml:para class="content">Content is text (Relax NG). Authors should supply a filesystem or URL path.</cnxml:para>
-    <attribute name="src"/>
+    <attribute name="src"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="mime-type-attribute">
     <cnxml:para class="description">An attribute whose value specifies the type of media object represented by the parent media object element.</cnxml:para>
     <cnxml:para class="content">Content is text (Relax NG). Authors should supply a value from the IANA registry of MIME media types.</cnxml:para>
-    <attribute name="mime-type"/>
+    <attribute name="mime-type"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="for-attribute">
@@ -500,23 +516,23 @@
   </define>
 
   <define name="thumbnail-attribute">
-    <attribute name="thumbnail"/>
+    <attribute name="thumbnail"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="codebase-attribute">
-    <attribute name="codebase"/>
+    <attribute name="codebase"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="code-attribute">
-    <attribute name="code"/>
+    <attribute name="code"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="archive-attribute">
-    <attribute name="archive"/>
+    <attribute name="archive"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="name-attribute">
-    <attribute name="name"/>
+    <attribute name="name"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="wmode-attribute">
@@ -563,14 +579,14 @@
 
   <define name="flash-vars-attribute">
     <attribute name="flash-vars">
-      <text/>
+      <ref name="not-invisible-text-in-attribute"/>
     </attribute>
   </define>
 
   <define name="standby-attribute">
     <optional>
       <attribute name="standby">
-        <text/>
+        <ref name="not-invisible-text-in-attribute"/>
       </attribute>
     </optional>
   </define>
@@ -620,7 +636,7 @@
   </define>
 
   <define name="viname-attribute">
-    <attribute name="viname"/>
+    <attribute name="viname"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="labview-version-attribute">
@@ -661,7 +677,7 @@
         <value>prerequisite</value>
         <value>example</value>
         <value>supplemental</value>
-        <text/>
+        <ref name="not-invisible-text-in-attribute"/>
       </choice>
     </attribute>
   </define>
@@ -691,7 +707,7 @@
           <value>broader-term</value>
           <value>use-for</value>
           <value>use</value>
-          <text/>
+          <ref name="not-invisible-text-in-attribute"/>
         </choice>
       </attribute>
     </optional>
@@ -727,7 +743,7 @@
   <define name="common-attributes-noclass">
     <ref name="foreign-namespaced-attribute"/>
     <optional>
-      <attribute name="xml:lang"/>
+      <attribute name="xml:lang"><ref name="not-invisible-text-in-attribute"/></attribute>
     </optional>
   </define>
 
@@ -743,7 +759,7 @@
 -->
 
   <define name="text-extras">
-    <text/>
+    <ref name="text-in-an-element"/>
   </define>
 
   <define name="inline-class">
@@ -894,13 +910,13 @@
     <element>
       <anyName/>
       <zeroOrMore>
-	<choice>
-	  <attribute>
-	    <anyName/>
-	  </attribute>
-	  <text/>
-	  <ref name="anyElement"/>
-	</choice>
+        <choice>
+          <attribute>
+            <anyName/>
+          </attribute>
+          <ref name="not-invisible-text-in-attribute"/>
+          <ref name="anyElement"/>
+        </choice>
       </zeroOrMore>
     </element>
   </define>
@@ -916,7 +932,7 @@
         <ref name="cnxml-version"/>
       </optional>
       <optional>
-        <attribute name="module-id"/>
+        <attribute name="module-id"><ref name="not-invisible-text-in-attribute"/></attribute>
       </optional>
         <ref name="metadata"/>
       <optional>
@@ -979,7 +995,7 @@
     <zeroOrMore>
       <choice>
         <ref name="anyElement"/>
-        <text/>
+        <ref name="not-invisible-text-in-attribute"/>
       </choice>
     </zeroOrMore>
   </define>
@@ -1081,10 +1097,12 @@
         <element name="sup">
           <ref name="document-title-content"/>
         </element>
-        <text/>
+        <ref name="text-in-an-element"/>
       </choice>
     </oneOrMore>
   </define>
+
+
 
   <define name="document-title">
     <element name="title">
@@ -1244,7 +1262,7 @@
       </optional>
       <choice>
         <ref name="media"/>
-        <text/>
+        <ref name="text-in-an-element"/>
         <ref name="equation-content-extras"/>
       </choice>
     </element>
@@ -1546,8 +1564,8 @@
       <optional>
         <ref name="id-attribute"/>
       </optional>
-      <attribute name="name"/>
-      <attribute name="value"/>
+      <attribute name="name"><ref name="not-invisible-text-in-attribute"/></attribute>
+      <attribute name="value"><ref name="not-invisible-text-in-attribute"/></attribute>
     </element>
   </define>
 
@@ -1939,35 +1957,35 @@
   </define>
 
   <define name="char-attribute">
-    <attribute name="char"/>
+    <attribute name="char"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="charoff-attribute">
-    <attribute name="charoff"/>
+    <attribute name="charoff"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="cols-attribute">
-    <attribute name="cols"/>
+    <attribute name="cols"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="colname-attribute">
-    <attribute name="colname"/>
+    <attribute name="colname"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="spanname-attribute">
-    <attribute name="spanname"/>
+    <attribute name="spanname"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="morerows-attribute">
-    <attribute name="morerows"/>
+    <attribute name="morerows"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="namest-attribute">
-    <attribute name="namest"/>
+    <attribute name="namest"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="nameend-attribute">
-    <attribute name="nameend"/>
+    <attribute name="nameend"><ref name="not-invisible-text-in-attribute"/></attribute>
   </define>
 
   <define name="table.title">
@@ -1996,7 +2014,7 @@
   <define name="table.att">
     <ref name="id-attribute"/>
     <optional>
-      <attribute name="tabstyle"/>
+      <attribute name="tabstyle"><ref name="not-invisible-text-in-attribute"/></attribute>
     </optional>
     <optional>
       <attribute name="tocentry">
@@ -2042,7 +2060,7 @@
   <define name="tgroup.att">
     <optional>
       <attribute name="tgroupstyle">
-        <text/>
+        <ref name="not-invisible-text-in-attribute"/>
       </attribute>
     </optional>
   </define>
@@ -2099,10 +2117,10 @@
         </attribute>
       </optional>
       <optional>
-        <attribute name="summary"/>
+        <attribute name="summary"><ref name="not-invisible-text-in-attribute"/></attribute>
       </optional>
       <optional>
-        <attribute name="aria-label"/>
+        <attribute name="aria-label"><ref name="not-invisible-text-in-attribute"/></attribute>
       </optional>
       <ref name="colsep-attribute"/>
       <ref name="rowsep-attribute"/>
@@ -2142,13 +2160,13 @@
   <define name="colspec">
     <element name="colspec">
       <optional>
-        <attribute name="colnum"/>
+        <attribute name="colnum"><ref name="not-invisible-text-in-attribute"/></attribute>
       </optional>
       <optional>
-        <attribute name="colname"/>
+        <attribute name="colname"><ref name="not-invisible-text-in-attribute"/></attribute>
       </optional>
       <optional>
-        <attribute name="colwidth"/>
+        <attribute name="colwidth"><ref name="not-invisible-text-in-attribute"/></attribute>
       </optional>
       <ref name="colsep-attribute"/>
       <ref name="rowsep-attribute"/>
@@ -2171,14 +2189,14 @@
   <define name="spanspec">
     <element name="spanspec">
       <optional>
-        <attribute name="namest"/>
+        <attribute name="namest"><ref name="not-invisible-text-in-attribute"/></attribute>
       </optional>
       <optional>
-        <attribute name="nameend"/>
+        <attribute name="nameend"><ref name="not-invisible-text-in-attribute"/></attribute>
       </optional>
       <ref name="spanname-attribute"/>
       <optional>
-        <attribute name="colwidth"/>
+        <attribute name="colwidth"><ref name="not-invisible-text-in-attribute"/></attribute>
       </optional>
       <ref name="colsep-attribute"/>
       <ref name="rowsep-attribute"/>
