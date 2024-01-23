@@ -859,6 +859,16 @@
     </zeroOrMore>
   </define>
 
+  <define name="inline-content-non-empty">
+    <ref name="common-attributes"/>
+    <optional>
+      <ref name="id-attribute"/>
+    </optional>
+    <oneOrMore>
+      <ref name="inline-class"/>
+    </oneOrMore>
+  </define>
+
   <define name="div-content">
     <optional>
       <ref name="title"/>
@@ -1172,7 +1182,7 @@
   <define name="term">
     <element name="term">
       <ref name="linking-attributes"/>
-      <ref name="inline-content"/>
+      <ref name="inline-content-non-empty"/>
     </element>
   </define>
 
