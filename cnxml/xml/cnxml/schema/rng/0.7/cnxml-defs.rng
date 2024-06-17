@@ -929,7 +929,19 @@
       <optional>
         <ref name="bibliography"/>
       </optional>
+      <ref name="noindex-attribute"/>
     </element>
+  </define>
+
+  <define name="noindex-attribute">
+    <optional>
+      <attribute name="noindex">
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
   </define>
 
   <define name="metadata">
