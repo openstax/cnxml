@@ -938,7 +938,6 @@
       <attribute name="noindex">
         <choice>
           <value>true</value>
-          <value>false</value>
         </choice>
       </attribute>
     </optional>
