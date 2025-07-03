@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+here=$(cd "$(dirname "$0")" && pwd)
+
+# shellcheck disable=SC2016
+"$here/bash" -c '
+set -euxo pipefail
+
+generate-schema() {
+    while test -n "${1:-}"; do
+        case "$1" in
+            --unpatched)
+                do_patch=0
+            ;;
+            *)
+                echo "Unknown option: $1" >&2
+            ;;
+        esac
+        shift 1
+    done
+
+    if ! [ -e poet ]; then
+        mkdir poet
+        cd poet
+        git init
+        git remote add origin https://github.com/openstax/poet
+        cd -
+    fi
+
+    cd poet
+    git fetch --depth=1 origin $branch
+    git checkout $branch
+    git reset --hard origin/$branch
+    cd -
+
+    jing -i -s ./cnxml/xml/poet/schema/rng/poet-jing.rng > poet-simplified.rng
+    trang -I rng -O xsd poet-simplified.rng ./poet/client/static/xsd/mathml.xsd
+
+    cd ./poet
+    rm -f ./client/static/xsd/*.rej
+    rm -f ./client/static/xsd/*.orig
+    if [ ${do_patch:-1} -eq 1 ]; then
+        patch -p1 < ./client/static/xsd/trang.patch
+    else
+        git add ./client/static/xsd/
+        git commit -m "unpatched"
+        git checkout origin/$branch -- ./client/static/xsd/
+        git restore --staged .
+        echo "Ready for changes. When you are done, run generate-patch." >&2
+    fi
+}
+
+generate-patch() {
+    cd poet
+    git restore --staged . || true
+    git diff --patch -- ./client/static/xsd/*.xsd > ./client/static/xsd/trang.patch
+}
+
+command="${1:?Command is required}"
+shift
+
+args=()
+while test -n "${1:-}"; do
+    case "$1" in
+        --branch)
+            branch="$2"
+            shift
+        ;;
+        *)
+            args+=("$1")
+        ;;
+    esac
+    shift
+done
+: ${branch:=main}
+
+case "$command" in
+    "generate-schema")
+        generate-schema "${args[@]}"
+    ;;
+    "generate-patch")
+        generate-patch "${args[@]}"
+    ;;
+    *)
+        echo "Unknown command" >&2
+    ;;
+esac
+
+' bash "$@"
+
+echo "Done! See updated files in: $(cd ./poet/client/static/xsd && pwd)" >&2

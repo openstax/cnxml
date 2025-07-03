@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+here=$(cd "$(dirname "$0")" && pwd)
+repo_root="$(cd "$here/.." && pwd)"
+
+cd "$here"
+img_id="$(echo "Building docker image..." >&2 && docker build -q .)"
+
+exec docker run --rm -it -v "$repo_root":/cnxml -w /cnxml --entrypoint bash "$img_id" "$@"
