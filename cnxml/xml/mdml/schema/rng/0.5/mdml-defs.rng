@@ -487,6 +487,19 @@
   </define>
 
   <define name="mdml-super">
+    <element name="super">
+      <interleave>
+        <ref name="mdml-super-tag"/>
+        <element name="author">
+          <data type="string">
+            <param name="pattern">(.+)</param> <!-- Need at least one character -->
+          </data>
+        </element>
+      </interleave>
+    </element>
+  </define>
+
+  <define name="mdml-super-tag">
     <element name="tags">
       <oneOrMore>
         <element name="tag">

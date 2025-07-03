@@ -8,6 +8,10 @@ here=$(cd "$(dirname "$0")" && pwd)
 "$here/bash" -c '
 set -euxo pipefail
 
+_find_xsd_path() {
+    find /cnxml/poet -type d -name xsd | head -n 1
+}
+
 generate-schema() {
     while test -n "${1:-}"; do
         case "$1" in
@@ -35,18 +39,20 @@ generate-schema() {
     git reset --hard origin/$branch
     cd -
 
+    xsd_path=$(_find_xsd_path)
+
     jing -i -s ./cnxml/xml/poet/schema/rng/poet-jing.rng > poet-simplified.rng
-    trang -I rng -O xsd poet-simplified.rng ./poet/client/static/xsd/mathml.xsd
+    trang -I rng -O xsd poet-simplified.rng $xsd_path/mathml.xsd
 
     cd ./poet
-    rm -f ./client/static/xsd/*.rej
-    rm -f ./client/static/xsd/*.orig
+    rm -f $xsd_path*.rej
+    rm -f $xsd_path*.orig
     if [ ${do_patch:-1} -eq 1 ]; then
-        patch -p1 < ./client/static/xsd/trang.patch
+        patch -p1 < $xsd_path/trang.patch
     else
-        git add ./client/static/xsd/
+        git add $xsd_path
         git commit -m "unpatched"
-        git checkout origin/$branch -- ./client/static/xsd/
+        git checkout origin/$branch -- $xsd_path
         git restore --staged .
         echo "Ready for changes. When you are done, run generate-patch." >&2
     fi
@@ -54,8 +60,9 @@ generate-schema() {
 
 generate-patch() {
     cd poet
+    xsd_path=$(_find_xsd_path)
     git restore --staged . || true
-    git diff --patch -- ./client/static/xsd/*.xsd > ./client/static/xsd/trang.patch
+    git diff --patch -- $xsd_path/*.xsd > $xsd_path/trang.patch
 }
 
 command="${1:?Command is required}"

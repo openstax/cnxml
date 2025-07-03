@@ -8,4 +8,15 @@ repo_root="$(cd "$here/.." && pwd)"
 cd "$here"
 img_id="$(echo "Building docker image..." >&2 && docker build -q .)"
 
-exec docker run --rm -it -v "$repo_root":/cnxml -w /cnxml --entrypoint bash "$img_id" "$@"
+run_args=(--entrypoint bash)
+run_args+=(--rm)
+run_args+=(--volume "$repo_root":/cnxml)
+run_args+=(--workdir /cnxml)
+run_args+=(--interactive)
+
+if test -t 0; then
+    run_args+=(--tty)
+fi
+
+#--rm -it -v "$repo_root":/cnxml -w /cnxml --entrypoint bash
+exec docker run "${run_args[@]}" "$img_id" "$@"

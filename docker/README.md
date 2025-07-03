@@ -29,5 +29,9 @@ Next, you should:
 
 This will create an updated patch file with all the changes from the previous patch plus your new changes. From here, you should copy the patch and xsd files into your regular poet workspace/repository (maybe something like `cp ./poet/client/static/xsd/* ../poet/client/static/xsd/.` depending on where your normal poet workspace is located.)
 
+The person who wrote this would usually open the local poet repository in vscode/codium and revert hunks visually. Something like `git checkout --patch` could also work. Remember that the changes you leave behind are the ones used to create the patch: only revert the hunks that removed your schema changes. Depending on what you're changing, you might also need to make manual edits.
+
+If generating the patch does not create a diff, then you should double check that your changes were included in the rng schema file as expected. You might have also missed reverting a hunk or something like that.
+
 You can test this new patch file by pushing it to a branch and running `./docker/poet-schema generate-schema --branch <your-branch>`. If all is well, the patch should apply without rejections and your changes should be in there.
 
