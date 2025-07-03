@@ -486,6 +486,39 @@
     </element>
   </define>
 
+  <define name="mdml-super">
+    <element name="tags">
+      <oneOrMore>
+        <element name="tag">
+          <attribute name="type">
+            <choice>
+              <value>primer</value>
+              <value>preparedness</value>
+              <value>learning</value>
+              <value>practice</value>
+              <value>enrichment</value>
+              <value>assessment</value>
+              <value>reflection</value>
+              <value>review</value>
+              <!-- arbitrary values -->
+              <data type="token"/>
+            </choice>
+          </attribute>
+          <optional>
+            <attribute name="link">
+              <data type="token">
+                <param name="pattern">(https?://.+)</param>
+              </data>
+            </attribute>
+          </optional>
+          <data type="string">
+            <param name="pattern">([0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12})|(https://openstax.org/orn/.+)</param>
+          </data>
+        </element>
+      </oneOrMore>
+    </element>
+  </define>
+
   <define name="mdml-abstract">
     <element name="abstract">
       <ref name="mdml-common-attributes"/>
