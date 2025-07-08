@@ -490,7 +490,7 @@
     <element name="super">
       <interleave>
         <ref name="mdml-super-tag"/>
-        <element name="author">
+        <element name="subject-name">
           <data type="string">
             <param name="pattern">(.+)</param> <!-- Need at least one character -->
           </data>
