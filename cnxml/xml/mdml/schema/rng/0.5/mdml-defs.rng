@@ -517,13 +517,6 @@
               <data type="token"/>
             </choice>
           </attribute>
-          <optional>
-            <attribute name="link">
-              <data type="token">
-                <param name="pattern">(https?://.+)</param>
-              </data>
-            </attribute>
-          </optional>
           <data type="string">
             <param name="pattern">([0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12})|(https://openstax.org/orn/.+)</param>
           </data>
