@@ -80,6 +80,9 @@
         <optional>
           <ref name="mdml-language"/>
         </optional>
+        <optional>
+          <ref name="mdml-super"></ref>
+        </optional>
       </interleave>
     </define>
     <define name="content-content">

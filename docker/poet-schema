@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+here=$(cd "$(dirname "$0")" && pwd)
+
+"$here/bash" "/cnxml/docker/manage-schema.bash" "$@"
+
+echo "Done! See updated files in: $(cd ./poet/client/static/xsd && pwd)" >&2
