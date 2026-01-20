@@ -728,6 +728,13 @@
     <ref name="foreign-namespaced-attribute"/>
     <optional>
       <attribute name="xml:lang"/>
+      <attribute name="data-platform-hidden">
+        <choice>
+          <value>assignable</value>
+          <!-- arbitrary values -->
+          <data type="token"/>
+        </choice>
+      </attribute>
     </optional>
   </define>
 
@@ -1052,7 +1059,7 @@
         </group>
         <group>
           <ref name="display-inline-attribute"/>
-          <ref name="inline-content"/>    
+          <ref name="inline-content"/>
         </group>
       </choice>
     </element>
