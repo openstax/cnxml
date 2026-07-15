@@ -488,22 +488,22 @@
 
   <define name="mdml-super">
     <element name="super">
+      <element name="ancillary-type">
+        <choice>
+          <value>portrait-of-a-researcher</value>
+          <value>current-issues-and-ethics</value>
+          <value>labs-and-activities</value>
+          <data type="string">
+            <param name="pattern">(.+)</param> <!-- Need at least one character -->
+          </data>
+        </choice>
+      </element>
       <interleave>
         <ref name="mdml-super-tag"/>
         <element name="subject-name">
           <data type="string">
             <param name="pattern">(.+)</param> <!-- Need at least one character -->
           </data>
-        </element>
-        <element name="ancillary-type">
-          <choice>
-            <value>portrait-of-a-researcher</value>
-            <value>current-issues-and-ethics</value>
-            <value>labs-and-activities</value>
-            <data type="string">
-              <param name="pattern">(.+)</param> <!-- Need at least one character -->
-            </data>
-          </choice>
         </element>
       </interleave>
     </element>
