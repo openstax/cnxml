@@ -491,8 +491,6 @@
       <element name="ancillary-type">
         <choice>
           <value>portrait-of-a-researcher</value>
-          <value>current-issues-and-ethics</value>
-          <value>labs-and-activities</value>
           <data type="string">
             <param name="pattern">(.+)</param> <!-- Need at least one character -->
           </data>
