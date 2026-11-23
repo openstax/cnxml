@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from pathlib import Path
 
-import pkg_resources
+from importlib.resources import files
 
 
 __all__ = (
@@ -10,4 +10,4 @@ __all__ = (
 
 
 def lookup_resource(resource_path):
-    return Path(pkg_resources.resource_filename('cnxml', resource_path))
+    return Path(str(files('cnxml').joinpath(resource_path)))
